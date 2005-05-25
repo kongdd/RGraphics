@@ -8,8 +8,8 @@ imageGrob(nrow, ncol, cols, byrow=TRUE,
 }
 \arguments{
   \item{nrow, ncol}{Number of rows/columns in the image.}
-  \item{cols}{Colours for the cells of the image (will be recycled).}
-  \item{byrow}{Logical value indicating whether colours should be
+  \item{cols}{Colors for the cells of the image (will be recycled).}
+  \item{byrow}{Logical value indicating whether colors should be
     allocated to cells across rows or down columns.}
   \item{name}{A character name for the grob.}
   \item{gp}{A \code{gpar} object containing graphical parameter settings

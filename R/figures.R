@@ -187,82 +187,58 @@ pushViewport(viewport(layout=grid.layout(3, 1,
   heights=unit(c(1, 1, 1), c("null", "cm", "null")))))
 
 # First page
-pushViewport(viewport(layout.pos.row=1, 
+pushViewport(viewport(layout.pos.row=3, 
   layout=grid.layout(3, 4, 
-    widths=unit(c(2, 1, 1, 1), c("cm", "null", "null", "cm")),
-    heights=unit(c(1, 1, 3), c("cm", "null", "cm")))))
+    widths=unit(c(2.5, 1, 1, 1), c("cm", "null", "null", "cm")),
+    heights=unit(c(1, 1, 2.5), c("cm", "null", "cm")))))
 grid.rect(gp=gpar(col="black"))
 for (i in 2) {
   for (j in 2:3) {
     pushViewport(viewport(layout.pos.col=j, layout.pos.row=i))
     grid.rect(gp=gpar(col="grey"))
-    if (i == 2 && j == 2) {
       pushViewport(plotViewport(c(2, 2, 1, 1), xscale=c(0, 11),
         gp=gpar(col="grey")))
       grid.rect(gp=gpar(col="grey"))
-      grid.lines(c(0, 1), c(0, 0))
-      grid.segments(c(0, 1), c(0, 0), c(0, 1), unit(c(-.5, -.5), "lines"))
-      grid.lines(c(0, 0), c(0, 1))
-      grid.segments(c(0, 0), c(0, 1), unit(c(-.5, -.5), "lines"), c(0, 1))
-      grid.text(c("ymin", "ymax"), unit(c(-1, -1), "lines"), c(0, 1), rot=90)
-      grid.text("Current\nPlot", rot=0)
+      grid.text(paste("Plot", j - 1))
       popViewport()      
-    }
     popViewport()
   }
 }
-pushViewport(viewport(layout.pos.row=3, layout.pos.col=2:3))
+pushViewport(viewport(layout.pos.row=2, layout.pos.col=1))
 grid.rect(gp=gpar(col="grey", fill="light grey"))
-grid.text("Outer Margin 1")
-  pushViewport(viewport(x=0, w=.5, just="left"))
-  grid.lines(unit.c(unit(2, "lines"), 
-                    unit(1, "npc") - unit(1, "lines")),
-             c(1, 1))
-  grid.segments(unit.c(unit(2, "lines"), 
-                    unit(1, "npc") - unit(1, "lines")),
-		c(1, 1),
-		unit.c(unit(2, "lines"), 
-                    unit(1, "npc") - unit(1, "lines")),
-                unit(c(1, 1), "npc") + unit(.5, "lines"))
-  grid.text(c("xmin", "xmax"),
-            unit.c(unit(2, "lines"), 
-                    unit(1, "npc") - unit(1, "lines")),
-            unit(c(1, 1), "npc") + unit(1, "lines"))
-  popViewport()
-grid.lines(c(0, 0), unit(1, "npc") - unit(c(1, 4), "lines"))
-grid.segments(c(0, 0), 
-              unit(1, "npc") - unit(c(1, 4), "lines"), 
-	      unit(c(-.5, -.5), "lines"),
-              unit(1, "npc") - unit(c(1, 4), "lines"))
+grid.text("Outer\nMargin\n2")
+grid.lines(c(1, 1), c(0, 1))
+grid.segments(c(1, 1), c(0, 1), 
+              unit(1, "npc") + unit(c(.5, .5), "lines"),
+              c(0, 1))
+grid.text(0:1, 
+          unit(1, "npc") + unit(c(1, 1), "lines"),
+	  c(0, 1))
+grid.lines(unit(1, "npc") - unit(c(0, 3), "lines"), c(0, 0))
+grid.segments(unit(1, "npc") - unit(c(0, 3), "lines"), 
+	      c(0, 0), 
+              unit(1, "npc") - unit(c(0, 3), "lines"), 
+	      unit(c(-.5, -.5), "lines"))
 grid.text(c("0 lines", "3 lines"),
-          unit(c(-1, -1), "lines"),
-	  unit(1, "npc") - unit(c(1, 4), "lines"),
-          just="right")
+          unit(1, "npc") - unit(c(0, 3), "lines"),
+          unit(c(-1, -1), "lines"))
 popViewport(2)
 
 # Second page
-pushViewport(viewport(layout.pos.row=3, 
+pushViewport(viewport(layout.pos.row=1, 
   layout=grid.layout(3, 4, 
-    widths=unit(c(2, 1, 1, 1), c("cm", "null", "null", "cm")),
-    heights=unit(c(1, 1, 3), c("cm", "null", "cm")))))
+    widths=unit(c(2.5, 1, 1, 1), c("cm", "null", "null", "cm")),
+    heights=unit(c(1, 1, 2.5), c("cm", "null", "cm")))))
 grid.rect(gp=gpar(col="black"))
 for (i in 2) {
   for (j in 2:3) {
     pushViewport(viewport(layout.pos.col=j, layout.pos.row=i))
     grid.rect(gp=gpar(col="grey"))
-    if (i == 2 && j == 2) {
       pushViewport(plotViewport(c(2, 2, 1, 1), xscale=c(0, 11),
         gp=gpar(col="grey")))
       grid.rect(gp=gpar(col="grey"))
-      grid.lines(c(0, 1), c(0, 0))
-      grid.segments(c(0, 1), c(0, 0), c(0, 1), unit(c(-.5, -.5), "lines"))
-      grid.text(c("xmin", "xmax"), c(0, 1), unit(c(-1, -1), "lines"))
-      grid.lines(c(0, 0), c(0, 1))
-      grid.segments(c(0, 0), c(0, 1), unit(c(-.5, -.5), "lines"), c(0, 1))
-      grid.text(c("ymin", "ymax"), unit(c(-1, -1), "lines"), c(0, 1), rot=90)
-      grid.text("Current\nPlot", rot=0)
+      grid.text(paste("Plot", j - 1))
       popViewport()      
-    }
     popViewport()
   }
 }
@@ -425,20 +401,16 @@ for (i in 1:4)
          paste("family=\"", family[j], "\"\nfont=", face[i], sep=""),
          font=face[i])
   }
-for (y in seq(.15, .85, length=4)) {
-  segments(c(.27, .5, .73), y - .1, 
-           c(.27, .5, .73), y + .1, col="grey")
-  segments(c(.27, .5, .73) - .01, y - .1, 
-           c(.27, .5, .73) + .01, y - .1, col="grey")
-  segments(c(.27, .5, .73) - .01, y + .1, 
-           c(.27, .5, .73) + .01, y + .1, col="grey")
-}
-segments(.02, c(.27, .5, .73), 
-         .98, c(.27, .5, .73), col="grey")
-segments(.02, c(.27, .5, .73) - .01, 
-         .02, c(.27, .5, .73) + .01, col="grey")
-segments(.98, c(.27, .5, .73) - .01, 
-         .98, c(.27, .5, .73) + .01, col="grey")
+segments(.02, c(.04, .27, .5, .73, .96), 
+         .98, c(.04, .27, .5, .73, .96), col="grey")
+segments(.02, c(.04, .27, .5, .73, .96) - .01, 
+         .02, c(.04, .27, .5, .73, .96) + .01, col="grey")
+segments(.98, c(.04, .27, .5, .73, .96) - .01, 
+         .98, c(.04, .27, .5, .73, .96) + .01, col="grey")
+rect(c(.27, .5, .73) - .01,
+     .02,
+     c(.27, .5, .73) + .01,
+     .98, col="white", border=NA)
 
 
 
@@ -1262,7 +1234,8 @@ grid.circle(x=seq(0.1, 0.9, length=100),
 figure5.3 <- function() {
 grid.rect(gp=gpar(col="grey"))
 angle <- seq(0, 2*pi, length=50)
-grid.arrows(x=seq(0.1, 0.5, length=50), y=0.5 + 0.3*sin(angle))
+grid.arrows(x=seq(0.1, 0.5, length=50), 
+            y=0.5 + 0.3*sin(angle))
 grid.arrows(grob=segmentsGrob(6:8/10, 0.2, 7:9/10, 0.8))
 
 
@@ -2864,7 +2837,7 @@ figure1.10 <- function() {
 # and then building up a final image by drawing individual lines and
 # and pieces of text.
 # 
-# Small point of interest is the use of some special glyphs (e.g. treble
+# Small point of interest is the use of some special glyphs (e.g., treble
 # clef) from the Hershey vector fonts.
 #
 
@@ -3080,7 +3053,7 @@ makeOzLines <- function(ozRegion) {
 }
 
 ozGrob <- function(ozRegion, name=NULL, gp=NULL, vp=NULL) {
-  gTree(ozRegion=ozRegion, name=name, gp=gp, vp=vp,
+  gTree(ozRegion=ozRegion, name=name, gp=gp, vp=vp, 
     childrenvp=makeOzViewports(ozRegion), 
     children=makeOzLines(ozRegion), 
     cl="ozGrob")
@@ -3091,10 +3064,11 @@ grid.ozGrob <- function(...) {
 }
 
 
-ozImage <- function(mapLong, mapLat, imageLong, imageLat, cols) {
+ozImage <- function(mapLong, mapLat, 
+                    imageLong, imageLat, cols) {
   grob(mapLong=mapLong, mapLat=mapLat, 
        imageLong=imageLong, imageLat=imageLat, cols=cols,
-       cl="ozImage")
+       cl="ozImage")  
 }
 
 drawDetails.ozImage <- function(x, recording) { 
@@ -3151,7 +3125,8 @@ ribbonKids <- function(nlevels, breaks, cols, scale) {
                      vp=vpPath("layout", "labels")),
         textGrob(x=unit(0.8, "lines"),
                  y=unit(tickloc, "native"),
-                 just="left", label=format(signif(tickloc, 3)),
+                 just="left", 
+                 label=format(signif(tickloc, 3)),
                  vp=vpPath("layout", "labels")))
 }
 
@@ -3186,7 +3161,8 @@ imageCols <- ozgreys[zcol]
 
 
 
-ozKey <- function(x, y, width, height, just, mapLong, mapLat) {
+ozKey <- function(x, y, width, height, just, 
+                  mapLong, mapLat) {
   gTree(childrenvp=viewport(name="ozkeyframe",
                             x=x, y=y, just=just,
                             width=width, height=height),
@@ -3250,7 +3226,7 @@ grid.imageFun <- function(nrow, ncol, cols,
     width=1/ncol, height=1/nrow, 
     just=c("right", "top"),
     gp=gpar(col=NA, fill=cols),
-    name="image")
+    name="image") 
 }
 
 
@@ -3274,7 +3250,7 @@ grid.imageFun <- function(nrow, ncol, cols,
     width=1/ncol, height=1/nrow, 
     just=c("right", "top"),
     gp=gpar(col=NA, fill=cols),
-    name="image")
+    name="image") 
 }
 
 
@@ -3318,7 +3294,7 @@ grid.ozFun <- function(ozRegion) {
   index <- 1
   for(i in ozRegion$lines) {
     grid.lines(i$x, i$y, default.units="native",
-               name=paste("ozlines", index, sep=""))
+               name=paste("ozlines", index, sep="")) 
     index <- index + 1
   }
   upViewport(2) 
@@ -3342,7 +3318,7 @@ grid.ozFun <- function(ozRegion) {
   index <- 1
   for(i in ozRegion$lines) {
     grid.lines(i$x, i$y, default.units="native",
-               name=paste("ozlines", index, sep=""))
+               name=paste("ozlines", index, sep="")) 
     index <- index + 1
   }
   upViewport(2) 
@@ -3376,7 +3352,7 @@ grid.imageFun <- function(nrow, ncol, cols,
     width=1/ncol, height=1/nrow, 
     just=c("right", "top"),
     gp=gpar(col=NA, fill=cols),
-    name="image")
+    name="image") 
 }
 
 
@@ -3396,7 +3372,7 @@ grid.ozFun <- function(ozRegion) {
   index <- 1
   for(i in ozRegion$lines) {
     grid.lines(i$x, i$y, default.units="native",
-               name=paste("ozlines", index, sep=""))
+               name=paste("ozlines", index, sep="")) 
     index <- index + 1
   }
   upViewport(2) 
@@ -3467,7 +3443,7 @@ grid.imageFun <- function(nrow, ncol, cols,
     width=1/ncol, height=1/nrow, 
     just=c("right", "top"),
     gp=gpar(col=NA, fill=cols),
-    name="image")
+    name="image") 
 }
 
 
@@ -3487,7 +3463,7 @@ grid.ozFun <- function(ozRegion) {
   index <- 1
   for(i in ozRegion$lines) {
     grid.lines(i$x, i$y, default.units="native",
-               name=paste("ozlines", index, sep=""))
+               name=paste("ozlines", index, sep="")) 
     index <- index + 1
   }
   upViewport(2) 
@@ -3564,14 +3540,14 @@ grid.imageGrob <- function(...) {
 }
 
 
-validDetails.imageGrob <- function(x) {
+validDetails.imageGrob <- function(x) { 
   if (!is.numeric(x$nrow) || length(x$nrow) > 1 || 
       !is.numeric(x$ncol) || length(x$ncol) > 1)
     stop("nrow and ncol must be numeric and length 1")
   if (!is.logical(x$byrow))
     stop("byrow must be logical")
   x 
-}
+} 
 
 validDetails.ozGrob <- function(x) {
   if (!inherits(x$ozRegion, "ozRegion"))
@@ -3607,7 +3583,7 @@ makeOzLines <- function(ozRegion) {
 }
 
 ozGrob <- function(ozRegion, name=NULL, gp=NULL, vp=NULL) {
-  gTree(ozRegion=ozRegion, name=name, gp=gp, vp=vp,
+  gTree(ozRegion=ozRegion, name=name, gp=gp, vp=vp, 
     childrenvp=makeOzViewports(ozRegion), 
     children=makeOzLines(ozRegion), 
     cl="ozGrob")
@@ -3618,10 +3594,11 @@ grid.ozGrob <- function(...) {
 }
 
 
-ozImage <- function(mapLong, mapLat, imageLong, imageLat, cols) {
+ozImage <- function(mapLong, mapLat, 
+                    imageLong, imageLat, cols) {
   grob(mapLong=mapLong, mapLat=mapLat, 
        imageLong=imageLong, imageLat=imageLat, cols=cols,
-       cl="ozImage")
+       cl="ozImage")  
 }
 
 drawDetails.ozImage <- function(x, recording) { 
@@ -3872,7 +3849,8 @@ ribbonKids <- function(nlevels, breaks, cols, scale) {
                      vp=vpPath("layout", "labels")),
         textGrob(x=unit(0.8, "lines"),
                  y=unit(tickloc, "native"),
-                 just="left", label=format(signif(tickloc, 3)),
+                 just="left", 
+                 label=format(signif(tickloc, 3)),
                  vp=vpPath("layout", "labels")))
 }
 
@@ -3893,7 +3871,8 @@ widthDetails.ribbonLegend <- function(x) {
 } 
 
 
-ozKey <- function(x, y, width, height, just, mapLong, mapLat) {
+ozKey <- function(x, y, width, height, just, 
+                  mapLong, mapLat) {
   gTree(childrenvp=viewport(name="ozkeyframe",
                             x=x, y=y, just=just,
                             width=width, height=height),
@@ -3942,7 +3921,7 @@ makeOzLines <- function(ozRegion) {
 }
 
 ozGrob <- function(ozRegion, name=NULL, gp=NULL, vp=NULL) {
-  gTree(ozRegion=ozRegion, name=name, gp=gp, vp=vp,
+  gTree(ozRegion=ozRegion, name=name, gp=gp, vp=vp, 
     childrenvp=makeOzViewports(ozRegion), 
     children=makeOzLines(ozRegion), 
     cl="ozGrob")
@@ -3991,7 +3970,8 @@ ribbonKids <- function(nlevels, breaks, cols, scale) {
                      vp=vpPath("layout", "labels")),
         textGrob(x=unit(0.8, "lines"),
                  y=unit(tickloc, "native"),
-                 just="left", label=format(signif(tickloc, 3)),
+                 just="left", 
+                 label=format(signif(tickloc, 3)),
                  vp=vpPath("layout", "labels")))
 }
 
@@ -4479,7 +4459,8 @@ grid.draw(tg1)
 grid.draw(rg1)
 grid.draw(rg2)
 
-grid.edit("tg1", grep=TRUE, global=TRUE, label="Different text")
+grid.edit("tg1", grep=TRUE, global=TRUE, 
+          label="Different text")
 
 popViewport()
 
@@ -4511,10 +4492,10 @@ xyplot(y ~ x, aspect=1,
        ylab="velocity")
 
 )
-grid.edit("[.]xlab$", grep=TRUE, global=TRUE,
+grid.edit("[.]xlab$", grep=TRUE, 
           x=unit(1, "npc"), just="right",
           gp=gpar(fontfamily="mono"))
-grid.edit("[.]ylab$", grep=TRUE, global=TRUE,
+grid.edit("[.]ylab$", grep=TRUE, 
           y=unit(1, "npc"), just="right",
           gp=gpar(fontfamily="mono"))
 
@@ -4774,7 +4755,7 @@ hc <- hclust(dist(USArrests), "ave")
 dend1 <- as.dendrogram(hc)
 dend2 <- cut(dend1, h=70)
 par(cex=0.7)
-par(mar=c(1, 0, 2, 5))
+par(mar=c(1, 0, 2, 5.5))
 #  dend2$lower is *NOT* a dendrogram, but a list of .. :
 plot(dend2$lower[[3]], 
   horiz = TRUE, type = "tr", axes=FALSE, cex=0.8)

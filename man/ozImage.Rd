@@ -11,6 +11,6 @@ ozImage(mapLong, mapLat, imageLong, imageLat, cols)
     area of Australia to create.}
   \item{imageLong, imageLat}{Longitude and latitude ranges describing the
     area that the image should occupy.}
-  \item{cols}{Colours for the image cells.}
+  \item{cols}{Colors for the image cells.}
 }
 \keyword{dplot}
