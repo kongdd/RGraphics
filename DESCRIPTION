@@ -1,6 +1,6 @@
 Package: RGraphics
 Title: Data and Functions from the book R Graphics
-Version: 1.0-2
+Version: 1.0-3
 Author: Paul Murrell
 Description: Data and Functions from the book R Graphics.  There is a 
   function to produce each figure in the book, plus several functions,
@@ -11,4 +11,4 @@ Suggests: CircStats, cluster, gridBase, maps, mapproj, oz, pixmap, vcd
 License: GPL
 LazyData: yes
 URL: http://www.stat.auckland.ac.nz/~paul/RGraphics/rgraphics.html
-Packaged: Fri May  6 14:15:00 2005; paul
+Packaged: Wed May 25 13:52:47 2005; paul
