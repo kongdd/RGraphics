@@ -2313,18 +2313,20 @@ detach("package:vcd")
 
 }
 figure1.7 <- function() {
+library(party)
 
+# CLASSIFICATION
+# fitting
+library(ipred)
+data(GlaucomaM)
+glau <- GlaucomaM
+levels(glau$Class) <- c("glau", "norm")
+fm.class <- ctree(Class ~ ., data = glau)
 
-#
-# Comment:
-# 
-# Underlying code by Torsten Hothorn, Kurt Hornik, Achim Zeileis 
-# and Friedrich Leisch still under development;  planned to appear
-# on CRAN as the package "party"
-# 
-
-
-grid.text("Sorry, code not publicly available yet")
+# visualization
+pushViewport(viewport(gp=gpar(cex=0.6)))
+plot(fm.class, new=FALSE, terminal.panel=myNode)
+popViewport()
 
 
 
