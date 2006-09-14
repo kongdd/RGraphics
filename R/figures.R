@@ -1068,7 +1068,6 @@ x <- 10 * (1:nrow(z))
 y <- 10 * (1:ncol(z))   
 trans <- persp(x, y, z, theta = 135, phi = 30, 
                scale = FALSE, ltheta = -120, 
-               # shade=0.5, border=NA, 
                box = FALSE)
 box(col="grey", lwd=1)
 
@@ -2011,7 +2010,7 @@ trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
 trellis.par.set(list(fontsize=list(text=6),
 	             par.xlab.text=list(cex=1.5),
                      add.text=list(cex=1.5),
-                     plot.symbol=list(cex=.5)))
+                     superpose.symbol=list(cex=.5)))
 key <- simpleKey(levels(barley$year), space = "right")
 key$text$cex <- 1.5
 print(
