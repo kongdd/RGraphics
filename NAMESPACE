@@ -1,3 +1,4 @@
+import(grDevices, graphics, grid, lattice)
 exportPattern("figure")
 export("plot.newclass")
 export("grid.imageFun")
