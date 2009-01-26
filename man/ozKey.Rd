@@ -8,10 +8,10 @@
 ozKey(x, y, width, height, just, mapLong, mapLat) 
 }
 \arguments{
-  \item{x, y, width, height, just}
-       {The location and size of the key within the current viewport.}
-  \item{mapLong, mapLat}
-       {Longitude and latitude ranges giving the area around which
-        to draw a rectangle.}
+  \item{x, y, width, height, just}{
+    The location and size of the key within the current viewport.}
+  \item{mapLong, mapLat}{
+    Longitude and latitude ranges giving the area around which
+    to draw a rectangle.}
 }
 \keyword{dplot}
