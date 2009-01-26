@@ -8,7 +8,6 @@ fit within the current viewport.}
 splitString(text)
 }
 \arguments{
-  \item{text}
-       {The string to split.}
+  \item{text}{The string to split.}
 }
 \keyword{dplot}

@@ -8,9 +8,7 @@ fit within the current viewport.}
 splitTextGrob(text, ...)
 }
 \arguments{
-  \item{text}
-       {The string to split.}
-  \item{\ldots}
-       {Arguments passed to the {\tt grob} function.}
+  \item{text}{The string to split.}
+  \item{\ldots}{Arguments passed to the \code{grob()} function.}
 }
 \keyword{dplot}

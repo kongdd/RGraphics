@@ -15,7 +15,7 @@ plot.newclass <-
            ...) 
 }
 \arguments{
-  \item{x, y, main, sub, xlim, ylim, axes, ann, col, ...}
-       {See \code{plot.default}}
+  \item{x, y, main, sub, xlim, ylim, axes, ann, col, ...}{
+    See \code{plot.default}}
 }
 \keyword{hplot} 

@@ -18,9 +18,9 @@ faceD(x, y, width, height)
 faceE(x, y, width, height)
 }
 \arguments{
-  \item{x, y, width, height}
-       {Numeric values or unit objects specifying the location
-        and size of the face.}
+  \item{x, y, width, height}{
+    Numeric values or unit objects specifying the location
+    and size of the face.}
 }
 \details{
 The functions \code{faceA} and \code{faceB} are
