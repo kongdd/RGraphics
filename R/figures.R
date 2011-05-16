@@ -1,38 +1,47 @@
-figureB.1 <- function() {
-midpts <- barplot(1:10, col="grey90", axes=FALSE)
+figure19.1 <- function() {
+#line 161 "combine.Rnw"
+#line 117 "combine.Rnw"
+midpts <- barplot(1:10, col="gray90", axes=FALSE)
 axis(2)
 axis(1, at=midpts, labels=FALSE)
 
+#line 162 "combine.Rnw"
+#line 135 "combine.Rnw"
 library(gridBase)
 vps <- baseViewports()
 pushViewport(vps$inner, vps$figure, vps$plot)
 
+#line 163 "combine.Rnw"
+#line 154 "combine.Rnw"
 grid.text(c("one", "two", "three", "four", "five",
             "six", "seven", "eight", "nine", "ten"), 
           x=unit(midpts, "native"), y=unit(-1, "lines"),
           just="right", rot=60)
 popViewport(3)
 
+#line 164 "combine.Rnw"
 
 
 
 }
-figureB.2 <- function() {
+figure19.2 <- function() {
+#line 228 "combine.Rnw"
 hc <- hclust(dist(USArrests), "ave")
 dend1 <- as.dendrogram(hc)
 dend2 <- cut(dend1, h=70)
 
 
 
+#line 244 "combine.Rnw"
 x <- 1:4
 y <- 1:4
-height <- factor(round(unlist(lapply(dend2$lower, 
-                                     attr, "height"))))
+height <- factor(round(sapply(dend2$lower, 
+                              attr, "height")))
 
 
 
-space <- 1.2 * max(unit(rep(1, 50), "strwidth",
-                        as.list(rownames(USArrests))))
+#line 279 "combine.Rnw"
+space <- 1.2 * max(stringWidth(rownames(USArrests)))
 dendpanel <- function(x, y, subscripts, ...) {
   pushViewport(viewport(gp=gpar(fontsize=8)),
                viewport(y=unit(0.95, "npc"), width=0.9,
@@ -45,35 +54,36 @@ dendpanel <- function(x, y, subscripts, ...) {
 
 
 
+#line 331 "combine.Rnw"
 trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
-library(lattice)
+#line 322 "combine.Rnw"
 plot.new()
 print(xyplot(y ~ x | height, subscripts=TRUE, 
              xlab="", ylab="",
-             strip=function(...) { 
-               strip.default(style=4, ...) 
-             },
+             strip=strip.custom(style=4), 
              scales=list(draw=FALSE), 
              panel=dendpanel),
       newpage=FALSE)
 
+#line 333 "combine.Rnw"
 
 
 
 }
 figure3.1 <- function() {
-par(oma=rep(3, 4), bg="grey80")
+#line 111 "custombase.Rnw"
+par(oma=rep(3, 4), bg="gray80")
 plot(c(0, 1), c(0, 1), type="n", ann=FALSE, axes=FALSE)
-box("outer", col="grey")
+box("outer", col="gray")
 # set clipping to figure region
 par(xpd=TRUE)
 # deliberately draw a stupidly large rectangle
-rect(-1, -1, 2, 2, col="grey90")
+rect(-1, -1, 2, 2, col="gray90")
 box("figure")
 # set clipping back to plot region
 par(xpd=FALSE)
 # deliberately draw a stupidly large rectangle
-rect(-1, -1, 2, 2, col="grey80")
+rect(-1, -1, 2, 2, col="gray80")
 box("plot", lty="dashed")
 text(.5, .5, "Plot Region")
 mtext("Figure Region", side=3, line=2)
@@ -84,16 +94,17 @@ for (i in 1:4)
 
 }
 figure3.2 <- function() {
-par(oma=rep(3, 4), mfrow=c(3,2), bg="grey80")
+#line 144 "custombase.Rnw"
+par(oma=rep(3, 4), mfrow=c(3,2), bg="gray80")
 for (i in 1:6) {
     if (i == 3) {
       omar <- par(mar=c(2, 2, 2, 1))  
       plot(c(0, 1), c(0, 1), type="n", ann=FALSE, axes=FALSE)
       par(xpd=TRUE)
-      rect(-1, -1, 2, 2, col="grey90")
+      rect(-1, -1, 2, 2, col="gray90")
       box("figure")
       par(xpd=FALSE)
-      rect(-1, -1, 2, 2, col="grey80")
+      rect(-1, -1, 2, 2, col="gray80")
       box("plot", lty="dashed")
       text(.5, .5, "Current Plot Region", cex=1.5)
       mtext("Current Figure Region", side=3)
@@ -102,13 +113,13 @@ for (i in 1:6) {
       omar <- par(mar=rep(0, 4))  
       plot(c(0, 1), c(0, 1), type="n", ann=FALSE, axes=FALSE)
       par(xpd=TRUE)
-      rect(-1, -1, 2, 2, col="grey90")
+      rect(-1, -1, 2, 2, col="gray90")
       box("figure")
       text(.5, .5, paste("Figure", i), cex=1.5)
       par(omar)
     }
 }
-box("outer", col="grey")
+box("outer", col="gray")
 for (i in 1:4)
     mtext(paste("Outer margin", i), side=i, line=1, outer=TRUE)
 
@@ -116,16 +127,17 @@ for (i in 1:4)
 
 }
 figure3.3 <- function() {
-par(xaxs="i", yaxs="i", xpd=FALSE)
+#line 218 "custombase.Rnw"
+par(mar=c(3, 6, 2, 2), xaxs="i", yaxs="i", xpd=FALSE, las=1)
     plot(c(0, 1), c(0, 1), type="n", ann=FALSE, axes=FALSE)
     box("figure")
-    rect(0, 0, 1, 1, col="light grey", border="grey")
+    rect(0, 0, 1, 1, col="light gray", border="gray")
     axis(1, at=c(0, 1), c("", ""))
-    mtext("Min x value", side=1, adj=0, line=1)
-    mtext("Max x value", side=1, adj=1, line=1)
+    mtext("Min x-value", side=1, adj=0, line=1)
+    mtext("Max x-value", side=1, adj=1, line=1)
     axis(2, at=c(0, 1), c("", ""))
-    mtext("Min y value", side=2, adj=0, line=1)
-    mtext("Max y value", side=2, adj=1, line=1)
+    mtext("Min y-value", side=2, at=0, adj=1, line=1)
+    mtext("Max y-value", side=2, at=1, adj=1, line=1)
     lines(c(.6, .6, 0), c(0, .6, .6), lty="dashed")
     text(.6, .6, expression(paste("The location ", 
             group("(",list(x[i], y[i]),")"))), pos=3)
@@ -140,15 +152,16 @@ par(xaxs="i", yaxs="i", xpd=FALSE)
 
 }
 figure3.4 <- function() {
+#line 262 "custombase.Rnw"
 pushViewport(viewport(layout=grid.layout(3, 1, 
   heights=unit(rep(1, 3), c("null", "cm", "null")))))
 pushViewport(viewport(layout.pos.row=1))
 grid.rect()
 pushViewport(plotViewport(c(5, 5, 3, 2), xscale=c(0, 11)))
-grid.rect(gp=gpar(col="grey"))
-grid.text("Current Plot", gp=gpar(col="grey"))
+grid.rect(gp=gpar(col="gray"))
+grid.text("Current Plot", gp=gpar(col="gray"))
 grid.rect(0, unit(-5, "lines"), 1, unit(5, "lines"),
-          just=c("left", "bottom"), gp=gpar(col="grey", fill="light grey"))
+          just=c("left", "bottom"), gp=gpar(col="gray", fill="light gray"))
 grid.text("Figure\nMargin\n1", y=unit(-2.5, "lines"))
 grid.lines(c(0, 1), c(0, 0))
 grid.segments(c(0, 1), c(0, 0), c(0, 1), unit(c(.5, .5), "lines"))
@@ -158,15 +171,15 @@ grid.segments(c(0, 0), unit(c(-1, -4), "lines"),
               unit(c(-.5, -.5), "lines"), unit(c(-1, -4), "lines"))
 grid.text(c("0 lines", "3 lines"),
           unit(c(-1, -1), "lines"), unit(c(-1, -4), "lines"),
-          just="right")
+          just=c("right", "bottom"))
 popViewport(2)
 pushViewport(viewport(layout.pos.row=3))
 grid.rect()
 pushViewport(plotViewport(c(5, 5, 3, 2), yscale=c(0, 11)))
-grid.rect(gp=gpar(col="grey"))
-grid.text("Current Plot", gp=gpar(col="grey"))
+grid.rect(gp=gpar(col="gray"))
+grid.text("Current Plot", gp=gpar(col="gray"))
 grid.rect(unit(-5, "lines"), 0, unit(5, "lines"), 1,
-          just=c("left", "bottom"), gp=gpar(col="grey", fill="light grey"))
+          just=c("left", "bottom"), gp=gpar(col="gray", fill="light gray"))
 grid.text("Figure\nMargin\n2", x=unit(-2.5, "lines"))
 grid.lines(c(0, 0), c(0, 1))
 grid.segments(c(0, 0), c(0, 1), unit(c(.5, .5), "lines"), c(0, 1))
@@ -175,7 +188,8 @@ grid.lines(unit(c(0, -3), "lines"), c(0, 0))
 grid.segments(unit(c(0, -3), "lines"), c(0, 0), 
               unit(c(0, -3), "lines"), unit(c(-.5, -.5), "lines"))
 grid.text(c("0 lines", "3 lines"),
-          unit(c(0, -3), "lines"), unit(c(-1, -1), "lines"))
+          unit(c(0, -3), "lines"), unit(c(-1, -1), "lines"),
+          rot=90, just=c("right", "bottom"))
 popViewport(2)
 popViewport()
 
@@ -183,6 +197,7 @@ popViewport()
 
 }
 figure3.5 <- function() {
+#line 337 "custombase.Rnw"
 pushViewport(viewport(layout=grid.layout(3, 1, 
   heights=unit(c(1, 1, 1), c("null", "cm", "null")))))
 
@@ -195,17 +210,17 @@ grid.rect(gp=gpar(col="black"))
 for (i in 2) {
   for (j in 2:3) {
     pushViewport(viewport(layout.pos.col=j, layout.pos.row=i))
-    grid.rect(gp=gpar(col="grey"))
+    grid.rect(gp=gpar(col="gray"))
       pushViewport(plotViewport(c(2, 2, 1, 1), xscale=c(0, 11),
-        gp=gpar(col="grey")))
-      grid.rect(gp=gpar(col="grey"))
+        gp=gpar(col="gray")))
+      grid.rect(gp=gpar(col="gray"))
       grid.text(paste("Plot", j - 1))
       popViewport()      
     popViewport()
   }
 }
 pushViewport(viewport(layout.pos.row=2, layout.pos.col=1))
-grid.rect(gp=gpar(col="grey", fill="light grey"))
+grid.rect(gp=gpar(col="gray", fill="light gray"))
 grid.text("Outer\nMargin\n2")
 grid.lines(c(1, 1), c(0, 1))
 grid.segments(c(1, 1), c(0, 1), 
@@ -221,7 +236,8 @@ grid.segments(unit(1, "npc") - unit(c(0, 3), "lines"),
 	      unit(c(-.5, -.5), "lines"))
 grid.text(c("0 lines", "3 lines"),
           unit(1, "npc") - unit(c(0, 3), "lines"),
-          unit(c(-1, -1), "lines"))
+          unit(c(-1, -1), "lines"),
+          rot=90, just=c("right", "bottom"))
 popViewport(2)
 
 # Second page
@@ -233,28 +249,28 @@ grid.rect(gp=gpar(col="black"))
 for (i in 2) {
   for (j in 2:3) {
     pushViewport(viewport(layout.pos.col=j, layout.pos.row=i))
-    grid.rect(gp=gpar(col="grey"))
+    grid.rect(gp=gpar(col="gray"))
       pushViewport(plotViewport(c(2, 2, 1, 1), xscale=c(0, 11),
-        gp=gpar(col="grey")))
-      grid.rect(gp=gpar(col="grey"))
+        gp=gpar(col="gray")))
+      grid.rect(gp=gpar(col="gray"))
       grid.text(paste("Plot", j - 1))
       popViewport()      
     popViewport()
   }
 }
 pushViewport(viewport(layout.pos.row=3, layout.pos.col=2:3))
-grid.rect(gp=gpar(col="grey", fill="light grey"))
+grid.rect(gp=gpar(col="gray", fill="light gray"))
 grid.text("Outer Margin 1")
 grid.lines(c(0, 1), c(1, 1))
 grid.segments(c(0, 1), 
               unit(c(1, 1), "npc"),
 	      c(0, 1),
               unit(c(1, 1), "npc") + unit(.5, "lines"))
-grid.rect(c(0, 1), 
-	  unit(c(1, 1), "npc") + unit(1, "lines"),
-	  unit(c(1, 1), "strwidth", list("0", "1")),
-	  unit(c(1, 1), "strheight", list("0", "1")),
-	  gp=gpar(col=NULL, fill="white"))
+# grid.rect(c(0, 1), 
+# 	  unit(c(1, 1), "npc") + unit(1, "lines"),
+# 	  unit(c(1, 1), "strwidth", list("0", "1")),
+# 	  unit(c(1, 1), "strheight", list("0", "1")),
+# 	  gp=gpar(col=NULL, fill="white"))
 grid.text(c(0, 1), 
           c(0, 1),
           unit(c(1, 1), "npc") + unit(1, "lines"))
@@ -266,7 +282,7 @@ grid.segments(c(0, 0),
 grid.text(c("0 lines", "3 lines"),
           unit(c(-1, -1), "lines"),
 	  unit(1, "npc") - unit(c(1, 4), "lines"),
-          just="right")
+          just=c("right", "bottom"))
 popViewport(2)
 
 popViewport()
@@ -275,89 +291,40 @@ popViewport()
 
 }
 figure3.6 <- function() {
-names <- c("blank", "solid", "dashed", "dotted", "dotdash",
-  "longdash", "twodash", "", "", "13", "F8", "431313", "22848222")
-hgap <- unit(5, "mm")
-pushViewport(viewport(layout=grid.layout(17, 5,
-  widths=unit.c(unit(1, "strwidth", "Integer") + unit(3, "mm"), 
-    hgap, unit(1.5, "inches"),
-    hgap, max(unit(rep(1, length(names)), "strwidth", data=as.list(names))) + unit(3, "mm")),
-  heights=unit(c(1.2, 1, 1, rep(1.2, 7), 1, 1, rep(1.2, 4), 1), "lines"))))
-pushViewport(viewport(layout.pos.col=1:5, layout.pos.row=1:17))
-grid.rect(width=1.3, height=1.3, gp=gpar(col="grey"))
-popViewport()
-for (i in 1:17) {
-	if (i == 1) {
-	  pushViewport(viewport(layout.pos.col=1, layout.pos.row=i))  
-	  grid.text("Integer", gp=gpar(fontface="bold"), just="right", x=1)
-	  popViewport()
-	  pushViewport(viewport(layout.pos.col=3, layout.pos.row=i))  
-	  grid.text("Sample line", gp=gpar(fontface="bold"))
-	  popViewport()
-	  pushViewport(viewport(layout.pos.col=5, layout.pos.row=i))  
-	  grid.text("String", gp=gpar(fontface="bold"), just="left", x=0)
-	  popViewport()
-	  pushViewport(viewport(layout.pos.row=i))  
-	  grid.lines(c(0, 1), 0)
-	  popViewport()
-        } else if (i == 3) {
-	    pushViewport(viewport(layout.pos.col=1, layout.pos.row=i))  
-	    grid.text("Predefined", just="left", x=0, 
-              gp=gpar(fontface="italic"))
-	    popViewport()          
-        } else if (i == 12) {
-	    pushViewport(viewport(layout.pos.col=1, layout.pos.row=i))  
-	    grid.text("Custom", just="left", x=0, 
-              gp=gpar(fontface="italic"))
-	    popViewport()          
-	} else if ((i > 3 && i < 11) || 
-                   (i > 12 && i < 17)) {
-	  if (i < 11) {
-	    pushViewport(viewport(layout.pos.col=1, layout.pos.row=i))  
-	    grid.text(i-4, just="right", x=1)
-	    popViewport()
-	  }
-	  if (nchar(names[i-3])) {
-		  pushViewport(viewport(layout.pos.col=5, layout.pos.row=i))  
-		  grid.text(paste("\"", names[i-3], "\"", sep=""), x=0, just="left")
-		  popViewport()
-		  pushViewport(viewport(layout.pos.col=3, layout.pos.row=i))  
-		  grid.lines(c(0, 1), 0.5, gp=gpar(lty=names[i-3], lwd=2))
-		  popViewport()
-	  }
-        }
-	if (i == 17) {
-	    	  pushViewport(viewport(layout.pos.row=i))  
-		  grid.lines(c(0, 1), 0)
-		  popViewport()
-	}
-}
-popViewport()
+#line 957 "custombase.Rnw"
+par(mar=rep(0, 4), cex=0.7)
+plot.new()
+plot.window(c(0.05, 0.95), 0:1)
+family <- c("sans", "serif", "mono")
+face <- 1:4
+for (i in 1:4)
+  for (j in 1:3) {
+    par(family=family[j], lheight=1.5)
+    text(seq(.15, .85, length=4)[i],
+         seq(.25, .75, length=3)[j],
+         paste("family=\"", family[j], "\"\nfont=", face[i], sep=""),
+         font=face[i])
+  }
+segments(.02, c(.125, .375, .625, .875), 
+         .98, c(.125, .375, .625, .875), col="gray")
+segments(.02, c(.125, .375, .625, .875) - .01, 
+         .02, c(.125, .375, .625, .875) + .01, col="gray")
+segments(.98, c(.125, .375, .625, .875) - .01, 
+         .98, c(.125, .375, .625, .875) + .01, col="gray")
+rect(c(.27, .5, .73) - .01,
+     .1,
+     c(.27, .5, .73) + .01,
+     .9, col="white", border=NA)
 
 
 
 }
 figure3.7 <- function() {
-x <- c(.3, .7, .3)
-y <- c(.2, .5, .8)
-grid.rect(gp=gpar(col="grey"))
-grid.lines(x, y, gp=gpar(lwd=40, lineend="square",
-                   linejoin="mitre", col="black"))
-grid.lines(x, y, gp=gpar(lwd=40, col="grey50"))
-                   # lineend="round", linejoin="round"
-grid.lines(x, y, gp=gpar(lwd=40, lineend="butt",
-                   linejoin="bevel", col="grey80"))
-grid.points(x, y, default="npc", pch=16, gp=gpar(cex=0.5))
-
-
-
-
-}
-figure3.8 <- function() {
+#line 1052 "custombase.Rnw"
 par(mar=rep(0, 4), xaxs="i", yaxs="i", cex=0.8)
 plot.new()
 par(new=TRUE)
-grid.rect(gp=gpar(col="grey"))
+grid.rect(gp=gpar(col="gray"))
 ncol <- 4
 nrow <- 4
 xadj <- c(1, 0.5, NA, 0)
@@ -373,7 +340,7 @@ for (i in 1:nrow) {
                   unit.c(yu, yu - size),
                   unit.c(xu + size, xu),
                   unit.c(yu, yu + size),
-		  gp=gpar(col="grey"))
+		  gp=gpar(col="gray"))
     text(x, y, paste("c(", xadj[j], ", ", yadj[i], ")", sep=""),
          adj=c(xadj[j], yadj[i]))
   }
@@ -382,68 +349,41 @@ for (i in 1:nrow) {
 
 
 }
-figure3.9 <- function() {
-par(mar=rep(0, 4), cex=0.7)
-plot.new()
-plot.window(c(0.05, 0.95), 0:1)
-family <- c("sans", "serif", "mono")
-face <- 1:4
-for (i in 1:4)
-  for (j in 1:3) {
-    par(family=family[j], lheight=1.5)
-    text(seq(.15, .85, length=4)[i],
-         seq(.25, .75, length=3)[j],
-         paste("family=\"", family[j], "\"\nfont=", face[i], sep=""),
-         font=face[i])
-  }
-segments(.02, c(.125, .375, .625, .875), 
-         .98, c(.125, .375, .625, .875), col="grey")
-segments(.02, c(.125, .375, .625, .875) - .01, 
-         .02, c(.125, .375, .625, .875) + .01, col="grey")
-segments(.98, c(.125, .375, .625, .875) - .01, 
-         .98, c(.125, .375, .625, .875) + .01, col="grey")
-rect(c(.27, .5, .73) - .01,
-     .1,
-     c(.27, .5, .73) + .01,
-     .9, col="white", border=NA)
-
-
-
-}
-figure3.10 <- function() {
+figure3.8 <- function() {
+#line 1161 "custombase.Rnw"
 ncol <- 6
-nrow <- 5
-grid.rect(gp=gpar(col="grey"))
+nrow <- 1
+grid.rect(gp=gpar(col="gray"))
 for (i in 1:nrow) {
   for (j in 1:ncol) {
     x <- unit(j/(ncol+1), "npc")
     y <- unit(i/(nrow + 1), "npc")
     pch <- (i - 1)*ncol + j - 1
-    if (pch > 25) 
-      pch <- c("A", "b", ".", "#")[pch - 25]
     grid.points(x + unit(3, "mm"), y, 
-      pch=pch, gp=gpar(fill="grey"))
-    grid.text(pch, x - unit(3, "mm"), y, gp=gpar(col="grey"))
+      pch=pch, gp=gpar(fill="gray"))
+    grid.text(pch, x - unit(3, "mm"), y, gp=gpar(col="gray"))
   }
 }
 
 
 
 }
-figure3.11 <- function() {
+figure3.9 <- function() {
+#line 1229 "custombase.Rnw"
 x <- -5:5
 y <- -x^2 + 25
 plottype <- function(type) {
   par(mar=c(1, 0, 1, 0), pty="s")
   plot.new()
   plot.window(c(-6, 6), c(-2, 27))
-  box(col="grey")
+  box(col="gray")
   points(x, y, type=type)
   mtext(paste("type=\"", type, "\"", sep=""))
 }
 
 
 
+#line 1241 "custombase.Rnw"
 par(mfrow=c(3, 2))
 plottype("p")
 plottype("l")
@@ -455,12 +395,13 @@ plottype("s")
 
 
 }
-figure3.12 <- function() {
+figure3.10 <- function() {
+#line 1320 "custombase.Rnw"
 axisfun <- function(mgp=c(3, 1, 0), xaxs="r", tcl=-.5,
                     mgpcol="black", xaxscol="black", tclcol="black") {
   par(mar=c(5, 1, 0, 1), mgp=mgp, xaxs=xaxs, tcl=tcl, pty="s")
   plot.new()
-  box(col="grey")
+  box(col="gray")
   text(.5, .75, paste("mgp=c(", paste(mgp, collapse=", "), ")", sep=""),
        col=mgpcol)
   text(.5, .5, paste("xaxs=\"", xaxs, "\"", sep=""),
@@ -473,15 +414,17 @@ axisfun <- function(mgp=c(3, 1, 0), xaxs="r", tcl=-.5,
 
 
 
+#line 1336 "custombase.Rnw"
 par(mfrow=c(2, 2))
 axisfun()
-axisfun(xaxs="i", mgpcol="grey", tclcol="grey")
-axisfun(mgp=c(2, 0.3, 0), tcl=0.3, xaxscol="grey")
+axisfun(mgp=c(2, 0.3, 0), tcl=0.2, xaxscol="gray")
+axisfun(xaxs="i", mgpcol="gray", tclcol="gray")
 
 
 
 }
-figure3.13 <- function() {
+figure3.11 <- function() {
+#line 1451 "custombase.Rnw"
 library(gridBase)
 par(oma=rep(3, 4))
 vps <- baseViewports()
@@ -519,7 +462,7 @@ annWidth <- function(x, y, lab, above=TRUE, horiz=TRUE) {
             gp=gpar(fontfamily="mono", cex=1))
 }
 # Annotate whole page
-grid.rect(gp=gpar(col="grey", fill="grey80"))
+grid.rect(gp=gpar(col="gray", fill="gray80"))
 annWidth(0:1, unit(1, "npc") - unit(1.5, "lines"), "din[1]")
 # grid.lines(x=0.5)
 annWidth(unit(c(0, 3), "lines"), unit(0.7, "npc"), c("omi[2]", "oma[2]"))
@@ -533,7 +476,7 @@ annWidth(unit.c(unit(0, "npc"),
          above=FALSE)
 # Annotate figure region
 pushViewport(do.call("vpStack", vps[1:2]))
-grid.rect(gp=gpar(fill="grey90"))
+grid.rect(gp=gpar(fill="gray90"))
 annWidth(0:1, unit(1, "npc") - unit(1.5, "lines"), "fin[1]")
 annWidth(unit(c(0, 4.1), "lines"), unit(0.6, "npc"), c("mai[2]", "mar[2]"))
 annWidth(unit(1, "npc") - unit(c(0, 2.1), "lines"),
@@ -546,14 +489,15 @@ annWidth(unit.c(unit(0, "npc"),
          above=FALSE)
 # Annotate plot region
 pushViewport(vps[[3]])
-grid.rect(gp=gpar(lty="dashed", fill="grey80"))
+grid.rect(gp=gpar(lty="dashed", fill="gray80"))
 annWidth(0:1, unit(1, "npc") - unit(1.5, "lines"), "pin[1]")
 popViewport(3)
 
 
 
 }
-figure3.14 <- function() {
+figure3.12 <- function() {
+#line 1828 "custombase.Rnw"
 grid.lshow <- function(i, j, lab, order, nrow, ncol, heights, respect) {
   pushViewport(viewport(layout.pos.col=j, layout.pos.row=i))
   pushViewport(viewport(width=unit(1, "npc") - unit(2, "lines"),
@@ -561,7 +505,7 @@ grid.lshow <- function(i, j, lab, order, nrow, ncol, heights, respect) {
 	       y=unit(3, "lines"), just="bottom", 
     layout=grid.layout(nrow, ncol, heights=heights, 
       respect=respect)))
-  grid.rect(gp=gpar(col="grey"))
+  grid.rect(gp=gpar(col="gray"))
   for (i in 1:nrow) {
     for (j in 1:ncol) {
       pushViewport(viewport(layout.pos.row=i, layout.pos.col=j))
@@ -586,7 +530,8 @@ popViewport()
 
 
 }
-figure3.15 <- function() {
+figure3.13 <- function() {
+#line 1961 "custombase.Rnw"
 grid.lshow <- function(i, j, lab, locs, nrow, ncol, heights, respect) {
   pushViewport(viewport(layout.pos.col=j, layout.pos.row=i))
   pushViewport(viewport(width=unit(1, "npc") - unit(2, "lines"),
@@ -594,7 +539,7 @@ grid.lshow <- function(i, j, lab, locs, nrow, ncol, heights, respect) {
 	       y=unit(3, "lines"), just="bottom", 
     layout=grid.layout(nrow, ncol, heights=heights, 
       respect=respect)))
-  grid.rect(gp=gpar(col="grey"))
+  grid.rect(gp=gpar(col="gray"))
   for (i in locs) {
       pushViewport(viewport(layout.pos.row=i$rows, layout.pos.col=i$cols))
       grid.rect()
@@ -634,187 +579,326 @@ popViewport()
 
 
 }
-figure3.16 <- function() {
-par(mfrow=c(2, 2), mar=c(1, 1, 2, 1))
+figure3.14 <- function() {
+#line 2223 "custombase.Rnw"
+par(mfrow=c(1, 2), mar=c(1, 1, 2, 1))
 par(cex=0.7)
+#line 2197 "custombase.Rnw"
 x <- 1:10
 y <- matrix(sort(rnorm(30)), ncol=3)
 plot(x, y[,1], ylim=range(y), ann=FALSE, axes=FALSE, 
-     type="l", col="grey")
-box(col="grey")
+     type="l", col="gray")
+box(col="gray")
 
+#line 2226 "custombase.Rnw"
+#line 2204 "custombase.Rnw"
 points(x, y[,1])
-lines(x, y[,2], col="grey")
+lines(x, y[,2], col="gray")
 points(x, y[,2], pch=2)
-lines(x, y[,3], col="grey")
+lines(x, y[,3], col="gray")
 points(x, y[,3], pch=3)
 
 
+#line 2227 "custombase.Rnw"
 mtext("points() & lines()", side=3, line=0.5)
-x <- c(4, 5, 2, 1)
+#line 2212 "custombase.Rnw"
+x <- 1:5
 y <- x
-plot(x, y, ann=FALSE, axes=FALSE, col="grey", pch=16)
-points(3, 3, col="grey", pch=16)
-box(col="grey")
+plot(x, y, ann=FALSE, axes=FALSE, col="gray", pch=16)
+box(col="gray")
 
-text(x, y, c("bottom", "left", "top", "right"), pos=1:4)
+#line 2229 "custombase.Rnw"
+#line 2218 "custombase.Rnw"
+text(x[-3], y[-3], c("right", "top", "bottom", "left"), 
+     pos=c(4, 3, 1, 2))
 text(3, 3, "overlay")
 
+#line 2230 "custombase.Rnw"
 mtext("text()", side=3, line=0.5)
-x <- rnorm(100)
-y <- rnorm(100)
-plot(x, y, ann=FALSE, axes=FALSE, col="grey")
-box(col="grey")
-
-rect(min(x), min(y), max(x), max(y), lty="dashed")
-hull <- chull(x, y)
-polygon(x[hull], y[hull])
-
-mtext("rect() & poly()", side=3, line=0.5)
 
 
 
 }
-figure3.17 <- function() {
+figure3.15 <- function() {
+#line 2343 "custombase.Rnw"
+t <- seq(60, 360, 30)
+x <- cos(t/180*pi)*t/360
+y <- sin(t/180*pi)*t/360
+
+
+
+#line 2373 "custombase.Rnw"
+library(pixmap)
+source(system.file("extra", "as.raster.R", package="RGraphics"))
+rlogo <- read.pnm(system.file("pictures/logo.pgm", 
+                              package="pixmap")[1])
+
+
+
+#line 2385 "custombase.Rnw"
+par(mfrow=c(1, 2), mar=c(1, 1, 2, 1))
+par(cex=0.7)
+
+#line 2343 "custombase.Rnw"
+t <- seq(60, 360, 30)
+x <- cos(t/180*pi)*t/360
+y <- sin(t/180*pi)*t/360
+
+#line 2389 "custombase.Rnw"
+
+par(mfrow=c(3, 3), mar=rep(1, 4), pty="s")
+plot(x, y, pch=16, col="gray",
+     xlim=c(-.6, 1.1), ylim=c(-1.1, .6),
+     axes=FALSE, ann=FALSE)
+box(col="gray")
+mtext("lines()", side=3, line=.6, cex=.7, family="mono")
+#line 2348 "custombase.Rnw"
+lines(x, y)
+
+#line 2397 "custombase.Rnw"
+plot(x, y, pch=16, col="gray",
+     xlim=c(-.6, 1.1), ylim=c(-1.1, .6),
+     axes=FALSE, ann=FALSE)
+box(col="gray")
+mtext("segments()", side=3, line=.6, cex=.7, family="mono")
+#line 2351 "custombase.Rnw"
+segments(0, 0, x, y)
+
+#line 2403 "custombase.Rnw"
+plot(x, y, pch=16, col="gray",
+     xlim=c(-.6, 1.1), ylim=c(-1.1, .6),
+     axes=FALSE, ann=FALSE)
+box(col="gray")
+mtext("arrows()", side=3, line=.6, cex=.7, family="mono")
+#line 2354 "custombase.Rnw"
+arrows(0, 0, x[-1], y[-1], length=.1)
+
+#line 2409 "custombase.Rnw"
+plot(x, y, pch=16, col="gray",
+     xlim=c(-.6, 1.1), ylim=c(-1.1, .6),
+     axes=FALSE, ann=FALSE)
+box(col="gray")
+mtext("xspline()", side=3, line=.6, cex=.7, family="mono")
+#line 2357 "custombase.Rnw"
+xspline(x, y, shape=1)
+
+#line 2415 "custombase.Rnw"
+plot(x, y, pch=16, col="gray",
+     xlim=c(-.6, 1.1), ylim=c(-1.1, .6),
+     axes=FALSE, ann=FALSE)
+box(col="gray")
+mtext("rect()", side=3, line=.6, cex=.7, family="mono")
+#line 2363 "custombase.Rnw"
+rect(min(x), min(y), max(x), max(y), col="gray")
+
+#line 2421 "custombase.Rnw"
+plot(x, y, pch=16, col="gray",
+     xlim=c(-.6, 1.1), ylim=c(-1.1, .6),
+     axes=FALSE, ann=FALSE)
+box(col="gray")
+mtext("polygon()", side=3, line=.6, cex=.7, family="mono")
+#line 2366 "custombase.Rnw"
+polygon(x, y, col="gray")
+
+#line 2427 "custombase.Rnw"
+plot(x, y, pch=16, col="gray",
+     xlim=c(-.6, 1.1), ylim=c(-1.1, .6),
+     axes=FALSE, ann=FALSE)
+box(col="gray")
+mtext("polypath()", side=3, line=.6, cex=.7, family="mono")
+#line 2369 "custombase.Rnw"
+polypath(c(x, NA, .5*x), c(y, NA, .5*y),
+         col="gray", rule="evenodd")
+
+#line 2433 "custombase.Rnw"
+plot(x, y, pch=16, col="gray",
+     xlim=c(-.6, 1.1), ylim=c(-1.1, .6),
+     axes=FALSE, ann=FALSE)
+box(col="gray")
+mtext("xspline()", side=3, line=.6, cex=.7, family="mono")
+#line 2360 "custombase.Rnw"
+xspline(x, y, shape=1, open=FALSE, col="gray")
+
+#line 2439 "custombase.Rnw"
+plot(x, y, pch=16, col="gray",
+     xlim=c(-.6, 1.1), ylim=c(-1.1, .6),
+     axes=FALSE, ann=FALSE)
+box(col="gray")
+mtext("rasterImage()", side=3, line=.6, cex=.7, family="mono")
+#line 2379 "custombase.Rnw"
+rasterImage(rlogo,
+            x - .07, y - .07,
+            x + .07, y + .07,
+            interpolate=FALSE)
+
+#line 2445 "custombase.Rnw"
+
+
+
+
+}
+figure3.16 <- function() {
+#line 2663 "custombase.Rnw"
 par(mfrow=c(1, 2), mar=c(1, 1, 2, 1), pty="s")
 par(cex=0.7)
+#line 2643 "custombase.Rnw"
 x <- runif(20, 1, 10)
 y <- x + rnorm(20)
-plot(x, y, ann=FALSE, axes=FALSE, col="grey", pch=16)
-box(col="grey")
+plot(x, y, ann=FALSE, axes=FALSE, col="gray", pch=16)
+box(col="gray")
 
+#line 2666 "custombase.Rnw"
+#line 2649 "custombase.Rnw"
 lmfit <- lm(y ~ x)
 abline(lmfit)
 arrows(5, 8, 7, predict(lmfit, data.frame(x=7)),
        length=0.1)
 text(5, 8, "Line of best fit", pos=2)
 
+#line 2667 "custombase.Rnw"
 mtext("abline() & arrows()", side=3, line=0.5)
+#line 2656 "custombase.Rnw"
 y <- rnorm(50)
 hist(y, main="", xlab="", ylab="", axes=FALSE, 
-     border="grey", col="light grey")
-box(col="grey")
+     border="gray", col="light gray")
+box(col="gray")
 rug(y, ticksize=0.02)
 
+#line 2669 "custombase.Rnw"
 mtext("rug()", side=3, line=0.5)
 
 
 
 }
-figure3.18 <- function() {
+figure3.17 <- function() {
+#line 2783 "custombase.Rnw"
+#line 2770 "custombase.Rnw"
 angle <- seq(0, 2*pi, length=13)[-13]
 x <- 0.15*cos(angle)
 y <- 0.5 + 0.3*sin(angle)
 par(mar=rep(0, 4))
 plot.new()
-box("outer", col="grey")
-polygon(0.25 + x, y, col="grey")
-text(0.75 + x[c(1, 5, 9)], y[c(1, 5, 9)], "NA", col="grey")
+box("outer", col="gray")
+polygon(0.25 + x, y, col="gray")
+text(0.75 + x[c(1, 5, 9)], y[c(1, 5, 9)], "NA", col="gray")
 x[c(1, 5, 9)] <- NA
 y[c(1, 5, 9)] <- NA
-polygon(0.75 + x, y, col="grey")
+polygon(0.75 + x, y, col="gray")
 
+#line 2784 "custombase.Rnw"
+
+
+
+}
+figure3.18 <- function() {
+#line 2919 "custombase.Rnw"
+par(mar=c(2, 1, 1, 1))
+#line 2895 "custombase.Rnw"
+y1 <- rnorm(100)
+y2 <- rnorm(100)
+
+#line 2921 "custombase.Rnw"
+#line 2899 "custombase.Rnw"
+par(mfrow=c(2, 1), xpd=NA)
+
+#line 2922 "custombase.Rnw"
+#line 2902 "custombase.Rnw"
+plot(y1, type="l", axes=FALSE,
+     xlab="", ylab="", main="")
+box(col="gray")
+mtext("Left end of margin", adj=0, side=3)
+lines(x=c(20, 20, 40, 40), y=c(-7, max(y1), max(y1), -7), 
+      lwd=3, col="gray")
+
+#line 2923 "custombase.Rnw"
+#line 2910 "custombase.Rnw"
+plot(y2, type="l", axes=FALSE,
+     xlab="", ylab="", main="")
+box(col="gray")
+mtext("Right end of margin", adj=1, side=3)
+mtext("Label below x=30", at=30, side=1)
+lines(x=c(20, 20, 40, 40), y=c(7, min(y2), min(y2), 7), 
+      lwd=3, col="gray")
+
+#line 2924 "custombase.Rnw"
 
 
 
 }
 figure3.19 <- function() {
-par(mar=c(2, 1, 1, 1))
-y1 <- rnorm(100)
-y2 <- rnorm(100)
-
-par(mfrow=c(2, 1), xpd=NA)
-
-plot(y1, type="l", axes=FALSE,
-     xlab="", ylab="", main="")
-box(col="grey")
-mtext("Left end of margin", adj=0, side=3)
-lines(x=c(20, 20, 40, 40), y=c(-7, max(y1), max(y1), -7), 
-      lwd=3, col="grey")
-
-plot(y2, type="l", axes=FALSE,
-     xlab="", ylab="", main="")
-box(col="grey")
-mtext("Right end of margin", adj=1, side=3)
-mtext("Label below x=30", at=30, side=1)
-lines(x=c(20, 20, 40, 40), y=c(7, min(y2), min(y2), 7), 
-      lwd=3, col="grey")
-
-
-
-
-}
-figure3.20 <- function() {
+#line 3037 "custombase.Rnw"
 par(mfrow=c(2, 1), mar=c(5, 3, 2, 1), cex=0.5, pty="s")
+#line 3024 "custombase.Rnw"
 with(iris,
      plot(Sepal.Length, Sepal.Width, 
           pch=as.numeric(Species), cex=1.2))
 legend(6.1, 4.4, c("setosa", "versicolor", "virginica"), 
        cex=1.5, pch=1:3)
 
+#line 3039 "custombase.Rnw"
+#line 3031 "custombase.Rnw"
 barplot(VADeaths[1:2,], angle=c(45, 135), density=20, 
-        col="grey", names=c("RM", "RF", "UM", "UF"))
+        col="gray", names=c("RM", "RF", "UM", "UF"))
 legend(0.4, 38, c("55-59", "50-54"), cex=1.5,
-       angle = c(135, 45), density = 20, fill = "grey")
+       angle=c(135, 45), density=20, fill="gray")
 
+#line 3040 "custombase.Rnw"
 
 
 
 }
-figure3.21 <- function() {
+figure3.20 <- function() {
+#line 3157 "custombase.Rnw"
 par(cex=0.8)
+#line 3135 "custombase.Rnw"
 x <- 1:2
 y <- runif(2, 0, 100)
 par(mar=c(4, 4, 2, 4))
 plot(x, y, type="n", xlim=c(0.5, 2.5), ylim=c(-10, 110),
      axes=FALSE, ann=FALSE)
 
+#line 3159 "custombase.Rnw"
+#line 3142 "custombase.Rnw"
 axis(2, at=seq(0, 100, 20))
 mtext("Temperature (Centigrade)", side=2, line=3)
 
+#line 3160 "custombase.Rnw"
+#line 3146 "custombase.Rnw"
 axis(1, at=1:2, labels=c("Treatment 1", "Treatment 2"))
 axis(4, at=seq(0, 100, 20), labels=seq(0, 100, 20)*9/5 + 32)
 mtext("Temperature (Fahrenheit)", side=4, line=3)
 box()
 
-segments(x, 0, x, 100, lwd=20, col="dark grey")
+#line 3161 "custombase.Rnw"
+#line 3152 "custombase.Rnw"
+segments(x, 0, x, 100, lwd=20)
 segments(x, 0, x, 100, lwd=16, col="white")
-segments(x, 0, x, y, lwd=16, col="light grey")
+segments(x, 0, x, y, lwd=16, col="gray")
 
-
-
-
-}
-figure3.22 <- function() {
-h <- 0.01
-drawexpr <- function(expr, y) {
-  grid.text(paste("expression(", expr, ")", sep=""), .5, y-h, 
-            just="top", gp=gpar(fontfamily="mono", cex=0.75))
-  grid.text(parse(text=expr), .5, y+h, 
-            just="bottom", gp=gpar(fontfamily="serif"))
-}
-drawexpr("z[i] == sqrt(x[i]^2 + y[i]^2)", 1/5)
-drawexpr("hat(beta) == (X^t * X)^{-1} * X^t * y", 2/5)
-drawexpr("bar(x) == sum(frac(x[i], n), i==1, n)", 3/5)
-drawexpr("paste(\"Temperature (\", degree, \"C) in 2003\")", 4/5)
-grid.rect(gp=gpar(col="grey"))
+#line 3162 "custombase.Rnw"
 
 
 
 }
-figure3.23 <- function() {
+figure3.21 <- function() {
+#line 3354 "custombase.Rnw"
 par(mar=rep(1, 4))
+#line 3331 "custombase.Rnw"
 plot(0:1, 0:1, type="n", axes=FALSE, ann=FALSE)
 usr <- par("usr")
 pin <- par("pin")
 xcm <- diff(usr[1:2])/(pin[1]*2.54)
 ycm <- diff(usr[3:4])/(pin[2]*2.54)
 
+#line 3356 "custombase.Rnw"
+#line 3338 "custombase.Rnw"
 par(xpd=NA)
 rect(0 + 0.2*xcm, 0 - 0.2*ycm,
      1 + 0.2*xcm, 1 - 0.2*ycm,
-     col="grey", border=NA)
+     col="gray", border=NA)
 
+#line 3357 "custombase.Rnw"
+#line 3344 "custombase.Rnw"
 rect(0, 0, 1, 1, col="white")
 segments(seq(1, 8, 0.1)*xcm, 0,
          seq(1, 8, 0.1)*xcm, 
@@ -824,21 +908,25 @@ segments(seq(1, 8, 0.1)*xcm, 0,
 text(1:8*xcm, 0.6*ycm, 0:7, adj=c(0.5, 0))
 text(8.2*xcm, 0.6*ycm, "cm", adj=c(0, 0))
 
+#line 3358 "custombase.Rnw"
 
 
 
 }
-figure3.24 <- function() {
+figure3.22 <- function() {
+#line 3533 "custombase.Rnw"
 layout(matrix(1:2, ncol=1), heights=1:2/6.5)
 par(cex=0.7)
+#line 3507 "custombase.Rnw"
 drunkenness <- ts(c(3875, 4846, 5128, 5773, 7327, 
                     6688, 5582, 3473, 3186,
                     rep(NA, 51)),
                   start=1912, end=1971)
 
+#line 3536 "custombase.Rnw"
 # Have to copy-and-paste to shrink the mtext text (arggh!)
 par(mar=c(5, 6, 2, 4))
-plot(drunkenness, lwd=3, col="grey", ann=FALSE, las=2)
+plot(drunkenness, lwd=3, col="gray", ann=FALSE, las=2)
 mtext("Drunkenness\nRelated Arrests", side=2, line=3.5, cex=0.7)
 par(new=TRUE)
 plot(nhtemp, ann=FALSE, axes=FALSE)
@@ -847,21 +935,24 @@ title("Using par(new=TRUE) or par(usr=...)")
 axis(4)
 
 par(mar=c(5, 4, 4, 2))
+#line 3523 "custombase.Rnw"
 with(trees, 
      {
        plot(Height, Volume, pch=3,
             xlab="Height (ft)", 
             ylab=expression(paste("Volume ", (ft^3))))
        symbols(Height, Volume, circles=Girth/12, 
-               fg="grey", inches=FALSE, add=TRUE)
+               fg="gray", inches=FALSE, add=TRUE)
      })
 
+#line 3548 "custombase.Rnw"
 mtext("symbols(..., add=TRUE)", font=2, side=3, line=1)
 
 
 
 }
-figure3.25 <- function() {
+figure3.23 <- function() {
+#line 3682 "custombase.Rnw"
 xx <- c(1:50)
 yy <- rnorm(50)
 n <- 50
@@ -869,155 +960,82 @@ hline <- 0
 
 
 
+#line 3706 "custombase.Rnw"
+#line 3682 "custombase.Rnw"
 xx <- c(1:50)
 yy <- rnorm(50)
 n <- 50
 hline <- 0
 
+#line 3707 "custombase.Rnw"
 par(mfrow=c(2,2), mar=c(3, 3, 1, 1))
+#line 3688 "custombase.Rnw"
 plot (yy ~ xx, type="n", axes=FALSE, ann=FALSE)
 polygon(c(xx[1], xx, xx[n]), c(min(yy), yy, min(yy)), 
-        col="grey", border=NA)
+        col="gray", border=NA)
 
-box(col="grey")
+#line 3709 "custombase.Rnw"
+box(col="gray")
+#line 3688 "custombase.Rnw"
 plot (yy ~ xx, type="n", axes=FALSE, ann=FALSE)
 polygon(c(xx[1], xx, xx[n]), c(min(yy), yy, min(yy)), 
-        col="grey", border=NA)
+        col="gray", border=NA)
 
+#line 3711 "custombase.Rnw"
+#line 3693 "custombase.Rnw"
 usr <- par("usr")
 rect(usr[1], usr[3], usr[2], hline, col="white", border=NA)
 
-box(col="grey")
+#line 3712 "custombase.Rnw"
+box(col="gray")
+#line 3688 "custombase.Rnw"
 plot (yy ~ xx, type="n", axes=FALSE, ann=FALSE)
 polygon(c(xx[1], xx, xx[n]), c(min(yy), yy, min(yy)), 
-        col="grey", border=NA)
+        col="gray", border=NA)
 
+#line 3714 "custombase.Rnw"
+#line 3693 "custombase.Rnw"
 usr <- par("usr")
 rect(usr[1], usr[3], usr[2], hline, col="white", border=NA)
 
+#line 3715 "custombase.Rnw"
+#line 3697 "custombase.Rnw"
 lines(xx, yy)
 
-box(col="grey")
+#line 3716 "custombase.Rnw"
+box(col="gray")
+#line 3688 "custombase.Rnw"
 plot (yy ~ xx, type="n", axes=FALSE, ann=FALSE)
 polygon(c(xx[1], xx, xx[n]), c(min(yy), yy, min(yy)), 
-        col="grey", border=NA)
+        col="gray", border=NA)
 
+#line 3718 "custombase.Rnw"
+#line 3693 "custombase.Rnw"
 usr <- par("usr")
 rect(usr[1], usr[3], usr[2], hline, col="white", border=NA)
 
+#line 3719 "custombase.Rnw"
+#line 3697 "custombase.Rnw"
 lines(xx, yy)
 
-abline (h=hline,col="grey")
+#line 3720 "custombase.Rnw"
+#line 3700 "custombase.Rnw"
+abline (h=hline,col="gray")
 box()
 axis(1)
 axis(2) 
 
+#line 3721 "custombase.Rnw"
 
 
 
 }
-figure3.26 <- function() {
-moonPhase <- function(x, y, phase, size=.07) {
-  # phase 1: first quarter
-  #       2: full
-  #       3: last quarter
-  #       4: new
-  # size is in inches
-  n <- 17
-  angle <- seq(0, 2*pi, length=n)
-  xx <- x + cos(angle)*xinch(size)
-  yy <- y + sin(angle)*yinch(size)
-  if (phase == 4)
-    fill <- "black"
-  else
-    fill <- "white"
-  polygon(xx, yy, col=fill)
-  if (phase == 1)
-    polygon(xx[(n/4):(n*3/4) + 1],
-            yy[(n/4):(n*3/4) + 1],
-            col="black")
-  if (phase == 3)
-    polygon(xx[c(1:(n/4 + 1), (n*3/4 + 1):n)],
-            yy[c(1:(n/4 + 1), (n*3/4 + 1):n)],
-            col="black")
-}
-
-# Data from Land Information New Zealand
-# http://hydro.linz.govt.nz
-# + 1 for daylight saving
-hours <- c(18, 18, 19, 20, 21, 22, 23,
-           0, 1, 2, 3, 4, 5, 5,
-           6, 7, 8, 9, 10, 11, 12,
-           13, 13, 14, 15, 15, 16) + 1
-hours[7] <- 0 # 23 + 1 = 0 on a 24-hour clock
-mins <- c(9, 57, 49, 46, 48, 54, 59,
-          59, 52, 41, 28, 14, 1, 52,
-          36, 43, 41, 39, 38, 35, 26,
-          10, 49, 26, 2, 39, 16)
-lowTideDate <- ISOdatetime(2005, 2, c(1:6,8:28),
-                           hours, mins, 0)
-lowTideHour <- ISOdatetime(2005, 2, 1,
-                           hours, mins, 0)
-phases <- ISOdatetime(2005, 2, c(2, 9, 16, 24),
-                      c(19, 10, 12, 16) + 1,
-                      c(28, 30, 16, 55), 0)
-mainHours <- ISOdatetime(2005, 2, 1,
-                         c(0, 4, 8, 12, 16, 20, 23), 
-                         c(rep(0, 6), 59), 
-                         c(rep(0, 6), 59))
-
-library(pixmap)
-# Original image from NASA
-# http://grin.hq.nasa.gov/ABSTRACTS/GPN-2000-000473.html
-moon <- read.pnm(system.file(file.path("Images", 
-                                       "GPN-2000-000473halfsize.pnm"), 
-                             package="RGraphics"))
-par(pty="s", xaxs="i", yaxs="i", cex=.7)
-plot.new()
-addlogo(moon, 0:1, 0:1, asp=1)
-par(new=TRUE, xaxs="r", yaxs="r", las=1)
-plot(lowTideDate, lowTideHour, type="n",
-     ylim=range(mainHours), axes=FALSE, ann=FALSE)
-# dashed reference lines
-midday <- ISOdatetime(2005, 2, 1, 12, 0, 0)
-abline(h=midday, v=phases,
-       col="white", lty="dashed")
-# grey "repeat" of tide info to show gradient
-lines(lowTideDate[6:7], 
-      c(ISOdatetime(2005, 1, 31,
-                    hours[6], mins[6], 0),
-        lowTideHour[7]),
-      lwd=2, col="grey50")
-points(lowTideDate[6:7], 
-       c(ISOdatetime(2005, 1, 31,
-                     hours[6], mins[6], 0),
-         lowTideHour[7]),
-       pch=16, cex=.7, col="grey50")
-for (subset in list(1:6, 7:27)) {
-  lines(lowTideDate[subset], lowTideHour[subset],
-        lwd=2, col="white")
-  points(lowTideDate[subset], lowTideHour[subset],
-         pch=16, cex=.7, col="white")
-}
-box()
-axis.POSIXct(1, lowTideDate)
-axis.POSIXct(2, at=mainHours, format="%H:%M")
-mtext("Time of Low Tide (NZDT)", side=2, line=4, las=0)
-mtext("Auckland, New Zealand 2005", side=1, line=3)
-axis(3, at=phases, labels=FALSE)
-par(xpd=NA)
-ymax <- par("usr")[4]
-for (i in 1:4)
-  moonPhase(phases[i], ymax + yinch(.2), c(3, 4, 1, 2)[i])
-mtext("Phases of the Moon", side=3, line=3)
-
-
-
-}
-figure3.27 <- function() {
+figure3.24 <- function() {
+#line 3908 "custombase.Rnw"
 par(mfrow=c(1, 2), mar=c(3, 3, 1, 1), cex=0.7)
+#line 3852 "custombase.Rnw"
 y <- sample(1:10)
-midpts <- barplot(y, col=" light grey")
+midpts <- barplot(y, col=" light gray")
 width <- diff(midpts[1:2])/4
 left <- rep(midpts, y - 1) - width
 right <- rep(midpts, y - 1) + width
@@ -1026,111 +1044,112 @@ heights <- unlist(apply(matrix(y, ncol=10),
 segments(left, heights, right, heights,
          col="white")
 
+#line 3910 "custombase.Rnw"
+#line 3898 "custombase.Rnw"
 with(ToothGrowth, 
      {
-       boxplot(len ~ supp, border="grey", 
-               col="light grey", boxwex=0.5)
+       boxplot(len ~ supp, border="gray", 
+               col="light gray", boxwex=0.5)
        points(jitter(rep(1:2, each=30), 0.5), 
               unlist(split(len, supp)),
               cex=0.5, pch=16)
      })
 
+#line 3911 "custombase.Rnw"
 
 
 
 }
-figure3.28 <- function() {
-library(maps)
-coplot(lat ~ long | depth, data = quakes, number=4, 
-       panel=function(x, y, ...) {
-         usr <- par("usr")
-         rect(usr[1], usr[3], usr[2], usr[4], col="white")
-         map("world2", regions=c("New Zealand", "Fiji"),
-             add=TRUE, lwd=0.1, fill=TRUE, col="grey")
-         text(180, -13, "Fiji", adj=1, cex=0.7)
-         text(170, -35, "NZ", cex=0.7)
-         points(x, y, pch=".")
-       })
+figure3.25 <- function() {
+#line 3999 "custombase.Rnw"
+par(cex=.7)
+#line 3988 "custombase.Rnw"
+pairs(iris[1:2], 
+      diag.panel=function(x, ...) { 
+          boxplot(x, add=TRUE, axes=FALSE,
+                  at=mean(par("usr")[1:2])) 
+      }, 
+      text.panel=function(x, y, labels, ...) { 
+          mtext(labels, side=3, line=0) 
+      })
 
+
+#line 4001 "custombase.Rnw"
 
 
 
 }
-figure3.29 <- function() {
-par(mar=rep(0, 4), lwd=0.1)
+figure3.26 <- function() {
+#line 4102 "custombase.Rnw"
+par(mar=rep(0, 4))
+#line 4068 "custombase.Rnw"
 z <- 2 * volcano        
 x <- 10 * (1:nrow(z))   
 y <- 10 * (1:ncol(z))   
-trans <- persp(x, y, z, theta = 135, phi = 30, 
-               scale = FALSE, ltheta = -120, 
-               box = FALSE)
-box(col="grey", lwd=1)
+trans <- persp(x, y, z, zlim=c(0, max(z)),
+               theta = 150, phi = 12, lwd=.5,
+               scale = FALSE, axes=FALSE)
 
-trans3d <- function(x,y,z,pmat) {
-  tmat <- cbind(x,y,z,1)%*% pmat
-  tmat[,1:2] / tmat[,4]
-}
+#line 4104 "custombase.Rnw"
+#line 4095 "custombase.Rnw"
+clines <- contourLines(x, y, z)
+lapply(clines,
+       function(contour) {
+           lines(trans3d(contour$x, contour$y, 0, trans))
+       })
 
-summit <- trans3d(x[20], y[31], max(z), trans)
-points(summit[1], summit[2], pch=16)
-summitlabel <- trans3d(x[20], y[31], max(z) + 50, trans)
-text(summitlabel[1], summitlabel[2], "Summit")
-
-drawRoad <- function(x, y, z, trans) {
-  road <- trans3d(x, y, z, trans)
-  lines(road[,1], road[,2], lwd=5)
-  lines(road[,1], road[,2], lwd=3, col="grey")
-}
-with(volcano.summitRoad,
-     drawRoad(srx, sry, srz, trans))
-with(volcano.upDownRoad,
-     {
-       clipudx <- udx
-       clipudx[udx < 230 & udy < 300 | 
-               udx < 150 & udy > 300] <- NA
-       drawRoad(clipudx, udy, udz, trans)
-     })
-with(volcano.accessRoad,
-     drawRoad(arx, ary, arz, trans))
-
+#line 4105 "custombase.Rnw"
 
 
 
 }
-figure3.30 <- function() {
-groups <- c("cows", "sheep", "horses", 
-            "elephants", "giraffes")
-males <- sample(1:10, 5)
-females <- sample(1:10, 5)
+figure3.27 <- function() {
+#line 4244 "custombase.Rnw"
+#line 4211 "custombase.Rnw"
+groups <- dimnames(Titanic)[[1]]
+males <- Titanic[, 1, 2, 2]
+females <- Titanic[, 2, 2, 2]
 
-par(mar=c(0.5, 5, 0.5, 1))
+#line 4245 "custombase.Rnw"
+#line 4216 "custombase.Rnw"
+par(mar=c(0.5, 3, 0.5, 1))
 
+#line 4246 "custombase.Rnw"
+#line 4219 "custombase.Rnw"
 plot.new()
-plot.window(xlim=c(-10, 10), ylim=c(-1.5, 5.5))
+plot.window(xlim=c(-200, 200), ylim=c(-1.5, 4.5))
 
-ticks <- seq(-10, 10, 5)
-y <- 1:5
+#line 4247 "custombase.Rnw"
+#line 4223 "custombase.Rnw"
+ticks <- seq(-200, 200, 100)
+y <- 1:4
 h <- 0.2
 
-lines(rep(0, 2), c(-1.5, 5.5), col="grey")
-segments(-10, y, 10, y, lty="dotted")
-rect(-males, y-h, 0, y+h, col="dark grey")
-rect(0, y-h, females, y+h, col="light grey")
+#line 4248 "custombase.Rnw"
+#line 4228 "custombase.Rnw"
+lines(rep(0, 2), c(-1.5, 4.5), col="gray")
+segments(-200, y, 200, y, lty="dotted")
+rect(-males, y-h, 0, y+h, col="dark gray")
+rect(0, y-h, females, y+h, col="light gray")
 mtext(groups, at=y, adj=1, side=2, las=2)
 par(cex.axis=0.5, mex=0.5)
 axis(1, at=ticks, labels=abs(ticks), pos=0)
 
+#line 4249 "custombase.Rnw"
+#line 4237 "custombase.Rnw"
 tw <- 1.5*strwidth("females")
-rect(-tw, -1-h, 0, -1+h, col="dark grey")
-rect(0, -1-h, tw, -1+h, col="light grey")
+rect(-tw, -1-h, 0, -1+h, col="dark gray")
+rect(0, -1-h, tw, -1+h, col="light gray")
 text(0, -1, "males", pos=2)
 text(0, -1, "females", pos=4)
 
-box("inner", col="grey")
+#line 4250 "custombase.Rnw"
+box("inner", col="gray")
 
 
 
 }
+#line 4566 "custombase.Rnw"
 plot.newclass <- 
   function(x, y=NULL, 
            main="", sub="",
@@ -1159,119 +1178,187 @@ plot.newclass <-
 }
 
 
-figure5.1 <- function() {
-pushViewport(viewport(layout=grid.layout(2, 2), gp=gpar(cex=0.6)))
+figure6.1 <- function() {
+#line 295 "customgrid.Rnw"
+pushViewport(viewport(layout=grid.layout(2, 2), gp=gpar(cex=0.6, fill=NA)))
 pushViewport(viewport(layout.pos.col=1, layout.pos.row=1))
+#line 177 "customgrid.Rnw"
 pushViewport(plotViewport(c(5, 4, 2, 2)))
 pushViewport(dataViewport(pressure$temperature, 
                           pressure$pressure,
                           name="plotRegion"))
 
+#line 298 "customgrid.Rnw"
 grid.points(pressure$temperature, pressure$pressure, 
   gp=gpar(cex=0.5))
 grid.rect()
 grid.xaxis()
 grid.yaxis()
-grid.text("temperature", y=unit(-3, "lines"))
-grid.text("pressure", x=unit(-3, "lines"), rot=90)
+#line 224 "customgrid.Rnw"
+grid.text("temperature", y=unit(-3, "line"))
+grid.text("pressure", x=unit(-3, "line"), rot=90)
 
+#line 304 "customgrid.Rnw"
 popViewport(3)
 pushViewport(viewport(layout.pos.col=2, layout.pos.row=1))
+#line 177 "customgrid.Rnw"
 pushViewport(plotViewport(c(5, 4, 2, 2)))
 pushViewport(dataViewport(pressure$temperature, 
                           pressure$pressure,
                           name="plotRegion"))
 
+#line 307 "customgrid.Rnw"
 grid.points(pressure$temperature, pressure$pressure, pch=2, 
   gp=gpar(cex=0.5))
 grid.rect()
 grid.xaxis()
 grid.yaxis()
-grid.text("temperature", y=unit(-3, "lines"))
-grid.text("pressure", x=unit(-3, "lines"), rot=90)
+#line 224 "customgrid.Rnw"
+grid.text("temperature", y=unit(-3, "line"))
+grid.text("pressure", x=unit(-3, "line"), rot=90)
 
+#line 313 "customgrid.Rnw"
 popViewport(3)
 pushViewport(viewport(layout.pos.col=2, layout.pos.row=2))
+#line 177 "customgrid.Rnw"
 pushViewport(plotViewport(c(5, 4, 2, 2)))
 pushViewport(dataViewport(pressure$temperature, 
                           pressure$pressure,
                           name="plotRegion"))
 
+#line 316 "customgrid.Rnw"
 grid.points(pressure$temperature, pressure$pressure, pch=2, 
   gp=gpar(cex=0.5))
 grid.rect()
 grid.xaxis()
 grid.yaxis()
-grid.text("temperature", y=unit(-3, "lines"))
-grid.text("pressure", x=unit(-3, "lines"), rot=90)
+#line 224 "customgrid.Rnw"
+grid.text("temperature", y=unit(-3, "line"))
+grid.text("pressure", x=unit(-3, "line"), rot=90)
 
+#line 322 "customgrid.Rnw"
+#line 271 "customgrid.Rnw"
 upViewport(2)
 grid.rect(gp=gpar(lty="dashed"))
+
+#line 323 "customgrid.Rnw"
+#line 290 "customgrid.Rnw"
 downViewport("plotRegion")
 grid.text("Pressure (mm Hg)\nversus\nTemperature (Celsius)",
           x=unit(150, "native"), y=unit(600, "native"))
 
+#line 324 "customgrid.Rnw"
 
 
 
 }
-figure5.2 <- function() {
-grid.rect(gp=gpar(col="grey"))
+figure6.2 <- function() {
+#line 536 "customgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+#line 531 "customgrid.Rnw"
 grid.circle(x=seq(0.1, 0.9, length=100), 
             y=0.5 + 0.4*sin(seq(0, 2*pi, length=100)),
             r=abs(0.1*cos(seq(0, 2*pi, length=100))))
 
+#line 538 "customgrid.Rnw"
 
 
 
 }
-figure5.3 <- function() {
-grid.rect(gp=gpar(col="grey"))
+figure6.3 <- function() {
+#line 604 "customgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+grid.circle(c(.1, .3, .4, .6, .7, .9), 
+            c(.25, .75), r=unit(1, "mm"),
+            gp=gpar(col=NA, fill="gray"))
+#line 597 "customgrid.Rnw"
+grid.curve(x1=.1, y1=.25, x2=.3, y2=.75)
+grid.curve(x1=.4, y1=.25, x2=.6, y2=.75,
+           square=FALSE, ncp=8, curvature=.5)
+grid.curve(x1=.7, y1=.25, x2=.9, y2=.75,
+           square=FALSE, angle=45, shape=-1)
+
+#line 609 "customgrid.Rnw"
+
+
+
+}
+figure6.4 <- function() {
+#line 658 "customgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+#line 651 "customgrid.Rnw"
 angle <- seq(0, 2*pi, length=50)
-grid.arrows(x=seq(0.1, 0.5, length=50), 
-            y=0.5 + 0.3*sin(angle))
-grid.arrows(grob=segmentsGrob(6:8/10, 0.2, 7:9/10, 0.8))
+grid.lines(x=seq(0.1, 0.5, length=50), 
+           y=0.5 + 0.3*sin(angle), arrow=arrow())
+grid.segments(6:8/10, 0.2, 7:9/10, 0.8,
+              arrow=arrow(angle=15, type="closed"))
 
+#line 660 "customgrid.Rnw"
 
 
 
 }
-figure5.4 <- function() {
-grid.rect(gp=gpar(col="grey"))
+figure6.5 <- function() {
+#line 714 "customgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+#line 706 "customgrid.Rnw"
 angle <- seq(0, 2*pi, length=10)[-10]
 grid.polygon(x=0.25 + 0.15*cos(angle), y=0.5 + 0.3*sin(angle), 
-             gp=gpar(fill="grey"))
+             gp=gpar(fill="gray"))
 grid.polygon(x=0.75 + 0.15*cos(angle), y=0.5 + 0.3*sin(angle), 
              id=rep(1:3, each=3),
-             gp=gpar(fill="grey"))
+             gp=gpar(fill="gray"))
 
+#line 716 "customgrid.Rnw"
 
 
 
 }
-figure5.5 <- function() {
-grid.rect(gp=gpar(col="grey"))
-pushViewport(viewport(gp=gpar(col="grey")))
-grid.text("very snug", 0.4, unit(1, "inches"), just=c("left", "bottom"))
-grid.arrows(x=0.4, y=unit(0:1, "inches"), ends="both",
-  length=unit(1, "mm"))
-grid.text("1 inch", unit(0.4, "npc") + unit(0.5, "lines"), 
-  unit(0.5, "inches"), rot=90)
-grid.arrows(x=c(0, 0.4), y=unit(1, "inches"), ends="both",
-  length=unit(1, "mm"))
-grid.text(unit(0.4, "npc"), 0.2, unit(1, "inches") + unit(0.5, "lines"))
+figure6.6 <- function() {
+#line 760 "customgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+#line 751 "customgrid.Rnw"
+angle <- seq(0, 2*pi, length=10)[-10]
+grid.path(x=0.25 + 0.15*cos(angle), y=0.5 + 0.3*sin(angle), 
+          gp=gpar(fill="gray"))
+grid.path(x=c(0.75 + 0.15*cos(angle), .7, .7, .8, .8),
+          y=c(0.5 + 0.3*sin(angle),  .4, .6, .6, .4), 
+          id=rep(1:2, c(9, 4)),
+          gp=gpar(fill="gray"))
+
+#line 762 "customgrid.Rnw"
+
+
+
+}
+figure6.7 <- function() {
+#line 1089 "customgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+pushViewport(viewport(gp=gpar(col="gray")))
+grid.text("very snug", 0.4, unit(1, "in"), just=c("left", "bottom"))
+grid.lines(x=0.4, y=unit(0:1, "in"), arrow=arrow(ends="both",
+                                       length=unit(1, "mm")))
+grid.text("1 inch", unit(0.4, "npc") + unit(0.5, "line"), 
+  unit(0.5, "in"), rot=90)
+grid.lines(x=c(0, 0.4), y=unit(1, "in"), arrow=arrow(ends="both",
+                                           length=unit(1, "mm")))
+grid.text(unit(0.4, "npc"), 0.2, unit(1, "in") + unit(0.5, "line"))
 popViewport()
-grid.rect(x=unit(0.4, "npc"), y=unit(1, "inches"),
+pushViewport(viewport(gp=gpar(fill=NA)))
+#line 1083 "customgrid.Rnw"
+grid.rect(x=unit(0.4, "npc"), y=unit(1, "in"),
           width=stringWidth("very snug"), 
-          height=unit(1, "lines"),
+          height=unit(1, "line"),
           just=c("left", "bottom"))
 
+#line 1102 "customgrid.Rnw"
 
 
 
 }
-figure5.6 <- function() {
-grid.rect(gp=gpar(col="grey"))
+figure6.8 <- function() {
+#line 1517 "customgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
 pushViewport(viewport(gp=gpar(fontsize=10)))
 grid.rect(x=0.33, height=0.7, width=0.2, gp=gpar(fill="black"))
 grid.rect(x=0.66, height=0.7, width=0.2)
@@ -1283,47 +1370,58 @@ popViewport()
 
 
 }
-figure5.7 <- function() {
-grid.rect(gp=gpar(col="grey"))
+figure6.9 <- function() {
+#line 1669 "customgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+#line 1661 "customgrid.Rnw"
 levels <- round(seq(90, 10, length=25))
-greys <- paste("grey", c(levels, rev(levels)), sep="")
+grays <- paste("gray", c(levels, rev(levels)), sep="")
 grid.circle(x=seq(0.1, 0.9, length=100), 
             y=0.5 + 0.4*sin(seq(0, 2*pi, length=100)),
             r=abs(0.1*cos(seq(0, 2*pi, length=100))),
-            gp=gpar(col=greys))
+            gp=gpar(col=grays))
 
+#line 1671 "customgrid.Rnw"
 
 
 
 }
-figure5.8 <- function() {
-grid.rect(gp=gpar(col="grey"))
+figure6.10 <- function() {
+#line 1733 "customgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+#line 1723 "customgrid.Rnw"
 angle <- seq(0, 2*pi, length=11)[-11]
 grid.polygon(x=0.25 + 0.15*cos(angle), y=0.5 + 0.3*sin(angle), 
              id=rep(1:2, c(7, 3)),
-             gp=gpar(fill=c("grey", "white")))
+             gp=gpar(fill=c("gray", "white")))
 angle[4] <- NA
 grid.polygon(x=0.75 + 0.15*cos(angle), y=0.5 + 0.3*sin(angle), 
              id=rep(1:2, c(7, 3)),
-             gp=gpar(fill=c("grey", "white")))
+             gp=gpar(fill=c("gray", "white")))
 
+#line 1735 "customgrid.Rnw"
 angle <- seq(0, 2*pi, length=11)[4]
-grid.text("NA", x=0.75 + 0.15*cos(angle), y=0.5 + 0.3*sin(angle),)
+grid.text("NA", x=0.75 + 0.15*cos(angle), y=0.5 + 0.3*sin(angle),
+          gp=gpar(col="gray"))
 
 
 
 }
-figure5.9 <- function() {
+figure6.11 <- function() {
+#line 1865 "customgrid.Rnw"
 vp1 <- 
+#line 1859 "customgrid.Rnw"
 viewport(x=unit(0.4, "npc"), y=unit(1, "cm"),
          width=stringWidth("very very snug indeed"), 
-         height=unit(6, "lines"),
+         height=unit(6, "line"),
          just=c("left", "bottom"))
 
-grid.show.viewport(scale.col="grey", border.fill="white", vp.col="black", vp.fill="grey", vp1, newpage=FALSE)
+#line 1867 "customgrid.Rnw"
+grid.show.viewport(scale.col="gray", border.fill="white", vp.col="black", vp.fill="gray", vp1)
+grid.rect(gp=gpar(col="white", fill=NA, lwd=3))
 pushViewport(viewport(.5, .5, .8, .8))
 pushViewport(vp1)
-grid.rect()
+grid.rect(gp=gpar(fill=NA))
 grid.text("very very snug indeed", 
           gp=gpar(col="white"))
 popViewport(2)
@@ -1331,8 +1429,10 @@ popViewport(2)
 
 
 }
-figure5.10 <- function() {
-grid.rect(gp=gpar(col="grey"))
+figure6.12 <- function() {
+#line 1957 "customgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+#line 1946 "customgrid.Rnw"
 grid.text("top-left corner", x=unit(1, "mm"),
           y=unit(1, "npc") - unit(1, "mm"), 
           just=c("left", "top"))
@@ -1343,12 +1443,15 @@ grid.text("top-left corner", x=unit(1, "mm"),
           y=unit(1, "npc") - unit(1, "mm"), 
           just=c("left", "top"))
 
+#line 1959 "customgrid.Rnw"
 
 
 
 }
-figure5.11 <- function() {
-grid.rect(gp=gpar(col="grey"))
+figure6.13 <- function() {
+#line 2003 "customgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+#line 1946 "customgrid.Rnw"
 grid.text("top-left corner", x=unit(1, "mm"),
           y=unit(1, "npc") - unit(1, "mm"), 
           just=c("left", "top"))
@@ -1359,6 +1462,8 @@ grid.text("top-left corner", x=unit(1, "mm"),
           y=unit(1, "npc") - unit(1, "mm"), 
           just=c("left", "top"))
 
+#line 2005 "customgrid.Rnw"
+#line 1995 "customgrid.Rnw"
 pushViewport(viewport(width=0.8, height=0.5, angle=10, 
              name="vp2"))
 grid.rect()
@@ -1366,12 +1471,15 @@ grid.text("top-left corner", x=unit(1, "mm"),
           y=unit(1, "npc") - unit(1, "mm"), 
           just=c("left", "top"))
 
+#line 2006 "customgrid.Rnw"
 
 
 
 }
-figure5.12 <- function() {
-grid.rect(gp=gpar(col="grey"))
+figure6.14 <- function() {
+#line 2054 "customgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+#line 1946 "customgrid.Rnw"
 grid.text("top-left corner", x=unit(1, "mm"),
           y=unit(1, "npc") - unit(1, "mm"), 
           just=c("left", "top"))
@@ -1382,6 +1490,8 @@ grid.text("top-left corner", x=unit(1, "mm"),
           y=unit(1, "npc") - unit(1, "mm"), 
           just=c("left", "top"))
 
+#line 2056 "customgrid.Rnw"
+#line 1995 "customgrid.Rnw"
 pushViewport(viewport(width=0.8, height=0.5, angle=10, 
              name="vp2"))
 grid.rect()
@@ -1389,17 +1499,23 @@ grid.text("top-left corner", x=unit(1, "mm"),
           y=unit(1, "npc") - unit(1, "mm"), 
           just=c("left", "top"))
 
+#line 2057 "customgrid.Rnw"
+#line 2048 "customgrid.Rnw"
 popViewport()
 grid.text("bottom-right corner", 
           x=unit(1, "npc") - unit(1, "mm"),
           y=unit(1, "mm"), just=c("right", "bottom"))
 
+#line 2058 "customgrid.Rnw"
 
 
 
 }
-figure5.13 <- function() {
-grid.rect(gp=gpar(col="grey"))
+figure6.15 <- function() {
+#line 2142 "customgrid.Rnw"
+pushViewport(viewport(gp=gpar(fill=NA)))
+grid.rect(gp=gpar(col="gray"))
+#line 1946 "customgrid.Rnw"
 grid.text("top-left corner", x=unit(1, "mm"),
           y=unit(1, "npc") - unit(1, "mm"), 
           just=c("left", "top"))
@@ -1410,6 +1526,8 @@ grid.text("top-left corner", x=unit(1, "mm"),
           y=unit(1, "npc") - unit(1, "mm"), 
           just=c("left", "top"))
 
+#line 2145 "customgrid.Rnw"
+#line 1995 "customgrid.Rnw"
 pushViewport(viewport(width=0.8, height=0.5, angle=10, 
              name="vp2"))
 grid.rect()
@@ -1417,11 +1535,15 @@ grid.text("top-left corner", x=unit(1, "mm"),
           y=unit(1, "npc") - unit(1, "mm"), 
           just=c("left", "top"))
 
+#line 2146 "customgrid.Rnw"
+#line 2048 "customgrid.Rnw"
 popViewport()
 grid.text("bottom-right corner", 
           x=unit(1, "npc") - unit(1, "mm"),
           y=unit(1, "mm"), just=c("right", "bottom"))
 
+#line 2147 "customgrid.Rnw"
+#line 2133 "customgrid.Rnw"
 upViewport()
 grid.text("bottom-right corner", 
           x=unit(1, "npc") - unit(1, "mm"),
@@ -1430,31 +1552,97 @@ downViewport("vp1")
 grid.rect(width=unit(1, "npc") + unit(2, "mm"),
           height=unit(1, "npc") + unit(2, "mm"))
 
+#line 2148 "customgrid.Rnw"
 
 
 
 }
-figure5.14 <- function() {
-grid.rect(gp=gpar(col="grey"))
+figure6.16 <- function() {
+#line 2270 "customgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+pushViewport(viewport(gp=gpar(fill=NA)))
+#line 2230 "customgrid.Rnw"
 pushViewport(viewport(w=.5, h=.5, clip="on"))
 grid.rect()
 grid.circle(r=.7, gp=gpar(lwd=20))
 
+#line 2273 "customgrid.Rnw"
+#line 2247 "customgrid.Rnw"
 pushViewport(viewport(clip="inherit"))
-grid.circle(r=.7, gp=gpar(lwd=10, col="grey"))
+grid.circle(r=.7, gp=gpar(lwd=10, col="gray"))
 
+#line 2274 "customgrid.Rnw"
+#line 2265 "customgrid.Rnw"
 pushViewport(viewport(clip="off"))
 grid.circle(r=.7)
 popViewport(3)
 
+#line 2275 "customgrid.Rnw"
 
 
 
 }
-figure5.15 <- function() {
-grid.rect(gp=gpar(col="grey"))
-pushViewport(viewport(gp=gpar(fill="grey", fontsize=10)))
-grid.text("viewport(gp=gpar(fill=\"grey\"))", y=0.925)
+figure6.17 <- function() {
+#line 2453 "customgrid.Rnw"
+circText <- function(lab, x, y, suffix) {
+    grid.circle(x, y, r=unit(3, "mm"), 
+                name=paste(lab, suffix, sep="-"))
+    grid.text(lab, x, y,
+              gp=if (lab == "ROOT") gpar(cex=.7) else NULL)
+}
+edge <- function(a, b, angle) {
+    grid.segments(grobX(a, angle), grobY(a, angle),
+                  grobX(b, 180 + angle), grobY(b, 180 + angle),
+                  arrow=arrow(length=unit(2, "mm"),
+                    type="closed"),
+                  gp=gpar(fill="black"))
+}
+grid.newpage()
+pushViewport(viewport(width=.9, height=.9,
+                      layout=grid.layout(2, 2),
+                      gp=gpar(cex=.5)))
+pushViewport(viewport(layout.pos.col=1, 
+                      layout.pos.row=1))
+grid.rect(width=.9, height=.9, gp=gpar(col="gray"))
+circText("ROOT", .5, .8, 1)
+circText("A", .3, .6, 1)
+circText("B", .5, .6, 1)
+circText("C", .7, .6, 1)
+edge("ROOT-1", "A-1", 225)
+edge("ROOT-1", "B-1", 270)
+edge("ROOT-1", "C-1", 315)
+popViewport()
+pushViewport(viewport(layout.pos.col=2, 
+                      layout.pos.row=1))
+grid.rect(width=.9, height=.9, gp=gpar(col="gray"))
+circText("ROOT", .5, .8, 2)
+circText("A", .5, .6, 2)
+circText("B", .5, .4, 2)
+circText("C", .5, .2, 2)
+edge("ROOT-2", "A-2", 270)
+edge("A-2", "B-2", 270)
+edge("B-2", "C-2", 270)
+popViewport()
+pushViewport(viewport(layout.pos.col=1, 
+                      layout.pos.row=2))
+grid.rect(width=.9, height=.9, gp=gpar(col="gray"))
+circText("ROOT", .5, .8, 3)
+circText("A", .5, .6, 3)
+circText("B", .4, .4, 3)
+circText("C", .6, .4, 3)
+edge("ROOT-3", "A-3", 270)
+edge("A-3", "B-3", 244)
+edge("A-3", "C-3", 296)
+popViewport()
+
+
+
+}
+figure6.18 <- function() {
+#line 2688 "customgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+pushViewport(viewport(gp=gpar(fill="gray", fontsize=10)))
+grid.text("viewport(gp=gpar(fill=\"gray\"))", y=0.925)
 grid.rect(x=0.33, height=0.7, width=0.2)
 grid.text("grid.rect()", x=0.33, rot=90)
 grid.rect(x=0.66, height=0.7, width=0.2, gp=gpar(fill="black"))
@@ -1465,15 +1653,16 @@ popViewport()
 
 
 }
-figure5.16 <- function() {
-labelvp <- function(name, col="grey", tcol="white", clipOff=TRUE) {
+figure6.19 <- function() {
+#line 2778 "customgrid.Rnw"
+labelvp <- function(name, col="gray", tcol="white", clipOff=TRUE) {
   seekViewport(name)
   if (clipOff)
     pushViewport(viewport(clip="off"))
-  grid.rect(gp=gpar(col=col, lwd=5))
+  grid.rect(gp=gpar(col=col, lwd=5, fill=NA))
   grid.rect(x=0, y=1, width=unit(1, "strwidth", name) + unit(2, "mm"),
-    height=unit(1, "lines"), just=c("left", "top"),
-    gp=gpar(fill=col, col=NULL))
+    height=unit(1, "line"), just=c("left", "top"),
+    gp=gpar(fill=col, col=NA))
   grid.text(name, x=unit(1, "mm"), y=unit(1, "npc") - unit(1, "mm"),
     just=c("left", "top"), gp=gpar(col=tcol))
   upViewport(0)
@@ -1481,6 +1670,7 @@ labelvp <- function(name, col="grey", tcol="white", clipOff=TRUE) {
 
 
 
+#line 2800 "customgrid.Rnw"
 vplay <- grid.layout(3, 3, 
                      respect=rbind(c(0, 0, 0), 
                                    c(0, 1, 0), 
@@ -1488,41 +1678,50 @@ vplay <- grid.layout(3, 3,
 
 
 
+#line 2842 "customgrid.Rnw"
 pushViewport(viewport(width=0.95, height=0.95))
-grid.rect(gp=gpar(col="light grey"))
+grid.rect(gp=gpar(col="light gray"))
+#line 2816 "customgrid.Rnw"
 pushViewport(viewport(layout=vplay))
 
+#line 2845 "customgrid.Rnw"
+#line 2837 "customgrid.Rnw"
 pushViewport(viewport(layout.pos.col=2, name="col2"))
 upViewport()
 pushViewport(viewport(layout.pos.row=2, name="row2"))
 
+#line 2846 "customgrid.Rnw"
 labelvp("col2", "black")
 labelvp("row2")
 
 
 
 }
-figure5.17 <- function() {
+figure6.20 <- function() {
+#line 2892 "customgrid.Rnw"
 unitlay <- 
   grid.layout(3, 3, 
               widths=unit(c(1, 1, 2), 
-                          c("inches", "null", "null")), 
+                          c("in", "null", "null")), 
               heights=unit(c(3, 1, 1), 
-                           c("lines", "null", "null")))
+                           c("line", "null", "null")))
 
 
 
+#line 2900 "customgrid.Rnw"
 pushViewport(viewport(gp=gpar(cex=0.8)))
 grid.show.layout(unitlay, bg="white", 
-                 cell.border="black", cell.fill="grey90", 
+                 cell.border="black", cell.fill="gray90", 
                  label.col="black", unit.col="black",
                  newpage=FALSE)
+grid.rect(gp=gpar(col="white", lwd=3, fill=NA))
 popViewport()
 
 
 
 }
-figure5.18 <- function() {
+figure6.21 <- function() {
+#line 2953 "customgrid.Rnw"
 gridfun <- function() {
   pushViewport(viewport(layout=grid.layout(1, 2)))
   pushViewport(viewport(layout.pos.col=1))
@@ -1539,7 +1738,8 @@ gridfun <- function() {
 
 
 
-grid.rect(gp=gpar(col="grey"))
+#line 3019 "customgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
 w <- unit(1, "npc") - unit(15, "mm")
 x <- unit.c(unit(5, "mm"),
             unit(5, "mm") + 1/3*w,
@@ -1550,9 +1750,10 @@ y <- unit.c(unit(5, "mm"),
             unit(5, "mm") + 2/3*w + unit(5, "mm"),
 	    unit(1, "npc") - unit(5, "mm"))
 grid.segments(x, 0, x, 1,
-  gp=gpar(col="grey", lty="dashed"))
+  gp=gpar(col="gray", lty="dashed"))
 grid.segments(0, y, 1, y,
-  gp=gpar(col="grey", lty="dashed"))
+  gp=gpar(col="gray", lty="dashed"))
+#line 2989 "customgrid.Rnw"
 pushViewport(
   viewport(
     layout=grid.layout(5, 5, 
@@ -1565,15 +1766,20 @@ pushViewport(
 pushViewport(viewport(layout.pos.col=2, layout.pos.row=2))
 gridfun()
 popViewport()
+
+#line 3034 "customgrid.Rnw"
+#line 3014 "customgrid.Rnw"
 pushViewport(viewport(layout.pos.col=4, layout.pos.row=4))
 gridfun()
 popViewport(2)
 
+#line 3035 "customgrid.Rnw"
 
 
 
 }
-figure5.19 <- function() {
+figure6.22 <- function() {
+#line 3107 "customgrid.Rnw"
 
 n <- 7
 primtest2 <- function(nas, na) {
@@ -1582,12 +1788,11 @@ primtest2 <- function(nas, na) {
   x <- 0.5 + 0.4*cos(angle)
   if (any(nas))
     grid.text(paste("NA", (1:n)[nas], sep=""),
-              x[nas], y[nas], gp=gpar(col="grey"))
+              x[nas], y[nas], gp=gpar(col="gray"))
   x[nas] <- na
   y[nas] <- na
-  grid.polygon(x, y, gp=gpar(fill="light grey", col=NA))
-  grid.arrows(grob=linesGrob(x, y),
-              gp=gpar(lwd=5))
+  grid.polygon(x, y, gp=gpar(fill="light gray", col=NA))
+  grid.lines(x, y, arrow=arrow(), gp=gpar(lwd=5))
   grid.move.to(x[1], y[1])
   for (i in 2:n) {
     grid.line.to(x[i], y[i], gp=gpar(col="white"))
@@ -1597,7 +1802,7 @@ celltest <- function(r, c, nas, na) {
   pushViewport(viewport(layout.pos.col=c,
                         layout.pos.row=r))
   primtest2(nas, na)
-  grid.rect(width=0.9, height=0.9, gp=gpar(col="grey"))
+  grid.rect(width=0.9, height=0.9, gp=gpar(col="gray", fill=NA))
   popViewport()
 }
 cellnas <- function(i) {
@@ -1618,116 +1823,112 @@ popViewport()
 
 
 }
-figure5.20 <- function() {
-depthgroup <- equal.count(quakes$depth, number=3, overlap=0)
-
-
-
-trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
-trellis.par.set(list(dot.symbol=list(pch=1), axis.text=list(cex=0.7)))
-temp <- xyplot(lat ~ long | depthgroup,   
-               data=quakes, pch=".",
-               layout=c(3, 1))
-print(temp, 
-      panel.width=list(1.21, "inches"), 
-      panel.height=list(1.5, "inches"))
-
-
-
-
-}
-figure5.21 <- function() {
-depthgroup <- equal.count(quakes$depth, number=3, overlap=0)
-
-
-
+figure6.23 <- function() {
+#line 3279 "customgrid.Rnw"
 trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
 trellis.par.set(list(layout.widths=list(left.padding=0, right.padding=0, ylab.axis.padding=0, axis.right=0, key.ylab.padding=0)))
 print(
-xyplot(lat ~ long | depthgroup, data=quakes, pch=".",
-       panel=function(...) {
-         grid.points(174.75, -36.87, pch=16, 
-                     size=unit(2, "mm"),
-                     default.units="native")
-         grid.text("Auckland",
-                   unit(174.75, "native") - unit(2, "mm"),
-                   unit(-36.87, "native"),
-                   just="right")
-         panel.xyplot(...)
+#line 3269 "customgrid.Rnw"
+xyplot(mpg ~ disp | factor(gear), data=mtcars,
+       panel=function(subscripts, ...) {
+           grid.text(paste("n =", length(subscripts)),
+                     unit(1, "npc") - unit(1, "mm"),
+                     unit(1, "npc") - unit(1, "mm"),
+                     just=c("right", "top"))
+           panel.xyplot(subscripts=subscripts, ...)
        })
 
+#line 3283 "customgrid.Rnw"
 )
 
 
 
 }
-figure5.22 <- function() {
-depthgroup <- equal.count(quakes$depth, number=3, overlap=0)
-
-
-
-labelvp <- function(name, col="grey", tcol="white", clipOff=TRUE) {
-  seekViewport(name)
-  if (clipOff)
-    pushViewport(viewport(clip="off"))
-  grid.rect(gp=gpar(col=col, lwd=5))
-  grid.rect(x=0, y=1, width=unit(1, "strwidth", name) + unit(2, "mm"),
-    height=unit(1, "lines"), just=c("left", "top"),
-    gp=gpar(fill=col, col=NULL))
-  grid.text(name, x=unit(1, "mm"), y=unit(1, "npc") - unit(1, "mm"),
-    just=c("left", "top"), gp=gpar(col=tcol))
-  upViewport(0)
-}
-
-
-
-lvp <- viewport(x=0, 
-                width=unit(1, "npc") - unit(1, "inches"),
-                just="left", name="lvp")
-tvp <- viewport(x=1, width=unit(1, "inches"), 
-                just="right", name="tvp")
-
-
-
-lplot <- xyplot(lat ~ long | depthgroup, 
-                data=quakes, pch=".",
-                layout=c(1, 3), aspect=1, 
-                index.cond=list(3:1))
-
-
-
+figure6.24 <- function() {
+#line 3345 "customgrid.Rnw"
 trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
-pushViewport(lvp)
-print(lplot, newpage=FALSE, prefix="plot1")
-upViewport()
+grid.newpage()
+pushViewport(viewport(x=0, width=.4, just="left"))
+print(barchart(table(mtcars$gear)),
+      newpage=FALSE)
+popViewport()
+pushViewport(viewport(x=.4, width=.6, just="left"))
+print(xyplot(mpg ~ disp, data=mtcars,
+             group=gear, 
+             auto.key=list(space="right"),
+             par.settings=list(superpose.symbol=list(pch=c(1, 3, 16),
+                                 fill="white"))),
+      newpage=FALSE)
+popViewport()
 
-labelvp("lvp")
-labelvp("plot1.panel.1.3.off.vp")
-pushViewport(tvp)
-grid.text("Largest\nEarthquake", x=unit(2, "mm"), 
-          y=unit(1, "npc") - unit(0.5, "inches"), 
-          just="left")
 
-labelvp("tvp")
-downViewport("tvp")
-grid.move.to(unit(1, "mm"), 
-             unit(1, "npc") - unit(0.5, "inches"))
-seekViewport("plot1.panel.1.3.off.vp")
-grid.arrows(grob=lineToGrob(unit(167.62, "native") +
-                            unit(1, "mm"),
-                            unit(-15.56, "native")),
-            length=unit(3, "mm"), type="closed", 
-            angle=10, gp=gpar(fill="black"))
-grid.circle(unit(167.62, "native"), 
-            unit(-15.56, "native"),
-            r=unit(1, "mm"),
-            gp=gpar(lwd=0.1))
 
+}
+figure6.25 <- function() {
+#line 3385 "customgrid.Rnw"
+mtcars2 <- mtcars
+mtcars2$trans <- factor(mtcars$am, 
+                        levels=0:1, 
+                        labels=c("automatic", "manual"))
+mtcars2$am <- NULL
+mtcars2$vs <- NULL
+mtcars2$drat <- NULL
+mtcars2$carb <- NULL
+
+
+
+#line 3437 "customgrid.Rnw"
+print(
+#line 3417 "customgrid.Rnw"
+ggplot(mtcars2, aes(x=disp, y=mpg)) +
+    geom_point()
+
+#line 3439 "customgrid.Rnw"
+)
+#line 3430 "customgrid.Rnw"
+downViewport("panel-3-3")
+grid.text(paste("n =", nrow(mtcars2)),
+          x=unit(1, "npc") - unit(1, "mm"), 
+          y=unit(1, "npc") - unit(1, "mm"),
+          just=c("right", "top"))
+
+#line 3441 "customgrid.Rnw"
+
+
+
+}
+figure6.26 <- function() {
+#line 3385 "customgrid.Rnw"
+mtcars2 <- mtcars
+mtcars2$trans <- factor(mtcars$am, 
+                        levels=0:1, 
+                        labels=c("automatic", "manual"))
+mtcars2$am <- NULL
+mtcars2$vs <- NULL
+mtcars2$drat <- NULL
+mtcars2$carb <- NULL
+
+
+
+#line 3483 "customgrid.Rnw"
+grid.newpage()
+pushViewport(viewport(x=0, width=1/3, just="left"))
+print(ggplot(mtcars2, aes(x=trans)) + 
+      geom_bar(),
+      newpage=FALSE)
+popViewport()
+pushViewport(viewport(x=1/3, width=2/3, just="left"))
+print(ggplot(mtcars2, aes(x=disp, y=mpg)) +
+      geom_point(aes(color=trans)) +
+      scale_color_manual(values=gray(2:1/3)),
+      newpage=FALSE)
+popViewport()
 
 
 
 }
 figure1.2 <- function() {
+#line 251 "examples.Rnw"
 
 
 #
@@ -1746,14 +1947,14 @@ par(mfrow=c(3, 2))
 x <- c(0.5, 2, 4, 8, 12, 16)
 y1 <- c(1, 1.3, 1.9, 3.4, 3.9, 4.8)
 y2 <- c(4, .8, .5, .45, .4, .3)
-par(las=1, mar=c(4, 4, 2, 4))
+par(las=1, mar=c(4, 4, 2, 4), cex=.7)
 plot.new()
 plot.window(range(x), c(0, 6))
 lines(x, y1)
 lines(x, y2)
 points(x, y1, pch=16, cex=2)
 points(x, y2, pch=21, bg="white", cex=2)
-par(col="grey50", fg="grey50", col.axis="grey50")
+par(col="gray50", fg="gray50", col.axis="gray50")
 axis(1, at=seq(0, 16, 4))
 axis(2, at=seq(0, 6, 2))
 axis(4, at=seq(0, 6, 2))
@@ -1773,19 +1974,22 @@ x <- seq(-3.5, 3.5, .1)
 dn <- dnorm(x)
 par(mar=c(4.5, 4.1, 3.1, 0))
 hist(Y, breaks=seq(-3.5, 3.5), ylim=c(0, 0.5), 
-     col="grey80", freq=FALSE)
+     col="gray80", freq=FALSE)
 lines(x, dnorm(x), lwd=2)
 par(mar=c(5.1, 4.1, 4.1, 2.1))
 
 # Barplot
 # Modified from example(barplot)
 par(mar=c(2, 3.1, 2, 2.1))
-midpts <- barplot(VADeaths, col=grey(0.5 + 1:5/12), 
+midpts <- barplot(VADeaths, 
+                  col=gray(0.5 + 1:5/12), 
                   names=rep("", 4))
 mtext(sub(" ", "\n", colnames(VADeaths)),
       at=midpts, side=1, line=0.5, cex=0.5)
 text(rep(midpts, each=5), apply(VADeaths, 2, cumsum) - VADeaths/2,
-     VADeaths, col=rep(c("white", "black"), times=2:3, cex=0.8))
+     VADeaths, 
+     col=rep(c("white", "black"), times=2:3), 
+     cex=0.8)
 par(mar=c(5.1, 4.1, 4.1, 2.1))
 
 # Boxplot
@@ -1793,15 +1997,17 @@ par(mar=c(5.1, 4.1, 4.1, 2.1))
 par(mar=c(3, 4.1, 2, 0))
      boxplot(len ~ dose, data = ToothGrowth,
              boxwex = 0.25, at = 1:3 - 0.2,
-             subset= supp == "VC", col="grey90",
+             subset= supp == "VC", col="gray90",
              xlab="",
              ylab="tooth length", ylim=c(0,35))
      mtext("Vitamin C dose (mg)", side=1, line=2.5, cex=0.8)
      boxplot(len ~ dose, data = ToothGrowth, add = TRUE,
              boxwex = 0.25, at = 1:3 + 0.2,
-             subset= supp == "OJ", col="grey70")
-     legend(1.5, 9, c("Ascorbic acid", "Orange juice"), bty="n",
-            fill = c("grey90", "grey70"))
+
+             subset= supp == "OJ")
+     legend(1.5, 9, c("Ascorbic acid", "Orange juice"), 
+            fill = c("gray90", "gray70"), 
+            bty="n")
 par(mar=c(5.1, 4.1, 4.1, 2.1))
 
 # Persp
@@ -1812,8 +2018,10 @@ par(mar=c(5.1, 4.1, 4.1, 2.1))
      z <- outer(x, y, f)
      z[is.na(z)] <- 1
 # 0.5 to include z axis label
-par(mar=c(0, 0.5, 0, 0), lwd=0.1)
-     persp(x, y, z, theta = 30, phi = 30, expand = 0.5, col = "grey80")
+par(mar=c(0, 0.5, 0, 0), lwd=0.5)
+     persp(x, y, z, theta = 30, phi = 30, 
+ 
+           expand = 0.5)
 par(mar=c(5.1, 4.1, 4.1, 2.1), lwd=1)
 
 # Piechart
@@ -1822,13 +2030,14 @@ par(mar=c(0, 2, 1, 2), xpd=FALSE, cex=0.5)
      pie.sales <- c(0.12, 0.3, 0.26, 0.16, 0.04, 0.12)
      names(pie.sales) <- c("Blueberry", "Cherry",
          "Apple", "Boston Cream", "Other", "Vanilla")
-     pie(pie.sales, col = gray(seq(0.4,1.0,length=6)))
+     pie(pie.sales, col = gray(seq(0.4,1.0,length=6))) 
 
 
 
 
 }
 figure1.3 <- function() {
+#line 374 "examples.Rnw"
 
 #
 # Comment:
@@ -1934,17 +2143,17 @@ anncomp <- function(params, comp, xlim, ylim, cylim) {
   nvessscale(params, xlim, ylim)
   polygon(c(cp[2], cp[2], 0, 0, cp[1], cp[1]),
           c(0, nv[2], nv[2], nv[1], nv[1], 0),
-          col="grey90", border=NA)
+          col="gray90", border=NA)
   text(0, nv[1], paste(round(nv[1]),
                        " (", round(100*nv[1]/params$N), "%)", sep=""),
-       adj=c(0, 0), col="grey")
+       adj=c(0, 0), col="gray")
   text(0, nv[2], paste(round(nv[2]), 
                        " (", round(100*nv[2]/params$N), "%)", sep=""),
-       adj=c(0, 1), col="grey")
+       adj=c(0, 1), col="gray")
   compscale(params, xlim, cylim)
-  segments(1, min(comp), cp[2], comp, col="grey")
-  segments(1, max(comp), cp[1], comp, col="grey")
-  text(1, comp, paste(comp, collapse="-"), adj=c(1, 0), col="grey")
+  segments(1, min(comp), cp[2], comp, col="gray")
+  segments(1, max(comp), cp[1], comp, col="gray")
+  text(1, comp, paste(comp, collapse="-"), adj=c(1, 0), col="gray")
 }
 
 plotPars <- function(params, comp, xlim=NULL, ylim=NULL) {
@@ -1961,7 +2170,7 @@ plotPars <- function(params, comp, xlim=NULL, ylim=NULL) {
   nvessscale(params, xlim, ylim, new=FALSE)
   compscale(params, xlim, cylim)
   polygon(c(params$p, rev(params$p)), c(lb, rev(ub)),
-          col="grey90", border=NA)
+          col="gray90", border=NA)
   anncomp(params, comp, xlim, ylim, cylim)
   nvessscale(params, xlim, ylim)
   mtext("Number of Vessels", side=2, line=3)
@@ -1991,6 +2200,58 @@ lines(c(pcrit, pcrit), c(200, 0))
 
 }
 figure1.4 <- function() {
+#line 546 "examples.Rnw"
+# Produce a plot of tiger populations with picture as background
+# Source: http://www.globaltiger.org/population.htm
+year <- c(1993, 1996, 1998, 2001)
+minpop <- c(20, 50, 50, 115)
+maxpop <- c(50, 240, 240, 150)
+
+library(grImport)
+tiger <- readPicture(system.file("extra", "tiger.ps.xml", 
+                                 package="RGraphics"))[-1]
+
+require(colorspace)
+
+source(system.file("extra", "grayify.R", package="RGraphics"))
+
+# grid.newpage()
+pushViewport(plotViewport(c(3, 2, 2, 1)),
+             viewport(xscale=c(1991, 2003), yscale=c(0, 250)))
+grid.rect()
+# tiger backdrop in gray
+grid.picture(tiger, x=0.45, FUN=grayify, min=.8)
+grid.xaxis(at=year, gp=gpar(cex=0.7))
+grid.yaxis(gp=gpar(cex=0.7))
+# black bars
+grid.rect(x=unit(year, "native"), y=0,
+          width=unit(1, "native"), height=unit(maxpop, "native"),
+          just="bottom", gp=gpar(fill="black"))
+# tiger in bars
+tigerGrob <- pictureGrob(tiger, x=0.45, 
+ FUN=grobify)
+# Start from 2 because bar 1 does not overlap with tiger
+for (i in 2:length(year)) {
+    grid.clip(x=unit(year[i], "native"), y=0,
+              width=unit(1, "native"), height=unit(maxpop[i], "native"),
+              just="bottom")
+    # tiger backdrop (shift slightly to left so get one eye in one bar)
+    grid.draw(tigerGrob)
+}
+grid.clip()
+# redo bar borders
+grid.rect(x=unit(year, "native"), y=0,
+          width=unit(1, "native"), height=unit(maxpop, "native"),
+          just="bottom", gp=gpar(fill=NA))
+grid.text("Estimated Population (max.) of Bengal Tigers\n(in Bhutan)",
+          y=unit(1, "npc") + unit(1, "lines"))
+popViewport(2)
+
+
+
+}
+figure1.5 <- function() {
+#line 610 "examples.Rnw"
 
 #
 # Comment:
@@ -2001,7 +2262,7 @@ figure1.4 <- function() {
 
 
 library(lattice)
-trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
+
 trellis.par.set(list(fontsize=list(text=6),
 	             par.xlab.text=list(cex=1.5),
                      add.text=list(cex=1.5),
@@ -2018,7 +2279,31 @@ print(
 
 
 }
-figure1.5 <- function() {
+figure1.6 <- function() {
+#line 658 "examples.Rnw"
+
+#
+# Comment:
+#
+# Inspired by Figure 3.3 from 
+# Wickham's book "ggplot2"
+#
+
+
+library(ggplot2)
+print(
+ggplot(data=mpg, aes(x=displ, y=hwy, shape=factor(cyl))) + 
+    geom_point() +
+    stat_smooth(method="lm", colour="black") +
+    scale_shape_manual(values=c(1, 16, 3, 17)) + 
+    theme_bw() 
+)
+
+
+
+}
+figure1.7 <- function() {
+#line 694 "examples.Rnw"
 
 #
 # Comment:
@@ -2028,19 +2313,22 @@ figure1.5 <- function() {
 # plotting function to perform calculations but do no drawing (see the
 # second call to the map() function).
 #
-# Makes use of the "maps" and "mapproj" packages to draw the maps.
+# Makes use of the "maps", "mapdata", and "mapproj" packages to draw the maps.
 #
 
 
 library(maps)
-par(mar=rep(0, 4))
-map("nz", fill=TRUE, col="grey80")
-points(174.75, -36.87, pch=16, cex=2)
+library(mapdata)
+par(mar=rep(1, 4))
+map("nzHires", fill=TRUE, col="gray80",
+    regions=c("North Island", "South Island", "Stewart Island"))
+points(174.75, -36.87, pch=16, cex=2,
+       col=rgb(0,0,0,.5))
 arrows(172, -36.87, 174, -36.87, lwd=3)
 text(172, -36.87, "Auckland  ", adj=1, cex=2)
 # mini world map as guide
 maplocs <- map(projection="sp_mercator", wrap=TRUE, lwd=0.1, 
-               col="grey", ylim=c(-60, 75),
+               col="gray", ylim=c(-60, 75),
                interior=FALSE, orientation=c(90, 180, 0), add=TRUE,
                plot=FALSE)
 xrange <- range(maplocs$x, na.rm=TRUE)
@@ -2052,261 +2340,27 @@ par(fig=c(0.99 - 0.5, 0.99, 0.01, 0.01 + 0.5*aspect*4.5/6.5),
 plot.new()
 plot.window(xlim=xrange,
             ylim=yrange)
-map(projection="sp_mercator", wrap=TRUE, lwd=0.1, ylim=c(-60, 75),
+map(projection="sp_mercator", wrap=TRUE, lwd=0.5, ylim=c(-60, 75),
     interior=FALSE, orientation=c(90, 180, 0), add=TRUE)
 symbols(-.13, -0.8, circles=1, inches=0.1, add=TRUE)
+box()
 
 
 
 }
-figure1.6 <- function() {
-"polar.plot" <- 
-function (r, theta, theta.zero = 0, theta.clw = FALSE, method = 1, 
-    rlabel.axis = 0, dir = 8, rlimits = NULL, grid.circle.pos = NULL, 
-    grid.lwd = 1, grid.col = "black", points.pch = 20, points.cex = 1, 
-    lp.col = "black", lines.lwd = 1, lines.lty = 1, polygon.col = NA, 
-    polygon.bottom = TRUE, overlay = NULL, pi2.lab = TRUE, text.lab = NULL, 
-    num.lab = NULL, rlabel.method = 1, rlabel.pos = 3, rlabel.cex = 1, 
-    rlabel.col = "black", tlabel.offset = 0.1, tlabel.cex = 1.5, 
-    tlabel.col = "black", main = NULL, sub = NULL) 
-{ 
-# r: (vector of) radial data. 
-# theta: (vector of) angular data (in radians). 
-# theta.zero: angular direction on plot of theta = 0 (in radians). 
-# theta.clw: clockwise orientation of theta values (default = FALSE). 
-# 
-# method: (plotting of (r,theta)-data): 
-# 1: points (default) 
-# 2: line 
-# 3: polygon 
-# 
-# rlabel.axis: angular direction on the plot of radial label axis (in radians). 
-# dir: number of radial grid lines (default=8). 
-# rlimts: Interval for radial axis as a numeric vector: c(lower,upper). Interval will be extended by the default use of pretty()-function. (default = NULL). 
-# grid.circle.pos: radial axis position of grid circles as numeric vector of minimum length 2. Overrides the default positioning of grid circles by pretty()-function. (default = NULL). 
-# grid.lwd. grid line width. 
-# grid.col: grid line color. 
-# 
-# points.pch: points plotting symbol. 
-# point.cex: character expansion factor for points. 
-# lp.col: color of points (method 1) or lines (method 2 and method 3). In method 3, set lp.col=0 for polygons without border. 
-# lines.lwd: line width for plotting methods 2 and 3 (default = 1). 
-# lines.lty: line type (default = 1). 
-# polygon.col: color of polygon (defalut = NA). 
-# polygon.bottom: polygon to the back i.e. behind the grid (default = TRUE). 
-# 
-# overlay: NULL (default), no overlay 
-# 1, overlay data on existing plot 
-# 2, overlay data, grid and labels on existing plot. 
-# 
-# pi2.lab: angular labels in radians (0, pi/2, pi, 3*pi/2) (default). 
-# text.lab: angular axis labels from a character vector c("N","E","S","W") (default = NULL). 
-# num.lab: numeric angular axis labels in interval [0;num.lab[ (default = NULL). Number of labels: dir. 
-# 
-# rlabel.method (plotting of radial axis labels): 
-# 0: no radial labels. 
-# 1: labels at pretty radial distances (default). 
-# 2: exclude label at radial distace 0. 
-# 3: exclude label at maximum radial distance. 
-# 4: exclude radial labels at distance 0 and at maximum radial distance. 
-# rlabel.pos: text position of radial axis labels (NULL,1,2,3,4). 
-# rlabel.cex: cex for radial axis labels. 
-# rlabel.col: color of the radial labels. 
-# 
-# tlabel.offset: radial offset for angular axis labels in fraction of maximum radial value (default = 0.1). 
-# tlabel.cex: cex for angular axis labels. 
-# tlabel.col: angular labels color. 
-# 
-# main: plot main title. 
-# sub: plot sub title. 
-   
-    fit.rad <- function(x, twop = 2 * pi) { 
-        for (i in 1:length(x)) { 
-            while (x[i] < 0) x[i] <- x[i] + twop 
-            while (x[i] >= twop) x[i] <- x[i] - twop 
-        } 
-        return(x) 
-    } 
-    if (is.null(rlimits)) 
-        rpretty <- pretty(range(abs(r), 0, na.rm = TRUE)) 
-    if (is.numeric(rlimits) & length(rlimits) == 2) 
-        rpretty <- pretty(range(abs(rlimits[1]), abs(rlimits[2]))) 
-    if (is.numeric(grid.circle.pos) & length(grid.circle.pos) > 
-        1) 
-        rpretty <- grid.circle.pos 
-    lab.dist <- max(rpretty) 
-    if (!is.null(text.lab) || is.numeric(num.lab) || pi2.lab) { 
-        lab.dist <- lab.dist * (tlabel.offset + 1) 
-    } 
-    if (is.null(overlay)) { 
-        plot.new() 
-        ps <- max(lab.dist, max(rpretty)) 
-        plot.window(xlim = c(-ps, ps), ylim = c(-ps, ps), asp = 1) 
-        title(main = main, sub = sub) 
-    } 
-    drawgrid <- function() { 
-        if (dir > 0) { 
-            rDir <- seq(0, 2 * pi, length = dir + 1)[-(dir + 
-                1)] 
-            segments(0, 0, max(rpretty) * cos(rDir), max(rpretty) * 
-                sin(rDir), col = grid.col, lwd = grid.lwd) 
-        } 
-        grid <- seq(0, 2 * pi, length = 360/4 + 1) 
-        for (rad in rpretty) { 
-            if (rad > 0) 
-                lines(rad * cos(grid), rad * sin(grid), col = grid.col, 
-                  lwd = grid.lwd) 
-        } 
-        if (rlabel.method != 0) { 
-            if (rlabel.method == 1) 
-                radLabels <- 1:length(rpretty) 
-            if (rlabel.method == 2) 
-                radLabels <- 2:length(rpretty) 
-            if (rlabel.method == 3) 
-                radLabels <- 1:(length(rpretty) - 1) 
-            if (rlabel.method == 4) { 
-                if (length(rpretty) > 2) 
-                  radLabels <- 2:(length(rpretty) - 1) 
-                else radLabels <- NULL 
-            } 
-            if (!is.null(radLabels)) { 
-                xpos <- rpretty[radLabels] * cos(rlabel.axis) 
-                ypos <- rpretty[radLabels] * sin(rlabel.axis) 
-                text(xpos, ypos, rpretty[radLabels], cex = rlabel.cex, 
-                  pos = rlabel.pos, col = rlabel.col) 
-            } 
-        } 
-        if (!is.numeric(num.lab)) {
-            t.lab <- ""
-            if (pi2.lab & !is.character(text.lab)) 
-                t.lab <- expression(0, pi/2, pi, 3 * pi/2) 
-            if (!pi2.lab & is.character(text.lab)) 
-                t.lab <- text.lab 
-            labDir <- seq(0, 2 * pi, length = length(t.lab) + 
-                1)[-(length(t.lab) + 1)] 
-            labDir <- fit.rad(theta.zero + (!theta.clw) * labDir - 
-                (theta.clw) * labDir) 
-            text(lab.dist * cos(labDir), lab.dist * sin(labDir), 
-                t.lab, cex = tlabel.cex, col = tlabel.col) 
-        } 
-        if (!pi2.lab & is.null(text.lab) & is.numeric(num.lab)) { 
-            labDir <- seq(0, 2 * pi, length = num.lab + 1)[-(num.lab + 
-                1)] 
-            labDir <- fit.rad(theta.zero + (!theta.clw) * labDir - 
-                (theta.clw) * labDir) 
-            text(lab.dist * cos(labDir), lab.dist * sin(labDir), 
-                paste(num.lab * labDir/(2 * pi)), cex = tlabel.cex, 
-                col = tlabel.col) 
-        } 
-        if ((is.character(text.lab) & is.numeric(num.lab)) || 
-            (is.character(text.lab) & pi2.lab) || (pi2.lab & 
-            is.numeric(num.lab))) 
-            print("More than one type of angular labels was requested.") 
-    } 
-    theta2 <- fit.rad(theta.zero + (!theta.clw) * theta - (theta.clw) * 
-        theta) 
-    cartesian.rt <- cbind(r * cos(theta2), r * sin(theta2)) 
-    if (method == 1) { 
-        if (is.null(overlay) || overlay == 2) 
-            drawgrid() 
-        points(cartesian.rt[, 1], cartesian.rt[, 2], col = lp.col, 
-            pch = points.pch, cex = points.cex) 
-    } 
-    if (method == 2) { 
-        if (is.null(overlay) || overlay == 2) 
-            drawgrid() 
-        lines(cartesian.rt[, 1], cartesian.rt[, 2], lwd = lines.lwd, 
-            col = lp.col, lty = lines.lty) 
-    } 
-    if ((method == 2 || method == 3) & length(r) <= 1) 
-        print("More than one data point is needed for line and polygon methods.") 
-    if (method == 3) { 
-        if (!polygon.bottom & (is.null(overlay) || overlay == 
-            2)) 
-            drawgrid() 
-        polygon(cartesian.rt, lwd = lines.lwd, col = polygon.col, 
-            border = lp.col, lty = lines.lty) 
-        if (polygon.bottom & (is.null(overlay) || overlay == 
-            2)) 
-            drawgrid() 
-    } 
-} 
+figure1.8 <- function() {
+#line 754 "examples.Rnw"
+library(quantmod)
+getSymbols("YHOO")
+chartSeries(YHOO, subset='last 4 months'
+ )
 
-
-
-
-#
-# Comment:
-#
-# Examples using high-level plotting functions from the packages 
-# "graphics", "CircStats", and "vcd", plus code contributed in an
-# email on the R-help mailing list by Kartsen Bjerre (above).
-#
-# In each case, additional output has been used to slightly
-# customize the output from the plotting function and/or 
-# the arguments of the plotting function have been used to
-# achieve a non-default appearance for the plot.
-#
-
-
-par(mfrow=c(2, 2), xpd=NA)
-# Example 3 from stars
-data(mtcars)
-     stars(mtcars[, 1:7], locations = c(0,0), radius = FALSE,
-           key.loc=c(0,0), main="Motor Trend Cars",
-           col.stars=grey(1:32/33))
-points(0, 0, pch=16)
-# karstenbjerre polar plot
-par(mar=rep(1, 4))
-div<-50
-theta <- seq(0, 2 * pi, length = div + 1)[-(div+1)] 
-r<-1:(div) 
-textlabels<-c('N','E','S','W')
-par(lwd=.1)
-polar.plot(r, theta, theta.clw = TRUE, theta.zero = pi/2, 
-           text.lab = textlabels , pi2.lab = FALSE, lines.lwd = 3, 
-           grid.lwd = 1, grid.col = "grey", rlabel.method = 2, 
-           rlabel.axis = pi/2, rlabel.pos = NULL,  
-           points.pch = 21, tlabel.offset = 0.3) 
-par(lwd=1)
-# example 2 from rose.diag from CircStats package
-library(CircStats)
-data <- runif(50, 0, 2*pi)
-par(cex=0.5, mar=rep(1, 4))
-rose.diag(data, bins = 18, pts=TRUE, prop=2, shrink=1.2)
-par(cex=1)
-
-# Ternary plot
-# Based on example 1 of help(ternaryplot)
-library(vcd)
-par(cex=0.5)
-data(Arthritis)
-
-# Build table by crossing Treatment and Sex
-tab <- as.table(xtabs(~ I(Sex:Treatment) + Improved, data = Arthritis))
-
-# Mark groups
-col <- c("black", "black", "black", "black")
-pch <- c(1, 19, 0, 15)
-
-# plot
-ternaryplot(tab,
-            col = col,
-            border="grey",
-            pch = pch,
-            prop.size = TRUE,
-            bg = "white",
-            grid="solid",
-            grid.color = "grey",
-            labels.color = "grey",
-            main = "")
-
-detach("package:vcd")
 
 
 
 }
-figure1.7 <- function() {
+figure1.9 <- function() {
+#line 1023 "examples.Rnw"
 library(party)
 
 # CLASSIFICATION
@@ -2325,7 +2379,8 @@ popViewport()
 
 
 }
-figure1.8 <- function() {
+figure1.10 <- function() {
+#line 1193 "examples.Rnw"
 
 #
 # Comment:
@@ -2353,15 +2408,15 @@ colgap <- unit(3, "mm")
 # calculation of column widths takes into account the font face.
 col1 <- list(labels=
              list(textGrob("Centre", x=0, just="left",
-                           gp=gpar(fontface="bold")),
+                           gp=gpar(fontface="bold", col="white")),
                   textGrob("Thailand", x=0, just="left"),
                   textGrob("Philippines", x=0, just="left"),
                   textGrob("All in situ", x=0, just="left",
-                           gp=gpar(fontface="bold")),
+                           gp=gpar(fontface="bold.italic")),
                   textGrob("Colombia", x=0, just="left"),
                   textGrob("Spain", x=0, just="left"),
                   textGrob("All invasive", x=0, just="left",
-                           gp=gpar(fontface="bold")),
+                           gp=gpar(fontface="bold.italic")),
                   textGrob("All", x=0, just="left",
                            gp=gpar(fontface="bold"))),
              rows=c(1, 5, 6, 8, 11, 12, 14, 16))
@@ -2370,15 +2425,15 @@ col1 <- list(labels=
 # column width (they spill over into col 2)
 col1plus <- list(labels=
                  list(textGrob("Carcinoma in situ", x=0, just="left",
-                               gp=gpar(fontface="bold")),
+                               gp=gpar(fontface="bold.italic")),
                       textGrob("Invasive cancer", x=0, just="left",
-                               gp=gpar(fontface="bold"))),
+                               gp=gpar(fontface="bold.italic"))),
                  rows=c(4, 10))
 
 # Data for column 2
 col2 <- list(labels=
-             list(textGrob("cases", x=1, just="right",
-                           gp=gpar(fontface="bold")),
+             list(textGrob("Cases", x=1, just="right",
+                           gp=gpar(fontface="bold", col="white")),
                   textGrob("327", x=1, just="right"),
                   textGrob("319", x=1, just="right"),
                   textGrob("1462", x=1, just="right",
@@ -2435,8 +2490,8 @@ drawNormalCI <- function(LL, OR, UL, size) {
   # Draw arrow if exceed col range
   # convertX() used to convert between coordinate systems
   if (convertX(unit(UL, "native"), "npc", valueOnly=TRUE) > 1)
-    grid.arrows(x=unit(c(LL, 1), c("native", "npc")),
-                length=unit(0.05, "inches"))
+    grid.lines(x=unit(c(LL, 1), c("native", "npc")), y=.5,
+               arrow=arrow(length=unit(0.05, "inches")))
   else {
     # Draw line white if totally inside rect
     lineCol <- if ((convertX(unit(OR, "native") + unit(0.5*size, "lines"),
@@ -2495,7 +2550,15 @@ pushViewport(viewport(layout=grid.layout(16, 5,
                                max(unit(rep(1, 8), "grobwidth", col2$labels)),
                                colgap,
                                col3width),
-                        heights=unit(rep(1, 16), "lines"))))
+                        heights=unit(c(1, 0, rep(1, 14)), "lines"))))
+pushViewport(viewport(layout.pos.row=1))
+grid.rect(gp=gpar(col=NA, fill="black"))
+popViewport()
+for (i in c(8, 14, 16)) {
+    pushViewport(viewport(layout.pos.row=i))
+    grid.rect(gp=gpar(col=NA, fill="gray80"))
+    popViewport()
+}
 drawLabelCol(col1, 1)
 drawLabelCol(col1plus, 1)
 drawLabelCol(col2, 3)
@@ -2506,7 +2569,8 @@ popViewport()
 
 
 }
-figure1.9 <- function() {
+figure1.11 <- function() {
+#line 1686 "examples.Rnw"
 
 #
 # Comment:
@@ -2520,6 +2584,7 @@ figure1.9 <- function() {
 
 
 par(mfrow=c(2, 1), pty="s", mar=rep(1, 4)) 
+#line 1392 "examples.Rnw"
 # Create plotting region and plot outer circle
 plot(c(-1.1, 1.2), c(-1.1, 1.2),
      type="n", xlab="", ylab="", 
@@ -2534,12 +2599,12 @@ phi1 <- pi*2/9
 k1 <- sin(phi1)
 k2 <- cos(phi1)
 
-# Create grey regions
+# Create gray regions
 obsphi <- pi/12
 lambdas <- seq(-pi, pi, length=500)
 xx <- cos(pi/2 - obsphi)*sin(lambdas)
 yy <- k2*sin(pi/2 - obsphi)-k1 * cos(pi/2 - obsphi)*cos(lambdas)
-polygon(xx, yy, col="grey")
+polygon(xx, yy, col="gray")
 lines(xx, yy, lwd=2)
 theta1sA <- seq(-obsphi, obsphi, length=500)
 theta2sA <- acos(cos(obsphi)/cos(theta1sA))
@@ -2549,11 +2614,11 @@ theta1s <- c(theta1sA, theta1sB)
 theta2s <- c(theta2sA, theta2sB)
 xx <- cos(theta1s)*sin(theta2s+pi/4)
 yy <- k2*sin(theta1s)-k1*cos(theta1s)*cos(theta2s+pi/4)
-polygon(xx, yy, col="grey")
+polygon(xx, yy, col="gray")
 lines(xx, yy, lwd=2)
 xx <- cos(theta1s)*sin(theta2s-pi/4)
 yy <- k2*sin(theta1s)-k1*cos(theta1s)*cos(theta2s-pi/4)
-polygon(xx, yy, col="grey")
+polygon(xx, yy, col="gray")
 lines(xx, yy, lwd=2)
 
 # Plot longitudes
@@ -2573,7 +2638,7 @@ phi <- 5.6*pi/12
 lambdas <- seq(-pi, pi, length=500)
 xx <- cos(phi)*sin(lambdas)
 yy <- k2*sin(phi)-k1 * cos(phi)*cos(lambdas)
-polygon(xx, yy, col="grey")
+polygon(xx, yy, col="gray")
 
 # Plot Latitudes
 vals2 <- seq(-2.8, 5.6, 1.4)*pi/12
@@ -2606,6 +2671,8 @@ text(0.1, 1.12, expression(bold(X[1])))
 text(-1.07, -.85, expression(bold(X[2])))
 text(1.11, -.85, expression(bold(X[3])))
 
+#line 1700 "examples.Rnw"
+#line 1479 "examples.Rnw"
 # set plot region and draw outer circle
 plot(c(-1.1, 1.2),  c(-1.1, 1.2),
      type="n", xlab="", ylab="", 
@@ -2621,7 +2688,7 @@ k1 <- sin(phi1)
 k2 <- cos(phi1)
 obsphi <- pi/24
 
-# create X2X3 grey region and plot boundary
+# create X2X3 gray region and plot boundary
 crit <- acos((-k1*sin(obsphi))/(k2 * cos(obsphi)))
 lambdas <- seq(-crit, crit, length=500)
 xx1 <- cos(obsphi)*sin(lambdas)
@@ -2643,13 +2710,13 @@ xx4 <- sin(angs)
 yy4 <- cos(angs)
 xxA <- c(xx1, xx2, xx3, xx4)
 yyA <- c(yy1, yy2, yy3, yy4)
-polygon(xxA, yyA, border="grey", col="grey")
+polygon(xxA, yyA, border="gray", col="gray")
 xx1A <- xx1
 yy1A <- yy1
 xx3A <- xx3
 yy3A <- yy3
 
-# create X1X3 grey region and plot boundary
+# create X1X3 gray region and plot boundary
 obsphi <- pi/24
 crit <- pi/2-obsphi
 theta1sA <- c(seq(-crit, crit/2, length=200), seq(crit/2, crit, length=500))
@@ -2680,13 +2747,13 @@ xx4 <- sin(angs)
 yy4 <- cos(angs)
 xxB <- c(xx1, -xx2, xx3, xx4)
 yyB <- c(yy1, -yy2, yy3, yy4)
-polygon(xxB, yyB, border="grey", col="grey")
+polygon(xxB, yyB, border="gray", col="gray")
 xx1B <- xx1
 yy1B <- yy1
 xx3B <- xx3
 yy3B <- yy3
 
-# create X1X2 grey region and plot boundary
+# create X1X2 gray region and plot boundary
 vals <- k1*sin(theta1s)+k2*cos(theta1s)*cos(theta2s-pi/4)
 xx1 <- cos(theta1s[vals>=0])*sin(theta2s[vals>=0]-pi/4)
 yy1 <- k2*sin(theta1s[vals>=0])-k1*cos(theta1s[vals>=0])*cos(theta2s[vals>=0]-pi/4)
@@ -2709,14 +2776,14 @@ xx4 <- sin(angs)
 yy4 <- cos(angs)
 xx <- c(xx1, -xx2, xx3, xx4)
 yy <- c(yy1, -yy2, yy3, yy4)
-polygon(xx, yy, border="grey", col="grey")
+polygon(xx, yy, border="gray", col="gray")
 xx1C <- xx1
 yy1C <- yy1
 xx3C <- xx3
 yy3C <- yy3
 
 
-# plot boundaries to grey regions
+# plot boundaries to gray regions
 lines(xx1C[2:45], yy1C[2:45], lwd=2)
 lines(xx1C[69:583], yy1C[69:583], lwd=2)
 lines(xx1C[660:1080], yy1C[660:1080], lwd=2)
@@ -2812,11 +2879,13 @@ text(0.1, 1.12, expression(bold(X[1])))
 
 lines(XX, YY, type="l")
 
+#line 1701 "examples.Rnw"
 
 
 
 }
-figure1.10 <- function() {
+figure1.12 <- function() {
+#line 1718 "examples.Rnw"
 
 
 #
@@ -2896,98 +2965,1856 @@ text(x = seq(s1$x + 1, s1$x + 8.5, by = 0.5), y = rep(4, 16),
 
 
 }
-figure1.11 <- function() {
+figure1.13 <- function() {
+#line 1809 "examples.Rnw"
+library(pixmap)
 
-#
-# Comment:
-#
-# An example of a one-off image drawn using the grid system.
-#
-# The code is somewhat modular and general, with functions
-# for producing different shapes, but the sizes and
-# locations used in this particular image assume a 2:1 aspect ratio.
-#
-# The gradient-fill background (dark at the top to lighter at the 
-# bottom) is achieved by filling multiple overlapping polygons with
-# slowly changing shades of grey.
-#
+pic <- read.pnm(system.file("extra", "AfterTheBombs.pnm", package="RGraphics"))
+
+source(system.file("extra", "as.raster.R", package="RGraphics"))
+
+library(grid)
+
+w <- 1024 # 578
+h <- 768 # 500
+picRaster <- as.raster(pic)
+bg <- picRaster # [1:h, (1024 - w):1024]
+
+unknown <- 8.7
+total <- 9.1
+known <- total - unknown
+
+theta0 <- pi/4
+thetaN <- theta0 + 2*pi*unknown/total
+theta <- seq(theta0, thetaN, length.out=100)
+x <- 0.3*c(0, cos(theta)) + 0.5
+y <- 0.3*c(0, sin(theta)) + 0.35
+
+# grid.newpage()
+grid.raster(bg)
+pushViewport(viewport(width=unit(1, "snpc"), height=unit(1, "snpc"),
+                      gp=gpar(cex=1.2)))
+grid.polygon(x, y, gp=gpar(col=NA, fill=rgb(.67, 0, .11, .7)))
+label1 <- textGrob("UNACCOUNTED\nFOR",
+                   unit(.2, "npc") - unit(2, "mm"),
+                   unit(.6, "npc") + unit(2, "mm"),
+                   gp=gpar(cex=1.4, fontface="bold"),
+                   just=c("right", "bottom"))
+grid.rect(.2, .6, just=c("right", "bottom"),
+          width=grobWidth(label1) + unit(4, "mm"),
+          height=grobHeight(label1) + unit(4, "mm"),
+          gp=gpar(col=NA, fill=rgb(1, 1, 1, .5)))
+grid.draw(label1)
+label2 <- textGrob("ACCOUNTED\nFOR", 
+                   unit(.8, "npc") + unit(2, "mm"),
+                   unit(.6, "npc") + unit(2, "mm"),
+                   gp=gpar(cex=1.4, fontface="bold"),
+                   just=c("left", "bottom"))
+grid.rect(.8, .6, just=c("left", "bottom"),
+          width=grobWidth(label2) + unit(4, "mm"),
+          height=grobHeight(label2) + unit(4, "mm"),
+          gp=gpar(col=NA, fill=rgb(1, 1, 1, .5)))
+grid.draw(label2)
+grid.segments(c(.2, .8), .6,
+              c(.3, .7), .5,
+              gp=gpar(lty="dotted", lwd=2))
+heading <- textGrob("The Department of Defense is unable to account for the use of
+$8.7 billion of the $9.1 billion it spent on reconstruction in Iraq",
+                    x=unit(0.5, "cm"),
+                    y=unit(3, "lines"),
+                    just=c("left", "top"),
+                    gp=gpar(cex=1, col="white"))
+pushViewport(viewport(x=0, y=1,
+                      just=c("left", "top"),
+                      height=grobHeight(heading) + unit(4, "lines"),
+                      width=grobWidth(heading) + unit(1, "cm")))
+grid.rect(gp=gpar(fill="black"))
+grid.segments(x0=unit(0.5, "cm"),
+              x1=unit(1, "npc") - unit(0.5, "cm"),
+              y0=unit(1, "npc") - unit(2, "lines"),
+              y1=unit(1, "npc") - unit(2, "lines"),
+              gp=gpar(col="grey50", lwd=2))
+grid.text("That's 96 Percent",
+          x=unit(0.5, "cm"),
+          y=unit(1, "npc") - unit(1, "lines"),
+          just="left",
+          gp=gpar(fontface="bold", col="white"))
+grid.draw(heading)
+popViewport(2)
 
 
-pushViewport(viewport(xscale=c(0, 1), yscale=c(0.5, 1),
-             clip=TRUE))
-             
-res <- 50
-for (i in 1:res)
-  grid.rect(y=1 - (i-1)/res, just="top",
-            gp=gpar(col=NULL, fill=grey(0.5*i/res)))
 
-moon <- function(x, y, size) {
-  angle <- seq(-90, 90, length=50)/180*pi
-  x1 <- x + size*cos(angle)
-  y1 <- y + size*sin(angle)
-  mod <- 0.8
-  x2 <- x + mod*(x1 - x)
-  grid.polygon(c(x1, rev(x2)), c(y1, rev(y1)),
-               default.unit="native",
-               gp=gpar(col=NULL, fill="white"))
 }
+figure11.1 <- function() {
+#line 73 "extra.Rnw"
+library(gplots)
 
-moon(.1, .9, .03)
 
-star <- function(x, y, size) {
-  x1 <- c(x,           x + size*.1, x + size*.5, x + size*.1,
-          x,           x - size*.1, x - size*.5, x - size*.1) + .05
-  y1 <- c(y - size,    y - size*.1, y,           y + size*.1,
-          y + size*.7, y + size*.1, y,           y - size*.1) + .05
-  grid.polygon(x1, y1, 
-               default.unit="native",
-               gp=gpar(col=NULL, fill="white"))
+
+#line 105 "extra.Rnw"
+par(mar=rep(1, 4))
+#line 100 "extra.Rnw"
+par(mfrow=c(1, 2))
+plot(faithful)
+textplot(capture.output(summary(faithful)))
+
+#line 107 "extra.Rnw"
+
+
+
 }
+figure11.2 <- function() {
+#line 128 "extra.Rnw"
+library(plotrix)
 
-star(.5, .7, .02)
-star(.8, .9, .02)
-star(.72, .74, .02)
-star(.62, .88, .02)
 
-grid.circle(runif(20, .2, 1), runif(20, .6, 1), r=.002,
-            default.unit="native",
-            gp=gpar(col=NULL, fill="white"))
 
-hill <- function(height=0.1, col="black") {
-  n <- 100
-  x <- seq(0, 1, length=n)
-  y1 <- sin(runif(1) + x*2*pi)
-  y2 <- sin(runif(1) + x*4*pi)
-  y3 <- sin(runif(1) + x*8*pi)
-  y <- 0.6 + height*((y1 + y2 + y3)/3)
-  grid.polygon(c(x, rev(x)), c(y, rep(0, n)),
-               default.unit="native",
-               gp=gpar(col=NULL, fill=col))
+
+#line 155 "extra.Rnw"
+par(mar=rep(1, 4))
+#line 151 "extra.Rnw"
+plot(pressure)
+addtable2plot(0, 300, pressure[13:19, ])
+
+#line 157 "extra.Rnw"
+
+
+
 }
+figure11.3 <- function() {
+#line 179 "extra.Rnw"
+library(gridExtra)
 
-hill()
 
-rdir <- function(n) {
-  sample(seq(-45, 45, length=10), n)/180*pi
+
+#line 196 "extra.Rnw"
+#line 192 "extra.Rnw"
+grid.table(pressure[13:19, ], show.box=TRUE, 
+           separator="black")
+
+#line 197 "extra.Rnw"
+
+
+
 }
+figure11.4 <- function() {
+#line 128 "extra.Rnw"
+library(plotrix)
 
-grid.text("Once upon a time ...",
-          x=.15, y=.51, just="bottom",
-          default.unit="native",
-          gp=gpar(col="white", fontface="italic", fontsize=10))
 
+
+
+#line 233 "extra.Rnw"
+library(Hmisc)
+
+
+
+#line 294 "extra.Rnw"
+par(mar=rep(1, 4))
+#line 251 "extra.Rnw"
+x <- rnorm(20)
+y <- rnorm(20)
+plot(x, y, pch=16, col="gray")
+
+#line 296 "extra.Rnw"
+#line 269 "extra.Rnw"
+xy <- emptyspace(x, y)
+text(xy, label="largest\nempty\nregion")
+
+#line 297 "extra.Rnw"
+#line 289 "extra.Rnw"
+xy2 <- largest.empty(x, y, 1, 1)
+rect(xy2$x - .5, xy2$y - .5, 
+     xy2$x + .5, xy2$y + .5)
+
+#line 298 "extra.Rnw"
+
+
+
+}
+figure11.5 <- function() {
+#line 337 "extra.Rnw"
+x <- runif(10)
+y <- rnorm(10)
+
+
+
+#line 128 "extra.Rnw"
+library(plotrix)
+
+
+
+
+#line 379 "extra.Rnw"
+library(TeachingDemos)
+
+
+
+#line 419 "extra.Rnw"
+library(maptools)
+
+
+
+#line 233 "extra.Rnw"
+library(Hmisc)
+
+
+
+#line 489 "extra.Rnw"
+par(mar=c(1, 1, 2, 1))
+#line 347 "extra.Rnw"
+plot(x, y, pch=21, bg="gray", ylim=c(-3, 3), asp=1)
+spread.labels(x, y, labels=1:10)
+
+#line 491 "extra.Rnw"
+mtext("spread.labels", side=3, line=0)
+
+
+
+#line 494 "extra.Rnw"
+par(mar=c(1, 1, 2, 1))
+#line 365 "extra.Rnw"
+plot(x, y, pch=21, bg="gray",  
+     ylim=c(-2, 3), xlim=c(-.5, 1.5))
+thigmophobe.labels(x, y, labels=1:10)
+
+#line 496 "extra.Rnw"
+mtext("thigmophobe.labels", side=3, line=0)
+
+
+
+#line 499 "extra.Rnw"
+par(mar=c(1, 1, 2, 1))
+#line 404 "extra.Rnw"
+plot(x, y, pch=21, bg="gray", ylim=c(-3, 3), asp=1)
+adjy <- spread.labs(y, strheight("10", cex=1.5))
+text(-0.5, adjy, labels=1:10, pos=2)
+segments(-0.5, adjy, x, y)
+
+#line 501 "extra.Rnw"
+mtext("spread.labs", side=3, line=0)
+
+
+
+#line 504 "extra.Rnw"
+par(mar=c(1, 1, 2, 1))
+#line 439 "extra.Rnw"
+plot(x, y, pch=16, col="gray", ylim=c(-2, 3), xlim=c(-.5, 1.5))
+pointLabel(x, y, labels=as.character(1:10))
+
+#line 506 "extra.Rnw"
+mtext("pointLabel", side=3, line=0)
+
+
+
+#line 509 "extra.Rnw"
+par(mar=c(1, 1, 2, 1))
+#line 465 "extra.Rnw"
+sx <- sort(x)
+sy <- sort(y)
+lines <- list(A=list(x=sx, y=y, lty=1), 
+              B=list(x=sx, y=sy, lty=2),
+              C=list(x=sx, y=rev(y), lty=3), 
+              D=list(x=sx, y=rev(sy), lty=4))
+
+#line 511 "extra.Rnw"
+#line 484 "extra.Rnw"
+plot(x, y, type="n", ylim=c(-3, 3))
+lapply(lines, function(l) do.call("lines", l))
+labcurve(lines)
+
+#line 512 "extra.Rnw"
+mtext("labcurve", side=3, line=0)
+
+
+}
+figure11.6 <- function() {
+#line 128 "extra.Rnw"
+library(plotrix)
+
+
+
+
+#line 379 "extra.Rnw"
+library(TeachingDemos)
+
+
+
+#line 707 "extra.Rnw"
+par(mar=rep(0, 4))
+plot.new()
+plot.window(0:1, c(.1, 1))
+#line 579 "extra.Rnw"
+draw.circle(.1, .9, radius=1:5/100)
+draw.arc(.3, .9, radius=1:5/100, 
+         deg1=45, deg2=seq(360, 160, -50))
+arctext("arctext", center=c(.5, .85), radius=.05,
+        stretch=1.2)
+
+#line 711 "extra.Rnw"
+text(.1, .8, "draw.circle")
+text(.3, .8, "draw.arc")
+#line 606 "extra.Rnw"
+boxed.labels(.7, .85, "boxed.labels", bg="gray90")
+textbox(c(.85, 1), .9, "this is a textbox .")
+
+#line 714 "extra.Rnw"
+#line 630 "extra.Rnw"
+gradient.rect(.05, .5, .15, .7, col=gray(0:20/21))
+cylindrect(.25, .5, .35, .7, "black")
+rectFill(.45, .5, .55, .7, pch=16)
+
+#line 715 "extra.Rnw"
+text(.1, .45, "gradient.rect")
+text(.3, .45, "cylindrect")
+text(.5, .45, "rectFill")
+#line 653 "extra.Rnw"
+x <- c(.65, .65, .75, .75)
+y <- c(.5, .7, .7, .5)
+polygon.shadow(x, y, offset=c(2/100, -2/100))
+polygon(x, y, col="white")
+
+#line 719 "extra.Rnw"
+text(.7, .45, "polygon.shadow")
+#line 671 "extra.Rnw"
+shadowtext(.9, .6, "shadowtext")
+
+#line 721 "extra.Rnw"
+#line 696 "extra.Rnw"
+my.symbols(seq(.3, .7, .2), .3,
+           ms.male, inches=.2)
+my.symbols(c(.4, .6), .3,
+           ms.female, inches=.2)
+
+#line 722 "extra.Rnw"
+text(.5, .2, "my.symbols")
+box(col="gray")
+
+
+
+}
+figure11.7 <- function() {
+#line 179 "extra.Rnw"
+library(gridExtra)
+
+
+
+#line 801 "extra.Rnw"
+#line 770 "extra.Rnw"
+grid.ellipse(x=1:6/7, y=rep(.8, 6), size=.1, 
+             default.units="npc", size.unit="npc", 
+             ar=1:6, angle=1:6*15/180*pi)
+#line 802 "extra.Rnw"
+grid.text("grid.ellipse", y=.7)
+#line 782 "extra.Rnw"
+grid.pattern(x=1:6/7, y=.5, width=unit(.1, "npc"),
+             height=unit(.1, "npc"), pattern=1:6,
+             motif.cex=.7, gp=gpar(fill="gray80"))
+
+#line 804 "extra.Rnw"
+grid.text("grid.pattern", y=.4)
+#line 795 "extra.Rnw"
+grid.barbed(1:6/7, y=rep(c(.15, .25), 3), 
+            size=unit(.05, "snpc"), 
+            pch=21, gp=gpar(fill="gray"))
+
+#line 806 "extra.Rnw"
+grid.text("grid.barbed", y=.1)
+grid.rect(gp=gpar(col="gray", fill=NA))
+
+
+
+}
+figure11.8 <- function() {
+#line 73 "extra.Rnw"
+library(gplots)
+
+
+
+#line 855 "extra.Rnw"
+plotmeans(mpg ~ cyl, mtcars, 
+          barcol="black", n.label=FALSE, connect=FALSE)
+
+
+
+}
+figure11.9 <- function() {
+#line 910 "extra.Rnw"
+library(colorspace)
+
+
+
+#line 973 "extra.Rnw"
+#line 938 "extra.Rnw"
+grid.rect(1:10/11, .75, width=1/15, height=1/3,
+          gp=gpar(col=NA,
+            fill=sequential_hcl(10, 0, 0, c(20, 90))))
+
+#line 974 "extra.Rnw"
+#line 963 "extra.Rnw"
+grid.rect(1:10/11, .25, width=1/15, height=1/3,
+          gp=gpar(col=NA,
+            fill=diverge_hcl(10, 0, 0, c(20, 90))))
+
+#line 975 "extra.Rnw"
+grid.rect(gp=gpar(col="gray", fill=NA))
+
+
+
+}
+figure11.10 <- function() {
+#line 73 "extra.Rnw"
+library(gplots)
+
+
+
+#line 1160 "extra.Rnw"
+par(mar=rep(1, 4))
+#line 1116 "extra.Rnw"
+plot(rnorm(100), rnorm(100), pch=16, col="gray",
+     ann=FALSE, axes=FALSE)
+box()
+
+#line 1162 "extra.Rnw"
+#line 1135 "extra.Rnw"
+corner.label("top-left", x=-1, y=1)
+
+#line 1163 "extra.Rnw"
+#line 1145 "extra.Rnw"
+smartlegend(x="right", y="top", 
+            legend="top-right", pch=16, 
+            col="gray", bg="white")
+
+#line 1164 "extra.Rnw"
+#line 1156 "extra.Rnw"
+text(grconvertX(1, "npc"), grconvertY(0, "npc"), 
+     adj=c(1, 0), labels="bottom-right")
+
+#line 1165 "extra.Rnw"
+
+
+
+}
+figure11.11 <- function() {
+#line 379 "extra.Rnw"
+library(TeachingDemos)
+
+
+
+#line 1217 "extra.Rnw"
+plot(window(Nile, 1920, 1940))
+subplot({ plot(Nile, axes=FALSE, ann=FALSE)
+          rect(1920, 0, 1940, 2000, border=NA, col="gray")
+          box()
+          lines(Nile) }, 
+        x=1920, y=1000, size=c(1.5, .75), hadj=0)
+
+
+
+}
+figure11.12 <- function() {
+#line 1291 "extra.Rnw"
+kelvin <- pressure$temperature + 273.15
+
+
+
+#line 128 "extra.Rnw"
+library(plotrix)
+
+
+
+
+#line 1267 "extra.Rnw"
+with(pressure,
+     {
+         plot(temperature, pressure, axes=FALSE)
+         axis(2)
+         box()
+         staxlab(1, at=temperature, cex=.7)
+     })
+
+
+
+#line 1303 "extra.Rnw"
+with(pressure,
+     {
+         plot(kelvin, pressure, xlim=c(250, 650))
+         axis.break(1)
+     })
+
+
+}
+figure11.13 <- function() {
+#line 1291 "extra.Rnw"
+kelvin <- pressure$temperature + 273.15
+
+
+
+#line 128 "extra.Rnw"
+library(plotrix)
+
+
+
+
+#line 379 "extra.Rnw"
+library(TeachingDemos)
+
+
+
+#line 1345 "extra.Rnw"
+with(pressure,
+     revaxis(temperature, pressure))
+
+
+
+#line 1370 "extra.Rnw"
+plot(kelvin, pressure$pressure)
+updateusr(c(0, 1), 0:1, c(-273.15, -272.15), 0:1)
+abline(v=100)
+text(x=100, y=700, " water boils", adj=0)
+
+
+
+#line 1395 "extra.Rnw"
+pdf("Figures/extra-zoomplot-%d.pdf", onefile=FALSE,
+    width=4, height=4)
+dev.control("enable")
+#line 1391 "extra.Rnw"
+plot(pressure)
+zoomplot(c(0, 150), c(0, 3))
+
+#line 1399 "extra.Rnw"
+dev.off()
+png("Web/extra-zoomplot%d.png", width=320, height=320)
+dev.control("enable")
+#line 1391 "extra.Rnw"
+plot(pressure)
+zoomplot(c(0, 150), c(0, 3))
+
+#line 1403 "extra.Rnw"
+dev.off()
+system("cp Web/extra-zoomplot2.png Web/extra-axisscale3.png")
+
+
+
+}
+figure5.1 <- function() {
+#line 93 "ggplot.Rnw"
+print(
+#line 89 "ggplot.Rnw"
+qplot(temperature, pressure, data=pressure)
+
+#line 95 "ggplot.Rnw"
+)
+
+
+}
+figure5.2 <- function() {
+#line 153 "ggplot.Rnw"
+print(
+#line 148 "ggplot.Rnw"
+qplot(temperature, pressure, data=pressure,
+      main="Vapor Pressure of Mercury",
+      geom=c("point", "line"), lty=I("dashed"))
+
+#line 155 "ggplot.Rnw"
+)
+
+
+}
+figure5.3 <- function() {
+#line 239 "ggplot.Rnw"
+# grid.newpage()
+layvp <- viewport(layout=grid.layout(1, 5,
+                    heights=unit(1, "inch"),
+                    widths=unit(c(1, .5), "inch")),
+                  name="vplay")
+vpi <- function(i) {
+    viewport(layout.pos.col=i, name=paste("vp", i, sep=""))
+}
+pushViewport(layvp)
+pushViewport(viewport(layout.pos.col=1:5))
+grid.rect(width=1.1, gp=gpar(col=NA, fill="gray"))
 popViewport()
-
-grid.rect()
+pushViewport(vpi(1))
+upViewport()
+pushViewport(vpi(3))
+upViewport()
+pushViewport(vpi(5))
+upViewport(0)
+for (i in c(1, 3, 5)) {
+    grid.roundrect(height=.5,
+                   vp=paste("vplay::vp", i, sep=""),
+                   name=paste("rr", i, sep=""),
+                   gp=gpar(fill="white"))
+}
+grid.text("data", vp="vplay::vp1")
+grid.text("aesthetic", vp="vplay::vp3")
+grid.text("geom", vp="vplay::vp5")
+arr <- arrow(length=unit(3, "mm"), type="closed")
+grid.segments(grobX("rr1", 0), .5,
+              grobX("rr3", 180), .5,
+              arrow=arr, gp=gpar(fill="black"))
+grid.segments(grobX("rr3", 0), .5,
+              grobX("rr5", 180), .5,
+              arrow=arr, gp=gpar(fill="black"))
 
 
 
 }
-figure7.1 <- function() {
+figure5.4 <- function() {
+#line 320 "ggplot.Rnw"
+mtcars2 <- mtcars
+mtcars2$trans <- factor(mtcars$am, 
+                        levels=0:1, 
+                        labels=c("automatic", "manual"))
+mtcars2$am <- NULL
+mtcars2$vs <- NULL
+mtcars2$drat <- NULL
+mtcars2$carb <- NULL
+mtcars2$wt <- NULL
+mtcars2$hp <- NULL
+mtcars2$qsec <- NULL
+
+
+
+#line 369 "ggplot.Rnw"
+p <- ggplot(mtcars2)
+
+
+
+#line 420 "ggplot.Rnw"
+print(
+#line 415 "ggplot.Rnw"
+p + geom_point(aes(x=disp, y=mpg))
+
+#line 422 "ggplot.Rnw"
+)
+
+
+#line 448 "ggplot.Rnw"
+print(
+#line 442 "ggplot.Rnw"
+p + geom_point(aes(x=disp, y=mpg, shape=gear),
+               size=4)
+
+#line 450 "ggplot.Rnw"
+)
+
+
+#line 494 "ggplot.Rnw"
+print(
+#line 489 "ggplot.Rnw"
+p + geom_text(aes(x=disp, y=mpg, label=gear))
+
+#line 496 "ggplot.Rnw"
+)
+
+
+#line 519 "ggplot.Rnw"
+lmcoef <- coef(lm(mpg ~ disp, mtcars2))
+
+
+
+#line 534 "ggplot.Rnw"
+print(
+#line 528 "ggplot.Rnw"
+p + geom_point(aes(x=disp, y=mpg)) +
+    geom_abline(intercept=lmcoef[1], slope=lmcoef[2])
+
+#line 536 "ggplot.Rnw"
+)
+
+
+}
+figure5.5 <- function() {
+#line 320 "ggplot.Rnw"
+mtcars2 <- mtcars
+mtcars2$trans <- factor(mtcars$am, 
+                        levels=0:1, 
+                        labels=c("automatic", "manual"))
+mtcars2$am <- NULL
+mtcars2$vs <- NULL
+mtcars2$drat <- NULL
+mtcars2$carb <- NULL
+mtcars2$wt <- NULL
+mtcars2$hp <- NULL
+mtcars2$qsec <- NULL
+
+
+
+#line 369 "ggplot.Rnw"
+p <- ggplot(mtcars2)
+
+
+
+#line 672 "ggplot.Rnw"
+print(
+#line 665 "ggplot.Rnw"
+p + geom_point(aes(x=disp, y=mpg)) +
+    scale_y_continuous(name="miles per gallon") +
+    scale_x_continuous(name="displacement (cu.in.)")
+
+#line 674 "ggplot.Rnw"
+)
+
+
+#line 697 "ggplot.Rnw"
+print(
+#line 691 "ggplot.Rnw"
+p + geom_point(aes(x=disp, y=mpg)) +
+    scale_y_continuous(limits=c(0, 40)) 
+
+#line 699 "ggplot.Rnw"
+)
+
+
+#line 766 "ggplot.Rnw"
+print(
+#line 758 "ggplot.Rnw"
+p + geom_point(aes(x=disp, y=mpg, 
+                   color=trans), size=4) +
+    scale_color_manual(values=c(automatic=gray(2/3),
+                         manual=gray(1/3)))
+
+#line 768 "ggplot.Rnw"
+)
+
+
+}
+figure5.6 <- function() {
+#line 799 "ggplot.Rnw"
+# grid.newpage()
+layvp <- viewport(layout=grid.layout(1, 7,
+                    heights=unit(1, "inch"),
+                    widths=unit(c(1, .5), "inch")),
+                  name="vplay")
+vpi <- function(i) {
+    viewport(layout.pos.col=i, name=paste("vp", i, sep=""))
+}
+pushViewport(layvp)
+pushViewport(viewport(layout.pos.col=1:7))
+grid.rect(width=1.1, gp=gpar(col=NA, fill="gray"))
+popViewport()
+pushViewport(vpi(1))
+upViewport()
+pushViewport(vpi(3))
+upViewport()
+pushViewport(vpi(5))
+upViewport()
+pushViewport(vpi(7))
+upViewport(0)
+for (i in c(1, 3, 5, 7)) {
+    grid.roundrect(height=.5,
+                   vp=paste("vplay::vp", i, sep=""),
+                   name=paste("rr", i, sep=""),
+                   gp=gpar(fill="white"))
+}
+grid.text("data", vp="vplay::vp1")
+grid.text("scale", vp="vplay::vp3")
+grid.text("aesthetic", vp="vplay::vp5")
+grid.text("geom", vp="vplay::vp7")
+arr <- arrow(length=unit(3, "mm"), type="closed")
+grid.segments(grobX("rr1", 0), .5,
+              grobX("rr3", 180), .5,
+              arrow=arr, gp=gpar(fill="black"))
+grid.segments(grobX("rr3", 0), .5,
+              grobX("rr5", 180), .5,
+              arrow=arr, gp=gpar(fill="black"))
+# grid.curve(grobX("rr1", 27), grobY("rr1", 27), 
+#            grobX("rr5", 153), grobY("rr5", 153),
+#            square=FALSE, ncp=8, curvature=-.3,
+#            arrow=arr, gp=gpar(fill="black"))
+grid.segments(grobX("rr5", 0), .5,
+              grobX("rr7", 180), .5,
+              arrow=arr, gp=gpar(fill="black"))
+
+
+
+}
+figure5.7 <- function() {
+#line 940 "ggplot.Rnw"
+# grid.newpage()
+layvp <- viewport(layout=grid.layout(1, 9,
+                    heights=unit(1, "inch"),
+                    widths=unit(c(1, .5), "inch")),
+                  name="vplay")
+vpi <- function(i) {
+    viewport(layout.pos.col=i, name=paste("vp", i, sep=""))
+}
+pushViewport(layvp)
+pushViewport(viewport(layout.pos.col=1:9))
+grid.rect(width=1.1, gp=gpar(col=NA, fill="gray"))
+popViewport()
+pushViewport(vpi(1))
+upViewport()
+pushViewport(vpi(3))
+upViewport()
+pushViewport(vpi(5))
+upViewport()
+pushViewport(vpi(7))
+upViewport()
+pushViewport(vpi(9))
+upViewport(0)
+for (i in c(1, 3, 5, 7, 9)) {
+    grid.roundrect(height=.5,
+                   vp=paste("vplay::vp", i, sep=""),
+                   name=paste("rr", i, sep=""),
+                   gp=gpar(fill="white"))
+}
+grid.text("data", vp="vplay::vp1")
+grid.text("scale", vp="vplay::vp3")
+grid.text("stat", vp="vplay::vp5")
+grid.text("aesthetic", vp="vplay::vp7")
+grid.text("geom", vp="vplay::vp9")
+arr <- arrow(length=unit(3, "mm"), type="closed")
+grid.segments(grobX("rr1", 0), .5,
+              grobX("rr3", 180), .5,
+              arrow=arr, gp=gpar(fill="black"))
+grid.segments(grobX("rr3", 0), .5,
+              grobX("rr5", 180), .5,
+              arrow=arr, gp=gpar(fill="black"))
+grid.segments(grobX("rr5", 0), .5,
+              grobX("rr7", 180), .5,
+              arrow=arr, gp=gpar(fill="black"))
+grid.segments(grobX("rr7", 0), .5,
+              grobX("rr9", 180), .5,
+              arrow=arr, gp=gpar(fill="black"))
+
+
+
+}
+figure5.8 <- function() {
+#line 320 "ggplot.Rnw"
+mtcars2 <- mtcars
+mtcars2$trans <- factor(mtcars$am, 
+                        levels=0:1, 
+                        labels=c("automatic", "manual"))
+mtcars2$am <- NULL
+mtcars2$vs <- NULL
+mtcars2$drat <- NULL
+mtcars2$carb <- NULL
+mtcars2$wt <- NULL
+mtcars2$hp <- NULL
+mtcars2$qsec <- NULL
+
+
+
+#line 369 "ggplot.Rnw"
+p <- ggplot(mtcars2)
+
+
+
+#line 934 "ggplot.Rnw"
+print(
+#line 929 "ggplot.Rnw"
+p + geom_bar(aes(x=trans))
+
+#line 936 "ggplot.Rnw"
+)
+
+
+#line 1051 "ggplot.Rnw"
+update_geom_defaults("smooth", aes(color="black"))
+print(
+#line 1048 "ggplot.Rnw"
+p + geom_smooth(aes(x=disp, y=mpg))
+
+#line 1054 "ggplot.Rnw"
+)
+
+
+}
+figure5.9 <- function() {
+#line 320 "ggplot.Rnw"
+mtcars2 <- mtcars
+mtcars2$trans <- factor(mtcars$am, 
+                        levels=0:1, 
+                        labels=c("automatic", "manual"))
+mtcars2$am <- NULL
+mtcars2$vs <- NULL
+mtcars2$drat <- NULL
+mtcars2$carb <- NULL
+mtcars2$wt <- NULL
+mtcars2$hp <- NULL
+mtcars2$qsec <- NULL
+
+
+
+#line 369 "ggplot.Rnw"
+p <- ggplot(mtcars2)
+
+
+
+#line 1190 "ggplot.Rnw"
+print(
+#line 1186 "ggplot.Rnw"
+p + geom_point(aes(x=disp, y=mpg, shape=trans)) +
+    scale_shape_manual(values=c(1, 3))
+
+#line 1192 "ggplot.Rnw"
+)
+
+
+#line 1227 "ggplot.Rnw"
+print(
+#line 1214 "ggplot.Rnw"
+ggplot(mtcars2, aes(x=disp, y=mpg)) + 
+    geom_point() +
+    stat_smooth(aes(group=trans),
+                method="lm")
+
+#line 1229 "ggplot.Rnw"
+)
+
+
+}
+figure5.10 <- function() {
+#line 320 "ggplot.Rnw"
+mtcars2 <- mtcars
+mtcars2$trans <- factor(mtcars$am, 
+                        levels=0:1, 
+                        labels=c("automatic", "manual"))
+mtcars2$am <- NULL
+mtcars2$vs <- NULL
+mtcars2$drat <- NULL
+mtcars2$carb <- NULL
+mtcars2$wt <- NULL
+mtcars2$hp <- NULL
+mtcars2$qsec <- NULL
+
+
+
+#line 369 "ggplot.Rnw"
+p <- ggplot(mtcars2)
+
+
+
+#line 1279 "ggplot.Rnw"
+print(
+#line 1274 "ggplot.Rnw"
+p + geom_bar(aes(x=trans, fill=factor(cyl)),
+             color="black") +
+    scale_fill_manual(values=gray(1:3/3))
+
+#line 1281 "ggplot.Rnw"
+)
+
+
+#line 1310 "ggplot.Rnw"
+print(
+#line 1304 "ggplot.Rnw"
+p + geom_bar(aes(x=trans, fill=factor(cyl)),
+             color="black",
+             position="dodge") +
+    scale_fill_manual(values=gray(1:3/3))
+
+#line 1312 "ggplot.Rnw"
+)
+
+
+#line 1335 "ggplot.Rnw"
+print(
+#line 1329 "ggplot.Rnw"
+p + geom_bar(aes(x=trans, fill=factor(cyl)),
+             color="black",
+             position="fill") +
+    scale_fill_manual(values=gray(1:3/3))
+
+#line 1337 "ggplot.Rnw"
+)
+
+
+}
+figure5.11 <- function() {
+#line 320 "ggplot.Rnw"
+mtcars2 <- mtcars
+mtcars2$trans <- factor(mtcars$am, 
+                        levels=0:1, 
+                        labels=c("automatic", "manual"))
+mtcars2$am <- NULL
+mtcars2$vs <- NULL
+mtcars2$drat <- NULL
+mtcars2$carb <- NULL
+mtcars2$wt <- NULL
+mtcars2$hp <- NULL
+mtcars2$qsec <- NULL
+
+
+
+#line 369 "ggplot.Rnw"
+p <- ggplot(mtcars2)
+
+
+
+#line 1398 "ggplot.Rnw"
+print(
+#line 1391 "ggplot.Rnw"
+p + geom_point(aes(x=disp, y=mpg)) + 
+    scale_x_continuous(trans="log") +
+    scale_y_continuous(trans="log") +
+    geom_line(aes(x=disp, y=mpg), stat="smooth", 
+              method="lm")
+
+#line 1400 "ggplot.Rnw"
+)
+
+
+#line 1438 "ggplot.Rnw"
+print(
+#line 1430 "ggplot.Rnw"
+p + geom_point(aes(x=disp, y=mpg)) + 
+    scale_x_continuous(trans="log") +
+    scale_y_continuous(trans="log") +
+    geom_line(aes(x=disp, y=mpg), stat="smooth", 
+              method="lm") +
+    coord_trans(x="exp", y="exp")
+
+#line 1440 "ggplot.Rnw"
+)
+
+
+#line 1469 "ggplot.Rnw"
+print(
+#line 1465 "ggplot.Rnw"
+p + geom_bar(aes(x="", fill=trans)) +
+    scale_fill_manual(values=gray(1:2/3))
+
+#line 1471 "ggplot.Rnw"
+)
+
+
+#line 1493 "ggplot.Rnw"
+print(
+#line 1488 "ggplot.Rnw"
+p + geom_bar(aes(x="", fill=trans)) +
+    scale_fill_manual(values=gray(1:2/3)) +
+    coord_polar(theta="y") 
+
+#line 1495 "ggplot.Rnw"
+)
+
+
+}
+figure5.12 <- function() {
+#line 1526 "ggplot.Rnw"
+# grid.newpage()
+layvp <- viewport(layout=grid.layout(1, 11,
+                    heights=unit(1, "inch"),
+                    widths=unit(c(1, .5), "inch")),
+                  name="vplay")
+vpi <- function(i) {
+    viewport(layout.pos.col=i, name=paste("vp", i, sep=""))
+}
+pushViewport(layvp)
+pushViewport(viewport(layout.pos.col=1:11))
+grid.rect(width=1.1, gp=gpar(col=NA, fill="gray"))
+popViewport()
+pushViewport(vpi(1))
+upViewport()
+pushViewport(vpi(3))
+upViewport()
+pushViewport(vpi(5))
+upViewport()
+pushViewport(vpi(7))
+upViewport()
+pushViewport(vpi(9))
+upViewport()
+pushViewport(vpi(11))
+upViewport(0)
+for (i in c(1, 3, 5, 7, 9, 11)) {
+    grid.roundrect(height=.5,
+                   vp=paste("vplay::vp", i, sep=""),
+                   name=paste("rr", i, sep=""),
+                   gp=gpar(fill="white"))
+}
+grid.text("data", vp="vplay::vp1")
+grid.text("scale", vp="vplay::vp3")
+grid.text("stat", vp="vplay::vp5")
+grid.text("aesthetic", vp="vplay::vp7")
+grid.text("geom", vp="vplay::vp9")
+grid.text("coord", vp="vplay::vp11")
+arr <- arrow(length=unit(3, "mm"), type="closed")
+grid.segments(grobX("rr1", 0), .5,
+              grobX("rr3", 180), .5,
+              arrow=arr, gp=gpar(fill="black"))
+grid.segments(grobX("rr3", 0), .5,
+              grobX("rr5", 180), .5,
+              arrow=arr, gp=gpar(fill="black"))
+grid.segments(grobX("rr5", 0), .5,
+              grobX("rr7", 180), .5,
+              arrow=arr, gp=gpar(fill="black"))
+grid.segments(grobX("rr7", 0), .5,
+              grobX("rr9", 180), .5,
+              arrow=arr, gp=gpar(fill="black"))
+grid.segments(grobX("rr9", 0), .5,
+              grobX("rr11", 180), .5,
+              arrow=arr, gp=gpar(fill="black"))
+
+
+
+}
+figure5.13 <- function() {
+#line 320 "ggplot.Rnw"
+mtcars2 <- mtcars
+mtcars2$trans <- factor(mtcars$am, 
+                        levels=0:1, 
+                        labels=c("automatic", "manual"))
+mtcars2$am <- NULL
+mtcars2$vs <- NULL
+mtcars2$drat <- NULL
+mtcars2$carb <- NULL
+mtcars2$wt <- NULL
+mtcars2$hp <- NULL
+mtcars2$qsec <- NULL
+
+
+
+#line 369 "ggplot.Rnw"
+p <- ggplot(mtcars2)
+
+
+
+#line 1619 "ggplot.Rnw"
+print(
+#line 1615 "ggplot.Rnw"
+p + geom_point(aes(x=disp, y=mpg)) +
+    facet_wrap(~ gear, nrow=1)
+
+#line 1621 "ggplot.Rnw"
+)
+
+
+}
+figure5.14 <- function() {
+#line 320 "ggplot.Rnw"
+mtcars2 <- mtcars
+mtcars2$trans <- factor(mtcars$am, 
+                        levels=0:1, 
+                        labels=c("automatic", "manual"))
+mtcars2$am <- NULL
+mtcars2$vs <- NULL
+mtcars2$drat <- NULL
+mtcars2$carb <- NULL
+mtcars2$wt <- NULL
+mtcars2$hp <- NULL
+mtcars2$qsec <- NULL
+
+
+
+#line 369 "ggplot.Rnw"
+p <- ggplot(mtcars2)
+
+
+
+#line 1672 "ggplot.Rnw"
+print(
+#line 1668 "ggplot.Rnw"
+p + geom_point(aes(x=disp, y=mpg)) +
+    theme_bw()
+
+#line 1674 "ggplot.Rnw"
+)
+
+
+#line 1698 "ggplot.Rnw"
+print(
+#line 1694 "ggplot.Rnw"
+p + geom_point(aes(x=disp, y=mpg)) +
+    opts(axis.title.y=theme_text(angle=0))
+
+#line 1700 "ggplot.Rnw"
+)
+
+
+#line 1719 "ggplot.Rnw"
+print(
+#line 1715 "ggplot.Rnw"
+p + geom_point(aes(x=disp, y=mpg)) +
+    opts(axis.title.y=theme_blank())
+
+#line 1721 "ggplot.Rnw"
+)
+
+
+#line 1743 "ggplot.Rnw"
+print(
+#line 1739 "ggplot.Rnw"
+p + geom_point(aes(x=disp, y=mpg)) +
+    opts(title="Vehicle Fuel Efficiency")
+
+#line 1745 "ggplot.Rnw"
+)
+
+
+}
+figure5.15 <- function() {
+#line 320 "ggplot.Rnw"
+mtcars2 <- mtcars
+mtcars2$trans <- factor(mtcars$am, 
+                        levels=0:1, 
+                        labels=c("automatic", "manual"))
+mtcars2$am <- NULL
+mtcars2$vs <- NULL
+mtcars2$drat <- NULL
+mtcars2$carb <- NULL
+mtcars2$wt <- NULL
+mtcars2$hp <- NULL
+mtcars2$qsec <- NULL
+
+
+
+#line 369 "ggplot.Rnw"
+p <- ggplot(mtcars2)
+
+
+
+#line 1825 "ggplot.Rnw"
+print(
+#line 1821 "ggplot.Rnw"
+p + geom_point(aes(x=disp, y=mpg)) +
+    geom_hline(yintercept=29)
+
+#line 1827 "ggplot.Rnw"
+)
+
+
+#line 1859 "ggplot.Rnw"
+gcLimits <- 
+    data.frame(category=c("2WD car",
+                 "4WD car",
+                 "2WD small pick-up truck",
+                 "4WD small pick-up truck",
+                 "2WD std pick-up truck",
+                 "4WD std pick-up truck"),
+               limit=c(29, 24, 20, 18, 17, 16))
+
+
+#line 1898 "ggplot.Rnw"
+print(
+#line 1889 "ggplot.Rnw"
+p + geom_point(aes(x=disp, y=mpg)) +
+    geom_hline(data=gcLimits, 
+               aes(yintercept=limit),
+               linetype="dotted") +
+    geom_text(data=gcLimits,
+              aes(y=limit + .1, label=category),
+              x=70, hjust=0, vjust=0, size=3)
+
+#line 1900 "ggplot.Rnw"
+)
+
+
+}
+figure15.1 <- function() {
+#line 77 "graph.Rnw"
+library(graph)
+
+
+
+#line 112 "graph.Rnw"
+nodes <- c("grDevices", "graphics", "grid",
+           "lattice", "ggplot2")
+edgeList <- 
+    list(grDevices=list(edges=c("graphics", "grid")),
+         graphics=list(),
+         grid=list(edges=c("lattice", "ggplot2")),
+         lattice=list(),
+         ggplot2=list())
+simpleGNEL <- new("graphNEL",
+                  nodes=nodes,
+                  edgeL=edgeList,
+                  edgemode="directed")
+
+
+
+#line 150 "graph.Rnw"
+library(Rgraphviz)
+Rgraphviz::plot(simpleGNEL)
+
+
+
+}
+#line 189 "graph.Rnw"
+# placeholder
+
+
+
+figure15.3 <- function() {
+#line 272 "graph.Rnw"
+library(Rgraphviz)
+
+
+
+#line 112 "graph.Rnw"
+nodes <- c("grDevices", "graphics", "grid",
+           "lattice", "ggplot2")
+edgeList <- 
+    list(grDevices=list(edges=c("graphics", "grid")),
+         graphics=list(),
+         grid=list(edges=c("lattice", "ggplot2")),
+         lattice=list(),
+         ggplot2=list())
+simpleGNEL <- new("graphNEL",
+                  nodes=nodes,
+                  edgeL=edgeList,
+                  edgemode="directed")
+
+
+
+#line 316 "graph.Rnw"
+Rgraphviz::plot(simpleGNEL, "neato")
+
+
+
+}
+figure15.4 <- function() {
+#line 272 "graph.Rnw"
+library(Rgraphviz)
+
+
+
+#line 112 "graph.Rnw"
+nodes <- c("grDevices", "graphics", "grid",
+           "lattice", "ggplot2")
+edgeList <- 
+    list(grDevices=list(edges=c("graphics", "grid")),
+         graphics=list(),
+         grid=list(edges=c("lattice", "ggplot2")),
+         lattice=list(),
+         ggplot2=list())
+simpleGNEL <- new("graphNEL",
+                  nodes=nodes,
+                  edgeL=edgeList,
+                  edgemode="directed")
+
+
+
+#line 367 "graph.Rnw"
+Rgraphviz::plot(simpleGNEL, 
+     edgeAttrs=list(lty=c(`grDevices~graphics`="solid", 
+                      `grDevices~grid`="solid",
+                      `grid~lattice`="dashed", 
+                      `grid~ggplot2`="dashed")),
+     nodeAttrs=list(fillcolor=c(grDevices="white", 
+                      graphics="gray90", grid="gray90",
+                      lattice="gray60", ggplot2="gray60")))
+
+
+
+}
+figure15.5 <- function() {
+#line 272 "graph.Rnw"
+library(Rgraphviz)
+
+
+
+#line 540 "graph.Rnw"
+load(system.file("extra", "grd.rda", package="RGraphics"))
+grDraw <- function(layout) {
+    ragrd <- agopen(grd, "", layoutType=layout)
+    xy <- getNodeXY(ragrd)
+    grid.newpage()
+    pushViewport(viewport(width=1.1, height=1.1),
+                 plotViewport(xscale=range(xy$x), yscale=range(xy$y)))
+    grid.circle(xy$x, xy$y, default="native", 
+                r=unit(.25, "mm"), gp=gpar(fill="black"))
+    grdNodes <- graph::nodes(grd)
+    grdEdges <- graph::edges(grd)
+    mapply(function(start, ends) {
+        if (length(ends) > 0) {
+            grid.segments(xy$x[grdNodes == start],
+                          xy$y[grdNodes == start],
+                          xy$x[grdNodes %in% ends],
+                          xy$y[grdNodes %in% ends],
+                          default="native",
+                          gp=gpar(col=rgb(0,0,0,.5)))
+        }
+    },
+           as.list(grdNodes),
+           grdEdges)
+    for (i in c("grDevices", "graphics", "grid", "lattice", "ggplot2")) {
+        grid.rect(xy$x[grdNodes == i], xy$y[grdNodes == i],
+                  width=stringWidth(i), height=unit(1, "lines"),
+                  default="native",
+                  gp=gpar(col=NA, fill=rgb(.5, .5, .5, .5)))
+        grid.text(i, xy$x[grdNodes == i], xy$y[grdNodes == i],
+                  default="native",
+                  gp=gpar(col="white"))
+    }
+}
+
+png("Figures/graph-pkgdep.png", width=1350, height=1350, res=300)
+grDraw("neato")
+dev.off()
+system("cp Figures/graph-pkgdep.png Web/")
+
+
+
+}
+figure15.6 <- function() {
+#line 272 "graph.Rnw"
+library(Rgraphviz)
+
+
+
+#line 112 "graph.Rnw"
+nodes <- c("grDevices", "graphics", "grid",
+           "lattice", "ggplot2")
+edgeList <- 
+    list(grDevices=list(edges=c("graphics", "grid")),
+         graphics=list(),
+         grid=list(edges=c("lattice", "ggplot2")),
+         lattice=list(),
+         ggplot2=list())
+simpleGNEL <- new("graphNEL",
+                  nodes=nodes,
+                  edgeL=edgeList,
+                  edgemode="directed")
+
+
+
+#line 631 "graph.Rnw"
+toFile(agopen(simpleGNEL, ""), 
+       filename="Figures/graph-graphvizrender.pdf", 
+       fileType="pdf")
+
+
+
+}
+figure15.7 <- function() {
+#line 667 "graph.Rnw"
+library(hyperdraw)
+
+
+
+#line 689 "graph.Rnw"
+dh <- DirectedHyperedge(c("A", "B"), c("C", "D"))
+hg <- Hypergraph(LETTERS[1:4], list(dh))
+getMethod("plot", "graphBPH")(graphBPH(hg))
+
+
+
+}
+figure15.8 <- function() {
+#line 725 "graph.Rnw"
+library(igraph)
+
+
+
+#line 777 "graph.Rnw"
+treeIgraph <- graph.tree(10)
+fullIgraph <- graph.full(10)
+
+
+
+#line 782 "graph.Rnw"
+# See ?igraph.plotting for useful graph attributes
+treeIgraph <- set.vertex.attribute(treeIgraph, "color", value="black")
+treeIgraph <- set.edge.attribute(treeIgraph, "color", value="black")
+plot(treeIgraph, layout=layout.reingold.tilford)
+
+
+
+#line 791 "graph.Rnw"
+fullIgraph <- set.vertex.attribute(fullIgraph, "color", value="black")
+fullIgraph <- set.edge.attribute(fullIgraph, "color", value="black")
+plot(fullIgraph, layout=layout.circle)
+
+
+
+}
+figure15.9 <- function() {
+#line 871 "graph.Rnw"
+library(network)
+
+
+
+#line 112 "graph.Rnw"
+nodes <- c("grDevices", "graphics", "grid",
+           "lattice", "ggplot2")
+edgeList <- 
+    list(grDevices=list(edges=c("graphics", "grid")),
+         graphics=list(),
+         grid=list(edges=c("lattice", "ggplot2")),
+         lattice=list(),
+         ggplot2=list())
+simpleGNEL <- new("graphNEL",
+                  nodes=nodes,
+                  edgeL=edgeList,
+                  edgemode="directed")
+
+
+
+#line 884 "graph.Rnw"
+simpleNetwork <- 
+    network(rbind(c(1, 2),
+                  c(1, 3),
+                  c(3, 4),
+                  c(3, 5)),
+            vertex.attr=list(vertex.names=nodes))
+
+
+
+
+#line 919 "graph.Rnw"
+par(mar=rep(2, 4), xpd=NA)
+set.seed(2500)
+#line 915 "graph.Rnw"
+plot(simpleNetwork, mode="fruchtermanreingold", 
+     vertex.col=1, displaylabels=TRUE)
+
+#line 922 "graph.Rnw"
+
+
+
+}
+figure15.10 <- function() {
+#line 969 "graph.Rnw"
+library(diagram)
+
+
+
+#line 1042 "graph.Rnw"
+par(mar=rep(1, 4))
+#line 999 "graph.Rnw"
+plot.new()
+
+#line 1044 "graph.Rnw"
+#line 985 "graph.Rnw"
+nodePos <- coordinates(c(2, 2, 2, 2))
+
+#line 1045 "graph.Rnw"
+#line 1015 "graph.Rnw"
+straightarrow(nodePos[1, ], nodePos[3,])
+
+#line 1046 "graph.Rnw"
+straightarrow(nodePos[3, ], nodePos[4,])
+straightarrow(nodePos[3, ], nodePos[5,])
+straightarrow(nodePos[5, ], nodePos[6,])
+straightarrow(nodePos[6, ], nodePos[4,])
+straightarrow(nodePos[5, ], nodePos[7,])
+straightarrow(nodePos[6, ], nodePos[8,])
+straightarrow(nodePos[7, ], nodePos[8,])
+
+textplain(nodePos[3, ] + c(.2, .02), lab="yes")
+textplain(nodePos[5, ] + c(.2, .02), lab="yes")
+textplain(nodePos[6, ] + c(.03, .15), lab="yes")
+textplain(nodePos[3, ] + c(.2, .02), lab="yes")
+textplain(nodePos[5, ] + c(-.03, .125), lab="no")
+textplain(nodePos[7, ] + c(-.03, .125), lab="no")
+textplain(nodePos[7, ] + c(.2, -.02), lab="no")
+textplain(nodePos[8, ] + c(-.03, .125), lab="no")
+
+#line 1030 "graph.Rnw"
+textrect(nodePos[1, ], .05, .025, lab="start")
+
+#line 1064 "graph.Rnw"
+textdiamond(nodePos[3, ], .15, .1)
+textplain(nodePos[3, ], .08,
+          lab=c("do you", "understand flow", "charts?"))
+textellipse(nodePos[4, ], .08, .08,
+            lab=c("let's go", "drink."))
+textdiamond(nodePos[5, ], .15, .1)
+textplain(nodePos[5, ], .08,
+          lab=c("you see", "the lines labeled", "'yes'?"))
+textdiamond(nodePos[6, ], .15, .1)
+textplain(nodePos[6, ], .08,
+          lab=c("you see", "the lines labeled", "'no'?"))
+textdiamond(nodePos[7, ], .15, .1)
+textplain(nodePos[7, ], .08,
+          lab=c("you see", "the lines labeled", "'no'?"))
+textellipse(nodePos[8, ], .07, .07,
+            lab=c("I hate", "you."))
+
+
+
+}
+figure18.1 <- function() {
+#line 84 "import.Rnw"
+
+
+}
+figure18.2 <- function() {
+#line 156 "import.Rnw"
+library(pixmap)
+
+
+
+#line 159 "import.Rnw"
+source(system.file("extra", "as.raster.R", package="RGraphics"))
+
+
+
+
+#line 163 "import.Rnw"
+moonPhase <- function(x, y, phase, size=.05) {
+  # size is in inches
+  n <- 17
+  angle <- seq(0, 2*pi, length=n)
+  xx <- x + cos(angle)*xinch(size)
+  yy <- y + sin(angle)*yinch(size)
+  if (phase == "New")
+    fill <- "black"
+  else
+    fill <- "white"
+  polygon(xx, yy, col=fill)
+  if (phase == "1Q")
+    polygon(xx[(n/4):(n*3/4) + 1],
+            yy[(n/4):(n*3/4) + 1],
+            col="black")
+  if (phase == "3Q")
+    polygon(xx[c(1:(n/4 + 1), (n*3/4 + 1):n)],
+            yy[c(1:(n/4 + 1), (n*3/4 + 1):n)],
+            col="black")
+}
+
+
+# Original image from NASA
+# http://grin.hq.nasa.gov/ABSTRACTS/GPN-2000-000473.html
+rasterMoon <- read.pnm(system.file("extra", "GPN-2000-000473.pgm",
+                                   package="RGraphics"))
+par(pin=c(3.5, 1.75), oma=c(0, 3, 0, 0), xaxs="i", yaxs="i", cex=.7)
+plot.new()
+rect(0, 0, 1, 1, col="black")
+rasterImage(rasterMoon, .25, 0, .75, 1*813/703)
+par(new=TRUE, xaxs="r", yaxs="r", las=1)
+plot(lowTideDate, lowTideHour, type="n",
+     ylim=range(mainHours), axes=FALSE, ann=FALSE)
+# dashed reference lines
+abline(v=phases$date,
+       col="white", lty="dashed")
+for (subset in list(1:13, 14:29, 30:31)) {
+  lines(lowTideDate[subset], lowTideHour[subset],
+        lwd=2, col="white")
+  points(lowTideDate[subset], lowTideHour[subset],
+         pch=16, col="white")
+}
+box()
+axis.POSIXct(1, lowTideDate)
+axis.POSIXct(2, at=mainHours, format="%H:%M")
+mtext("Time of Low Tide (NZDT)", side=2, line=4, las=0, cex=.7)
+mtext("Auckland, New Zealand January 2010", side=1, line=3, cex=.7)
+axis(3, at=phases$date, labels=FALSE)
+par(xpd=NA)
+ymax <- par("usr")[4]
+for (i in 1:nrow(phases))
+    moonPhase(phases$date[i], ymax + yinch(.2), 
+              phases$phase[i])
+mtext("Phases of the Moon", side=3, line=3, cex=.7)
+
+
+
+
+#line 224 "import.Rnw"
+library(grImport)
+
+
+
+#line 227 "import.Rnw"
+grid.moonPhase <- function(x, y, phase, size=unit(.05, "in")) {
+  n <- 17
+  angle <- seq(0, 2*pi, length=n)
+  xx <- x + cos(angle)*size
+  yy <- y + sin(angle)*size
+  if (phase == "New")
+    fill <- "black"
+  else
+    fill <- "white"
+  grid.polygon(xx, yy, gp=gpar(fill=fill))
+  if (phase == "1Q")
+      grid.polygon(xx[(n/4):(n*3/4) + 1],
+                   yy[(n/4):(n*3/4) + 1],
+                   gp=gpar(fill="black"))
+  if (phase == "3Q")
+      grid.polygon(xx[c(1:(n/4 + 1), (n*3/4 + 1):n)],
+                   yy[c(1:(n/4 + 1), (n*3/4 + 1):n)],
+                   gp=gpar(fill="black"))
+}
+
+# grid.newpage()
+pushViewport(viewport(gp=gpar(cex=0.7)),
+             plotViewport(c(4, 5, 3, 1)),
+             dataViewport(as.numeric(lowTideDate), 
+                          as.numeric(mainHours)))
+vectorMoon <- 
+    readPicture(system.file("extra", "comic_moon.ps.xml",
+                            package="RGraphics"))
+grid.picture(vectorMoon)
+grid.segments(unit(phases$date, "native"), 0,
+              unit(phases$date, "native"), 1,
+              gp=gpar(lty="dashed"))
+for (subset in list(1:13, 14:29, 30:31)) {
+  grid.lines(lowTideDate[subset], lowTideHour[subset],
+             default.units="native", 
+             gp=gpar(lwd=2))
+  grid.points(lowTideDate[subset], lowTideHour[subset],
+              pch=16, size=unit(2, "mm"))
+}
+grid.rect(gp=gpar(fill=NA))
+xTicks <- seq(min(lowTideDate), max(lowTideDate), by="week")
+grid.xaxis(at=xTicks, label=format(xTicks, "%b %d"))
+grid.yaxis(at=mainHours, label=format(mainHours, "%H:%M"))
+grid.text("Time of Low Tide (NZDT)", 
+          x=unit(-4, "lines"), rot=90)
+grid.text("Auckland, New Zealand January 2010", 
+          y=unit(-3, "lines"))
+grid.xaxis(main=FALSE, at=phases$date, label=FALSE)
+for (i in 1:nrow(phases))
+    grid.moonPhase(unit(phases$date[i], "native"),
+                   unit(1, "npc") + unit(1, "lines"), 
+                   phases$phase[i])
+grid.text("Phases of the Moon", 
+          y=unit(1, "npc") + unit(2, "lines"))
+popViewport(2)
+
+
+
+}
+figure18.3 <- function() {
+#line 156 "import.Rnw"
+library(pixmap)
+
+
+
+#line 159 "import.Rnw"
+source(system.file("extra", "as.raster.R", package="RGraphics"))
+
+
+
+
+#line 519 "import.Rnw"
+moon <- read.pnm(system.file("extra", "GPN-2000-000473.pgm",
+                                   package="RGraphics"))
+helmet <- read.pnm(system.file("extra", "astronaut.pgm",
+                               package="RGraphics"))
+
+moonMatrix <- as.matrix(as.raster(moon))
+helmetMatrix <- as.matrix(as.raster(helmet))
+
+moonCrop <- moonMatrix[120:(119 + nrow(helmetMatrix)),
+                       10:(9 + ncol(helmetMatrix))]
+moonGreys <- col2rgb(moonCrop)[1, ]
+helmetRGB <- col2rgb(helmetMatrix)
+helmetMask <- matrix(rgb(helmetRGB[1, ],
+                         helmetRGB[2, ],
+                         helmetRGB[3, ],
+                         moonGreys, max=255), ncol=ncol(helmetMatrix))
+
+
+
+
+#line 538 "import.Rnw"
+pushViewport(viewport(layout=grid.layout(1, 2, respect=TRUE)))
+pushViewport(viewport(layout.pos.row=1, layout.pos.col=1),
+             viewport(width=.8, height=.8))
+grid.raster(helmet)
+popViewport(2)
+pushViewport(viewport(layout.pos.row=1, layout.pos.col=2),
+             viewport(width=.8, height=.8))
+grid.raster(moonCrop)
+popViewport(2)
+
+
+
+}
+figure18.4 <- function() {
+#line 519 "import.Rnw"
+moon <- read.pnm(system.file("extra", "GPN-2000-000473.pgm",
+                                   package="RGraphics"))
+helmet <- read.pnm(system.file("extra", "astronaut.pgm",
+                               package="RGraphics"))
+
+moonMatrix <- as.matrix(as.raster(moon))
+helmetMatrix <- as.matrix(as.raster(helmet))
+
+moonCrop <- moonMatrix[120:(119 + nrow(helmetMatrix)),
+                       10:(9 + ncol(helmetMatrix))]
+moonGreys <- col2rgb(moonCrop)[1, ]
+helmetRGB <- col2rgb(helmetMatrix)
+helmetMask <- matrix(rgb(helmetRGB[1, ],
+                         helmetRGB[2, ],
+                         helmetRGB[3, ],
+                         moonGreys, max=255), ncol=ncol(helmetMatrix))
+
+
+
+
+#line 156 "import.Rnw"
+library(pixmap)
+
+
+
+#line 159 "import.Rnw"
+source(system.file("extra", "as.raster.R", package="RGraphics"))
+
+
+
+
+#line 549 "import.Rnw"
+grid.rect(width=.99, height=.99)
+grid.raster(helmetMask)
+
+
+
+}
+figure18.5 <- function() {
+#line 224 "import.Rnw"
+library(grImport)
+
+
+
+#line 600 "import.Rnw"
+library(grImport)
+PostScriptTrace(system.file("extra", "comic_moon.ps",
+                            package="RGraphics"))
+
+
+#line 610 "import.Rnw"
+vectorMoon <- readPicture("comic_moon.ps.xml")
+
+
+#line 707 "import.Rnw"
+picturePaths(vectorMoon[1:6], fill="white", 
+             freeScales=TRUE, nr=2, nc=3)
+
+
+
+}
+figure18.6 <- function() {
+#line 224 "import.Rnw"
+library(grImport)
+
+
+
+#line 600 "import.Rnw"
+library(grImport)
+PostScriptTrace(system.file("extra", "comic_moon.ps",
+                            package="RGraphics"))
+
+
+#line 610 "import.Rnw"
+vectorMoon <- readPicture("comic_moon.ps.xml")
+
+
+#line 691 "import.Rnw"
+grid.picture(vectorMoon[1:4])
+
+
+
+#line 735 "import.Rnw"
+grid.picture(vectorMoon, use.gc=FALSE)
+
+
+
+}
+figure8.1 <- function() {
+#line 335 "interactgrid.Rnw"
 library(oz)
 
 
 
+#line 842 "interactgrid.Rnw"
 makeImageRect <- function(nrow, ncol, cols, byrow) {
   xx <- (1:ncol)/ncol   
   yy <- (1:nrow)/nrow
@@ -3001,7 +4828,7 @@ makeImageRect <- function(nrow, ncol, cols, byrow) {
   rectGrob(x=right, y=top, 
            width=1/ncol, height=1/nrow, 
            just=c("right", "top"), 
-           gp=gpar(col=NULL, fill=cols),
+           gp=gpar(col=NA, fill=cols),
            name="image")
 }
 
@@ -3022,6 +4849,7 @@ grid.imageGrob <- function(...) {
 }
 
 
+#line 1266 "interactgrid.Rnw"
 makeOzViewports <- function(ozRegion) {
   vpStack(viewport(name="ozlay", layout=grid.layout(1, 1,
                      widths=diff(ozRegion$rangex),
@@ -3060,6 +4888,7 @@ grid.ozGrob <- function(...) {
 }
 
 
+#line 1452 "interactgrid.Rnw"
 ozImage <- function(mapLong, mapLat, 
                     imageLong, imageLat, cols) {
   grob(mapLong=mapLong, mapLat=mapLat, 
@@ -3083,6 +4912,7 @@ drawDetails.ozImage <- function(x, recording) {
 } 
 
 
+#line 2056 "interactgrid.Rnw"
 calcBreaks <- function(nlevels, breaks, scale) {
   if (is.null(breaks)) {
     seq(min(scale), max(scale), diff(scale)/nlevels)
@@ -3097,8 +4927,8 @@ ribbonVps <- function(nlevels, breaks, margin, scale) {
   vpTree(
     viewport(name="layout", layout=
       grid.layout(3, 4,
-        widths=unit.c(margin, unit(1, "lines"),
-                      max(unit(0.8, "lines") + 
+        widths=unit.c(margin, unit(1, "line"),
+                      max(unit(0.8, "line") + 
                           stringWidth(breaks)), margin),
         heights=unit.c(margin, unit(1, "null"), margin))),
     vpList(viewport(layout.pos.col=2, layout.pos.row=2,
@@ -3115,11 +4945,11 @@ ribbonKids <- function(nlevels, breaks, cols, scale) {
                  height=unit(diff(breaks), "native"),
                  just="top", gp=gpar(fill=cols),
                  vp=vpPath("layout", "ribbon")),
-        segmentsGrob(x1=unit(0.5, "lines"),
+        segmentsGrob(x1=unit(0.5, "line"),
                      y0=unit(tickloc, "native"),
                      y1=unit(tickloc, "native"),
                      vp=vpPath("layout", "labels")),
-        textGrob(x=unit(0.8, "lines"),
+        textGrob(x=unit(0.8, "line"),
                  y=unit(tickloc, "native"),
                  just="left", 
                  label=format(signif(tickloc, 3)),
@@ -3127,9 +4957,10 @@ ribbonKids <- function(nlevels, breaks, cols, scale) {
 }
 
 
+#line 2154 "interactgrid.Rnw"
 ribbonLegend <- function(nlevels=NULL, breaks=NULL, cols, 
                          scale=range(breaks), 
-                         margin=unit(0.5, "lines"), 
+                         margin=unit(0.5, "line"), 
                          gp=NULL, vp=NULL, name=NULL) {
   gTree(
     nlevels=nlevels, breaks=breaks, cols=cols, scale=scale, 
@@ -3143,6 +4974,7 @@ widthDetails.ribbonLegend <- function(x) {
 } 
 
 
+#line 508 "interactgrid.Rnw"
 mapLong <- c(132, 136)
 mapLat <- c(-35, -31.5)
 imageLong <- range(fluoro.predict$x)
@@ -3152,11 +4984,12 @@ zbreaks <- seq(min(fluoro.predict$z, na.rm=TRUE),
                length=10)
 zcol <- cut(fluoro.predict$z, zbreaks,
             include.lowest=TRUE, labels=FALSE)
-ozgreys <- grey(0.5 + 1:9/20)
-imageCols <- ozgreys[zcol]
+ozgrays <- gray(0.5 + 1:9/20)
+imageCols <- ozgrays[zcol]
 
 
 
+#line 2352 "interactgrid.Rnw"
 ozKey <- function(x, y, width, height, just, 
                   mapLong, mapLat) {
   gTree(childrenvp=viewport(name="ozkeyframe",
@@ -3175,18 +5008,21 @@ ozKey <- function(x, y, width, height, just,
 }
 
 
+#line 2312 "interactgrid.Rnw"
 ozimage <- ozImage(mapLong, mapLat, 
                    imageLong, imageLat, imageCols)
 
 
 
+#line 2328 "interactgrid.Rnw"
 ribbonlegend <- ribbonLegend(breaks=zbreaks, 
-                             cols=ozgreys, 
+                             cols=ozgrays, 
                              scale=range(zbreaks),
                              gp=gpar(cex=0.7))
 
 
 
+#line 2410 "interactgrid.Rnw"
 ozkey <- ozKey(x=unit(1, "npc") - unit(1, "mm"),
                y=unit(1, "npc") - unit(1, "mm"),
                width=unit(3.5, "cm"),
@@ -3196,17 +5032,21 @@ ozkey <- ozKey(x=unit(1, "npc") - unit(1, "mm"),
 
 
 
-grid.rect(gp=gpar(col="grey"))
+#line 2440 "interactgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+#line 2433 "interactgrid.Rnw"
 fg <- frameGrob()
 fg <- packGrob(fg, ozimage)
 fg <- placeGrob(fg, ozkey)
 fg <- packGrob(fg, ribbonlegend, "right")
 grid.draw(fg)
 
+#line 2442 "interactgrid.Rnw"
 
 
 
 }
+#line 145 "interactgrid.Rnw"
 grid.imageFun <- function(nrow, ncol, cols, 
                           byrow=TRUE) {
   x <- (1:ncol)/ncol
@@ -3226,11 +5066,13 @@ grid.imageFun <- function(nrow, ncol, cols,
 }
 
 
-figure7.3 <- function() {
-greys <- grey(0.5 + (rep(1:4, 4) - rep(0:3, each=4))/10)
+figure8.3 <- function() {
+#line 212 "interactgrid.Rnw"
+grays <- gray(0.5 + (rep(1:4, 4) - rep(0:3, each=4))/10)
 
 
 
+#line 145 "interactgrid.Rnw"
 grid.imageFun <- function(nrow, ncol, cols, 
                           byrow=TRUE) {
   x <- (1:ncol)/ncol
@@ -3250,12 +5092,15 @@ grid.imageFun <- function(nrow, ncol, cols,
 }
 
 
+#line 237 "interactgrid.Rnw"
 pushViewport(viewport(layout=grid.layout(3, 5, widths=c(1,8,2,8,1),
-  heights=unit(c(1, 8, 1), c("null", "null", "lines")))))
+  heights=unit(c(1, 8, 1), c("null", "null", "line")))))
 pushViewport(viewport(layout.pos.col=2, 
                       layout.pos.row=2))
-grid.imageFun(4, 4, greys)
+#line 226 "interactgrid.Rnw"
+grid.imageFun(4, 4, grays)
 
+#line 242 "interactgrid.Rnw"
 popViewport()
 pushViewport(viewport(layout.pos.col=2, 
                       layout.pos.row=3))
@@ -3263,8 +5108,10 @@ grid.text("(a)", gp=gpar(cex=0.7))
 popViewport()
 pushViewport(viewport(layout.pos.col=4,
                       layout.pos.row=2))
-grid.imageFun(4, 4, greys, byrow=FALSE)
+#line 234 "interactgrid.Rnw"
+grid.imageFun(4, 4, grays, byrow=FALSE)
 
+#line 250 "interactgrid.Rnw"
 popViewport()
 pushViewport(viewport(layout.pos.col=4, 
                       layout.pos.row=3))
@@ -3274,6 +5121,7 @@ popViewport(2)
 
 
 }
+#line 387 "interactgrid.Rnw"
 grid.ozFun <- function(ozRegion) {
   pushViewport( 
     viewport(name="ozlay", 
@@ -3297,7 +5145,8 @@ grid.ozFun <- function(ozRegion) {
 }
 
 
-figure7.5 <- function() {
+figure8.5 <- function() {
+#line 387 "interactgrid.Rnw"
 grid.ozFun <- function(ozRegion) {
   pushViewport( 
     viewport(name="ozlay", 
@@ -3321,18 +5170,23 @@ grid.ozFun <- function(ozRegion) {
 }
 
 
-grid.rect(gp=gpar(col="grey"))
+#line 457 "interactgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+#line 454 "interactgrid.Rnw"
 grid.ozFun(ozRegion())
 
+#line 459 "interactgrid.Rnw"
 
 
 
 }
-figure7.6 <- function() {
+figure8.6 <- function() {
+#line 335 "interactgrid.Rnw"
 library(oz)
 
 
 
+#line 145 "interactgrid.Rnw"
 grid.imageFun <- function(nrow, ncol, cols, 
                           byrow=TRUE) {
   x <- (1:ncol)/ncol
@@ -3352,6 +5206,7 @@ grid.imageFun <- function(nrow, ncol, cols,
 }
 
 
+#line 387 "interactgrid.Rnw"
 grid.ozFun <- function(ozRegion) {
   pushViewport( 
     viewport(name="ozlay", 
@@ -3375,6 +5230,7 @@ grid.ozFun <- function(ozRegion) {
 }
 
 
+#line 508 "interactgrid.Rnw"
 mapLong <- c(132, 136)
 mapLat <- c(-35, -31.5)
 imageLong <- range(fluoro.predict$x)
@@ -3384,11 +5240,13 @@ zbreaks <- seq(min(fluoro.predict$z, na.rm=TRUE),
                length=10)
 zcol <- cut(fluoro.predict$z, zbreaks,
             include.lowest=TRUE, labels=FALSE)
-ozgreys <- grey(0.5 + 1:9/20)
-imageCols <- ozgreys[zcol]
+ozgrays <- gray(0.5 + 1:9/20)
+imageCols <- ozgrays[zcol]
 
 
 
+#line 537 "interactgrid.Rnw"
+#line 508 "interactgrid.Rnw"
 mapLong <- c(132, 136)
 mapLat <- c(-35, -31.5)
 imageLong <- range(fluoro.predict$x)
@@ -3398,14 +5256,20 @@ zbreaks <- seq(min(fluoro.predict$z, na.rm=TRUE),
                length=10)
 zcol <- cut(fluoro.predict$z, zbreaks,
             include.lowest=TRUE, labels=FALSE)
-ozgreys <- grey(0.5 + 1:9/20)
-imageCols <- ozgreys[zcol]
+ozgrays <- gray(0.5 + 1:9/20)
+imageCols <- ozgrays[zcol]
 
-grid.rect(gp=gpar(col="grey"))
+#line 538 "interactgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+#line 521 "interactgrid.Rnw"
 grid.ozFun(ozRegion(xlim=mapLong, ylim=mapLat))
 
+#line 540 "interactgrid.Rnw"
+#line 524 "interactgrid.Rnw"
 downViewport("ozvp")
 
+#line 541 "interactgrid.Rnw"
+#line 527 "interactgrid.Rnw"
 pushViewport(viewport(y=min(imageLat), 
                       height=abs(diff(imageLat)), 
                       x=max(imageLong), 
@@ -3415,15 +5279,18 @@ pushViewport(viewport(y=min(imageLat),
 grid.imageFun(50, 50, col=imageCols)
 upViewport(0)
 
+#line 542 "interactgrid.Rnw"
 
 
 
 }
-figure7.7 <- function() {
+figure8.7 <- function() {
+#line 335 "interactgrid.Rnw"
 library(oz)
 
 
 
+#line 145 "interactgrid.Rnw"
 grid.imageFun <- function(nrow, ncol, cols, 
                           byrow=TRUE) {
   x <- (1:ncol)/ncol
@@ -3443,6 +5310,7 @@ grid.imageFun <- function(nrow, ncol, cols,
 }
 
 
+#line 387 "interactgrid.Rnw"
 grid.ozFun <- function(ozRegion) {
   pushViewport( 
     viewport(name="ozlay", 
@@ -3466,6 +5334,7 @@ grid.ozFun <- function(ozRegion) {
 }
 
 
+#line 508 "interactgrid.Rnw"
 mapLong <- c(132, 136)
 mapLat <- c(-35, -31.5)
 imageLong <- range(fluoro.predict$x)
@@ -3475,16 +5344,22 @@ zbreaks <- seq(min(fluoro.predict$z, na.rm=TRUE),
                length=10)
 zcol <- cut(fluoro.predict$z, zbreaks,
             include.lowest=TRUE, labels=FALSE)
-ozgreys <- grey(0.5 + 1:9/20)
-imageCols <- ozgreys[zcol]
+ozgrays <- gray(0.5 + 1:9/20)
+imageCols <- ozgrays[zcol]
 
 
 
-grid.rect(gp=gpar(col="grey"))
+#line 679 "interactgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+#line 521 "interactgrid.Rnw"
 grid.ozFun(ozRegion(xlim=mapLong, ylim=mapLat))
 
+#line 681 "interactgrid.Rnw"
+#line 524 "interactgrid.Rnw"
 downViewport("ozvp")
 
+#line 682 "interactgrid.Rnw"
+#line 527 "interactgrid.Rnw"
 pushViewport(viewport(y=min(imageLat), 
                       height=abs(diff(imageLat)), 
                       x=max(imageLong), 
@@ -3494,14 +5369,17 @@ pushViewport(viewport(y=min(imageLat),
 grid.imageFun(50, 50, col=imageCols)
 upViewport(0)
 
-grid.edit("image", gp=gpar(fill=rev(ozgreys)[zcol]))
-grid.edit("^ozlines[0-9]+$", gp=gpar(col="grey", lwd=2), 
-          grep=TRUE, global=TRUE)
+#line 683 "interactgrid.Rnw"
+#line 675 "interactgrid.Rnw"
+grid.edit("image", gp=gpar(fill=rev(ozgrays)[zcol]))
+grid.gedit("^ozlines[0-9]+$", gp=gpar(col="gray", lwd=2))
 
+#line 684 "interactgrid.Rnw"
 
 
 
 }
+#line 842 "interactgrid.Rnw"
 makeImageRect <- function(nrow, ncol, cols, byrow) {
   xx <- (1:ncol)/ncol   
   yy <- (1:nrow)/nrow
@@ -3515,7 +5393,7 @@ makeImageRect <- function(nrow, ncol, cols, byrow) {
   rectGrob(x=right, y=top, 
            width=1/ncol, height=1/nrow, 
            just=c("right", "top"), 
-           gp=gpar(col=NULL, fill=cols),
+           gp=gpar(col=NA, fill=cols),
            name="image")
 }
 
@@ -3536,6 +5414,7 @@ grid.imageGrob <- function(...) {
 }
 
 
+#line 1051 "interactgrid.Rnw"
 validDetails.imageGrob <- function(x) { 
   if (!is.numeric(x$nrow) || length(x$nrow) > 1 || 
       !is.numeric(x$ncol) || length(x$ncol) > 1)
@@ -3552,6 +5431,7 @@ validDetails.ozGrob <- function(x) {
 }
 
 
+#line 1266 "interactgrid.Rnw"
 makeOzViewports <- function(ozRegion) {
   vpStack(viewport(name="ozlay", layout=grid.layout(1, 1,
                      widths=diff(ozRegion$rangex),
@@ -3590,6 +5470,7 @@ grid.ozGrob <- function(...) {
 }
 
 
+#line 1452 "interactgrid.Rnw"
 ozImage <- function(mapLong, mapLat, 
                     imageLong, imageLat, cols) {
   grob(mapLong=mapLong, mapLat=mapLat, 
@@ -3613,6 +5494,7 @@ drawDetails.ozImage <- function(x, recording) {
 } 
 
 
+#line 1649 "interactgrid.Rnw"
 editDetails.imageGrob <- function(x, specs) { 
   if (any(c("ncol", "nrow", "byrow") %in% names(specs))) { 
     x <- addGrob(x, makeImageRect(x$nrow, x$ncol,
@@ -3633,11 +5515,13 @@ editDetails.ozGrob <- function(x, specs) {
 }
 
 
-figure7.13 <- function() {
-greys <- grey(0.5 + (rep(1:4, 4) - rep(0:3, each=4))/10)
+figure8.13 <- function() {
+#line 212 "interactgrid.Rnw"
+grays <- gray(0.5 + (rep(1:4, 4) - rep(0:3, each=4))/10)
 
 
 
+#line 842 "interactgrid.Rnw"
 makeImageRect <- function(nrow, ncol, cols, byrow) {
   xx <- (1:ncol)/ncol   
   yy <- (1:nrow)/nrow
@@ -3651,7 +5535,7 @@ makeImageRect <- function(nrow, ncol, cols, byrow) {
   rectGrob(x=right, y=top, 
            width=1/ncol, height=1/nrow, 
            just=c("right", "top"), 
-           gp=gpar(col=NULL, fill=cols),
+           gp=gpar(col=NA, fill=cols),
            name="image")
 }
 
@@ -3672,6 +5556,7 @@ grid.imageGrob <- function(...) {
 }
 
 
+#line 1649 "interactgrid.Rnw"
 editDetails.imageGrob <- function(x, specs) { 
   if (any(c("ncol", "nrow", "byrow") %in% names(specs))) { 
     x <- addGrob(x, makeImageRect(x$nrow, x$ncol,
@@ -3692,25 +5577,32 @@ editDetails.ozGrob <- function(x, specs) {
 }
 
 
+#line 1754 "interactgrid.Rnw"
 pushViewport(viewport(layout=grid.layout(2, 1, 
                                          heights=unit(c(1, 1),
-                                                      c("null", "lines")),
+                                                      c("null", "line")),
                                          respect=TRUE)))
 pushViewport(viewport(layout.pos.row=1))
-grid.imageGrob(4, 4, greys, name="imageGrob")
+#line 1717 "interactgrid.Rnw"
+grid.imageGrob(4, 4, grays, name="imageGrob")
 
+#line 1760 "interactgrid.Rnw"
 popViewport()
 pushViewport(viewport(layout.pos.row=2, gp=gpar(cex=0.7)))
 grid.text("(a)", name="label")
 popViewport()
+#line 1725 "interactgrid.Rnw"
 grid.edit("imageGrob", byrow=FALSE)
 
+#line 1765 "interactgrid.Rnw"
 grid.remove("label")
 pushViewport(viewport(layout.pos.row=2, gp=gpar(cex=0.7)))
 grid.text("(b)", name="label")
 popViewport()
+#line 1751 "interactgrid.Rnw"
 grid.edit("imageGrob::image", gp=gpar(col="white", lwd=6))
 
+#line 1770 "interactgrid.Rnw"
 grid.remove("label")
 pushViewport(viewport(layout.pos.row=2, gp=gpar(cex=0.7)))
 grid.text("(c)", name="label")
@@ -3719,11 +5611,13 @@ popViewport(2)
 
 
 }
-figure7.14 <- function() {
-greys <- grey(0.5 + (rep(1:4, 4) - rep(0:3, each=4))/10)
+figure8.14 <- function() {
+#line 212 "interactgrid.Rnw"
+grays <- gray(0.5 + (rep(1:4, 4) - rep(0:3, each=4))/10)
 
 
 
+#line 842 "interactgrid.Rnw"
 makeImageRect <- function(nrow, ncol, cols, byrow) {
   xx <- (1:ncol)/ncol   
   yy <- (1:nrow)/nrow
@@ -3737,7 +5631,7 @@ makeImageRect <- function(nrow, ncol, cols, byrow) {
   rectGrob(x=right, y=top, 
            width=1/ncol, height=1/nrow, 
            just=c("right", "top"), 
-           gp=gpar(col=NULL, fill=cols),
+           gp=gpar(col=NA, fill=cols),
            name="image")
 }
 
@@ -3758,6 +5652,7 @@ grid.imageGrob <- function(...) {
 }
 
 
+#line 1649 "interactgrid.Rnw"
 editDetails.imageGrob <- function(x, specs) { 
   if (any(c("ncol", "nrow", "byrow") %in% names(specs))) { 
     x <- addGrob(x, makeImageRect(x$nrow, x$ncol,
@@ -3778,27 +5673,36 @@ editDetails.ozGrob <- function(x, specs) {
 }
 
 
+#line 1875 "interactgrid.Rnw"
 pushViewport(viewport(layout=grid.layout(2, 1, 
                                          heights=unit(c(1, 1),
-                                                      c("null", "lines")),
+                                                      c("null", "line")),
                                          respect=TRUE)))
 pushViewport(viewport(layout.pos.row=1))
-grid.imageGrob(4, 4, greys, name="imageGrob")
+#line 1827 "interactgrid.Rnw"
+grid.imageGrob(4, 4, grays, name="imageGrob")
 
+#line 1881 "interactgrid.Rnw"
+#line 1842 "interactgrid.Rnw"
 grid.edit("imageGrob::image", gp=gpar(col="white"))
 
+#line 1882 "interactgrid.Rnw"
 popViewport()
 pushViewport(viewport(layout.pos.row=2, gp=gpar(cex=0.7)))
 grid.text("(a)", name="label")
 popViewport()
-grid.edit("imageGrob", cols=rev(greys))
+#line 1857 "interactgrid.Rnw"
+grid.edit("imageGrob", cols=rev(grays))
 
+#line 1887 "interactgrid.Rnw"
 grid.remove("label")
 pushViewport(viewport(layout.pos.row=2, gp=gpar(cex=0.7)))
 grid.text("(b)", name="label")
 popViewport()
+#line 1872 "interactgrid.Rnw"
 grid.edit("imageGrob", byrow=FALSE)
 
+#line 1892 "interactgrid.Rnw"
 grid.remove("label")
 pushViewport(viewport(layout.pos.row=2, gp=gpar(cex=0.7)))
 grid.text("(c)", name="label")
@@ -3807,6 +5711,7 @@ popViewport(2)
 
 
 }
+#line 2056 "interactgrid.Rnw"
 calcBreaks <- function(nlevels, breaks, scale) {
   if (is.null(breaks)) {
     seq(min(scale), max(scale), diff(scale)/nlevels)
@@ -3821,8 +5726,8 @@ ribbonVps <- function(nlevels, breaks, margin, scale) {
   vpTree(
     viewport(name="layout", layout=
       grid.layout(3, 4,
-        widths=unit.c(margin, unit(1, "lines"),
-                      max(unit(0.8, "lines") + 
+        widths=unit.c(margin, unit(1, "line"),
+                      max(unit(0.8, "line") + 
                           stringWidth(breaks)), margin),
         heights=unit.c(margin, unit(1, "null"), margin))),
     vpList(viewport(layout.pos.col=2, layout.pos.row=2,
@@ -3839,11 +5744,11 @@ ribbonKids <- function(nlevels, breaks, cols, scale) {
                  height=unit(diff(breaks), "native"),
                  just="top", gp=gpar(fill=cols),
                  vp=vpPath("layout", "ribbon")),
-        segmentsGrob(x1=unit(0.5, "lines"),
+        segmentsGrob(x1=unit(0.5, "line"),
                      y0=unit(tickloc, "native"),
                      y1=unit(tickloc, "native"),
                      vp=vpPath("layout", "labels")),
-        textGrob(x=unit(0.8, "lines"),
+        textGrob(x=unit(0.8, "line"),
                  y=unit(tickloc, "native"),
                  just="left", 
                  label=format(signif(tickloc, 3)),
@@ -3851,9 +5756,10 @@ ribbonKids <- function(nlevels, breaks, cols, scale) {
 }
 
 
+#line 2154 "interactgrid.Rnw"
 ribbonLegend <- function(nlevels=NULL, breaks=NULL, cols, 
                          scale=range(breaks), 
-                         margin=unit(0.5, "lines"), 
+                         margin=unit(0.5, "line"), 
                          gp=NULL, vp=NULL, name=NULL) {
   gTree(
     nlevels=nlevels, breaks=breaks, cols=cols, scale=scale, 
@@ -3867,6 +5773,7 @@ widthDetails.ribbonLegend <- function(x) {
 } 
 
 
+#line 2352 "interactgrid.Rnw"
 ozKey <- function(x, y, width, height, just, 
                   mapLong, mapLat) {
   gTree(childrenvp=viewport(name="ozkeyframe",
@@ -3885,11 +5792,13 @@ ozKey <- function(x, y, width, height, just,
 }
 
 
-figure7.18 <- function() {
+figure8.18 <- function() {
+#line 335 "interactgrid.Rnw"
 library(oz)
 
 
 
+#line 1266 "interactgrid.Rnw"
 makeOzViewports <- function(ozRegion) {
   vpStack(viewport(name="ozlay", layout=grid.layout(1, 1,
                      widths=diff(ozRegion$rangex),
@@ -3928,6 +5837,7 @@ grid.ozGrob <- function(...) {
 }
 
 
+#line 2056 "interactgrid.Rnw"
 calcBreaks <- function(nlevels, breaks, scale) {
   if (is.null(breaks)) {
     seq(min(scale), max(scale), diff(scale)/nlevels)
@@ -3942,8 +5852,8 @@ ribbonVps <- function(nlevels, breaks, margin, scale) {
   vpTree(
     viewport(name="layout", layout=
       grid.layout(3, 4,
-        widths=unit.c(margin, unit(1, "lines"),
-                      max(unit(0.8, "lines") + 
+        widths=unit.c(margin, unit(1, "line"),
+                      max(unit(0.8, "line") + 
                           stringWidth(breaks)), margin),
         heights=unit.c(margin, unit(1, "null"), margin))),
     vpList(viewport(layout.pos.col=2, layout.pos.row=2,
@@ -3960,11 +5870,11 @@ ribbonKids <- function(nlevels, breaks, cols, scale) {
                  height=unit(diff(breaks), "native"),
                  just="top", gp=gpar(fill=cols),
                  vp=vpPath("layout", "ribbon")),
-        segmentsGrob(x1=unit(0.5, "lines"),
+        segmentsGrob(x1=unit(0.5, "line"),
                      y0=unit(tickloc, "native"),
                      y1=unit(tickloc, "native"),
                      vp=vpPath("layout", "labels")),
-        textGrob(x=unit(0.8, "lines"),
+        textGrob(x=unit(0.8, "line"),
                  y=unit(tickloc, "native"),
                  just="left", 
                  label=format(signif(tickloc, 3)),
@@ -3972,9 +5882,10 @@ ribbonKids <- function(nlevels, breaks, cols, scale) {
 }
 
 
+#line 2154 "interactgrid.Rnw"
 ribbonLegend <- function(nlevels=NULL, breaks=NULL, cols, 
                          scale=range(breaks), 
-                         margin=unit(0.5, "lines"), 
+                         margin=unit(0.5, "line"), 
                          gp=NULL, vp=NULL, name=NULL) {
   gTree(
     nlevels=nlevels, breaks=breaks, cols=cols, scale=scale, 
@@ -3988,6 +5899,7 @@ widthDetails.ribbonLegend <- function(x) {
 } 
 
 
+#line 2497 "interactgrid.Rnw"
 grid.ozGrob(ozRegion())
 downViewport("ozvp")
 for (i in 1:(dim(ozTemp)[1])) {
@@ -3996,14 +5908,15 @@ for (i in 1:(dim(ozTemp)[1])) {
                               ozTemp$min[i], 
                               ozTemp$max[i], 
                               max(ozTemp$max)),
-                     cols=c("white", "grey", "white"))
+                     cols=c("white", "gray", "white"),
+                     gp=gpar(cex=.7))
   pushViewport(viewport(x=unit(ozTemp$long[i], "native"),
                         y=unit(ozTemp$lat[i], "native"),
-                        height=unit(1, "inches"),
+                        height=unit(1, "in"),
                         width=grobWidth(rl),
                         clip="off"))
-  grid.circle(r=0.7, 
-              gp=gpar(col="grey", fill="white", alpha=0.8))
+  grid.circle(r=1, 
+              gp=gpar(col="gray", fill="white", alpha=0.8))
   grid.draw(rl)
   popViewport()
 }
@@ -4012,6 +5925,7 @@ upViewport(0)
 
 
 }
+#line 2666 "interactgrid.Rnw"
 splitString <- function(text) {
   strings <- strsplit(text, " ")[[1]]
   newstring <- strings[1]
@@ -4019,11 +5933,11 @@ splitString <- function(text) {
   gapwidth <- stringWidth(" ")
   availwidth <- 
     convertWidth(unit(1, "npc"), 
-                 "inches", valueOnly=TRUE) 
+                 "in", valueOnly=TRUE) 
   for (i in 2:length(strings)) {
     width <- stringWidth(strings[i])
     if (convertWidth(linewidth + gapwidth + width, 
-                     "inches", valueOnly=TRUE) <
+                     "in", valueOnly=TRUE) <
         availwidth) {
       sep <- " "
       linewidth <- linewidth + gapwidth + width
@@ -4037,7 +5951,8 @@ splitString <- function(text) {
 }   
 
 
-figure7.20 <- function() {
+figure8.20 <- function() {
+#line 2666 "interactgrid.Rnw"
 splitString <- function(text) {
   strings <- strsplit(text, " ")[[1]]
   newstring <- strings[1]
@@ -4045,11 +5960,11 @@ splitString <- function(text) {
   gapwidth <- stringWidth(" ")
   availwidth <- 
     convertWidth(unit(1, "npc"), 
-                 "inches", valueOnly=TRUE) 
+                 "in", valueOnly=TRUE) 
   for (i in 2:length(strings)) {
     width <- stringWidth(strings[i])
     if (convertWidth(linewidth + gapwidth + width, 
-                     "inches", valueOnly=TRUE) <
+                     "in", valueOnly=TRUE) <
         availwidth) {
       sep <- " "
       linewidth <- linewidth + gapwidth + width
@@ -4063,12 +5978,14 @@ splitString <- function(text) {
 }   
 
 
+#line 2760 "interactgrid.Rnw"
 text <- "The quick brown fox jumps over the lazy dog."
 grid.text(splitString(text), 
           x=0, y=1, just=c("left", "top")) 
 
 
 
+#line 2785 "interactgrid.Rnw"
 splitTextGrob <- function(text, ...) {
   grob(text=text, cl="splitText", ...)
 }
@@ -4079,25 +5996,30 @@ drawDetails.splitText <- function(x, recording) {
 }
 
 
+#line 2845 "interactgrid.Rnw"
 pushViewport(viewport(layout=grid.layout(2, 2)))
 pushViewport(viewport(layout.pos.col=1))
 pushViewport(viewport(width=0.5, height=0.9))
-grid.rect(gp=gpar(col="grey"))
+grid.rect(gp=gpar(col="gray"))
+#line 2760 "interactgrid.Rnw"
 text <- "The quick brown fox jumps over the lazy dog."
 grid.text(splitString(text), 
           x=0, y=1, just=c("left", "top")) 
 
+#line 2850 "interactgrid.Rnw"
 popViewport(2)
 pushViewport(viewport(layout.pos.col=2, layout.pos.row=1))
 pushViewport(viewport(height=0.8))
-grid.rect(gp=gpar(col="grey"))
+grid.rect(gp=gpar(col="gray"))
+#line 2827 "interactgrid.Rnw"
 splitText <- splitTextGrob(text, name="splitText")
 grid.draw(splitText)
 
+#line 2855 "interactgrid.Rnw"
 popViewport(2)
 pushViewport(viewport(layout.pos.col=2, layout.pos.row=2))
 pushViewport(viewport(height=0.8))
-grid.rect(gp=gpar(col="grey"))
+grid.rect(gp=gpar(col="gray"))
 grid.draw(editGrob(splitText, gp=gpar(cex=1.5)))
 popViewport(2)
 popViewport()
@@ -4105,6 +6027,7 @@ popViewport()
 
 
 }
+#line 2785 "interactgrid.Rnw"
 splitTextGrob <- function(text, ...) {
   grob(text=text, cl="splitText", ...)
 }
@@ -4115,7 +6038,8 @@ drawDetails.splitText <- function(x, recording) {
 }
 
 
-figure7.22 <- function() {
+figure8.22 <- function() {
+#line 3046 "interactgrid.Rnw"
 faceA <- function(x, y, width, height) {
   pushViewport(viewport(x=x, y=y, 
                         width=width, height=height))
@@ -4135,6 +6059,7 @@ faceB <- function(x, y, width, height) {
 }
 
 
+#line 3214 "interactgrid.Rnw"
 faceA(.5, .5, width=.1, height=.1)
 angle <- seq(0, 2*pi, length=9)[-9]
 for (i in angle) {
@@ -4142,11 +6067,12 @@ for (i in angle) {
   y <- 0.5 + 0.3*sin(i)
   faceA(x, y, 0.2*x, 0.2*y)
 }
-grid.rect(width=.9, height=.9, gp=gpar(col="grey"))
+grid.rect(width=.9, height=.9, gp=gpar(col="gray", fill=NA))
 
 
 
 }
+#line 3046 "interactgrid.Rnw"
 faceA <- function(x, y, width, height) {
   pushViewport(viewport(x=x, y=y, 
                         width=width, height=height))
@@ -4166,6 +6092,7 @@ faceB <- function(x, y, width, height) {
 }
 
 
+#line 3120 "interactgrid.Rnw"
 faceC <- function(x, y, width, height) {
   gTree(childrenvp=viewport(x=x, y=y,
                             width=width, height=height,
@@ -4204,7 +6131,396 @@ faceE <- function(x, y, width, height) {
 }
 
 
+figure8.25 <- function() {
+#line 3046 "interactgrid.Rnw"
+faceA <- function(x, y, width, height) {
+  pushViewport(viewport(x=x, y=y, 
+                        width=width, height=height))
+  grid.rect()
+  grid.circle(x=c(0.25, 0.75), y=0.75, r=0.1)
+  grid.lines(x=c(0.33, 0.67), y=0.25)
+  popViewport()
+}
+
+faceB <- function(x, y, width, height) {
+  pushViewport(viewport(x=x, y=y, 
+                        width=width, height=height))
+  grid.draw(rectGrob())
+  grid.draw(circleGrob(x=c(0.25, 0.75), y=0.75, r=0.1))
+  grid.draw(linesGrob(x=c(0.33, 0.67), y=0.25))
+  popViewport()
+}
+
+
+#line 3260 "interactgrid.Rnw"
+#line 3256 "interactgrid.Rnw"
+grid.newpage()
+grid.draw(faceC(.5, .5, .5, .5))
+
+#line 3261 "interactgrid.Rnw"
+grid.rect(gp=gpar(col="gray", fill=NA))
+
+
+
+}
+figure8.26 <- function() {
+#line 3377 "interactgrid.Rnw"
+pdf("Figures/interactgrid-latticevps-%d.pdf", onefile=FALSE)
+print(
+#line 3366 "interactgrid.Rnw"
+xyplot(pressure ~ temperature, pressure)
+
+#line 3380 "interactgrid.Rnw"
+)
+showViewport(newpage=TRUE, 
+             col="black",
+             fill=rgb(.5, .5, .5, .2))
+dev.off()
+png("Web/interactgrid-latticevps%d.png")
+print(
+#line 3366 "interactgrid.Rnw"
+xyplot(pressure ~ temperature, pressure)
+
+#line 3388 "interactgrid.Rnw"
+)
+showViewport(newpage=TRUE, 
+             col="black",
+             fill=rgb(.5, .5, .5, .2))
+dev.off()
+system("rm Web/interactgrid-latticevps1.png")
+
+
+
+}
+figure8.27 <- function() {
+#line 3423 "interactgrid.Rnw"
+pdf("Figures/interactgrid-latticeleaves-%d.pdf", onefile=FALSE)
+print(
+#line 3366 "interactgrid.Rnw"
+xyplot(pressure ~ temperature, pressure)
+
+#line 3426 "interactgrid.Rnw"
+)
+showViewport(newpage=TRUE, leaves=TRUE,
+             col="black",
+             fill=rgb(.5, .5, .5, .2))
+dev.off()
+png("Web/interactgrid-latticeleaves%d.png")
+print(
+#line 3366 "interactgrid.Rnw"
+xyplot(pressure ~ temperature, pressure)
+
+#line 3434 "interactgrid.Rnw"
+)
+showViewport(newpage=TRUE, leaves=TRUE,
+             col="black",
+             fill=rgb(.5, .5, .5, .2))
+dev.off()
+system("rm Web/interactgrid-latticeleaves1.png")
+
+
+
+
+}
+figure17.1 <- function() {
+#line 71 "interactive.Rnw"
+
+n <- 40
+t <- seq(0, 2*pi, length=n)
+x <- cos(t)
+y <- sin(t)
+
+
+
+#line 90 "interactive.Rnw"
+for (i in 1:n) {
+    plot.new()
+    plot.window(c(-1, 1), c(-1, 1))
+    lines(x, y)
+    points(x[i], y[i], pch=16, cex=2)
+    Sys.sleep(.05)
+}
+
+
+
+}
+figure17.2 <- function() {
+#line 186 "interactive.Rnw"
+library(animation)
+
+
+
+#line 71 "interactive.Rnw"
+
+n <- 40
+t <- seq(0, 2*pi, length=n)
+x <- cos(t)
+y <- sin(t)
+
+
+
+#line 163 "interactive.Rnw"
+orbit <- function() {
+    par(pty="s", mar=rep(1, 4))
+    for (i in 1:n) {
+        plot.new()
+        plot.window(c(-1, 1), c(-1, 1))
+        lines(x, y)
+        points(x[i], y[i], pch=16, cex=2)
+    }
+}
+
+
+
+#line 244 "interactive.Rnw"
+ani.options(interval=0.05, outdir="orbitImages",
+            filename="orbit.html")
+ani.start()
+orbit()
+ani.stop()
+
+
+}
+figure17.3 <- function() {
+#line 285 "interactive.Rnw"
+plot(mpg ~ disp, mtcars)
+points(mpg ~ disp, mtcars, subset=gear == 3, pch=16)
+
+
+
+#line 290 "interactive.Rnw"
+plot(mpg ~ disp, mtcars)
+points(mpg ~ disp, mtcars, subset=gear == 4, pch=16)
+
+
+
+}
+figure17.4 <- function() {
+#line 317 "interactive.Rnw"
+trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
+print(
+#line 314 "interactive.Rnw"
+xyplot(mpg ~ disp | factor(gear), mtcars, subset=gear != 5, pch=16)
+
+#line 320 "interactive.Rnw"
+)
+
+
+
+}
+figure17.5 <- function() {
+#line 364 "interactive.Rnw"
+library(rggobi)
+mtcars$gear <- factor(mtcars$gear)
+mtcars$cyl <- factor(mtcars$cyl)
+gg <- ggobi(mtcars)
+
+
+}
+figure17.6 <- function() {
+#line 401 "interactive.Rnw"
+
+
+}
+figure17.7 <- function() {
+#line 559 "interactive.Rnw"
+library(rggobi)
+
+
+
+#line 574 "interactive.Rnw"
+gg <- ggobi(mtcars)
+
+
+}
+figure17.8 <- function() {
+#line 717 "interactive.Rnw"
+library(iplots)
+
+
+
+#line 726 "interactive.Rnw"
+iplot(mtcars$disp, mtcars$mpg)
+ibar(mtcars$gear)
+
+
+}
+figure17.9 <- function() {
+#line 717 "interactive.Rnw"
+library(iplots)
+
+
+
+#line 726 "interactive.Rnw"
+iplot(mtcars$disp, mtcars$mpg)
+ibar(mtcars$gear)
+
+
+#line 846 "interactive.Rnw"
+iplot.set(1)
+
+
+
+#line 869 "interactive.Rnw"
+labels <- mapply("itext", 
+                 mtcars$disp, mtcars$mpg, rownames(mtcars), 
+                 MoreArgs=list(visible=FALSE), SIMPLIFY=FALSE)
+olds <- NULL
+while (!is.null(ievent.wait())) {
+    if (iset.sel.changed()) {
+        s <- iset.selected()
+        if (length(s) > 1) {
+            lapply(labels[s], iobj.opt, visible = TRUE)
+        }
+        if (length(olds) > 1) {
+            lapply(labels[olds], iobj.opt, visible = FALSE)
+        }
+        olds <- s
+    }
+}
+
+
+}
+figure17.10 <- function() {
+#line 962 "interactive.Rnw"
+library(Rcmdr)
+
+
+}
+figure17.11 <- function() {
+#line 989 "interactive.Rnw"
+library(pmg)
+
+
+}
+figure17.12 <- function() {
+#line 1023 "interactive.Rnw"
+library(latticist)
+latticist(mtcars, list(xvar="disp", yvar="mpg"), 
+          use.playwith=FALSE)
+
+
+}
+figure17.13 <- function() {
+#line 1068 "interactive.Rnw"
+library(playwith)
+playwith(xyplot(mpg ~ disp, mtcars))
+playwith(xyplot(qsec ~ wt, mtcars), 
+         new=TRUE, link.to=playDevCur())
+
+
+}
+figure17.15 <- function() {
+#line 1165 "interactive.Rnw"
+drawClock <- function(hour, minute) {
+    t <- seq(0, 2*pi, length=13)[-13]
+    x <- cos(t)
+    y <- sin(t)
+
+    grid.newpage()
+    pushViewport(dataViewport(x, y, gp=gpar(lwd=4)))
+    # Circle with ticks
+    grid.circle(x=0, y=0, default="native", 
+                r=unit(1, "native"))
+    grid.segments(x, y, x*.9, y*.9, default="native")
+    # Hour hand
+    hourAngle <- pi/2 - (hour + minute/60)/12*2*pi
+    grid.segments(0, 0, 
+                  .6*cos(hourAngle), .6*sin(hourAngle), 
+                  default="native", gp=gpar(lex=4))
+    # Minute hand
+    minuteAngle <- pi/2 - (minute)/60*2*pi
+    grid.segments(0, 0, 
+                  .8*cos(minuteAngle), .8*sin(minuteAngle), 
+                  default="native", gp=gpar(lex=2))    
+    grid.circle(0, 0, default="native", r=unit(1, "mm"),
+                gp=gpar(fill="white"))
+}
+
+
+#line 1265 "interactive.Rnw"
+library(gWidgetsRGtk2)
+
+
+
+#line 1279 "interactive.Rnw"
+window <- gwindow("Clock")
+
+
+
+#line 1295 "interactive.Rnw"
+allContent <- ggroup(container=window, horizontal=FALSE)
+
+
+
+#line 1310 "interactive.Rnw"
+graphicTime <- ggraphics(container=allContent)
+
+
+
+#line 1322 "interactive.Rnw"
+timeContent <- ggroup(container=allContent)
+
+
+
+#line 1337 "interactive.Rnw"
+textLabel <- glabel("")
+
+
+
+#line 1366 "interactive.Rnw"
+randomizeTime <- function(h, ...) {
+    hour <- sample(1:12, 1)
+    minute <- sample(seq(0, 55, 5), 1)
+    drawClock(hour, minute)
+    visible(textLabel) <- FALSE
+    svalue(textLabel) <- paste(hour, 
+                               sprintf("%02d", minute), 
+                               sep=":")
+}
+
+
+
+#line 1387 "interactive.Rnw"
+reset <- gbutton("Randomize Time", 
+                 handler=randomizeTime)
+
+
+
+#line 1404 "interactive.Rnw"
+textButton <- gbutton("Show Time", 
+                      handler=function(h, ...) {
+                          visible(textLabel) <- TRUE
+                      })
+
+
+#line 1420 "interactive.Rnw"
+add(timeContent, reset)
+add(timeContent, textButton)
+add(timeContent, textLabel)
+
+
+
+}
+figure17.16 <- function() {
+#line 1523 "interactive.Rnw"
+library(SVGAnnotation)
+
+
+
+#line 1574 "interactive.Rnw"
+doc <- svgPlot({ par(mfrow=c(2, 1), cex=.7,     
+                     mar=c(5.1, 4.1, 1, 1))
+                 plot(mpg ~ disp, mtcars, cex=2)
+                 plot(qsec ~ wt, mtcars, cex=2) },
+               width=4, height=8)
+linkPlots(doc)
+saveXML(doc, "linkedplots.svg")
+
+
+}
 figure1.1 <- function() {
+#line 40 "intro.Rnw"
 plot(pressure)
 text(150, 600, 
      "Pressure (mm Hg)\nversus\nTemperature (Celsius)")
@@ -4212,120 +6528,450 @@ text(150, 600,
 
 
 }
-figure6.1 <- function() {
-grid.rect(gp=gpar(col="grey"))
-grid.circle(name="circles", x=seq(0.1, 0.9, length=40), 
-            y=0.5 + 0.4*sin(seq(0, 2*pi, length=40)),
-            r=abs(0.1*cos(seq(0, 2*pi, length=40))))
-
-grid.edit("circles", 
-          gp=gpar(col=grey(c(1:20*0.04, 20:1*0.04))))
-
-grid.remove("circles")
-
+figure14.1 <- function() {
+#line 57 "maps.Rnw"
+library(maptools)
+colorado <- readShapeSpatial(system.file("extra", "10m-colorado.shp",
+                                         package="RGraphics"))
+par(mar=rep(0, 4))
+sp::plot(colorado, col="gray")
 
 
 
 }
-figure6.2 <- function() {
-grid.rect(gp=gpar(col="grey"))
+figure14.2 <- function() {
+#line 211 "maps.Rnw"
+library(maps)
+
+
+
+
+#line 223 "maps.Rnw"
+par(mar=rep(0, 4))
+#line 220 "maps.Rnw"
+map(regions="Brazil", fill=TRUE, col="gray")
+
+#line 225 "maps.Rnw"
+box("figure", col="gray", lwd=2)
+
+
+
+}
+figure14.3 <- function() {
+#line 310 "maps.Rnw"
+library(maptools)
+
+
+
+#line 330 "maps.Rnw"
+brazil <- 
+    readShapeSpatial(system.file("extra", "10m-brazil.shp",
+                                 package="RGraphics"))
+
+
+
+#line 358 "maps.Rnw"
+par(mar=rep(0, 4))
+# Need to spec. sp:: here so that code works in 'RGraphics' package
+sp::plot(brazil, col="gray")
+box("figure", col="gray", lwd=2)
+
+
+
+}
+figure14.4 <- function() {
+#line 310 "maps.Rnw"
+library(maptools)
+
+
+
+#line 330 "maps.Rnw"
+brazil <- 
+    readShapeSpatial(system.file("extra", "10m-brazil.shp",
+                                 package="RGraphics"))
+
+
+
+#line 436 "maps.Rnw"
+print(
+#line 433 "maps.Rnw"
+spplot(brazil, "Regions", col.regions=gray(5:1/6))
+
+#line 438 "maps.Rnw"
+)
+
+
+
+}
+figure14.5 <- function() {
+#line 310 "maps.Rnw"
+library(maptools)
+
+
+
+#line 330 "maps.Rnw"
+brazil <- 
+    readShapeSpatial(system.file("extra", "10m-brazil.shp",
+                                 package="RGraphics"))
+
+
+
+#line 525 "maps.Rnw"
+brazilRegions <- 
+    readShapeSpatial(system.file("extra", 
+                                 "10m_brazil_regions.shp",
+                                 package="RGraphics"))
+
+
+#line 554 "maps.Rnw"
+brazilCapitals <- 
+    readShapeSpatial(system.file("extra",
+                                 "10m_brazil_capitals.shp",
+                                 package="RGraphics"))
+
+
+
+
+#line 619 "maps.Rnw"
+print(
+#line 598 "maps.Rnw"
+spplot(brazil, "Regions", 
+       col.regions=gray.colors(5, 0.8, 0.3),
+       col="white", 
+       panel=function(...) {
+           panel.polygonsplot(...)
+           sp.lines(brazilRegions, col="gray40")
+           labels <- brazilCapitals$Name
+           w <- stringWidth(labels)
+           h <- stringHeight(labels)
+           locs <- coordinates(brazilCapitals)
+           grid.rect(unit(locs[, 1], "native"),
+                     unit(locs[, 2], "native"),
+                     w, h, just=c("right", "top"),
+                     gp=gpar(col=NA, fill=rgb(1, 1, 1, .5)))
+           sp.text(locs, labels, adj=c(1, 1))
+           sp.points(brazilCapitals, pch=21,
+                     col="black", fill="white")
+       })
+
+
+#line 621 "maps.Rnw"
+)
+
+
+
+}
+figure14.6 <- function() {
+#line 310 "maps.Rnw"
+library(maptools)
+
+
+
+#line 691 "maps.Rnw"
+marajo <- 
+    readShapeSpatial(system.file("extra", "marajo.shp",
+                                 package="RGraphics"))
+
+
+
+#line 711 "maps.Rnw"
+par(mar=rep(0, 4))
+sp::plot(marajo, col="gray", pbg="white")
+
+
+
+}
+figure14.7 <- function() {
+#line 310 "maps.Rnw"
+library(maptools)
+
+
+
+#line 803 "maps.Rnw"
+iceland <- 
+    readShapeSpatial(system.file("extra", "10m-iceland.shp",
+                                 package="RGraphics"))
+
+
+
+#line 816 "maps.Rnw"
+par(mar=rep(0, 4))
+sp::plot(iceland, col="gray")
+
+
+
+}
+figure14.8 <- function() {
+#line 310 "maps.Rnw"
+library(maptools)
+
+
+
+#line 803 "maps.Rnw"
+iceland <- 
+    readShapeSpatial(system.file("extra", "10m-iceland.shp",
+                                 package="RGraphics"))
+
+
+
+#line 852 "maps.Rnw"
+proj4string(iceland) <- CRS("+proj=longlat +ellps=WGS84")
+
+
+
+#line 871 "maps.Rnw"
+par(mar=rep(0, 4))
+sp::plot(iceland, col="gray")
+
+
+
+}
+figure14.9 <- function() {
+#line 898 "maps.Rnw"
+library(rgdal)
+
+
+
+#line 803 "maps.Rnw"
+iceland <- 
+    readShapeSpatial(system.file("extra", "10m-iceland.shp",
+                                 package="RGraphics"))
+
+
+
+#line 852 "maps.Rnw"
+proj4string(iceland) <- CRS("+proj=longlat +ellps=WGS84")
+
+
+
+#line 930 "maps.Rnw"
+icelandMercator <- spTransform(iceland, 
+                               CRS("+proj=merc +ellps=GRS80"))
+
+
+
+#line 942 "maps.Rnw"
+par(mar=rep(0, 4))
+sp::plot(iceland, col="gray80", border="white", lwd=3)
+par(new=TRUE)
+sp::plot(icelandMercator)
+
+
+
+}
+figure14.10 <- function() {
+#line 310 "maps.Rnw"
+library(maptools)
+
+
+
+#line 898 "maps.Rnw"
+library(rgdal)
+
+
+
+#line 330 "maps.Rnw"
+brazil <- 
+    readShapeSpatial(system.file("extra", "10m-brazil.shp",
+                                 package="RGraphics"))
+
+
+
+#line 975 "maps.Rnw"
+proj4string(brazil) <- CRS("+proj=longlat +ellps=WGS84")
+
+
+
+#line 997 "maps.Rnw"
+glines <- gridlines(brazil)
+glinesOrtho <- spTransform(glines, CRS("+proj=ortho"))
+par(mar=rep(0, 4))
+brazilOrtho <- spTransform(brazil, CRS("+proj=ortho"))
+sp::plot(brazilOrtho, col="gray")
+sp::plot(glinesOrtho, lty="dashed", add=TRUE)
+
+
+
+}
+figure14.11 <- function() {
+#line 310 "maps.Rnw"
+library(maptools)
+
+
+
+#line 1040 "maps.Rnw"
+library(raster)
+
+
+
+#line 330 "maps.Rnw"
+brazil <- 
+    readShapeSpatial(system.file("extra", "10m-brazil.shp",
+                                 package="RGraphics"))
+
+
+
+#line 1091 "maps.Rnw"
+# Read in prepared raster
+brazilRelief <- raster(system.file("extra", "brazilRelief.tif",
+                                   package="RGraphics"))
+
+
+
+#line 1113 "maps.Rnw"
+# Make PNG version for this one because otherwise it's TOO big
+png("Figures/maps-brazilraster.png",
+    width=900, height=900)
+par(mar=rep(0, 4))
+raster::image(brazilRelief, col=gray(0:255/255), maxpixels=1e6)
+sp::plot(brazil, add=TRUE)
+box(lwd=4)
+dev.off()
+system("cp Figures/maps-brazilraster.png Web/")
+
+
+}
+figure7.1 <- function() {
+#line 157 "objectgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+#line 82 "objectgrid.Rnw"
+grid.circle(name="circles", x=seq(0.1, 0.9, length=40), 
+            y=0.5 + 0.4*sin(seq(0, 2*pi, length=40)),
+            r=abs(0.1*cos(seq(0, 2*pi, length=40))))
+
+#line 159 "objectgrid.Rnw"
+#line 138 "objectgrid.Rnw"
+grid.edit("circles", 
+          gp=gpar(col=gray(c(1:20*0.04, 20:1*0.04))))
+
+#line 160 "objectgrid.Rnw"
+#line 154 "objectgrid.Rnw"
+grid.remove("circles")
+
+#line 161 "objectgrid.Rnw"
+
+
+
+}
+figure7.2 <- function() {
+#line 327 "objectgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+#line 285 "objectgrid.Rnw"
 suffix <- c("even", "odd")
 for (i in 1:8)
   grid.circle(name=paste("circle.", suffix[i %% 2 + 1], 
                          sep=""),
               r=(9 - i)/20, 
-              gp=gpar(col=NA, fill=grey(i/10)))
+              gp=gpar(col=NA, fill=gray(i/10)))
 
-grid.edit("circle.odd", gp=gpar(fill="grey10"), 
+#line 329 "objectgrid.Rnw"
+#line 305 "objectgrid.Rnw"
+grid.edit("circle.odd", gp=gpar(fill="gray10"), 
           global=TRUE)
 
-grid.edit("circle", gp=gpar(col="grey", fill="grey90"), 
+#line 330 "objectgrid.Rnw"
+#line 323 "objectgrid.Rnw"
+grid.edit("circle", gp=gpar(col="gray", fill="gray90"), 
           grep=TRUE, global=TRUE) 
 
+#line 331 "objectgrid.Rnw"
 
 
 
 }
-figure6.3 <- function() {
+figure7.3 <- function() {
+#line 429 "objectgrid.Rnw"
 labels <- c("\"xaxis1\"\nxaxis gTree", "\"major\"\nlines grob", 
             "\"ticks\"\nlines grob", "\"labels\"\ntext grob")
 names <- c("", "major", "ticks", "labels")
-boxheight <- unit(2.5, "lines")
-boxwidth <- unit(1.2, "inches")
+boxheight <- unit(2.5, "line")
+boxwidth <- unit(1.2, "in")
 pushViewport(viewport(layout=grid.layout(2, 3)))
 pushViewport(viewport(layout.pos.row=1, layout.pos.col=2))
 grid.text(labels[1])
 grid.lines(unit(0.5, "npc") + unit.c(-0.5*boxwidth, 0.5*boxwidth),
-           0.5, gp=gpar(col="grey"))
-grid.roundRect(height=boxheight, 
+           0.5, gp=gpar(col="gray"))
+grid.roundrect(height=boxheight, 
                width=boxwidth, # 1.2*stringWidth(labels[1]),
-               r=unit(2, "mm"))
+               r=unit(2, "mm"),
+               gp=gpar(fill=NA))
 popViewport()
 pushViewport(viewport(layout.pos.row=2, layout.pos.col=1))
 grid.text(labels[2])
 grid.lines(unit(0.5, "npc") + unit.c(-0.5*boxwidth, 0.5*boxwidth),
-           0.5, gp=gpar(col="grey"))
-grid.roundRect(height=boxheight, 
+           0.5, gp=gpar(col="gray"))
+grid.roundrect(height=boxheight, 
                width=boxwidth, # 1.2*stringWidth(labels[2]),
-               r=unit(2, "mm"))
+               r=unit(2, "mm"),
+               gp=gpar(fill=NA))
 popViewport()
 pushViewport(viewport(layout.pos.row=2, layout.pos.col=2))
 grid.text(labels[3])
 grid.lines(unit(0.5, "npc") + unit.c(-0.5*boxwidth, 0.5*boxwidth),
-           0.5, gp=gpar(col="grey"))
-grid.roundRect(height=boxheight, 
+           0.5, gp=gpar(col="gray"))
+grid.roundrect(height=boxheight, 
                width=boxwidth, # 1.2*stringWidth(labels[3]),
-               r=unit(2, "mm"))
+               r=unit(2, "mm"),
+               gp=gpar(fill=NA))
 popViewport()
 pushViewport(viewport(layout.pos.row=2, layout.pos.col=3))
 grid.text(labels[4])
 grid.lines(unit(0.5, "npc") + unit.c(-0.5*boxwidth, 0.5*boxwidth),
-           0.5, gp=gpar(col="grey"))
-grid.roundRect(height=boxheight, 
+           0.5, gp=gpar(col="gray"))
+grid.roundrect(height=boxheight, 
                width=boxwidth, # 1.2*stringWidth(labels[4]),
-               r=unit(2, "mm"))
+               r=unit(2, "mm"),
+               gp=gpar(fill=NA))
 popViewport()
 pushViewport(viewport(layout.pos.row=1, layout.pos.col=2))
 grid.move.to(x=0.5, y=unit(0.5, "npc") - 0.5*boxheight)
 popViewport()
 pushViewport(viewport(layout.pos.row=2, layout.pos.col=1))
-grid.arrows(grob=lineToGrob(x=0.5, y=unit(0.5, "npc") + 0.5*boxheight),
-            angle=10, length=unit(3, "mm"))
+grid.line.to(x=0.5, y=unit(0.5, "npc") + 0.5*boxheight,
+             arrow=arrow(angle=10, length=unit(3, "mm")))
 popViewport()
 pushViewport(viewport(layout.pos.row=1, layout.pos.col=2))
 grid.move.to(x=0.5, y=unit(0.5, "npc") - 0.5*boxheight)
 popViewport()
 pushViewport(viewport(layout.pos.row=2, layout.pos.col=2))
-grid.arrows(grob=lineToGrob(x=0.5, y=unit(0.5, "npc") + 0.5*boxheight),
-            angle=10, length=unit(3, "mm"))
+grid.line.to(x=0.5, y=unit(0.5, "npc") + 0.5*boxheight,
+             arrow=arrow(angle=10, length=unit(3, "mm")))
 popViewport()
 pushViewport(viewport(layout.pos.row=1, layout.pos.col=2))
 grid.move.to(x=0.5, y=unit(0.5, "npc") - 0.5*boxheight)
 popViewport()
 pushViewport(viewport(layout.pos.row=2, layout.pos.col=3))
-grid.arrows(grob=lineToGrob(x=0.5, y=unit(0.5, "npc") + 0.5*boxheight),
-            angle=10, length=unit(3, "mm"))
+grid.line.to(x=0.5, y=unit(0.5, "npc") + 0.5*boxheight,
+             arrow=arrow(angle=10, length=unit(3, "mm")))
 popViewport()
 
 
 
 }
-figure6.4 <- function() {
-grid.rect(gp=gpar(col="grey"))
+figure7.4 <- function() {
+#line 586 "objectgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
 pushViewport(viewport(just="bottom", gp=gpar(cex=0.7)))
+#line 524 "objectgrid.Rnw"
 grid.xaxis(name="axis1", at=1:4/5)
-childNames(grid.get("axis1"))
+grid.ls()
 
+#line 589 "objectgrid.Rnw"
+#line 553 "objectgrid.Rnw"
 grid.edit("axis1", at=1:3/4)
 
+#line 590 "objectgrid.Rnw"
+#line 583 "objectgrid.Rnw"
 grid.edit(gPath("axis1", "labels"), rot=45)
 
+#line 591 "objectgrid.Rnw"
 popViewport()
 
 
 
 }
-figure6.5 <- function() {
+figure7.5 <- function() {
+#line 880 "objectgrid.Rnw"
 tg <- textGrob("sample text")
 rg <- rectGrob(width=1.1*grobWidth(tg), 
                height=1.3*grobHeight(tg))
@@ -4333,40 +6979,48 @@ boxedText <- gTree(children=gList(tg, rg))
 
 
 
+#line 936 "objectgrid.Rnw"
 pushViewport(viewport(layout=grid.layout(1, 7,
-                                         heights=unit(1.25, "inches"),
+                                         heights=unit(1.25, "in"),
                                          widths=unit(rep(c(1, 1.25), length=7),
-                                                     rep(c("null", "inches"),
+                                                     rep(c("null", "in"),
                                                            length=7)))))
-pushViewport(viewport(layout.pos.col=2))
-grid.rect(gp=gpar(col="grey"))
+pushViewport(viewport(layout.pos.col=2, gp=gpar(fill=NA)))
+grid.rect(gp=gpar(col="gray", fill=NA))
+#line 901 "objectgrid.Rnw"
 grid.draw(boxedText)
 
+#line 944 "objectgrid.Rnw"
 popViewport()
-pushViewport(viewport(layout.pos.col=4))
-grid.rect(gp=gpar(col="grey"))
-grid.draw(editGrob(boxedText, gp=gpar(col="grey")))
+pushViewport(viewport(layout.pos.col=4, gp=gpar(fill=NA)))
+grid.rect(gp=gpar(col="gray", fill=NA))
+#line 916 "objectgrid.Rnw"
+grid.draw(editGrob(boxedText, gp=gpar(col="gray")))
 
+#line 948 "objectgrid.Rnw"
 popViewport()
-pushViewport(viewport(layout.pos.col=6))
-grid.rect(gp=gpar(col="grey"))
+pushViewport(viewport(layout.pos.col=6, gp=gpar(fill=NA)))
+grid.rect(gp=gpar(col="gray", fill=NA))
+#line 932 "objectgrid.Rnw"
 grid.draw(editGrob(boxedText, vp=viewport(angle=45),
                    gp=gpar(fontsize=18)))
               
+#line 952 "objectgrid.Rnw"
 popViewport()
 popViewport()
                              
 
 
 }
-figure6.6 <- function() {
+figure7.6 <- function() {
+#line 1098 "objectgrid.Rnw"
 label <- textGrob("A\nPlot\nLabel ",
                   x=0, just="left")
 x <- seq(0.1, 0.9, length=50)
 y <- runif(50, 0.1, 0.9)
 gplot <- 
   gTree(
-    children=gList(rectGrob(gp=gpar(col="grey60",
+    children=gList(rectGrob(gp=gpar(col="gray60",
                                     fill="white")),
                    linesGrob(x, y), 
                    pointsGrob(x, y, pch=16, 
@@ -4376,6 +7030,7 @@ gplot <-
 
 
 
+#line 1128 "objectgrid.Rnw"
 layout <- grid.layout(1, 2,
                       widths=unit(c(1, 1), 
                                   c("null", "grobwidth"),
@@ -4383,7 +7038,9 @@ layout <- grid.layout(1, 2,
 
 
 
-grid.rect(gp=gpar(col="grey60", fill="grey90"))
+#line 1161 "objectgrid.Rnw"
+grid.rect(gp=gpar(col="gray60", fill="gray90"))
+#line 1152 "objectgrid.Rnw"
 pushViewport(viewport(layout=layout))
 pushViewport(viewport(layout.pos.col=2))
 grid.draw(label)
@@ -4392,102 +7049,195 @@ pushViewport(viewport(layout.pos.col=1))
 grid.draw(gplot)
 popViewport(2)
 
+#line 1163 "objectgrid.Rnw"
 
 
 
 }
-figure6.7 <- function() {
+figure7.7 <- function() {
+#line 1335 "objectgrid.Rnw"
 tg1 <- textGrob("Sample")
 rg1 <- rectGrob(x=rep(0.5, 2),
                 width=1.1*grobWidth(tg1), 
                 height=1.3*grobHeight(tg1),
-                gp=gpar(col=c("grey60", "white"), 
+                gp=gpar(col=c("gray60", "white"), 
                         lwd=c(3, 1)))
 
 
 
+#line 1403 "objectgrid.Rnw"
 pushViewport(viewport(layout=grid.layout(1, 7,
-                                         heights=unit(1.25, "inches"),
+                                         heights=unit(1.25, "in"),
                                          widths=unit(rep(c(1, 1.25), length=7),
-                                                     rep(c("null", "inches"),
+                                                     rep(c("null", "in"),
                                                            length=7)))))
-pushViewport(viewport(layout.pos.col=2))
-grid.rect(gp=gpar(col="grey"))
+pushViewport(viewport(layout.pos.col=2, gp=gpar(fill=NA)))
+grid.rect(gp=gpar(col="gray", fill=NA))
+#line 1356 "objectgrid.Rnw"
 grid.draw(tg1)
 grid.draw(rg1)
 
+#line 1411 "objectgrid.Rnw"
 popViewport()
-pushViewport(viewport(layout.pos.col=4))
-grid.rect(gp=gpar(col="grey"))
+pushViewport(viewport(layout.pos.col=4, gp=gpar(fill=NA)))
+grid.rect(gp=gpar(col="gray", fill=NA))
+#line 1377 "objectgrid.Rnw"
 pushViewport(viewport(gp=gpar(cex=2)))
 grid.draw(tg1)
 grid.draw(rg1)
 popViewport()
 
+#line 1415 "objectgrid.Rnw"
 popViewport()
-pushViewport(viewport(layout.pos.col=6))
-grid.rect(gp=gpar(col="grey"))
+pushViewport(viewport(layout.pos.col=6, gp=gpar(fill=NA)))
+grid.rect(gp=gpar(col="gray", fill=NA))
+#line 1397 "objectgrid.Rnw"
 pushViewport(viewport(gp=gpar(cex=2)))
 grid.draw(tg1)
 popViewport()
 grid.draw(rg1)
 
+#line 1419 "objectgrid.Rnw"
 popViewport()
 popViewport()
 
 
 
 }
-figure6.8 <- function() {
+figure7.8 <- function() {
+#line 1468 "objectgrid.Rnw"
 tg1 <- textGrob("Sample", name="tg1")
 rg1 <- rectGrob(width=1.1*grobWidth("tg1"), 
                 height=1.3*grobHeight("tg1"),
-                gp=gpar(col="grey60", lwd=3))
+                gp=gpar(col="gray60", lwd=3))
 rg2 <- rectGrob(width=1.1*grobWidth(tg1), 
                 height=1.3*grobHeight(tg1),
                 gp=gpar(col="white"))
 
 
 
-pushViewport(viewport(gp=gpar(cex=1.5)))
-grid.rect(gp=gpar(col="grey"))
+#line 1512 "objectgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+pushViewport(viewport(gp=gpar(cex=1.5, fill=NA)))
+#line 1490 "objectgrid.Rnw"
 grid.draw(tg1)
 grid.draw(rg1)
 grid.draw(rg2)
 
+#line 1515 "objectgrid.Rnw"
+#line 1508 "objectgrid.Rnw"
 grid.edit("tg1", grep=TRUE, global=TRUE, 
           label="Different text")
 
+#line 1516 "objectgrid.Rnw"
 popViewport()
 
 
 
 }
-figure6.9 <- function() {
-grid.rect(gp=gpar(col="grey"))
-grid.circle(r=0.3, gp=gpar(fill="grey80"), 
-            name="mycircle")
-grid.edit("mycircle", gp=gpar(lwd=5))
-grid.edit("mycircle", gp=gpar(lty="dashed"))
+figure7.9 <- function() {
+#line 1648 "objectgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+pushViewport(viewport(gp=gpar(fill=NA)))
+#line 1617 "objectgrid.Rnw"
+grid.circle(.25, .5, r=unit(1, "mm"), 
+            gp=gpar(fill="black"))
+grid.text("A label", .75, .5)
+grid.rect(.75, .5, 
+          width=stringWidth("A label") + unit(2, "mm"),
+          height=unit(1, "line"),
+          name="labelbox")
 
+#line 1651 "objectgrid.Rnw"
+#line 1640 "objectgrid.Rnw"
+grid.segments(.25, .5, 
+              grobX("labelbox", 180), .5,
+              arrow=arrow(angle=15, type="closed"),
+              gp=gpar(fill="black"))
+
+
+#line 1652 "objectgrid.Rnw"
 
 
 
 }
-figure6.10 <- function() {
+figure7.10 <- function() {
+#line 1766 "objectgrid.Rnw"
+pushViewport(viewport(gp=gpar(fill=NA)))
+#line 1685 "objectgrid.Rnw"
+vptop <- viewport(width=.9, height=.4, y=.75,
+                  name="vptop")
+vpbot <- viewport(width=.9, height=.4, y=.25,
+                  name="vpbot")
+pushViewport(vptop)
+upViewport()
+pushViewport(vpbot)
+upViewport()
+
+#line 1768 "objectgrid.Rnw"
+#line 1707 "objectgrid.Rnw"
+grid.rect(vp="vptop")
+grid.lines(1:50/51, runif(50), vp="vptop")
+grid.rect(vp="vpbot")
+grid.lines(1:50/51, runif(50), vp="vpbot")
+
+#line 1769 "objectgrid.Rnw"
+#line 1726 "objectgrid.Rnw"
+grid.null(x=.2, y=.95, vp="vptop", name="tl")
+grid.null(x=.4, y=.95, vp="vptop", name="tr")
+grid.null(x=.2, y=.05, vp="vpbot", name="bl")
+grid.null(x=.4, y=.05, vp="vpbot", name="br")
+
+#line 1770 "objectgrid.Rnw"
+#line 1752 "objectgrid.Rnw"
+grid.polygon(unit.c(grobX("tl", 0),
+                    grobX("tr", 0),
+                    grobX("br", 0),
+                    grobX("bl", 0)),
+             unit.c(grobY("tl", 0),
+                    grobY("tr", 0),
+                    grobY("br", 0),
+                    grobY("bl", 0)),
+             gp=gpar(col="gray", lwd=3))
+
+#line 1771 "objectgrid.Rnw"
+
+
+
+}
+figure7.11 <- function() {
+#line 1821 "objectgrid.Rnw"
+grid.rect(gp=gpar(col="gray"))
+#line 1815 "objectgrid.Rnw"
+grid.circle(r=0.3, gp=gpar(fill="gray80"), 
+            name="mycircle")
+grid.edit("mycircle", gp=gpar(lwd=5))
+grid.edit("mycircle", gp=gpar(lty="dashed"))
+
+#line 1823 "objectgrid.Rnw"
+
+
+
+}
+figure7.12 <- function() {
+#line 1918 "objectgrid.Rnw"
 angle <- seq(0, 2*pi, length=21)[-21]
 x <- cos(angle)
 y <- sin(angle)
 
 
 
+#line 1980 "objectgrid.Rnw"
 trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
 print(
+#line 1930 "objectgrid.Rnw"
 xyplot(y ~ x, aspect=1, 
        xlab="displacement", 
        ylab="velocity")
 
+#line 1983 "objectgrid.Rnw"
 )
+#line 1972 "objectgrid.Rnw"
 grid.edit("[.]xlab$", grep=TRUE, 
           x=unit(1, "npc"), just="right",
           gp=gpar(fontfamily="mono"))
@@ -4495,303 +7245,785 @@ grid.edit("[.]ylab$", grep=TRUE,
           y=unit(1, "npc"), just="right",
           gp=gpar(fontfamily="mono"))
 
+#line 1985 "objectgrid.Rnw"
 
 
 
 }
-figure1.12 <- function() {
+figure7.13 <- function() {
+#line 2044 "objectgrid.Rnw"
+mtcars2 <- mtcars
+mtcars2$trans <- factor(mtcars$am, 
+                        levels=0:1, 
+                        labels=c("automatic", "manual"))
+mtcars2$am <- NULL
+mtcars2$vs <- NULL
+mtcars2$drat <- NULL
+mtcars2$carb <- NULL
 
-#
-# Comment:
-#
-# Makes use of the roundRect grob defined in the RGraphics package
-#
 
-require(RGraphics)
 
-label <- function(label, row, col, title=FALSE, box=TRUE, tcol="black",
-                  fill=NA, lwd=1) {
-  if (title) {
-    face <- "bold"
-    cex <- 0.8
-  } else {
-    face <- "plain"
-    cex <- 0.8
+#line 2099 "objectgrid.Rnw"
+update_geom_defaults("smooth", aes(color="black"))
+print(
+#line 2061 "objectgrid.Rnw"
+ggplot(mtcars2, aes(x=disp, y=mpg)) +
+    geom_point() +
+    geom_smooth(method=lm)
+
+#line 2102 "objectgrid.Rnw"
+)
+#line 2087 "objectgrid.Rnw"
+downViewport("panel-3-3")
+sline <- grid.get(gPath("smooth", "polyline"),
+                  grep=TRUE)
+grid.segments(.7, .8, 
+              grobX(sline, 45), grobY(sline, 45),
+              arrow=arrow(angle=10, type="closed"),
+              gp=gpar(fill="black"))
+grid.text("line of best fit", .71, .81,
+          just=c("left", "bottom"))
+
+#line 2104 "objectgrid.Rnw"
+
+
+
+}
+figure1.14 <- function() {
+#line 23 "organisation.Rnw"
+library(graph)
+library(Rgraphviz)
+
+grpkgs <- new("graphNEL", 
+              nodes=c(
+                # engine
+                "grDevices", 
+                # systems
+                "graphics", "grid",
+                # graphics-based packages
+                "maps", "diagram", "plotrix", "gplots", "pixmap", 
+                # grid-based packages
+                "lattice", "ggplot2", "grImport", "gridBase", "vcd",
+                # interface packages
+                "rgl", "rggobi", "iplots",
+                # devices
+                "JavaGD", "Cairo", "tikzDevice"),
+                # ggplot-based packages
+                # "DescribeDisplay",
+                # lattice-based packages
+                # "latticist", "latticeExtra"),
+              edgeL=list(
+                grDevices=list(edges=c("graphics", "grid",
+                                 "JavaGD", "Cairo", "tikzDevice")),
+                graphics=list(edges=c("maps", "diagram", "plotrix",
+                                "gplots", "pixmap", 
+                                "gridBase")),
+                grid=list(edges=c("lattice", "ggplot2", "grImport", "vcd",
+                            "gridBase")),
+                maps=list(),
+                diagram=list(),
+                plotrix=list(),
+                gplots=list(),
+                pixmap=list(),
+                lattice=list(), # edges=c("latticist", "latticeExtra")), 
+#                latticist=list(),
+#                latticeExtra=list(),
+                ggplot2=list(), # edges="DescribeDisplay"),
+                # DescribeDisplay=list(),
+                grImport=list(),
+                gridBase=list(),
+                vcd=list(),
+                # Invisible links to tie interface packages together
+                rgl=list(edges="rggobi"),
+                rggobi=list(edges="iplots"),
+                iplots=list(edges="rgl"),
+#                GDD=list(edges=c("grDevices")),
+#                JavaGD=list(edges=c("grDevices")),
+#                Cairo=list(edges=c("grDevices")),
+#                cairoDevice=list(edges=c("grDevices")),
+#                tikzDevice=list(edges="grDevices")),
+                JavaGD=list(),
+                Cairo=list(),
+                tikzDevice=list()),
+              edgemode="directed")
+
+# systemPkgs <- subGraph(c("graphics", "grid"), grpkgs)
+# graphicsPkgs <- subGraph(c("maps", "diagram", "plotrix",
+#                            "gplots", "pixmap"), grpkgs)
+# gridPkgs <- subGraph(c("grid", "lattice", "ggplot2", "grImport"), grpkgs)
+# 
+# devicePkgs <- subGraph(c("GDD", "JavaGD", "Cairo", 
+#                          "cairoDevice", "tikzDevice"),
+#                        grpkgs)
+interfacePkgs <- subGraph(c("iplots", "rggobi", "rgl"), grpkgs)
+
+ragraph <- agopen(grpkgs, name="whatever",
+                  # layoutType="dot", 
+                  layoutType="dot", 
+                  # layoutType="twopi", 
+                  attrs=list(
+                    node=list(fontname="Helvetica", fontsize=10),
+                    edge=list(arrowhead="none"),
+                    # NOTE: size and margins controlled below in call to 'dot'
+                    graph=list(
+                      root="grDevices",
+                      # ratio=3/4,
+                      rankdir="LR")),
+#                      compound=TRUE)),
+                  subGList=list(
+#                    list(graph=devicePkgs), 
+#                    list(graph=systemPkgs),
+#                    list(graph=graphicsPkgs),
+#                    list(graph=gridPkgs),
+                    list(graph=interfacePkgs)))
+
+nodeDataDefaults(ragraph, "style") <- "filled"
+nodeDataDefaults(ragraph, "fillcolor") <- "gray90"
+nodeData(ragraph, c("grDevices", "graphics", "grid", "lattice", "ggplot2"), 
+         "style") <- "filled"
+nodeData(ragraph, c("grDevices", "graphics", "grid", "lattice", "ggplot2"), 
+         "fillcolor") <- "gray70"
+
+# clusterData(ragraph, 0, "label") <- "Devices"
+# clusterData(ragraph, 1, "label") <- "Systems"
+# clusterData(ragraph, 2, "label") <- "Graphics-based Packages"
+# clusterData(ragraph, 3, "label") <- "Grid-based Packages"
+clusterData(ragraph, 0, "style") <- "dashed"
+
+# Edge from "grDevices" to "Interface Packages" cluster
+# (Needs existing link from grDevices to rgl)
+# edgeDataDefaults(ragraph, "lhead") <- NA
+# edgeData(ragraph, "grDevices", "rgl", "lhead") <- "cluster_1" 
+
+# Edges within "Interface Packages" cluster
+edgeData(ragraph, "rgl", "rggobi", "style") <- "invis"
+edgeData(ragraph, "rggobi", "iplots", "style") <- "invis"
+edgeData(ragraph, "iplots", "rgl", "style") <- "invis"
+# edgeData(ragraph, "pixmap", "rgl", "style") <- "invis"
+# edgeData(ragraph, "gridBase", "rggobi", "style") <- "invis"
+# edgeData(ragraph, "lattice", "iplots", "style") <- "invis"
+
+toFile(ragraph, filename="grpkgs.dot", fileType="dot")
+system("dot -Kneato grpkgs.dot -Tps -Gsize='8,8' -Gmargin=0 > organisation-graphicslevels.ps") 
+
+
+
+
+
+}
+figure10.1 <- function() {
+#line 440 "params.Rnw"
+names <- c("blank", "solid", "dashed", "dotted", "dotdash",
+  "longdash", "twodash", "", "", "13", "F8", "431313", "22848222")
+hgap <- unit(5, "mm")
+pushViewport(viewport(layout=grid.layout(17, 5,
+  widths=unit.c(unit(1, "strwidth", "Integer") + unit(3, "mm"), 
+    hgap, unit(1.5, "inches"),
+    hgap, max(unit(rep(1, length(names)), "strwidth", data=as.list(names))) + unit(3, "mm")),
+  heights=unit(c(1.2, 1, 1, rep(1.2, 7), 1, 1, rep(1.2, 4), 1), "lines"))))
+pushViewport(viewport(layout.pos.col=1:5, layout.pos.row=1:17))
+grid.rect(width=1.3, height=1.3, gp=gpar(col="gray"))
+popViewport()
+for (i in 1:17) {
+	if (i == 1) {
+	  pushViewport(viewport(layout.pos.col=1, layout.pos.row=i))  
+	  grid.text("Integer", gp=gpar(fontface="bold"), just="right", x=1)
+	  popViewport()
+	  pushViewport(viewport(layout.pos.col=3, layout.pos.row=i))  
+	  grid.text("Sample line", gp=gpar(fontface="bold"))
+	  popViewport()
+	  pushViewport(viewport(layout.pos.col=5, layout.pos.row=i))  
+	  grid.text("String", gp=gpar(fontface="bold"), just="left", x=0)
+	  popViewport()
+	  pushViewport(viewport(layout.pos.row=i))  
+	  grid.lines(c(0, 1), 0)
+	  popViewport()
+        } else if (i == 3) {
+	    pushViewport(viewport(layout.pos.col=1, layout.pos.row=i))  
+	    grid.text("Predefined", just="left", x=0, 
+              gp=gpar(fontface="italic"))
+	    popViewport()          
+        } else if (i == 12) {
+	    pushViewport(viewport(layout.pos.col=1, layout.pos.row=i))  
+	    grid.text("Custom", just="left", x=0, 
+              gp=gpar(fontface="italic"))
+	    popViewport()          
+	} else if ((i > 3 && i < 11) || 
+                   (i > 12 && i < 17)) {
+	  if (i < 11) {
+	    pushViewport(viewport(layout.pos.col=1, layout.pos.row=i))  
+	    grid.text(i-4, just="right", x=1)
+	    popViewport()
+	  }
+	  if (nchar(names[i-3])) {
+		  pushViewport(viewport(layout.pos.col=5, layout.pos.row=i))  
+		  grid.text(paste("\"", names[i-3], "\"", sep=""), x=0, just="left")
+		  popViewport()
+		  pushViewport(viewport(layout.pos.col=3, layout.pos.row=i))  
+		  grid.lines(c(0, 1), 0.5, gp=gpar(lty=names[i-3], lwd=2))
+		  popViewport()
+	  }
+        }
+	if (i == 17) {
+	    	  pushViewport(viewport(layout.pos.row=i))  
+		  grid.lines(c(0, 1), 0)
+		  popViewport()
+	}
+}
+popViewport()
+
+
+
+}
+figure10.2 <- function() {
+#line 548 "params.Rnw"
+x <- c(.3, .7, .3)
+y <- c(.2, .5, .8)
+grid.rect(gp=gpar(col="gray"))
+grid.lines(x, y, gp=gpar(lwd=40, lineend="square",
+                   linejoin="mitre", col="black"))
+grid.lines(x, y, gp=gpar(lwd=40, col="gray50"))
+                   # lineend="round", linejoin="round"
+grid.lines(x, y, gp=gpar(lwd=40, lineend="butt",
+                   linejoin="bevel", col="gray80"))
+grid.points(x, y, default="npc", pch=16, gp=gpar(cex=0.5))
+
+
+
+
+}
+figure10.3 <- function() {
+#line 596 "params.Rnw"
+ncol <- 6
+nrow <- 5
+grid.rect(gp=gpar(col="gray"))
+for (i in 1:nrow) {
+  for (j in 1:ncol) {
+    x <- unit(j/(ncol+1), "npc")
+    y <- unit(i/(nrow + 1), "npc")
+    pch <- (i - 1)*ncol + j - 1
+    if (pch > 25) 
+      pch <- c("A", "b", ".", "#")[pch - 25]
+    grid.points(x + unit(3, "mm"), y, 
+      pch=pch, gp=gpar(fill="gray"))
+    grid.text(pch, x - unit(3, "mm"), y, gp=gpar(col="gray"))
   }
-  pushViewport(viewport(layout.pos.row=row,
-                         layout.pos.col=col))
-  if (box)
-    grid.roundRect(w=unit(0.82, "inches"), h=unit(1.2, "lines"),
-                   r=unit(0.2, "snpc"), 
-                   gp=gpar(col=tcol, lwd=lwd, fill=fill))
-  grid.text(label, gp=gpar(fontface=face, cex=cex, col=tcol))
-  popViewport()
 }
 
-arrow <- function(row1, col1, row2, col2, col="black") {
-  pushViewport(viewport(layout.pos.row=row1,
-                         layout.pos.col=col1))
-  grid.move.to(x=0.5, y=unit(0.5, "npc") - unit(0.6, "lines"))
-  popViewport()
-  pushViewport(viewport(layout.pos.row=row2,
-                         layout.pos.col=col2))
-  grid.arrows(grob=lineToGrob(x=0.5,
-                y=unit(0.5, "npc") + unit(0.6, "lines")),
-              angle=10, type="closed", 
-              length=unit(0.15, "inches"), gp=gpar(col=col, fill=col))
-  popViewport()
-} 
 
-pushViewport(viewport(width=unit(4.9, "inches"),
-                      layout=grid.layout(7, 5,
-                         heights=unit(c(3,.7,3,.7,2,.7,3),
-                           c("lines", "inches",
-                             "lines", "inches",
-                             "lines", "inches",
-                             "lines")))
-                       ))
 
-pushViewport(viewport(layout.pos.row=1,
-                       layout.pos.col=2:5))
-grid.roundRect(gp=gpar(lty="dashed"), r=unit(0.1, "snpc"))
-popViewport()
-
-label("Graphics\nPackages", 1, 1, title=TRUE, box=FALSE)
-label("lattice", 1, 4, lwd=3, fill="grey80")
-label("...", 1, 5)
-label("maps", 1, 2)
-label("...", 1, 3)
-arrow(1, 2, 3, 3)
-arrow(1, 3, 3, 3)
-arrow(1, 4, 3, 4)
-arrow(1, 5, 3, 4)
-
-pushViewport(viewport(layout.pos.row=3,
-                       layout.pos.col=2:5))
-grid.roundRect(gp=gpar(lty="dashed"), r=unit(0.1, "snpc"))
-popViewport()
-
-label("Graphics\nSystems", 3, 1, title=TRUE, box=FALSE)
-label("graphics", 3, 3, lwd=3, fill="grey80")
-label("grid", 3, 4, lwd=3, fill="grey80")
-arrow(3, 3, 5, 3:4)
-arrow(3, 4, 5, 3:4)
-
-label("Graphics\nEngine\n&\nDevices", 5, 1, title=TRUE, box=FALSE)
-label("grDevices", 5, 3:4, lwd=3, fill="grey80")
-# arrow(5, 3:4, 7, 2)
-# arrow(5, 3:4, 7, 3)
-# arrow(5, 3:4, 7, 4)
-# arrow(5, 3:4, 7, 5)
-
-pushViewport(viewport(layout.pos.row=7,
-                       layout.pos.col=2:5))
-grid.roundRect(gp=gpar(lty="dashed"), r=unit(0.1, "snpc"))
-popViewport()
-
-label("Graphics\nDevice\nPackages", 7, 1, title=TRUE, box=FALSE)
-label("gtkDevice", 7, 3)
-label("...", 7, 4)
-      
-popViewport()
+}
+figure10.4 <- function() {
+#line 852 "params.Rnw"
+h <- 0.01
+drawexpr <- function(expr, y, exprFamily="CM") {
+  grid.text(paste("expression(", expr, ")", sep=""), .5, y-h, 
+            just="top", gp=gpar(fontfamily="mono", cex=0.75))
+  grid.text(parse(text=expr), .5, y+h, 
+            just="bottom", gp=gpar(fontfamily=exprFamily))
+}
+drawexpr("z[i] == sqrt(x[i]^2 + y[i]^2)", 1/5)
+drawexpr("hat(beta) == (X^t * X)^{-1} * X^t * y", 2/5)
+drawexpr("bar(x) == sum(frac(x[i], n), i==1, n)", 3/5)
+drawexpr("paste(\"Temperature (\", degree, \"C) in 2003\")", 4/5,
+         exprFamily="CM2")
+grid.rect(gp=gpar(col="gray", fill=NA))
 
 
 
 }
 figure2.1 <- function() {
+#line 179 "simplebase.Rnw"
 par(mfrow=c(2, 2), cex=0.6, mar=c(4, 4, 1, 1))
+#line 172 "simplebase.Rnw"
 y <- rnorm(20)
 plot(y, type="p")
 plot(y, type="l")
 plot(y, type="b")
 plot(y, type="h")
 
+#line 181 "simplebase.Rnw"
 
 
 
 }
 figure2.2 <- function() {
+#line 247 "simplebase.Rnw"
   par(mfrow=c(2, 2), cex=0.6, mar=c(4, 4, 4, 2), mex=0.8)
   plot(lm.SR <- lm(sr ~ pop15 + pop75 + dpi + ddpi, data = LifeCycleSavings),
-    id.n=1)
+       id.n=1, cex.caption=0.8, which=1:4,
+       panel=function(...) { panel.smooth(..., col.smooth="gray") })
 
 
 
 }
 figure2.3 <- function() {
+#line 294 "simplebase.Rnw"
 library(cluster)
 
 
 
+#line 323 "simplebase.Rnw"
+#line 307 "simplebase.Rnw"
 subset <- sample(1:150, 20)
 cS <- as.character(Sp <- iris$Species[subset])
 cS[Sp == "setosa"] <- "S"
 cS[Sp == "versicolor"] <- "V"
 cS[Sp == "virginica"] <- "g"
 ai <- agnes(iris[subset, 1:4])
+
+#line 324 "simplebase.Rnw"
 par(mfrow=c(2, 1), cex=0.5, pty="s")
-plot(ai, which=1, col=c("grey90", "grey"), labels = cS)
+plot(ai, which=1, col=c("gray90", "gray"), labels = cS)
 plot(ai, which=2, labels = cS)
 
 
 
 }
 figure2.4 <- function() {
-par(mfrow=c(2, 2), mar=c(2.5, 2, 1, 1), cex=0.6)
-boxplot(decrease ~ treatment, data = OrchardSprays,
-        log = "y", col="light grey")
-boxplot(decrease ~ treatment, data = OrchardSprays,
-        log = "y", col="light grey", 
-        boxwex=0.5)
+#line 433 "simplebase.Rnw"
+plottitle <- function(plotfun, funarg, outer=FALSE, cex=.7, line=1) {
+    ncp <- nchar(plotfun)
+    nca <- nchar(funarg)
+    mtext(paste(plotfun, "(", 
+                paste(rep(" ", nca), collapse=""),
+                ")", sep=""),
+          family="mono", cex=cex, line=line, font=2, outer=outer)
+    mtext(paste(paste(rep(" ", ncp + 1), collapse=""),
+                funarg, " ", sep=""),
+          family="mono", col="gray60", cex=cex, line=line, font=2, outer=outer)
+}
+plot2title <- function(plotfun, funarg, 
+                       extrafn, extraarg, 
+                       outer=FALSE, cex=.7, line=.5) {
+    ncp <- nchar(plotfun)
+    nca <- nchar(funarg)
+    ncep <- nchar(extrafn)
+    ncea <- nchar(extraarg)
+    mtext(paste(plotfun, 
+                "(",  paste(rep(" ", nca), collapse=""),
+                ")\n", 
+                extrafn, "(",
+                paste(rep(" ", ncea), collapse=""),
+                ")", sep=""),
+          family="mono", cex=cex, line=line, font=2, outer=outer)
+    mtext(paste(paste(rep(" ", ncp + 1), collapse=""),
+                funarg, " \n", 
+                paste(rep(" ", ncep + 1), collapse=""),
+                extraarg, " ", sep=""),
+          family="mono", col="gray60", cex=cex, line=line, font=2, outer=outer)
+}
+dohplot <- function(plotfn, ..., funarg, 
+                    extrafn=NULL, extraarg=NULL, namefudge=FALSE,
+                    main="", xlab="", ylab="", axes=FALSE, box=TRUE) {
+    if (is.null(xlab) || is.null(ylab)) {
+        do.call(plotfn,
+                list(..., main=""))
+    } else if (is.null(axes)) {
+        do.call(plotfn,
+                list(..., main="", xlab="", ylab=""))
+    } else {
+        do.call(plotfn,
+                list(..., main="", axes=FALSE, xlab="", ylab=""))
+    }
+    if (is.null(extrafn)) {
+        plottitle(plotfn, funarg)
+    } else {
+        plot2title(if (namefudge) paste(" ", plotfn, sep="") else plotfn, 
+                   funarg, extrafn, extraarg)
+    }
+    if (box)
+        box() # col="gray")
+}
 
-par(las=2, xpd=NA)
-barplot(VADeaths[1:2,], angle = c(45, 135), 
-        density = 20, col = "grey",
-        names=c("RM", "RF", "UM", "UF"))
-barplot(VADeaths[1:2,], angle = c(45, 135), 
-        density = 20, col = "grey",
-        names=c("RM", "RF", "UM", "UF"),
-        horiz=TRUE)
 
+
+#line 488 "simplebase.Rnw"
+par(mfrow=c(3, 4), mar=c(1, 1, 3, 1), mex=.7, mgp=c(3, 100, 100))
+dohplot("plot", (1:10)^2, funarg="numeric",
+        xlim=c(0, 11), ylim=c(-10, 110))
+dohplot("plot", table(rep(1:3, 1:3)), funarg="table", 
+        lwd=2, xlim=c(0, 4), ylim=c(0, 4))
+# Empty
+plot.new()
+plot.new()
+dohplot("barplot", table(rep(1:3, 1:3)), funarg="", 
+        extrafn="plot", extraarg="factor",
+        xlim=c(-1, 5), ylim=c(0, 4), names.arg="")
+dohplot("pie", c(1, 2, 4), funarg="", col=gray(1:3/4), cex=.7,
+        labels="", axes=NULL)
+dohplot("dotchart", 1:3, 
+        funarg="numeric", pch=21, bg="gray",  
+        lcolor="black", xlim=c(0, 4))
+# Empty
+plot.new()
+dohplot("boxplot", (1:10)^2, funarg="numeric", 
+        col="gray", ylim=c(-10, 110))
+dohplot("hist", (1:100)^2, funarg="", col="gray", 
+        breaks=6,
+        xlim=c(-1000, 11000), ylim=c(0, 50))
+dohplot("stripchart", (1:10)^2, funarg="numeric", 
+        method="stack",
+        cex=1, xlim=c(-10, 110), ylim=c(-1, 3), pch=21, bg="gray")
+# stem()
+plot.new()
+txt <- capture.output(stem((1:10)^2))[-2]
+text(.05, (1:length(txt))/(length(txt) + 1), txt, adj=0, family="mono", cex=.7)
+box() # col="gray")
+plottitle("stem", "")
 
 
 
 }
 figure2.5 <- function() {
-par(mfrow=c(2, 2), mar=c(2, 2, 1, 1), cex=0.6)
-y <- rnorm(20)
-plot(y, type="l", lwd=3)
-plot(y, type="l", col="grey")
-plot(y, type="l", lty="dashed")
-plot(y, type="l", ylim=c(-4, 4))
+#line 433 "simplebase.Rnw"
+plottitle <- function(plotfun, funarg, outer=FALSE, cex=.7, line=1) {
+    ncp <- nchar(plotfun)
+    nca <- nchar(funarg)
+    mtext(paste(plotfun, "(", 
+                paste(rep(" ", nca), collapse=""),
+                ")", sep=""),
+          family="mono", cex=cex, line=line, font=2, outer=outer)
+    mtext(paste(paste(rep(" ", ncp + 1), collapse=""),
+                funarg, " ", sep=""),
+          family="mono", col="gray60", cex=cex, line=line, font=2, outer=outer)
+}
+plot2title <- function(plotfun, funarg, 
+                       extrafn, extraarg, 
+                       outer=FALSE, cex=.7, line=.5) {
+    ncp <- nchar(plotfun)
+    nca <- nchar(funarg)
+    ncep <- nchar(extrafn)
+    ncea <- nchar(extraarg)
+    mtext(paste(plotfun, 
+                "(",  paste(rep(" ", nca), collapse=""),
+                ")\n", 
+                extrafn, "(",
+                paste(rep(" ", ncea), collapse=""),
+                ")", sep=""),
+          family="mono", cex=cex, line=line, font=2, outer=outer)
+    mtext(paste(paste(rep(" ", ncp + 1), collapse=""),
+                funarg, " \n", 
+                paste(rep(" ", ncep + 1), collapse=""),
+                extraarg, " ", sep=""),
+          family="mono", col="gray60", cex=cex, line=line, font=2, outer=outer)
+}
+dohplot <- function(plotfn, ..., funarg, 
+                    extrafn=NULL, extraarg=NULL, namefudge=FALSE,
+                    main="", xlab="", ylab="", axes=FALSE, box=TRUE) {
+    if (is.null(xlab) || is.null(ylab)) {
+        do.call(plotfn,
+                list(..., main=""))
+    } else if (is.null(axes)) {
+        do.call(plotfn,
+                list(..., main="", xlab="", ylab=""))
+    } else {
+        do.call(plotfn,
+                list(..., main="", axes=FALSE, xlab="", ylab=""))
+    }
+    if (is.null(extrafn)) {
+        plottitle(plotfn, funarg)
+    } else {
+        plot2title(if (namefudge) paste(" ", plotfn, sep="") else plotfn, 
+                   funarg, extrafn, extraarg)
+    }
+    if (box)
+        box() # col="gray")
+}
 
+
+
+#line 653 "simplebase.Rnw"
+set.seed(1500)
+# mgp draws the axes miles off the page
+par(mfrow=c(4, 4), mar=c(1, 1, 3, 1), mex=.7, mgp=c(3, 100, 100))
+dohplot("plot", 1:10, (1:10)^2, funarg="num,num", 
+        pch=21, bg="gray", 
+        xlim=c(0, 11), ylim=c(-10, 110))
+x <- rnorm(10000)
+dohplot("smoothScatter", x, x + rnorm(10000)/3,  funarg="",
+        nbin=64, colramp=function(n) { gray(n:1/(n + 1)) },
+        xlim=c(-5, 5), ylim=c(-5, 5))
+x <- sample(1:4, 20, replace=TRUE)
+y <- x + sample(0:1, 20, replace=TRUE)
+dohplot("sunflowerplot", x, y,
+        funarg="", seg.col="black", size=.07,
+        xlim=c(0, 5), ylim=c(0, 6))
+# Empty gap 
+plot.new()
+dohplot("boxplot", list((1:10)^2, 120 - (1:10)^2), funarg="list", 
+        extrafn="plot", extraarg="fac,num", col="gray", boxwex=0.5,
+        ylim=c(-10, 130))
+dohplot("barplot", rbind(1:3, (1:3)^2), funarg="matrix",
+        xlim=c(0, 4), ylim=c(0, 13))
+dohplot("barplot", rbind(1:3, (1:3)^2), funarg="matrix",
+        beside=TRUE,
+        xlim=c(0, 10), ylim=c(0, 11))
+# Empty gap for dotchart
+plot.new()
+fig <- par("fig")
+dohplot("stripchart", list((1:10)^2, 140 - (1:10)^2), funarg="list",
+        extrafn="plot", extraarg="num,fac",
+        xlim=c(-10, 150), ylim=c(0, 3), pch=21, bg="gray", cex=1)
+dohplot("spineplot", 
+        rep(1:3, each=6), 
+        factor(c(rep(1:3, 3:1), rep(1:3, 2), rep(1:3, 1:3))),
+        funarg="num,fac", box=FALSE)
+dohplot("cdplot", 
+        rep(1:3, each=6), 
+        factor(c(rep(1:3, 3:1), rep(1:3, 2), rep(1:3, 1:3))),
+        funarg="", box=FALSE)
+# Empty gap 
+plot.new()
+dohplot("spineplot", 
+        factor(rep(1:3, each=6)), 
+        factor(c(rep(1:3, 3:1), rep(1:3, 2), rep(1:3, 1:3))),
+        funarg="fac,fac", off=5,
+        extrafn="plot", extraarg="fac,fac",
+        namefudge=TRUE,
+        box=FALSE)
+dohplot("assocplot", 
+        table(rep(1:2, each=3),
+              c(rep(1:2, 1:2), rep(1:2, 2:1))),
+        funarg="",
+        col=c("black", "gray"), axes=NULL)
+dohplot("fourfoldplot", 
+        table(rep(1:2, each=3),
+              c(rep(1:2, 1:2), rep(1:2, 2:1))),
+        color=gray(1:2/3),
+        # NOTE: can't make 'space' too small or font size of labels
+        # goes to zero and get error from ghostscript
+        funarg="", xlab=NULL, box=FALSE, space=0.03)
+dohplot("mosaicplot", 
+        table(factor(rep(1:3, each=6)), 
+              factor(c(rep(1:3, 3:1), rep(1:3, 2), rep(1:3, 1:3)))),
+        funarg="", off=10,
+        extrafn="plot", extraarg="table",
+        cex.axis=.1, box=FALSE)
+# Put dotchart in gap
+par(fig=c(fig[1] - .1, fig[2:4]), new=TRUE)
+dotdata <- rbind(1:3, (1:3)^2) # rbind(table(gy), table(gx))
+colnames(dotdata) <- rep("", 3)
+dohplot("dotchart", dotdata, funarg="matrix",
+        labels="", pch=c(16, 21), bg="gray",
+        lcolor="black", xlim=c(0, 13), box=FALSE)
 
 
 
 }
 figure2.6 <- function() {
-par(mfrow=c(2, 2))
-z <- 2 * volcano        # Exaggerate the relief
-x <- 10 * (1:nrow(z))   # 10 meter spacing (S to N)
-y <- 10 * (1:ncol(z))   # 10 meter spacing (E to W)
-# Don't draw the grid lines :  border = NA
-par(mar=rep(0, 4))
-persp(x, y, z, theta = 135, phi = 30, col = "light grey", scale = FALSE,
-      ltheta = -120, shade = 0.75, border = NA, box = FALSE)
-mtext("persp()", side=3, line=-2)
-par(mar=c(3, 3, 2, 0.5))
-# Note that  example(trees)  shows more sensible plots!
-N <- nrow(trees)
-attach(trees)
-# Girth is diameter in inches
-symbols(Height, Volume, circles=Girth/24, inches=FALSE,
-        main="", xlab="", ylab="", bg=grey(Girth/max(Girth)))
-mtext("symbols()", side=3, line=0.5)
-par(mar=rep(0.5, 4))
-contour(x, y, z, asp=1, labcex=0.35, axes=FALSE)
-rect(0, 0, 870, 620)
-mtext("contour()", side=3, line=-1.5)
-image(x, y, z, asp=1, col=grey(0.5 + 1:12/24), xlab="", ylab="", axes=FALSE)
-rect(min(x)-5, min(y)-5, max(x)+5, max(y)+5)
-mtext("image()", side=3, line=-1.5)
+#line 433 "simplebase.Rnw"
+plottitle <- function(plotfun, funarg, outer=FALSE, cex=.7, line=1) {
+    ncp <- nchar(plotfun)
+    nca <- nchar(funarg)
+    mtext(paste(plotfun, "(", 
+                paste(rep(" ", nca), collapse=""),
+                ")", sep=""),
+          family="mono", cex=cex, line=line, font=2, outer=outer)
+    mtext(paste(paste(rep(" ", ncp + 1), collapse=""),
+                funarg, " ", sep=""),
+          family="mono", col="gray60", cex=cex, line=line, font=2, outer=outer)
+}
+plot2title <- function(plotfun, funarg, 
+                       extrafn, extraarg, 
+                       outer=FALSE, cex=.7, line=.5) {
+    ncp <- nchar(plotfun)
+    nca <- nchar(funarg)
+    ncep <- nchar(extrafn)
+    ncea <- nchar(extraarg)
+    mtext(paste(plotfun, 
+                "(",  paste(rep(" ", nca), collapse=""),
+                ")\n", 
+                extrafn, "(",
+                paste(rep(" ", ncea), collapse=""),
+                ")", sep=""),
+          family="mono", cex=cex, line=line, font=2, outer=outer)
+    mtext(paste(paste(rep(" ", ncp + 1), collapse=""),
+                funarg, " \n", 
+                paste(rep(" ", ncep + 1), collapse=""),
+                extraarg, " ", sep=""),
+          family="mono", col="gray60", cex=cex, line=line, font=2, outer=outer)
+}
+dohplot <- function(plotfn, ..., funarg, 
+                    extrafn=NULL, extraarg=NULL, namefudge=FALSE,
+                    main="", xlab="", ylab="", axes=FALSE, box=TRUE) {
+    if (is.null(xlab) || is.null(ylab)) {
+        do.call(plotfn,
+                list(..., main=""))
+    } else if (is.null(axes)) {
+        do.call(plotfn,
+                list(..., main="", xlab="", ylab=""))
+    } else {
+        do.call(plotfn,
+                list(..., main="", axes=FALSE, xlab="", ylab=""))
+    }
+    if (is.null(extrafn)) {
+        plottitle(plotfn, funarg)
+    } else {
+        plot2title(if (namefudge) paste(" ", plotfn, sep="") else plotfn, 
+                   funarg, extrafn, extraarg)
+    }
+    if (box)
+        box() # col="gray")
+}
+
+
+
+#line 840 "simplebase.Rnw"
+# mgp draws the axes miles off the page
+par(mfrow=c(3, 4), mar=c(1, 1, 3, 1), mex=.7, mgp=c(3, 100, 100))
+mdf <- cbind(3:6, (3:6)^2, (3:6)^3)
+names(mdf) <- c("Y1", "Y2", "Y3")
+aaa <- seq(0, pi, length=10)
+xxx <- rep(aaa, 10)
+yyy <- rep(aaa, each=10)
+zzz <- sin(xxx) + sin(yyy)
+# gap for pairs(matrix)
+plot.new()
+dohplot("matplot", mdf[order(mdf[, 1]), ], funarg="", 
+        pch=21:23, bg=c("white", "black", "gray"), type="o",
+        col="black", xlim=c(0, 6), ylim=c(-10, 230))
+df <- USJudgeRatings[1:6, ]
+rownames(df) <- NULL
+dohplot("stars", df, funarg="", ncol=2, lwd=1,
+        len=.8, col.stars=rep("gray", 13), mar=c(1, 1, 3, 1))
+# gap
+plot.new()
+dohplot("image", matrix(zzz, ncol=10), funarg="", col=gray(1:12/13))
+dohplot("contour", matrix(zzz, ncol=10), funarg="", 
+        levels=seq(0, 2, .25), labcex=.4)
+# gap for filled.contour(matrix)
+plot.new()
+dohplot("persp", matrix(zzz, ncol=10), funarg="",
+        theta=30, phi=45, col="gray")
+dohplot("symbols", xxx, yyy, funarg="",
+        circles=zzz, inches=.03, axes=NULL)
+# gap for coplot(y ~ x | g)
+plot.new()
+dohplot("mosaicplot", 
+        table(factor(rep(1:3, each=6)), 
+              factor(c(rep(1:3, 3:1), rep(1:3, 2), rep(1:3, 1:3)))),
+        funarg="", cex.axis=.1, off=10,
+        box=FALSE)
 
 
 
 }
 figure2.7 <- function() {
-# Awful way to position multiple plots here (using oma)
-# Won't lay things out nicely on different sized device or
-# different output format (i.e. where line heights differ)
-par(cex=0.6)
-pairs(iris[1:4], oma=c(18, 4, 4, 4), 
-      panel=function(x, y, ...) {
-	      points(x, y, lwd=0.1,
-              pch = ".") }) 
-par(cex=1)
+#line 984 "simplebase.Rnw"
+par(mfrow=c(2, 2), mar=c(2.5, 2, 1, 1), cex=0.6)
+#line 968 "simplebase.Rnw"
+boxplot(decrease ~ treatment, data = OrchardSprays,
+        log = "y", col="light gray")
+boxplot(decrease ~ treatment, data = OrchardSprays,
+        log = "y", col="light gray", 
+        boxwex=0.5)
 
-par(new=TRUE)
-par(omi=c(0, 0, 4.7, 0), mfrow=c(1, 2), mfg=c(1, 1), xpd=NA)
-par(mar=c(1, 1, 0, 1))
-palette(grey(0.5 + 1:8/24))
-stars(mtcars[1:8, 1:7], len = 0.8, cex=0.5,
-      draw.segments = TRUE, xpd=NA)
+#line 986 "simplebase.Rnw"
+par(las=2, xpd=NA)
+#line 975 "simplebase.Rnw"
+barplot(VADeaths[1:2,], angle = c(45, 135), 
+        density = 20, col = "gray",
+        names=c("RM", "RF", "UM", "UF"))
+barplot(VADeaths[1:2,], angle = c(45, 135), 
+        density = 20, col = "gray",
+        names=c("RM", "RF", "UM", "UF"),
+        horiz=TRUE)
 
-par(mar=c(0, 1, 1, 1))
-# Terrible hack to add empty lines to data set names
-# to try to get labelling right in small size
-dm <- dimnames(Titanic)
-dm$Sex <- c("Male\n\n", "Female\n\n")
-dm$Survived <- c("No\n", "Yes\n")
-dm$Age <- c("Child\n", "Adult\n")
-dimnames(Titanic) <- dm
-mosaicplot(~ Sex + Age + Survived, data = Titanic, off=rep(5, 3),
-           ylab="", main="", 
-           color = c("light grey", "dark grey"))
+#line 988 "simplebase.Rnw"
 
 
 
 }
 figure2.8 <- function() {
-par(mfrow=c(2, 2))
+#line 1119 "simplebase.Rnw"
+par(mfrow=c(2, 2), mar=c(2, 2, 1, 1), cex=0.6)
+#line 1112 "simplebase.Rnw"
+y <- rnorm(20)
+plot(y, type="l", lwd=3)
+plot(y, type="l", col="gray")
+plot(y, type="l", lty="dashed")
+plot(y, type="l", ylim=c(-4, 4))
+
+#line 1121 "simplebase.Rnw"
+
+
+
+}
+figure2.9 <- function() {
+#line 1212 "simplebase.Rnw"
+par(cex=.5)
+#line 1205 "simplebase.Rnw"
+plot(function(x) { 
+         sin(x)/x 
+     }, 
+     from=-10*pi, to=10*pi, 
+     xlab="", ylab="", n=500)
+
+#line 1214 "simplebase.Rnw"
+
+
+
+#line 1254 "simplebase.Rnw"
+par(mfrow=c(1, 2))
 par(mar=c(7, 0, 3, 1))
 par(mex=0.7)
-dotchart(t(VADeaths[1:3,]), xlim = c(0,40), cex=0.6,
-         labels=c("RM", "RF", "UM", "UF"))
-
-par(mex=1)
-par(mar=c(5, 3, 2, 1))
-sunflowerplot(x=sort(round(rnorm(100))), y= round(rnorm(100),0),
-             xlab="", ylab="", xlim=c(-3, 3), ylim=c(-3, 3), cex=0.5,
-             size=1/12, seg.lwd=1, seg.col="grey",
-             axes=FALSE)
-axis(1, at=seq(-3, 3, 3))
-axis(2, at=seq(-3, 3, 3))
 
 hc <- hclust(dist(USArrests), "ave")
 dend1 <- as.dendrogram(hc)
 dend2 <- cut(dend1, h=70)
 par(cex=0.7)
-par(mar=c(1, 0, 2, 5.5))
+par(mar=c(1, 0, 2, 8))
 #  dend2$lower is *NOT* a dendrogram, but a list of .. :
 plot(dend2$lower[[3]], 
   horiz = TRUE, type = "tr", axes=FALSE, cex=0.8)
-par(mar=c(6, 0, 2, 0))
+par(mar=c(8, 0, 2, 0))
 # "inner" and "leaf" edges in different type & color :
 plot(dend2$lower[[2]], 
-     edgePar = list(col=c("black", "grey")), edge.root=TRUE, 
+     edgePar = list(col=c("black", "gray")), edge.root=TRUE, 
      axes=FALSE, cex=0.8)
 
 
 
 }
 figure4.1 <- function() {
-trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
+#line 117 "simplegrid.Rnw"
+
 trellis.par.set(list(dot.symbol=list(pch=1)))
 print(
-xyplot(lat ~ long, data=quakes, pch=".")
+#line 114 "simplegrid.Rnw"
+xyplot(pressure ~ temperature, pressure)
 
+#line 121 "simplegrid.Rnw"
 )
 
 
 
 }
 figure4.2 <- function() {
-tplot <- xyplot(lat ~ long, data=quakes, pch=".")
+#line 193 "simplegrid.Rnw"
+tplot <- xyplot(pressure ~ temperature, pressure)
 
 
 
-trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
+#line 157 "simplegrid.Rnw"
+
 trellis.par.set(list(dot.symbol=list(pch=1)))
 print(
-update(tplot, 
-       main="Earthquakes in the Pacific Ocean\n(since 1964)")
+#line 151 "simplegrid.Rnw"
+xyplot(pressure ~ temperature, pressure,
+       type="o", pch=16, lty="dashed", 
+       main="Vapor Pressure of Mercury")
 
+
+#line 161 "simplegrid.Rnw"
 )
 
 
 
 }
 figure4.3 <- function() {
+#line 330 "simplegrid.Rnw"
 x <- 1:5
 y <- 1:5
 g <- factor(1:5)
@@ -4799,10 +8031,10 @@ types <- c("barchart", "bwplot", "densityplot", "dotplot",
            "histogram", "qqmath", "stripplot", "qq",
            "xyplot", "levelplot", "contourplot",
            "cloud", "wireframe", "splom", "parallel")
-angle <- seq(0, 2*pi, length=21)[-21]
+angle <- seq(0, 2*pi, length=19)[-19]
 xx <- cos(angle)
 yy <- sin(angle)
-gg <- factor(rep(1:2, each=10))
+gg <- factor(rep(1:3, each=6))
 
 aaa <- seq(0, pi, length=10)
 xxx <- rep(aaa, 10)
@@ -4814,7 +8046,7 @@ doplot <- function(name, ...) {
   do.call(name, 
           list(..., scales=list(draw=FALSE), xlab=NULL, ylab=NULL,
                strip=function(which.panel, ...) { 
-                       grid.rect(gp=gpar(fill="grey90")); grid.text(name) 
+                       grid.rect(gp=gpar(fill="gray90")); grid.text(name) 
                      }))
 }
 plot <- vector("list", 15)
@@ -4822,22 +8054,22 @@ plot[[1]] <- doplot("barchart", y ~ g | 1)
 plot[[2]] <- doplot("bwplot", yy ~ gg | 1, 
                     par.settings=list(box.umbrella=list(lwd=0.5)))
 plot[[3]] <- doplot("densityplot", ~ yy | 1)
-plot[[4]] <- doplot("dotplot", y ~ g | 1)
-plot[[5]] <- doplot("histogram", ~ yy | 1)
+plot[[4]] <- doplot("dotplot", g ~ y | 1)
+plot[[5]] <- doplot("histogram", ~ xx | 1)
 plot[[6]] <- doplot("qqmath", ~ yy | 1)
 plot[[7]] <- doplot("stripplot", yy ~ gg | 1)
-plot[[8]] <- doplot("qq", gg ~ yy | 1)
+plot[[8]] <- doplot("qq", gg ~ yy | rep(1, 18), subset=gg != 3)
 plot[[9]] <- doplot("xyplot", xx ~ yy | 1)
 plot[[10]] <- doplot("levelplot", zzz ~ xxx + yyy | 1, colorkey=FALSE)
 plot[[11]] <- doplot("contourplot", zzz ~ xxx + yyy | 1, labels=FALSE, cuts=8)
 plot[[12]] <- doplot("cloud", zzz ~ xxx + yyy | 1, zlab=NULL, zoom=0.9, 
-                     par.settings=list(box.3d=list(lwd=0.01)))
+                     par.settings=list(box.3d=list(lwd=0.1)))
 plot[[13]] <- doplot("wireframe", zzz ~ xxx + yyy | 1, zlab=NULL, zoom=0.9,
-                     drape=TRUE, par.settings=list(box.3d=list(lwd=0.01)),
+                     drape=TRUE, par.settings=list(box.3d=list(lwd=0.1)),
                      colorkey=FALSE)
 plot[[14]] <- doplot("splom", ~ data.frame(x=xx[1:10], y=yy[1:10]) | 1, 
                      pscales=0)
-plot[[15]] <- doplot("parallel", ~ data.frame(x=xx[1:10], y=yy[1:10]) | 1)
+plot[[15]] <- doplot("parallel", ~ as.data.frame(split(yy, gg)) | 1)
 
 grid.newpage()
 pushViewport(viewport(layout=grid.layout(4, 4)))
@@ -4855,119 +8087,1351 @@ popViewport()
 
 }
 figure4.4 <- function() {
-depthgroup <- equal.count(quakes$depth, number=3, overlap=0)
+#line 489 "simplegrid.Rnw"
 
-
-
-trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
-trellis.par.set(list(dot.symbol=list(pch=1)))
-trellis.par.set(list(layout.widths=list(left.padding=0, right.padding=0, ylab.axis.padding=0, axis.right=0, key.ylab.padding=0)))
 print(
-xyplot(lat ~ long | depthgroup, data=quakes, pch=".")
+#line 486 "simplegrid.Rnw"
+xyplot(mpg ~ disp, data=mtcars)
 
+#line 492 "simplegrid.Rnw"
 )
 
 
 
 }
 figure4.5 <- function() {
-depthgroup <- equal.count(quakes$depth, number=3, overlap=0)
+#line 520 "simplegrid.Rnw"
 
-
-
-magnitude <- equal.count(quakes$mag, number=2, overlap=0)
-
-
-
-trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
+trellis.par.set(list(dot.symbol=list(pch=1)))
 trellis.par.set(list(layout.widths=list(left.padding=0, right.padding=0, ylab.axis.padding=0, axis.right=0, key.ylab.padding=0)))
 print(
-xyplot(lat ~ long | depthgroup * magnitude,
-       data=quakes,
-       main="Fiji Earthquakes",
-       ylab="latitude", xlab="longitude",
-       pch=".",
-       scales=list(x=list(alternating=c(1, 1, 1))),
-       between=list(y=1),
-       par.strip.text=list(cex=0.7),
-       par.settings=list(axis.text=list(cex=0.7)))
+#line 517 "simplegrid.Rnw"
+xyplot(mpg ~ disp | factor(gear), data=mtcars)
 
+#line 525 "simplegrid.Rnw"
 )
 
 
 
 }
 figure4.6 <- function() {
-trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
-trellis.par.set(list(fontsize=list(text=9, points=8)))
-show.settings()
+#line 600 "simplegrid.Rnw"
+
+trellis.par.set(list(layout.widths=list(left.padding=0, right.padding=0, ylab.axis.padding=0, axis.right=0, key.ylab.padding=0)))
+print(
+#line 592 "simplegrid.Rnw"
+xyplot(mpg ~ disp, data=mtcars,
+       group=gear, 
+       auto.key=list(space="right"),
+       par.settings=list(superpose.symbol=list(pch=c(1, 3, 16),
+                           fill="white")))
+
+#line 604 "simplegrid.Rnw"
+)
 
 
 
 }
 figure4.7 <- function() {
-depthgroup <- equal.count(quakes$depth, number=3, overlap=0)
+#line 675 "simplegrid.Rnw"
 
-
-
-trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
 trellis.par.set(list(dot.symbol=list(pch=1)))
 print(
-xyplot(lat ~ long | depthgroup, data=quakes, pch=".",
-       layout=c(1, 3), aspect=1, index.cond=list(3:1))
+#line 671 "simplegrid.Rnw"
+xyplot(mpg ~ disp | factor(gear), data=mtcars,
+       layout=c(1, 3), aspect=1)
 
+#line 679 "simplegrid.Rnw"
 )
 
 
 
 }
 figure4.8 <- function() {
-trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
-trellis.par.set(list(fontsize=list(text=10)))
-spots <- by(sunspots, gl(235, 12, lab=1749:1983), mean)
-plot1 <- xyplot(spots ~ 1749:1983, xlab="", type="l",
-                main="Average Yearly Sunspots", 
-                scales=list(x=list(alternating=2)))
-plot2 <- xyplot(spots ~ 1749:1983, xlab="Year", type="l")
-print(plot1, position=c(0, 0.2, 1, 1), more=TRUE)
-print(plot2, position=c(0, 0, 1, 0.33))
+#line 763 "simplegrid.Rnw"
 
+trellis.par.set(list(fontsize=list(text=10)))
+trellis.par.set(list(layout.widths=list(left.padding=0, right.padding=0, ylab.axis.padding=0, axis.right=0, key.ylab.padding=0)))
+#line 747 "simplegrid.Rnw"
+plot1 <- xyplot(mpg ~ disp, data=mtcars, 
+                aspect=1, xlim=c(65, 480), ylim=c(9, 35),
+                subset=gear == 5)
+plot2 <- xyplot(mpg ~ disp, data=mtcars, 
+                aspect=1, xlim=c(65, 480), ylim=c(9, 35),
+                subset=gear == 4)
+plot3 <- xyplot(mpg ~ disp, data=mtcars, 
+                aspect=1, xlim=c(65, 480), ylim=c(9, 35),
+                subset=gear == 3)
+print(plot1, position=c(0, 2/3, 1, 1), more=TRUE)
+print(plot2, position=c(0, 1/3, 1, 2/3), more=TRUE)
+print(plot3, position=c(0, 0, 1, 1/3))
+
+#line 767 "simplegrid.Rnw"
 
 
 
 }
 figure4.9 <- function() {
-trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
-myPanel <- function(x, y, subscripts, ...) {
-  panel.xyplot(x, y, ...)
-  ltext(x - 1, y + 1, letters[subscripts], cex=0.5)
-}
+#line 822 "simplegrid.Rnw"
 
-myStrip <- function(which.panel, ...) {
-  font <- rep(1, 2)
-  font[which.panel] <- 2
-  col=rep("grey", 2)
-  col[which.panel] <- "black"
-  llines(c(0, 1, 1, 0, 0), c(0, 0, 1, 1, 0))
-  ltext(c(0.33, 0.66), rep(0.5, 2), 1:2, 
-        font=font, col=col)
-}
-
-myPrePanel <- function(x, y, ...) {
-  list(xlim=c(min(x) - 1, max(x) + 1),
-       ylim=c(min(y) - 1, max(y) + 1))
-}
-
-X <- 1:20
-Y <- 1:20
-G <- factor(rep(1:2, 10))
-
+trellis.par.set(list(fontsize=list(text=10)))
 print(
-xyplot(X ~ Y | G, aspect=1, layout=c(1, 2),
-       panel=myPanel, strip=myStrip,
-       prepanel=myPrePanel)
+#line 813 "simplegrid.Rnw"
+xyplot(mpg ~ disp | factor(gear), data=mtcars,
+       layout=c(3, 1), aspect=1,
+       scales=list(y=list(at=seq(10, 30, 10))),
+       ylab="miles per gallon",
+       xlab=expression(paste("displacement (", inch^3, ")")))
 
+#line 826 "simplegrid.Rnw"
 )
+
+
+
+}
+figure4.10 <- function() {
+#line 909 "simplegrid.Rnw"
+
+trellis.par.set(list(fontsize=list(text=10)))
+print(
+#line 897 "simplegrid.Rnw"
+xyplot(mpg ~ disp | factor(gear), data=mtcars,
+       layout=c(3, 1), aspect=1,
+       panel=function(...) {
+           panel.xyplot(...)
+           panel.abline(h=29, lty="dashed")
+           panel.text(470, 29.5, "efficiency criterion",
+                      adj=c(1, 0), cex=.7)
+       })
+
+#line 913 "simplegrid.Rnw"
+)
+
+
+
+}
+figure4.11 <- function() {
+#line 975 "simplegrid.Rnw"
+
+trellis.par.set(list(fontsize=list(text=10)))
+gray.colors <- function(n) { 
+    adjustcolor(gray(n:1/n), alpha.f=.7) 
+}
+print(
+#line 965 "simplegrid.Rnw"
+xyplot(mpg ~ disp | factor(gear), data=mtcars,
+       layout=c(3, 1), aspect=1,
+       panel=function(x, y, ...) {
+           panel.lmline(x, y)
+           panel.xyplot(x, y, ...)
+       })
+
+#line 982 "simplegrid.Rnw"
+)
+
+
+
+}
+figure4.12 <- function() {
+#line 1155 "simplegrid.Rnw"
+
+trellis.par.set(list(fontsize=list(text=9, points=8)))
+show.settings()
+
+
+
+}
+figure4.13 <- function() {
+#line 1314 "simplegrid.Rnw"
+doplot <- function(name, ...) {
+  do.call(name, 
+          list(..., scales=list(draw=FALSE), xlab=NULL, ylab="",
+               strip=function(which.panel, ...) { 
+                       grid.rect(gp=gpar(fill="gray90")); grid.text(name) 
+                     }))
+}
+library(latticeExtra)
+plot <- vector("list", 4)
+plot[[1]] <- doplot("ecdfplot", ~ rnorm(10) | 1)
+plot[[2]] <- doplot("rootogram", ~ rpois(50, 10) | 1, 
+                    dfun=function(x) dpois(x, 10))
+plot[[3]] <- doplot("segplot", factor(1:5) ~ rnorm(5) + rnorm(5) | 1)
+plot[[4]] <- doplot("tileplot", 
+                    1:10 ~ rnorm(10) + rnorm(10) | 1,
+                    colorkey=FALSE, aspect="fill")
+
+
+grid.newpage()
+pushViewport(viewport(layout=grid.layout(1, 4)))
+for (i in 1:4) {
+  pushViewport(viewport(layout.pos.col=i,
+                        layout.pos.row=1))
+  print(plot[[i]], newpage=FALSE, 
+        panel.width=list(1.025, "inches"),
+        panel.height=list(1.025, "inches"))
+  popViewport()
+}
+popViewport()
+
+
+
+}
+figure12.1 <- function() {
+#line 81 "special.Rnw"
+TitanicDF <- as.data.frame(Titanic)
+TitanicList <- lapply(TitanicDF[1:4], rep, TitanicDF$Freq)
+TitanicSets <- 
+    data.frame(passenger=TitanicList$Class != "Crew",
+               adult=TitanicList$Age == "Adult",
+               male=TitanicList$Sex == "Male",
+               survivor=TitanicList$Survived == "Yes")
+head(TitanicSets)
+
+
+
+#line 101 "special.Rnw"
+library(gplots)
+
+
+
+#line 165 "special.Rnw"
+library(venneuler)
+
+
+
+#line 117 "special.Rnw"
+venn(TitanicSets[1:2])
+
+
+
+#line 190 "special.Rnw"
+par(mar=rep(2, 4))
+#line 185 "special.Rnw"
+plot(venneuler(TitanicSets[1:2]), 
+     col=hcl(0, 0, c(60, 80), .5),
+     alpha=NA, border="black")
+
+#line 192 "special.Rnw"
+
+
+
+#line 125 "special.Rnw"
+venn(TitanicSets[1:3])
+
+
+
+#line 206 "special.Rnw"
+par(mar=rep(2, 4))
+#line 201 "special.Rnw"
+plot(venneuler(TitanicSets[1:3]), 
+     col=hcl(0, 0, seq(40, 80, 20), .5),
+     alpha=NA, border="black")
+
+#line 208 "special.Rnw"
+
+
+
+#line 145 "special.Rnw"
+pdf("Figures/special-venn-3-%d.pdf", onefile=FALSE,
+    width=6, height=6)
+#line 142 "special.Rnw"
+venn(TitanicSets)
+
+#line 148 "special.Rnw"
+dev.off()
+png("Figures/special-venn-3-%d.png", width=240, height=240, pointsize=8)
+#line 142 "special.Rnw"
+venn(TitanicSets)
+
+#line 151 "special.Rnw"
+dev.off()
+
+
+#line 222 "special.Rnw"
+par(mar=rep(2, 4))
+#line 217 "special.Rnw"
+plot(venneuler(TitanicSets[1:4]), 
+     col=hcl(0, 0, seq(20, 80, 20), .5),
+     alpha=NA, border="black")
+
+#line 224 "special.Rnw"
+
+
+
+}
+figure12.2 <- function() {
+#line 278 "special.Rnw"
+library(TeachingDemos)
+
+
+
+#line 315 "special.Rnw"
+library(symbols)
+
+
+
+#line 294 "special.Rnw"
+faces(USJudgeRatings[1:5, ], nrow=1, ncol=5)
+
+
+
+#line 302 "special.Rnw"
+faces2(USJudgeRatings[1:5, ], nrow=1, ncol=5, scale="all")
+
+
+
+#line 326 "special.Rnw"
+symbol(USJudgeRatings[1:25, ], type="face")
+
+
+
+}
+figure12.3 <- function() {
+#line 377 "special.Rnw"
+library(agricolae)
+data(soil)
+place2region <- as.data.frame(rbind(c("Cnt1", "Lima"),
+                                    c("Cnt2", "Lima"),
+                                    c("Cnt3", "Lima"),
+                                    c("Chz", "Ancash"),
+                                    c("Chmar", "Huanuco"),
+                                    c("Hco1", "Huanuco"),
+                                    c("Hco2", "Huanuco"),
+                                    c("Hco3", "Huanuco"),
+                                    c("Hyo1", "Junin"),
+                                    c("Hyo2", "Junin"),
+                                    c("Namora", "Cajamarca"),
+                                    c("SR1", "Junin"),
+                                    c("SR2", "Junin")))
+soils <- merge(soil, place2region,
+               by.x="place", by.y="V1")[c("sand", "slime", "clay")]
+names(soils) <- c("sand", "silt", "clay")
+
+
+
+#line 413 "special.Rnw"
+library(vcd)
+
+
+
+#line 445 "special.Rnw"
+library(plotrix)
+
+
+
+#line 468 "special.Rnw"
+library(compositions)
+
+
+
+#line 538 "special.Rnw"
+library(soiltexture)
+
+
+
+#line 427 "special.Rnw"
+ternaryplot(soils, col="black", 
+            grid_color="black", labels_color="black")
+ 
+
+
+
+#line 457 "special.Rnw"
+triax.plot(soils,  cex.ticks=.5)
+
+
+
+#line 498 "special.Rnw"
+par(mar=rep(1, 4))
+#line 491 "special.Rnw"
+plot(rcomp(soils))
+lines(rcomp(rbind(c(.4, 0, .6),
+                  c(0, .4, .6))))
+lines(rcomp(rbind(c(.65, 0, .35),
+                  c(0, .65, .35))))
+
+#line 500 "special.Rnw"
+
+
+
+#line 553 "special.Rnw"
+TTsoils <- soils
+names(TTsoils) <- c("SAND", "SILT", "CLAY")
+TT.plot(tri.data=TTsoils)
+
+
+
+}
+figure12.4 <- function() {
+#line 869 "special.Rnw"
+hourSpeed <- aggregate(hourlySpeed["Speed"], 
+                       list(hour=hourlySpeed$hour),
+                       mean)
+head(hourSpeed)
+
+
+
+#line 445 "special.Rnw"
+library(plotrix)
+
+
+
+#line 796 "special.Rnw"
+library(openair)
+
+
+
+#line 837 "special.Rnw"
+trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
+print(
+#line 832 "special.Rnw"
+with(wind9am,
+     polarFreq(data.frame(ws=Speed, wd=Dir, date=Date),
+               cols=gray(10:1/11), border.col="black"))
+
+#line 840 "special.Rnw"
+      )
+
+
+
+#line 891 "special.Rnw"
+polar.plot(hourSpeed$Speed, hourSpeed$hour * 15,
+           start=90, clockwise=TRUE, lwd=5,
+           label.pos=seq(15, 360, 15), labels=1:24,
+           radial.lim=c(0, 4.5))
+
+
+}
+figure12.5 <- function() {
+#line 933 "special.Rnw"
+library(circular) 
+
+
+
+#line 946 "special.Rnw"
+station22254dir <- with(wind9am, Dir[Station == 22254])
+
+
+
+#line 962 "special.Rnw"
+station22254 <- circular(station22254dir, 
+                         units="degrees",
+                         zero=pi/2, rotation="clock")
+
+
+
+#line 1034 "special.Rnw"
+windHours <- circular(hourlySpeed$hour,
+                      units="hours", 
+                      zero=pi/2, rotation="clock")
+
+
+
+#line 980 "special.Rnw"
+par(mar=rep(2, 4), xpd=NA)
+#line 977 "special.Rnw"
+plot(station22254, stack=TRUE, sep=.06)
+
+#line 982 "special.Rnw"
+
+
+
+#line 998 "special.Rnw"
+par(mar=rep(2, 4), xpd=NA)
+#line 994 "special.Rnw"
+plot(density(station22254, bw=45), 
+     main="", xlab="", ylab="")
+
+#line 1000 "special.Rnw"
+
+
+
+#line 1015 "special.Rnw"
+par(mar=rep(1, 4), xpd=NA)
+#line 1012 "special.Rnw"
+rose.diag(station22254, bins=36, prop=3)
+
+#line 1017 "special.Rnw"
+
+
+
+#line 1066 "special.Rnw"
+par(mar=rep(1, 4), xpd=NA)
+#line 1059 "special.Rnw"
+plot(windHours, col=NA, shrink=1.2, axes=FALSE)
+lines(windHours, 
+      0.5*hourlySpeed$Speed/max(hourlySpeed$Speed),
+      nosort=TRUE, lty="dotted", join=FALSE)
+axis.circular(template="clock24")
+
+#line 1068 "special.Rnw"
+
+
+
+}
+figure12.6 <- function() {
+#line 796 "special.Rnw"
+library(openair)
+
+
+
+#line 1129 "special.Rnw"
+# Extra mucking around because "calm" annotations are 
+# hard-coded "forestgreen"
+pdf("Figures/special-windrose-%d.pdf", onefile=FALSE)
+trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
+print(
+#line 1121 "special.Rnw"
+with(wind9am,
+     windRose(data.frame(ws=Speed, wd=Dir, 
+                         date=Date, station=factor(Station)),
+              paddle=FALSE,
+              type="station", cols=gray(4:1/6), width=2))
+              
+
+#line 1135 "special.Rnw"
+)
+grid.edit("text", gp=gpar(col="black"),
+          grep=TRUE, global=TRUE)
+dev.off()
+png("Web/special-windrose.png", width=800, height=800)
+print(
+#line 1121 "special.Rnw"
+with(wind9am,
+     windRose(data.frame(ws=Speed, wd=Dir, 
+                         date=Date, station=factor(Station)),
+              paddle=FALSE,
+              type="station", cols=gray(4:1/6), width=2))
+              
+
+#line 1142 "special.Rnw"
+)
+dev.off()
+
+
+
+}
+figure12.7 <- function() {
+#line 1235 "special.Rnw"
+library(hexbin)
+
+
+
+#line 1251 "special.Rnw"
+data(NHANES)
+plot(Serum.Iron ~ Transferin, NHANES)
+
+
+
+#line 1270 "special.Rnw"
+trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
+print(
+#line 1267 "special.Rnw"
+hexbinplot(Serum.Iron ~ Transferin, NHANES)
+
+#line 1273 "special.Rnw"
+)
+
+
+
+#line 1289 "special.Rnw"
+trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
+print(
+#line 1286 "special.Rnw"
+hexbinplot(Serum.Iron ~ Transferin | Sex, NHANES)
+
+#line 1292 "special.Rnw"
+)
+
+
+
+}
+figure16.1 <- function() {
+#line 75 "threed.Rnw"
+library(rgl)
+tetra <- function() {
+t1 <- tetrahedron3d()
+t2vb <- t1$vb
+t2vb[1, ] <- -3
+t2 <- tmesh3d(t2vb, t1$it)
+plane <- qmesh3d(rbind(rep(-3.01, 4),
+                       c(-2, -2, 2, 2),
+                       c(-3, 3, 3, -3),
+                       rep(1, 4)),
+                 matrix(1:4, ncol=1))
+open3d(windowRect=c(0, 0, 600, 600))
+# clear3d()
+shade3d(plane, color="white", specular="black")
+wire3d(plane)
+wire3d(t1, lwd=3)
+wire3d(t2, lwd=3)
+segments3d(rbind(t2$vb[1, t2$it], 
+                 t1$vb[1, t1$it]),
+           rbind(t2$vb[2, t2$it], 
+                 t1$vb[2, t1$it]),
+           rbind(t2$vb[3, t2$it], 
+                 t1$vb[3, t1$it]),
+           col="gray", lwd=3)
+view3d(40, -30)
+}
+
+
+t1 <- cube3d()
+t1tube <- t1
+t1tube$ib <- t1tube$ib[, -(3:4)]
+t2vb <- t1$vb
+t2vb[1, ] <- -5
+t2 <- qmesh3d(t2vb, t1$ib)
+plane <- qmesh3d(rbind(rep(-5.01, 4),
+                       c(-2, -2, 2, 2),
+                       c(-3, 3, 3, -3),
+                       rep(1, 4)),
+                 matrix(1:4, ncol=1))
+open3d(windowRect=c(0, 0, 600, 600))
+# clear3d()
+shade3d(plane, color="white", 
+        ambient="white", specular="white", emission="white")
+wire3d(plane)
+shade3d(t1tube, color="white", specular="black")
+wire3d(t1, lwd=3)
+wire3d(t2, lwd=3)
+segments3d(rbind(t2$vb[1, t2$ib[, 4]], 
+                 t1$vb[1, t1$ib[, 4]]),
+           rbind(t2$vb[2, t2$ib[, 4]], 
+                 t1$vb[2, t1$ib[, 4]]),
+           rbind(t2$vb[3, t2$ib[, 4]], 
+                 t1$vb[3, t1$ib[, 4]]),
+           col="gray", lwd=3)
+view3d(55, -20, fov=0)
+rgl.postscript("Figures/threed-3dproj.eps")
+system("epstopdf Figures/threed-3dproj.eps")
+system("convert Figures/threed-3dproj.pdf Web/threed-3dproj.png")
+
+
+
+}
+figure16.2 <- function() {
+#line 167 "threed.Rnw"
+library(rgl)
+tetra <- function() {
+t2vb <- t1$vb
+t2vb[1, ] <- -3
+t2vb[2, c(1, 4)] <- t2vb[2, c(1, 4)]*.8
+t2vb[3, c(1, 4)] <- t2vb[3, c(1, 4)]*.8
+t2vb[2, 2:3] <- t2vb[2, 2:3]*.6
+t2vb[3, 2:3] <- t2vb[3, 2:3]*.6
+t2 <- tmesh3d(t2vb, t1$it)
+t3vb <- t1$vb
+t3vb[1, ] <- -10
+t3vb[2, ] <- 0
+t3vb[3, ] <- 0
+t3 <- tmesh3d(t3vb, t1$it)
+open3d(windowRect=c(0, 0, 600, 600))
+# clear3d()
+shade3d(plane, color="white", specular="black")
+wire3d(plane)
+wire3d(t1, lwd=3)
+wire3d(t2, lwd=3)
+segments3d(rbind(t3$vb[1, t3$it], 
+                 t1$vb[1, t1$it]),
+           rbind(t3$vb[2, t3$it], 
+                 t1$vb[2, t1$it]),
+           rbind(t3$vb[3, t3$it], 
+                 t1$vb[3, t1$it]),
+           col="gray", lwd=3)
+shade3d(translate3d(scale3d(cube3d(), .1, .1, .1), -10, 0, 0))
+view3d(50, -20, zoom=.8)
+}
+
+t1 <- cube3d()
+t1tube <- t1
+t1tube$ib <- t1tube$ib[, -(3:4)]
+t2vb <- t1$vb
+t2vb[2, t1$ib[, 4]] <- t2vb[2, t1$ib[, 4]]*.4
+t2vb[3, t1$ib[, 4]] <- t2vb[3, t1$ib[, 4]]*.4
+t2vb[2, t1$ib[, 3]] <- t2vb[2, t1$ib[, 3]]*.6
+t2vb[3, t1$ib[, 3]] <- t2vb[3, t1$ib[, 3]]*.6
+t2vb[1, ] <- -4.5
+t2 <- qmesh3d(t2vb, t1$ib)
+t2tube <- t2
+t2tube$ib <- t2tube$ib[, -(3:4)]
+t3 <- translate3d(scale3d(cube3d(), .1, .1, .1), -10, 0, 0)
+plane <- qmesh3d(rbind(rep(-4.51, 4),
+                       c(-2, -2, 2, 2),
+                       c(-3, 3, 3, -3),
+                       rep(1, 4)),
+                 matrix(1:4, ncol=1))
+open3d(windowRect=c(0, 0, 600, 300))
+# clear3d()
+shade3d(plane, color="white", 
+        ambient="white", specular="white", emission="white")
+wire3d(plane)
+shade3d(t1tube, color="white", specular="black")
+wire3d(t1, lwd=3)
+shade3d(t2tube, color="white", specular="black")
+wire3d(t2, lwd=3)
+segments3d(rbind(-10, 
+                 t1$vb[1, t1$ib[, 4]]),
+           rbind(0, 
+                 t1$vb[2, t1$ib[, 4]]),
+           rbind(0,
+                 t1$vb[3, t1$ib[, 4]]),
+           col="gray", lwd=3)
+shade3d(t3)
+view3d(50, -15, fov=0, zoom=.7)
+rgl.postscript("Figures/threed-3dvp.eps")
+system("epstopdf Figures/threed-3dvp.eps")
+system("convert Figures/threed-3dvp.pdf Web/threed-3dvp.png")
+
+
+
+}
+figure16.3 <- function() {
+#line 355 "threed.Rnw"
+quakes <- read.csv("Quake/earthquakes.csv")
+NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
+
+
+
+#line 392 "threed.Rnw"
+cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
+               quakes$LONG > 171 & quakes$LONG < 173.5, ]
+library(MASS)
+quakeDens <- kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
+
+
+
+#line 410 "threed.Rnw"
+par(mar=rep(0, 4))
+#line 407 "threed.Rnw"
+persp(quakeDens)
+
+#line 412 "threed.Rnw"
+
+
+
+}
+figure16.4 <- function() {
+#line 355 "threed.Rnw"
+quakes <- read.csv("Quake/earthquakes.csv")
+NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
+
+
+
+#line 392 "threed.Rnw"
+cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
+               quakes$LONG > 171 & quakes$LONG < 173.5, ]
+library(MASS)
+quakeDens <- kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
+
+
+
+#line 450 "threed.Rnw"
+par(mar=rep(0, 4))
+#line 445 "threed.Rnw"
+persp(quakeDens, scale=FALSE, expand=0.02,
+      theta=60, d=.1, r=.1,
+      xlab="longitude", ylab="latitude", zlab="")
+
+#line 452 "threed.Rnw"
+
+
+
+}
+figure16.5 <- function() {
+#line 355 "threed.Rnw"
+quakes <- read.csv("Quake/earthquakes.csv")
+NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
+
+
+
+#line 392 "threed.Rnw"
+cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
+               quakes$LONG > 171 & quakes$LONG < 173.5, ]
+library(MASS)
+quakeDens <- kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
+
+
+
+#line 530 "threed.Rnw"
+par(mar=rep(0, 4))
+#line 522 "threed.Rnw"
+zinterp <- with(quakeDens,
+                z[-1, -1] + z[-1, -ncol(z)] + 
+                z[-nrow(z), -1] + z[-nrow(z), -ncol(z)])
+persp(quakeDens, scale=FALSE, expand=0.02,
+      theta=60, d=.1, r=.1, axes=FALSE, box=FALSE,
+      col=gray(.4 + 1:6/10)[cut(zinterp, 6)])
+
+#line 532 "threed.Rnw"
+
+
+
+}
+figure16.6 <- function() {
+#line 355 "threed.Rnw"
+quakes <- read.csv("Quake/earthquakes.csv")
+NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
+
+
+
+#line 392 "threed.Rnw"
+cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
+               quakes$LONG > 171 & quakes$LONG < 173.5, ]
+library(MASS)
+quakeDens <- kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
+
+
+
+#line 593 "threed.Rnw"
+shallowCantyQuakes <- subset(cantyQuakes, DEPTH < 20)
+
+
+
+#line 643 "threed.Rnw"
+trellis.device("pdf", color=FALSE,
+               file="Figures/threed-cloud%d.pdf", onefile=FALSE)
+#line 635 "threed.Rnw"
+for (i in seq(40, 80, 20)) {
+    print(cloud(-DEPTH ~ LONG + LAT, shallowCantyQuakes,
+                xlim=c(171, 173), ylim=c(-44.5, -42.5),
+                pch=16, col=rgb(0, 0, 0, .5),
+                screen=list(z=i, x=-70)))
+}
+
+#line 646 "threed.Rnw"
+dev.off()
+
+
+
+}
+figure16.7 <- function() {
+#line 355 "threed.Rnw"
+quakes <- read.csv("Quake/earthquakes.csv")
+NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
+
+
+
+#line 392 "threed.Rnw"
+cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
+               quakes$LONG > 171 & quakes$LONG < 173.5, ]
+library(MASS)
+quakeDens <- kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
+
+
+
+#line 593 "threed.Rnw"
+shallowCantyQuakes <- subset(cantyQuakes, DEPTH < 20)
+
+
+
+#line 739 "threed.Rnw"
+library(scatterplot3d)
+
+
+
+#line 850 "threed.Rnw"
+par(lab=c(3, 3, 0))
+#line 752 "threed.Rnw"
+s3d <- with(shallowCantyQuakes,
+            scatterplot3d(-DEPTH ~ LONG + LAT,
+                          angle=30, scale.y=0.45, type="n",
+                          pch=16, color=rgb(0, 0, 0, .5),
+                          x.ticklabs=pretty(LONG, 3),
+                          grid=FALSE, zlim=c(-20, 0)))
+
+#line 852 "threed.Rnw"
+#line 788 "threed.Rnw"
+quakeDensXY <- kde2d(shallowCantyQuakes$LONG, 
+                     shallowCantyQuakes$LAT, n=30)
+lapply(contourLines(quakeDensXY, nlevels=8),
+       function(cl) {
+           polygon(s3d$xyz.convert(cl$x, cl$y, 
+                                   rep(-20, length(cl$x))),
+                   lwd=.5, col=gray(.8 - cl$level/20),
+                   border=NA)
+       })
+
+#line 853 "threed.Rnw"
+#line 805 "threed.Rnw"
+quakeDensXZ <- kde2d(shallowCantyQuakes$LONG, 
+                     -shallowCantyQuakes$DEPTH, n=30)
+lapply(contourLines(quakeDensXZ, nlevels=8),
+       function(cl) {
+           polygon(s3d$xyz.convert(cl$x, 
+                                   rep(-43.2, length(cl$x)),
+                                   cl$y),
+                   lwd=.5, col=gray(.8 - 2*cl$level),
+                   border=NA)
+       })
+quakeDensYZ <- kde2d(shallowCantyQuakes$LAT, 
+                     -shallowCantyQuakes$DEPTH, n=30)
+lapply(contourLines(quakeDensYZ, nlevels=8),
+       function(cl) {
+           polygon(s3d$xyz.convert(rep(171.5, length(cl$x)),
+                                 cl$x, cl$y),
+                   lwd=.5, col=gray(.8 - cl$level),
+                   border=NA)
+       })
+lapply(contourLines(quakeDensYZ, nlevels=8),
+       function(cl) {
+           polygon(s3d$xyz.convert(rep(173.5, length(cl$x)),
+                                   cl$x, cl$y),
+                   lwd=.5, col=gray(.8 - cl$level),
+                   border=NA)
+       })
+
+#line 854 "threed.Rnw"
+#line 845 "threed.Rnw"
+with(shallowCantyQuakes,
+     s3d$points3d(-DEPTH ~ LONG + LAT, pch=16,
+                  col=rgb(0, 0, 0, .3)))
+
+#line 855 "threed.Rnw"
+s3d$box()
+
+
+
+}
+figure16.8 <- function() {
+#line 891 "threed.Rnw"
+library(rgl)
+
+
+
+#line 355 "threed.Rnw"
+quakes <- read.csv("Quake/earthquakes.csv")
+NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
+
+
+
+#line 392 "threed.Rnw"
+cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
+               quakes$LONG > 171 & quakes$LONG < 173.5, ]
+library(MASS)
+quakeDens <- kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
+
+
+
+#line 935 "threed.Rnw"
+open3d(windowRect=c(0, 0, 900, 450))
+# clear3d("all")
+#line 930 "threed.Rnw"
+persp3d(quakeDens$x, quakeDens$y, quakeDens$z, 
+        aspect=c(1, 0.55, .2), col="white", box=FALSE,
+        axes=FALSE, xlab="", ylab="", zlab="")
+
+#line 938 "threed.Rnw"
+par3d(userMatrix=rotationMatrix(-80/180*pi, 1, 0, 0)%*%
+                 rotationMatrix(-65/180*pi, 0, 0, 1),
+      zoom=.5)
+snapshot3d("Figures/threed-rglpersp.png")
+system("cp Figures/threed-rglpersp.png Web/")
+
+
+
+}
+figure16.9 <- function() {
+#line 891 "threed.Rnw"
+library(rgl)
+
+
+
+#line 1024 "threed.Rnw"
+library(misc3d)
+
+
+
+#line 355 "threed.Rnw"
+quakes <- read.csv("Quake/earthquakes.csv")
+NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
+
+
+
+#line 392 "threed.Rnw"
+cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
+               quakes$LONG > 171 & quakes$LONG < 173.5, ]
+library(MASS)
+quakeDens <- kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
+
+
+
+#line 593 "threed.Rnw"
+shallowCantyQuakes <- subset(cantyQuakes, DEPTH < 20)
+
+
+
+#line 1036 "threed.Rnw"
+d <- with(shallowCantyQuakes, 
+          {
+              kde3d(LONG, LAT, -DEPTH, 
+                    h=c(.1, .1, 2), n = 30)
+          })
+
+
+
+#line 1079 "threed.Rnw"
+open3d(windowRect=c(0, 0, 900, 900))
+#line 1066 "threed.Rnw"
+with(shallowCantyQuakes, 
+     {
+         plot3d(LONG, LAT, -DEPTH, 
+                aspect=c(1, 0.55, 1), 
+                axes=TRUE, box=FALSE,
+                xlab="", ylab="", zlab="")
+         contour3d(d$d, c(.4, .1), d$x, d$y, d$z,
+                   color=rep("gray80", 2), 
+                   color2="gray", specular="black",
+                   engine="rgl", add=TRUE, alpha=.5)
+     })
+
+#line 1081 "threed.Rnw"
+par3d(userMatrix=rotationMatrix(-60/180*pi, 1, 0, 0)%*%
+                 rotationMatrix(-40/180*pi, 0, 0, 1),
+      zoom=.9)
+snapshot3d("Figures/contour3d.png")
+system("cp Figures/contour3d.png Web/threed-contour3d.png")
+
+
+}
+figure16.10 <- function() {
+#line 891 "threed.Rnw"
+library(rgl)
+
+
+
+#line 1117 "threed.Rnw"
+open3d(windowRect=c(0, 0, 600, 600))
+clear3d("all")
+light3d()
+material3d(shininess=100, specular="black")
+# Head
+radius <- function(d) {
+   pchisq(d^2, 3)
+}
+shade3d(ellipse3d(diag(3), level=radius(1),
+                   centre=c(0, 0, 1)),
+         color="yellow")
+# Neck
+# logo is 100x76
+png("rlogoExtended.png",
+    width=500, height=250)
+library(grid)
+grid.rect(gp=gpar(col=NA, fill="yellow"))
+library(png)
+rlogo <- as.raster(readPNG(system.file("extra", "Rlogo.png", 
+                                       package="RGraphics")))
+rlogo[rlogo == "#FFFFFF"] <- "yellow"
+grid.raster(rlogo, x=.6, y=.01, width=.08, just=c("bottom"))
+dev.off()
+shade3d(cylinder3d(cbind(0, 0, c(-1.4, 1)),
+                   e1=cbind(0, 0, 1),
+                   e2=cbind(1, 0, 0),
+                   sides=100),
+        color="yellow",
+        texture="rlogoExtended.png",
+        texcoords=list(x=rep(seq(1, 0, length.out=101), each=4)[-c(1:2, 403:404)],
+                       y=rep(c(0, 1, 1, 0), 50)))
+old <- function() {
+shade3d(cylinder3d(cbind(0, 0, c(-1.3, 1)),
+                   e1=cbind(0, 0, 1),
+                   e2=cbind(1, 0, 0),
+                   sides=100),
+        color="yellow")
+}
+# Eyes
+eyeball <- ellipse3d(diag(3), level=radius(.4))
+shade3d(translate3d(eyeball, .8, .35, .7),
+         color="white")
+shade3d(translate3d(eyeball, .8, -.35, .7),
+         color="white")
+# Translate radius of eye, rotate, translate position of eye
+pupil <- rotate3d(translate3d(ellipse3d(diag(3),
+                                        level=radius(.05)),
+                              .4, 0, 0),
+                  30/180*pi, 0, 0, 1)
+shade3d(translate3d(pupil, .8, .35, .7),
+         color="black")
+shade3d(translate3d(pupil, .8, -.35, .7),
+         color="black")
+# points3d(1.21, c(-.35, .35), .7, cex=3)
+# Nose
+shade3d(cylinder3d(cbind(c(1, 1.3), 0, .3),
+                    radius=.2,
+                    e1=cbind(1, 0, 0),
+                    e2=cbind(0, 1, 0),
+                    sides=100),
+         color="yellow")
+shade3d(ellipse3d(diag(3), level=radius(.2),
+                   centre=c(1.3, 0, .3)),
+         color="yellow")
+# Mouth
+shade3d(ellipse3d(diag(3), level=radius(.8),
+                   centre=c(.6, 0, -.5)),
+         color="tan")
+angle <- seq(-65, 65, length=30)/180*pi
+lines3d(.6 + .81*cos(angle), .81*sin(angle), -.5, lwd=3)
+# Hair on top
+angle <- seq(15, 165, length=30)/180*pi
+lines3d(.2, .7*cos(angle), 1.5 + .7*sin(angle), lwd=3)
+lines3d(-.2, .7*cos(angle), 1.5 + .7*sin(angle), lwd=3)
+# Hair on sides
+lines3d(seq(.5, -.5, length=5), -1, rep(c(.3, .8), length=5), lwd=3)
+lines3d(seq(.5, -.5, length=5), 1, rep(c(.3, .8), length=5), lwd=3)
+
+par3d(userMatrix=rotationMatrix(-pi/2, 1, 0, 0)%*%
+      rotationMatrix(-50/180*pi, 0, 0, 1)%*%
+      rotationMatrix(10/180*pi, 1, 0, 0))
+
+snapshot3d("homer.png")
+
+
+
+}
+figure16.11 <- function() {
+#line 1230 "threed.Rnw"
+library(vrmlgen)
+
+
+
+#line 355 "threed.Rnw"
+quakes <- read.csv("Quake/earthquakes.csv")
+NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
+
+
+
+#line 392 "threed.Rnw"
+cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
+               quakes$LONG > 171 & quakes$LONG < 173.5, ]
+library(MASS)
+quakeDens <- kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
+
+
+
+#line 593 "threed.Rnw"
+shallowCantyQuakes <- subset(cantyQuakes, DEPTH < 20)
+
+
+
+#line 1252 "threed.Rnw"
+with(shallowCantyQuakes,
+     cloud3d(LONG, LAT, -DEPTH,
+             filename="vrmlgen.wrl",
+             cols="white"))
+
+
+
+
+}
+figure13.1 <- function() {
+#line 93 "vcd.Rnw"
+xmm <- read.table(file.path("XMM-Newton", "XMM-Newton.txt"),
+                  header=TRUE)
+
+
+
+#line 120 "vcd.Rnw"
+counts <- sort(table(xmm$Category))
+
+par(mfrow=c(1, 2), mar=c(3, 3, 2, 2))
+
+barplot(counts)
+dotchart(counts)
+
+
+
+#line 130 "vcd.Rnw"
+
+print(barchart(counts), pos=c(0, 0, .5, 1),
+      more=TRUE)
+print(dotplot(counts), pos=c(.5, 0, 1, 1))
+
+
+
+#line 136 "vcd.Rnw"
+grid.newpage()
+catSort <- data.frame(Category=factor(xmm$Category, levels=names(counts)))
+pushViewport(viewport(x=0, width=.5, just="left"))
+print(ggplot(catSort) +
+      geom_bar(aes(x=Category)), newpage=FALSE)
+popViewport()
+pushViewport(viewport(x=1, width=.5, just="right"))
+catCounts <- data.frame(Category=factor(names(counts), levels=names(counts)),
+                        Count=counts)
+print(ggplot(catCounts) +
+      geom_point(aes(y=Category, x=Count)),
+      newpage=FALSE)
+popViewport()
+
+
+
+
+}
+figure13.2 <- function() {
+#line 215 "vcd.Rnw"
+library(vcd)
+
+
+
+#line 229 "vcd.Rnw"
+spine(Priority ~ Duration, xmm)
+
+
+
+#line 246 "vcd.Rnw"
+durn <- xmm$Duration/1000
+cd_plot(Priority ~ durn, xmm, xlab="Duration (1000s)")
+
+
+
+}
+figure13.3 <- function() {
+#line 284 "vcd.Rnw"
+trellis.par.set(theme = canonical.theme("postscript", col=FALSE))
+catTab <- table(xmm$Schedule, xmm$Priority)
+print(barchart(prop.table(catTab, margin=1), col=gray(1:3/4)),
+      pos=c(0, 0, .5, 1), more=TRUE)
+print(barchart(prop.table(catTab, margin=1), col=gray(1:3/4), stack=FALSE),
+      pos=c(.5, 0, 1, 1))
+
+
+
+#line 292 "vcd.Rnw"
+grid.newpage()
+pushViewport(viewport(x=0, width=.5, just="left"))
+print(
+ggplot(as.data.frame(prop.table(catTab, margin=1))) +
+    geom_bar(aes(x=Var1, fill=Var2, y=Freq), 
+             stat="identity", col="black") +
+    scale_fill_manual(values=gray(1:3/3)),
+      newpage=FALSE)
+popViewport()
+pushViewport(viewport(x=1, width=.5, just="right"))
+print(
+ggplot(as.data.frame(prop.table(catTab, margin=1))) +
+    geom_bar(aes(x=Var1, fill=Var2, y=Freq), 
+             stat="identity", col="black", position="dodge") +
+    scale_fill_manual(values=gray(1:3/3)),
+      newpage=FALSE)
+popViewport()
+
+
+
+
+}
+figure13.4 <- function() {
+#line 215 "vcd.Rnw"
+library(vcd)
+
+
+
+#line 361 "vcd.Rnw"
+mosaic(Priority ~ Schedule, xmm)
+
+
+
+#line 396 "vcd.Rnw"
+#line 381 "vcd.Rnw"
+mosaic(nObs ~ Schedule + Priority, xmm,
+       labeling_args=list(rot_labels=c(right=0), 
+         offset_labels=c(right=-.5),
+         just_labels=c(right="left")),
+       margin=c(right=4))
+
+#line 397 "vcd.Rnw"
+
+
+
+}
+figure13.5 <- function() {
+#line 215 "vcd.Rnw"
+library(vcd)
+
+
+
+#line 467 "vcd.Rnw"
+grid.rect(gp=gpar(col=NA, fill="gray"))
+#line 434 "vcd.Rnw"
+tile(nObs ~ Schedule + Priority, xmm,
+     tile_type="area",
+     shade=TRUE, 
+     gp=gpar(lwd=2, fill="white"), 
+     pos_labels=c(left="left", top="left", right="left"), 
+     just_labels=c(left="left", top="left", right="left"),
+     pop=FALSE, newpage=FALSE)
+
+#line 469 "vcd.Rnw"
+#line 443 "vcd.Rnw"
+downViewport("cell:Schedule=fixed,Priority=C,nObs=multiple")
+grid.circle(0, 0, r=unit(1, "mm"))
+upViewport(0)
+
+#line 470 "vcd.Rnw"
+#line 448 "vcd.Rnw"
+downViewport("cell:Schedule=fixed,Priority=C,nObs=single")
+grid.circle(0, 0, r=unit(1, "mm"))
+upViewport(0)
+downViewport("cell:Schedule=free,Priority=A,nObs=multiple")
+grid.circle(0, 0, r=unit(1, "mm"))
+upViewport(0)
+downViewport("cell:Schedule=free,Priority=B,nObs=multiple")
+grid.circle(0, 0, r=unit(1, "mm"))
+upViewport(0)
+
+#line 471 "vcd.Rnw"
+
+
+
+#line 506 "vcd.Rnw"
+#line 491 "vcd.Rnw"
+doubledecker(nObs ~ Schedule + Priority, xmm,
+             dep_varname=FALSE,
+             gp=gpar(fill=c("gray90", "gray")),
+             offset_labels=c(right=-.5),
+             margins=c(bottom=3, left=1, top=1, right=5))
+
+#line 507 "vcd.Rnw"
+
+
+
+}
+figure13.6 <- function() {
+#line 93 "vcd.Rnw"
+xmm <- read.table(file.path("XMM-Newton", "XMM-Newton.txt"),
+                  header=TRUE)
+
+
+
+#line 215 "vcd.Rnw"
+library(vcd)
+
+
+
+#line 558 "vcd.Rnw"
+pairs(structable(nObs ~ Priority + Schedule, xmm),
+      space=.15)
+
+
+
+}
+figure13.7 <- function() {
+#line 591 "vcd.Rnw"
+cotabplot(~ Schedule + Priority | nObs, xmm)
+
+
+
+}
+figure13.8 <- function() {
+#line 738 "vcd.Rnw"
+library(vcdExtra)
+
+
+
+#line 756 "vcd.Rnw"
+# Need the .1 cos the handling of zero cells seems off
+# Also need the custom shading to produce gray-scale
+mosaic3d(structable(~ Priority + Schedule + nObs, xmm) + .1, 
+         shading=function(x) { "gray" })
 
 
 

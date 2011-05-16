@@ -24,7 +24,7 @@ faceE(x, y, width, height)
 }
 \details{
 The functions \code{faceA} and \code{faceB} are
-graphics functions to be used for their side-effect of
+graphics functions to be used for their side effect of
 producing graphical output.
 The functions \code{faceC}, \code{faceD}, and \code{faceE}
 return a grob representing a face (and produce no output).
