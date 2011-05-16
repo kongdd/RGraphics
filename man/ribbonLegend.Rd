@@ -6,7 +6,7 @@
 \usage{
 ribbonLegend(nlevels=NULL, breaks=NULL, cols, 
              scale=range(breaks), 
-             margin=unit(0.5, "lines"), 
+             margin=unit(0.5, "line"), 
              gp=NULL, vp=NULL, name=NULL) 
 }
 \arguments{
