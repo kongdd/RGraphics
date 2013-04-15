@@ -9,9 +9,6 @@
 for the border, circles for eyes, and a line for the mouth.}
 \usage{
 faceA(x, y, width, height)
-}
-\synopsis{
-faceA(x, y, width, height)
 faceB(x, y, width, height)
 faceC(x, y, width, height)
 faceD(x, y, width, height)

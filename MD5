@@ -1,11 +1,11 @@
-f71999a7da75782c2f6f68bfb13afc5a *DESCRIPTION
+1bcd3dffcd5de24a0d2185293c5ba5e4 *DESCRIPTION
 801e8c7422da708b285c6967434086cb *NAMESPACE
-06fb640a31d3a241b5c34869c38c6da5 *R/figures.R
+7eba9df0ee3dd1fdcd6b9e286010c3f8 *R/figures.R
 67d061c53758ce2b93faf8c4aca13778 *Rplots.pdf
-60a6870d3811cabcd107057b751e07b5 *data/ocean.rda
-648cc2005ac55f14d68fa86b48b024e1 *data/ozTemp.rda
-f8b35c0fcaafdc9be2c5d7ee884d2352 *data/wind.rda
-1716c4b545a22425dcbdebf81f3433fc *data/xmm.rda
+a29f9f53f90901ef7a8488c03be22198 *data/ocean.rda
+2894be7e0a88d7c70067dfcc6e590ff1 *data/ozTemp.rda
+cdd0086571e977ddf8410f2196c7db92 *data/wind.rda
+13007b32e8da8fb8eadfbb3f5c3d29de *data/xmm.rda
 db9be7f0dbb708ab3d10b70c476c2d21 *inst/extra/10m-brazil.dbf
 81629a8a6aba4daedd950b75cd63b18f *inst/extra/10m-brazil.shp
 06355712fc677a47822804a7e6a6b6eb *inst/extra/10m-brazil.shx
@@ -35,8 +35,8 @@ b580f9e4f3dc9148a20019327fe4adc9 *inst/extra/grayify.R
 ef86fc172711d94c0c6bf42629794450 *inst/extra/marajo.shp
 2d02af9e3de905825980fa9e68afacd9 *inst/extra/marajo.shx
 dc06c624d189e9e16acdd55769fab7c7 *inst/extra/tiger.ps.xml
-c0f0ab37af6255b911815da85418335f *man/faceA.Rd
-2cf0c5809c1d6528287fd4cc8e4ab7b9 *man/figures.Rd
+cff715f2b596b633d701c3dece3fb43c *man/faceA.Rd
+c9d6a601888a0567c181f4cb870f80b7 *man/figures.Rd
 4ae837a190be988fbcd34952c57aac3b *man/grid.imageFun.Rd
 16c1f4fa9555c262fcf61bdec78f2a3a *man/grid.imageGrob.Rd
 5f9b708113c4eb9717b4f473546f7e11 *man/grid.ozFun.Rd
@@ -47,7 +47,7 @@ f288fd2f5a7c024d30bb2698062a1ee8 *man/hourlySpeed.Rd
 91a488d4d0c76d36666a7d3012ae17db *man/ozImage.Rd
 50547b07a21ff511df421faa7ae0c3ae *man/ozKey.Rd
 a48f53249f120e8e49666a963b929e54 *man/ozTemp.Rd
-1a8b0911c44861a2d1fd0fde69119cb1 *man/plot.newclass.Rd
+4d7a9b3dcf465159165b2f31ae9cfc7e *man/plot.newclass.Rd
 61d667ba82c31b36d26221e049223f10 *man/ribbonLegend.Rd
 2b1889105cb189474ccea4b73b6550ba *man/splitString.Rd
 118d0edbfb59502acd684abfd1766d53 *man/splitTextGrob.Rd
