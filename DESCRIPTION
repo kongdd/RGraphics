@@ -1,6 +1,6 @@
 Package: RGraphics
 Title: Data and Functions from the book R Graphics, Second Edition
-Version: 2.0-3
+Version: 2.0-4
 Author: Paul Murrell
 Description: Data and Functions from the book R Graphics, Second
         Edition. There is a function to produce each figure in the
@@ -23,6 +23,7 @@ Suggests: agricolae, animation, CircStats, circular, cluster,
 License: GPL
 LazyData: yes
 URL: http://www.stat.auckland.ac.nz/~paul/RG2e/index.html
-Packaged: 2012-08-17 02:54:32 UTC; EC\pmur002
+Packaged: 2013-04-15 23:36:25 UTC; EC\pmur002
+NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2012-08-17 05:38:39
+Date/Publication: 2013-04-16 07:43:15

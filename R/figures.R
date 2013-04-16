@@ -2098,7 +2098,7 @@ library(party)
 # CLASSIFICATION
 # fitting
 library(ipred)
-data(GlaucomaM)
+data("GlaucomaM", envir=environment())
 glau <- GlaucomaM
 levels(glau$Class) <- c("glau", "norm")
 fm.class <- ctree(Class ~ ., data = glau)
@@ -7499,7 +7499,7 @@ symbol(USJudgeRatings[1:25, ], type="face")
 }
 figure12.3 <- function() {
 library(agricolae)
-data(soil)
+data("soil", envir=environment())
 place2region <- as.data.frame(rbind(c("Cnt1", "Lima"),
                                     c("Cnt2", "Lima"),
                                     c("Cnt3", "Lima"),
@@ -7667,7 +7667,7 @@ library(hexbin)
 
 
 
-data(NHANES)
+data("NHANES", envir=environment())
 plot(Serum.Iron ~ Transferin, NHANES)
 
 

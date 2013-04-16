@@ -217,7 +217,7 @@
 \alias{figure13.8}
 \title{Figures for R Graphics}
 \description{Functions to produce the figures from the book R Graphics.  Function \emph{i} is produced by figure\emph{i}().}
-\synopsis{
+\usage{
 figure19.1()
 figure19.2()
 figure3.1()
@@ -435,5 +435,4 @@ figure13.6()
 figure13.7()
 figure13.8()
 }
-\usage{figure1.1()}
 \keyword{internal}
