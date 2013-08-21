@@ -1,4 +1,4 @@
-import(grDevices, graphics, grid, lattice)
+import(methods, grDevices, graphics, grid, ggplot2, lattice)
 exportPattern("figure")
 export("plot.newclass")
 export("grid.imageFun")

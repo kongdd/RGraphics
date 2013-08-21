@@ -1628,7 +1628,7 @@ ggplot(mtcars2, aes(x=disp, y=mpg)) +
     geom_point()
 
 )
-downViewport("panel-3-4")
+downViewport("panel.3-4-3-4")
 grid.text(paste("n =", nrow(mtcars2)),
           x=unit(1, "npc") - unit(1, "mm"), 
           y=unit(1, "npc") - unit(1, "mm"),
@@ -1997,7 +1997,6 @@ figure1.5 <- function() {
 #
 
 
-library(lattice)
 
 trellis.par.set(list(fontsize=list(text=6),
 	             par.xlab.text=list(cex=1.5),
@@ -2025,7 +2024,6 @@ figure1.6 <- function() {
 #
 
 
-library(ggplot2)
 print(
 ggplot(data=mpg, aes(x=displ, y=hwy, shape=factor(cyl))) + 
     geom_point() +
@@ -2697,8 +2695,6 @@ pic <- read.pnm(system.file("extra", "AfterTheBombs.pnm", package="RGraphics"))
 
 source(system.file("extra", "as.raster.R", package="RGraphics"))
 
-library(grid)
-
 w <- 1024 # 578
 h <- 768 # 500
 picRaster <- as.raster(pic)
@@ -3014,6 +3010,11 @@ grid.rect(gp=gpar(col="gray", fill=NA))
 }
 figure11.10 <- function() {
 library(gplots)
+
+
+
+library(plotrix)
+
 
 
 
@@ -3893,8 +3894,8 @@ simpleGNEL <- new("graphNEL",
 
 
 toFile(agopen(simpleGNEL, ""), 
-       filename="Figures/graph-graphvizrender.pdf", 
-       fileType="pdf")
+       filename="Figures/graph-graphvizrender.ps", 
+       fileType="ps")
 
 
 
@@ -3912,7 +3913,7 @@ getMethod("plot", "graphBPH")(graphBPH(hg))
 
 }
 figure15.8 <- function() {
-library(igraph0)
+library(igraph)
 
 
 
@@ -3924,7 +3925,8 @@ fullIgraph <- graph.full(10)
 # See ?igraph.plotting for useful graph attributes
 treeIgraph <- set.vertex.attribute(treeIgraph, "color", value="black")
 treeIgraph <- set.edge.attribute(treeIgraph, "color", value="black")
-plot(treeIgraph, layout=layout.reingold.tilford)
+plot(treeIgraph, 
+     layout=layout.reingold.tilford(treeIgraph, root=1, flip.y=FALSE))
 
 
 
@@ -6475,7 +6477,7 @@ ggplot(mtcars2, aes(x=disp, y=mpg)) +
     geom_smooth(method=lm)
 
 )
-downViewport("panel-3-4")
+downViewport("panel.3-4-3-4")
 sline <- grid.get(gPath("smooth", "polyline"),
                   grep=TRUE)
 grid.segments(.7, .8, 
@@ -8106,7 +8108,6 @@ shade3d(ellipse3d(diag(3), level=radius(1),
 # logo is 100x76
 png("rlogoExtended.png",
     width=500, height=250)
-library(grid)
 grid.rect(gp=gpar(col=NA, fill="yellow"))
 library(png)
 rlogo <- as.raster(readPNG(system.file("extra", "Rlogo.png", 
