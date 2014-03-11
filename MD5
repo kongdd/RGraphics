@@ -1,11 +1,11 @@
-5f4d09fd7ad23815fc319f440806cb4e *DESCRIPTION
+dd288f0fbeb34cd23c0e978597bbdcf4 *DESCRIPTION
 f7feb12ca96df28742134203a4708fe8 *NAMESPACE
-d54f0046130713877d48b49a6acd0b90 *R/figures.R
+191b29c147191f382ce4a0d427cda567 *R/figures.R
 17dce657ff4e01e92e54ca4298d40905 *R/globals.R
-9573650e16653042594a03cd5c0ec214 *data/ocean.rda
-0f3d37c3dac7993be8643b775035f25e *data/ozTemp.rda
-abb2cab9b926b0dcecdaaac69545d3c6 *data/wind.rda
-dac65774973539d6669989e869f7c35b *data/xmm.rda
+a29f9f53f90901ef7a8488c03be22198 *data/ocean.rda
+2894be7e0a88d7c70067dfcc6e590ff1 *data/ozTemp.rda
+cdd0086571e977ddf8410f2196c7db92 *data/wind.rda
+13007b32e8da8fb8eadfbb3f5c3d29de *data/xmm.rda
 db9be7f0dbb708ab3d10b70c476c2d21 *inst/extra/10m-brazil.dbf
 81629a8a6aba4daedd950b75cd63b18f *inst/extra/10m-brazil.shp
 06355712fc677a47822804a7e6a6b6eb *inst/extra/10m-brazil.shx
@@ -36,7 +36,7 @@ ef86fc172711d94c0c6bf42629794450 *inst/extra/marajo.shp
 2d02af9e3de905825980fa9e68afacd9 *inst/extra/marajo.shx
 dc06c624d189e9e16acdd55769fab7c7 *inst/extra/tiger.ps.xml
 cff715f2b596b633d701c3dece3fb43c *man/faceA.Rd
-c9d6a601888a0567c181f4cb870f80b7 *man/figures.Rd
+68303b88a895fe0b39d0351b5e1e6dd4 *man/figures.Rd
 4ae837a190be988fbcd34952c57aac3b *man/grid.imageFun.Rd
 16c1f4fa9555c262fcf61bdec78f2a3a *man/grid.imageGrob.Rd
 5f9b708113c4eb9717b4f473546f7e11 *man/grid.ozFun.Rd

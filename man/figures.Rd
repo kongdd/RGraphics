@@ -435,4 +435,5 @@ figure13.6()
 figure13.7()
 figure13.8()
 }
+\examples{figure1.1()}
 \keyword{internal}

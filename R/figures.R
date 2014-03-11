@@ -7529,10 +7529,6 @@ library(plotrix)
 
 
 
-library(compositions)
-
-
-
 library(soiltexture)
 
 
@@ -7544,16 +7540,6 @@ ternaryplot(soils, col="black",
 
 
 triax.plot(soils,  cex.ticks=.5)
-
-
-
-par(mar=rep(1, 4))
-plot(rcomp(soils))
-lines(rcomp(rbind(c(.4, 0, .6),
-                  c(0, .4, .6))))
-lines(rcomp(rbind(c(.65, 0, .35),
-                  c(0, .65, .35))))
-
 
 
 
