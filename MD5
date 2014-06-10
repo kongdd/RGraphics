@@ -1,11 +1,11 @@
-dd288f0fbeb34cd23c0e978597bbdcf4 *DESCRIPTION
+9f19b659515243b061cc56369f3a2603 *DESCRIPTION
 f7feb12ca96df28742134203a4708fe8 *NAMESPACE
-191b29c147191f382ce4a0d427cda567 *R/figures.R
+d2879e2166c8453b8b7b20a0b758445d *R/figures.R
 17dce657ff4e01e92e54ca4298d40905 *R/globals.R
-a29f9f53f90901ef7a8488c03be22198 *data/ocean.rda
-2894be7e0a88d7c70067dfcc6e590ff1 *data/ozTemp.rda
-cdd0086571e977ddf8410f2196c7db92 *data/wind.rda
-13007b32e8da8fb8eadfbb3f5c3d29de *data/xmm.rda
+c60858ec764d3861bfd22b2eaa4e4445 *data/ocean.rda
+fc9853be8c186de6dc6214701920ddd1 *data/ozTemp.rda
+362edc5166539044172e8c5080e1bf9f *data/wind.rda
+183f8f7acf0577ba0787174d92bf89db *data/xmm.rda
 db9be7f0dbb708ab3d10b70c476c2d21 *inst/extra/10m-brazil.dbf
 81629a8a6aba4daedd950b75cd63b18f *inst/extra/10m-brazil.shp
 06355712fc677a47822804a7e6a6b6eb *inst/extra/10m-brazil.shx

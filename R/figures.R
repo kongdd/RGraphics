@@ -3901,6 +3901,7 @@ toFile(agopen(simpleGNEL, ""),
 
 }
 figure15.7 <- function() {
+library(hypergraph)
 library(hyperdraw)
 
 
@@ -3938,6 +3939,10 @@ plot(fullIgraph, layout=layout.circle)
 
 }
 figure15.9 <- function() {
+library(graph)
+
+
+
 library(network)
 
 
