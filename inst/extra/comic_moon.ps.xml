@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='ISO-8859-1' ?>
 
-<picture version='3' xmlns:rgml='http://r-project.org/RGML' source='/home/staff/paul/Research/Rstuff/r-2-13-branch/R/library/RGraphics/extra/comic_moon.ps' date='2011-04-21 10:42:37' creator='R (2.13.0)' >
+<picture version='3' xmlns:rgml='http://r-project.org/RGML' source='comic_moon.ps' date='2014-09-11 12:19:14' creator='R (3.2.0)' >
 
 <path type='fill' id='1'>
 	<context>
 		<rgb r='0.854902' g='0.854902' b='0.854902'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='3182.23' x='1764.79'/>
@@ -520,7 +520,7 @@
 <path type='eofill' id='2'>
 	<context>
 		<rgb r='0.937255' g='0.937255' b='0.937255'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='3170.19' x='1548.54'/>
@@ -746,7 +746,7 @@
 <path type='eofill' id='3'>
 	<context>
 		<rgb r='0.784314' g='0.784314' b='0.784314'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1262.19' x='3057.54'/>
@@ -828,7 +828,7 @@
 	<line y='117.688' x='2014.04'/>
 	<line y='125.762' x='2020.5'/>
 	<line y='134.438' x='2024.29'/>
-	<line y='147.742' x='2077.18'/>
+	<line y='147.742' x='2077.19'/>
 	<line y='163.691' x='2130.0'/>
 	<line y='182.406' x='2182.64'/>
 	<line y='204.02' x='2235.04'/>
@@ -884,7 +884,7 @@
 <path type='fill' id='4'>
 	<context>
 		<rgb r='0.784314' g='0.784314' b='0.784314'/>
-		<style lwd='2.44354' lty=''/>
+		<style lwd='2.44354' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1569.97' x='1768.28'/>
@@ -1022,7 +1022,7 @@
 <path type='fill' id='5'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2009.76' x='1216.63'/>
@@ -1096,7 +1096,7 @@
 <path type='fill' id='6'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2088.05' x='1190.65'/>
@@ -1170,7 +1170,7 @@
 <path type='fill' id='7'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1581.19' x='1770.29'/>
@@ -1291,14 +1291,14 @@
 <path type='fill' id='8'>
 	<context>
 		<rgb r='0.784314' g='0.784314' b='0.784314'/>
-		<style lwd='1.0495' lty=''/>
+		<style lwd='1.0495' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='395.59' x='1567.9'/>
 	<line y='374.137' x='1566.82'/>
 	<line y='353.301' x='1563.63'/>
 	<line y='333.191' x='1558.46'/>
-	<line y='313.91' x='1551.39'/>
+	<line y='313.91' x='1551.4'/>
 	<line y='295.562' x='1542.55'/>
 	<line y='278.254' x='1532.04'/>
 	<line y='262.094' x='1519.95'/>
@@ -1306,7 +1306,7 @@
 	<line y='233.633' x='1491.49'/>
 	<line y='221.547' x='1475.33'/>
 	<line y='211.027' x='1458.02'/>
-	<line y='202.188' x='1439.67'/>
+	<line y='202.188' x='1439.68'/>
 	<line y='195.125' x='1420.39'/>
 	<line y='189.949' x='1400.28'/>
 	<line y='186.766' x='1379.45'/>
@@ -1346,7 +1346,7 @@
 	<line y='604.406' x='1379.45'/>
 	<line y='601.223' x='1400.28'/>
 	<line y='596.047' x='1420.39'/>
-	<line y='588.988' x='1439.67'/>
+	<line y='588.988' x='1439.68'/>
 	<line y='580.145' x='1458.02'/>
 	<line y='569.625' x='1475.33'/>
 	<line y='557.539' x='1491.49'/>
@@ -1354,7 +1354,7 @@
 	<line y='529.082' x='1519.95'/>
 	<line y='512.922' x='1532.04'/>
 	<line y='495.613' x='1542.55'/>
-	<line y='477.266' x='1551.39'/>
+	<line y='477.266' x='1551.4'/>
 	<line y='457.984' x='1558.46'/>
 	<line y='437.875' x='1563.63'/>
 	<line y='417.039' x='1566.82'/>
@@ -1365,7 +1365,7 @@
 <path type='fill' id='9'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='584.48' x='1330.96'/>
@@ -1423,7 +1423,7 @@
 <path type='fill' id='10'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='618.109' x='1319.8'/>
@@ -1481,7 +1481,7 @@
 <path type='fill' id='11'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='160.328' x='1456.85'/>
@@ -1547,7 +1547,7 @@
 <path type='fill' id='12'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='206.852' x='1401.63'/>
@@ -1597,7 +1597,7 @@
 <path type='fill' id='13'>
 	<context>
 		<rgb r='0.784314' g='0.784314' b='0.784314'/>
-		<style lwd='0.500946' lty=''/>
+		<style lwd='0.500946' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1187.15' x='683.996'/>
@@ -1671,7 +1671,7 @@
 <path type='fill' id='14'>
 	<context>
 		<rgb r='0.501961' g='0.501961' b='0.501961'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1277.31' x='570.902'/>
@@ -1713,7 +1713,7 @@
 <path type='fill' id='15'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1293.36' x='565.578'/>
@@ -1755,7 +1755,7 @@
 <path type='fill' id='16'>
 	<context>
 		<rgb r='0.501961' g='0.501961' b='0.501961'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1074.86' x='630.992'/>
@@ -1793,7 +1793,7 @@
 <path type='fill' id='17'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1097.06' x='604.637'/>
@@ -1835,7 +1835,7 @@
 <path type='fill' id='18'>
 	<context>
 		<rgb r='0.862745' g='0.862745' b='0.862745'/>
-		<style lwd='0.946533' lty=''/>
+		<style lwd='0.946533' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2403.47' x='1110.61'/>
@@ -1909,7 +1909,7 @@
 <path type='fill' id='19'>
 	<context>
 		<rgb r='0.501961' g='0.501961' b='0.501961'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2573.83' x='896.93'/>
@@ -1959,7 +1959,7 @@
 <path type='fill' id='20'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2604.16' x='886.863'/>
@@ -2017,7 +2017,7 @@
 <path type='fill' id='21'>
 	<context>
 		<rgb r='0.501961' g='0.501961' b='0.501961'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2191.3' x='1010.46'/>
@@ -2075,7 +2075,7 @@
 <path type='fill' id='22'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2233.26' x='960.664'/>
@@ -2125,7 +2125,7 @@
 <path type='fill' id='23'>
 	<context>
 		<rgb r='0.862745' g='0.862745' b='0.862745'/>
-		<style lwd='0.500977' lty=''/>
+		<style lwd='0.500977' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2691.15' x='2148.0'/>
@@ -2199,7 +2199,7 @@
 <path type='fill' id='24'>
 	<context>
 		<rgb r='0.501961' g='0.501961' b='0.501961'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2781.31' x='2034.9'/>
@@ -2241,7 +2241,7 @@
 <path type='fill' id='25'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2797.36' x='2029.58'/>
@@ -2283,7 +2283,7 @@
 <path type='fill' id='26'>
 	<context>
 		<rgb r='0.501961' g='0.501961' b='0.501961'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2578.86' x='2094.99'/>
@@ -2321,7 +2321,7 @@
 <path type='fill' id='27'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2601.06' x='2068.64'/>
@@ -2363,7 +2363,7 @@
 <path type='fill' id='28'>
 	<context>
 		<rgb r='0.784314' g='0.784314' b='0.784314'/>
-		<style lwd='0.670166' lty=''/>
+		<style lwd='0.683342' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1001.67' x='2935.53'/>
@@ -2373,11 +2373,11 @@
 	<line y='941.625' x='2912.61'/>
 	<line y='928.789' x='2904.18'/>
 	<line y='916.961' x='2894.84'/>
-	<line y='906.203' x='2884.67'/>
+	<line y='906.203' x='2884.68'/>
 	<line y='896.586' x='2873.76'/>
 	<line y='888.172' x='2862.19'/>
-	<line y='881.031' x='2850.03'/>
-	<line y='875.23' x='2837.39'/>
+	<line y='881.031' x='2850.04'/>
+	<line y='875.231' x='2837.39'/>
 	<line y='870.84' x='2824.34'/>
 	<line y='867.918' x='2810.95'/>
 	<line y='866.539' x='2797.33'/>
@@ -2437,7 +2437,7 @@
 <path type='fill' id='29'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='5.664' lty=''/>
+		<style lwd='5.77531' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1175.53' x='2812.88'/>
@@ -2487,7 +2487,7 @@
 <path type='fill' id='30'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='5.664' lty=''/>
+		<style lwd='5.77531' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1202.54' x='2810.85'/>
@@ -2522,7 +2522,7 @@
 	<line y='1161.03' x='2885.54'/>
 	<line y='1150.62' x='2897.34'/>
 	<line y='1138.78' x='2908.04'/>
-	<line y='1125.6' x='2917.54'/>
+	<line y='1125.6' x='2917.53'/>
 	<line y='1143.46' x='2910.19'/>
 	<line y='1158.91' x='2900.87'/>
 	<line y='1171.97' x='2889.71'/>
@@ -2537,10 +2537,10 @@
 <path type='fill' id='31'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='5.664' lty=''/>
+		<style lwd='5.77531' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
-	<move y='836.808' x='2828.96'/>
+	<move y='836.809' x='2828.96'/>
 	<line y='840.398' x='2840.66'/>
 	<line y='845.367' x='2851.88'/>
 	<line y='851.617' x='2862.58'/>
@@ -2553,16 +2553,16 @@
 	<line y='922.758' x='2919.8'/>
 	<line y='935.637' x='2925.02'/>
 	<line y='948.898' x='2929.38'/>
-	<line y='962.437' x='2932.86'/>
+	<line y='962.438' x='2932.86'/>
 	<line y='976.156' x='2935.42'/>
-	<line y='989.953' x='2937.03'/>
+	<line y='989.954' x='2937.03'/>
 	<line y='1003.73' x='2937.64'/>
 	<line y='980.218' x='2930.62'/>
 	<line y='958.047' x='2920.94'/>
 	<line y='937.559' x='2908.8'/>
 	<line y='919.082' x='2894.4'/>
 	<line y='902.953' x='2877.95'/>
-	<line y='889.508' x='2859.64'/>
+	<line y='889.507' x='2859.64'/>
 	<line y='879.078' x='2839.7'/>
 	<line y='872.0' x='2818.32'/>
 	<line y='869.184' x='2802.18'/>
@@ -2572,44 +2572,44 @@
 	<line y='878.226' x='2741.5'/>
 	<line y='885.121' x='2727.84'/>
 	<line y='893.691' x='2715.01'/>
-	<line y='903.855' x='2703.11'/>
+	<line y='903.856' x='2703.11'/>
 	<line y='887.726' x='2714.01'/>
 	<line y='872.941' x='2726.8'/>
 	<line y='859.937' x='2741.23'/>
 	<line y='849.145' x='2757.05'/>
 	<line y='841.004' x='2773.98'/>
-	<line y='835.941' x='2791.79'/>
-	<line y='834.398' x='2810.2'/>
-	<line y='836.808' x='2828.96'/>
-	<line y='836.808' x='2828.96'/>
+	<line y='835.942' x='2791.79'/>
+	<line y='834.399' x='2810.2'/>
+	<line y='836.809' x='2828.96'/>
+	<line y='836.809' x='2828.96'/>
 </path>
 
 <path type='fill' id='32'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='5.664' lty=''/>
+		<style lwd='5.77531' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='879.23' x='2800.75'/>
-	<line y='880.942' x='2812.66'/>
+	<line y='880.941' x='2812.66'/>
 	<line y='883.875' x='2824.25'/>
 	<line y='887.969' x='2835.47'/>
-	<line y='893.16' x='2846.29'/>
+	<line y='893.16' x='2846.28'/>
 	<line y='899.383' x='2856.63'/>
 	<line y='906.582' x='2866.47'/>
 	<line y='914.695' x='2875.76'/>
 	<line y='923.66' x='2884.43'/>
 	<line y='933.418' x='2892.45'/>
-	<line y='943.898' x='2899.77'/>
+	<line y='943.899' x='2899.77'/>
 	<line y='955.051' x='2906.34'/>
 	<line y='966.809' x='2912.12'/>
-	<line y='979.109' x='2917.04'/>
-	<line y='991.895' x='2921.07'/>
+	<line y='979.11' x='2917.04'/>
+	<line y='991.894' x='2921.07'/>
 	<line y='1005.1' x='2924.16'/>
 	<line y='1018.67' x='2926.26'/>
 	<line y='996.453' x='2917.04'/>
 	<line y='976.41' x='2905.7'/>
-	<line y='958.703' x='2892.38'/>
+	<line y='958.703' x='2892.37'/>
 	<line y='943.492' x='2877.17'/>
 	<line y='930.934' x='2860.2'/>
 	<line y='921.191' x='2841.58'/>
@@ -2618,7 +2618,7 @@
 	<line y='910.144' x='2783.46'/>
 	<line y='911.133' x='2767.2'/>
 	<line y='913.804' x='2751.29'/>
-	<line y='918.207' x='2735.97'/>
+	<line y='918.207' x='2735.96'/>
 	<line y='924.375' x='2721.44'/>
 	<line y='932.34' x='2707.93'/>
 	<line y='942.149' x='2695.65'/>
@@ -2629,7 +2629,7 @@
 	<line y='896.68' x='2731.66'/>
 	<line y='888.074' x='2747.33'/>
 	<line y='882.16' x='2764.2'/>
-	<line y='879.14' x='2782.07'/>
+	<line y='879.141' x='2782.07'/>
 	<line y='879.23' x='2800.75'/>
 	<line y='879.23' x='2800.75'/>
 </path>
@@ -2637,7 +2637,7 @@
 <path type='fill' id='33'>
 	<context>
 		<rgb r='0.784314' g='0.784314' b='0.784314'/>
-		<style lwd='0.789795' lty=''/>
+		<style lwd='0.789795' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1402.78' x='1871.79'/>
@@ -2711,7 +2711,7 @@
 <path type='fill' id='34'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1377.19' x='1817.79'/>
@@ -2817,7 +2817,7 @@
 <path type='fill' id='35'>
 	<context>
 		<rgb r='0.784314' g='0.784314' b='0.784314'/>
-		<style lwd='0.990723' lty=''/>
+		<style lwd='0.990723' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='917.828' x='2104.34'/>
@@ -2891,7 +2891,7 @@
 <path type='fill' id='36'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1096.14' x='1880.67'/>
@@ -2941,7 +2941,7 @@
 <path type='fill' id='37'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1127.89' x='1870.14'/>
@@ -2999,7 +2999,7 @@
 <path type='fill' id='38'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='695.742' x='1999.51'/>
@@ -3065,7 +3065,7 @@
 <path type='fill' id='39'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='739.66' x='1947.38'/>
@@ -3115,7 +3115,7 @@
 <path type='fill' id='40'>
 	<context>
 		<rgb r='0.890196' g='0.890196' b='0.890196'/>
-		<style lwd='0.777283' lty=''/>
+		<style lwd='0.789814' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2941.27' x='1412.7'/>
@@ -3163,7 +3163,7 @@
 	<line y='2956.07' x='1159.81'/>
 	<line y='2961.92' x='1171.99'/>
 	<line y='2967.34' x='1185.04'/>
-	<line y='2972.29' x='1198.9'/>
+	<line y='2972.28' x='1198.9'/>
 	<line y='2976.71' x='1213.48'/>
 	<line y='2980.56' x='1228.71'/>
 	<line y='2983.79' x='1244.54'/>
@@ -3189,7 +3189,7 @@
 <path type='fill' id='41'>
 	<context>
 		<rgb r='0.501961' g='0.501961' b='0.501961'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2973.12' x='1225.79'/>
@@ -3231,7 +3231,7 @@
 <path type='fill' id='42'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2982.93' x='1215.49'/>
@@ -3273,7 +3273,7 @@
 <path type='fill' id='43'>
 	<context>
 		<rgb r='0.501961' g='0.501961' b='0.501961'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2847.39' x='1344.71'/>
@@ -3311,7 +3311,7 @@
 <path type='fill' id='44'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2855.65' x='1301.0'/>
@@ -3353,12 +3353,12 @@
 <path type='fill' id='45'>
 	<context>
 		<rgb r='0.784314' g='0.784314' b='0.784314'/>
-		<style lwd='0.351166' lty=''/>
+		<style lwd='0.383422' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='571.582' x='651.07'/>
 	<line y='554.777' x='658.0'/>
-	<line y='538.145' x='664.02'/>
+	<line y='538.145' x='664.019'/>
 	<line y='521.781' x='669.129'/>
 	<line y='505.785' x='673.324'/>
 	<line y='490.25' x='676.605'/>
@@ -3368,14 +3368,14 @@
 	<line y='434.715' x='680.578'/>
 	<line y='422.965' x='679.281'/>
 	<line y='412.266' x='677.07'/>
-	<line y='402.715' x='673.938'/>
+	<line y='402.715' x='673.937'/>
 	<line y='394.41' x='669.887'/>
 	<line y='387.445' x='664.918'/>
 	<line y='381.918' x='659.031'/>
 	<line y='377.934' x='652.223'/>
 	<line y='375.629' x='644.676'/>
 	<line y='375.043' x='636.621'/>
-	<line y='376.105' x='628.133'/>
+	<line y='376.106' x='628.133'/>
 	<line y='378.758' x='619.281'/>
 	<line y='382.93' x='610.133'/>
 	<line y='388.551' x='600.766'/>
@@ -3400,19 +3400,19 @@
 	<line y='646.883' x='481.094'/>
 	<line y='658.629' x='482.391'/>
 	<line y='669.328' x='484.602'/>
-	<line y='678.883' x='487.734'/>
-	<line y='687.187' x='491.785'/>
+	<line y='678.879' x='487.734'/>
+	<line y='687.188' x='491.785'/>
 	<line y='694.152' x='496.754'/>
-	<line y='699.68' x='502.641'/>
-	<line y='703.668' x='509.453'/>
-	<line y='705.969' x='516.996'/>
-	<line y='706.555' x='525.051'/>
+	<line y='699.676' x='502.641'/>
+	<line y='703.664' x='509.453'/>
+	<line y='705.965' x='516.996'/>
+	<line y='706.551' x='525.051'/>
 	<line y='705.488' x='533.539'/>
 	<line y='702.836' x='542.391'/>
-	<line y='698.668' x='551.539'/>
+	<line y='698.664' x='551.539'/>
 	<line y='693.043' x='560.906'/>
 	<line y='686.035' x='570.422'/>
-	<line y='677.707' x='580.02'/>
+	<line y='677.707' x='580.019'/>
 	<line y='668.125' x='589.625'/>
 	<line y='657.359' x='599.164'/>
 	<line y='645.473' x='608.57'/>
@@ -3427,7 +3427,7 @@
 <path type='fill' id='46'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='683.398' x='507.555'/>
@@ -3469,7 +3469,7 @@
 <path type='fill' id='47'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='707.852' x='492.383'/>
@@ -3511,7 +3511,7 @@
 <path type='fill' id='48'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='372.758' x='693.922'/>
@@ -3561,7 +3561,7 @@
 <path type='fill' id='49'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='400.758' x='659.625'/>
@@ -3603,7 +3603,7 @@
 <path type='fill' id='50'>
 	<context>
 		<rgb r='0.784314' g='0.784314' b='0.784314'/>
-		<style lwd='1.31189' lty=''/>
+		<style lwd='1.35793' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2236.12' x='2687.56'/>
@@ -3677,7 +3677,7 @@
 <path type='fill' id='51'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='7.30725' lty=''/>
+		<style lwd='7.56352' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2360.25' x='2337.08'/>
@@ -3735,7 +3735,7 @@
 <path type='fill' id='52'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='7.30725' lty=''/>
+		<style lwd='7.56352' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2392.71' x='2313.46'/>
@@ -3793,7 +3793,7 @@
 <path type='fill' id='53'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='7.30725' lty=''/>
+		<style lwd='7.56352' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1945.87' x='2616.38'/>
@@ -3803,7 +3803,7 @@
 	<line y='2007.77' x='2679.2'/>
 	<line y='2025.88' x='2690.2'/>
 	<line y='2044.73' x='2699.33'/>
-	<line y='2064.17' x='2706.61'/>
+	<line y='2064.17' x='2706.6'/>
 	<line y='2084.05' x='2712.04'/>
 	<line y='2104.21' x='2715.62'/>
 	<line y='2124.5' x='2717.37'/>
@@ -3859,7 +3859,7 @@
 <path type='fill' id='54'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='7.30725' lty=''/>
+		<style lwd='7.56352' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1977.5' x='2533.98'/>
@@ -3887,7 +3887,7 @@
 	<line y='2148.57' x='2641.17'/>
 	<line y='2132.87' x='2633.67'/>
 	<line y='2117.63' x='2624.87'/>
-	<line y='2102.88' x='2614.79'/>
+	<line y='2102.88' x='2614.78'/>
 	<line y='2088.66' x='2603.42'/>
 	<line y='2075.02' x='2590.79'/>
 	<line y='2061.98' x='2576.9'/>
@@ -3917,7 +3917,7 @@
 <path type='fill' id='55'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='0.731812' lty=''/>
+		<style lwd='0.75749' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2167.0' x='2315.89'/>
@@ -3931,8 +3931,8 @@
 	<line y='2115.67' x='2286.02'/>
 	<line y='2129.12' x='2289.01'/>
 	<line y='2141.14' x='2296.4'/>
-	<line y='2151.27' x='2307.59'/>
-	<line y='2159.03' x='2322.0'/>
+	<line y='2151.27' x='2307.6'/>
+	<line y='2159.03' x='2322.01'/>
 	<line y='2162.89' x='2333.66'/>
 	<line y='2164.81' x='2345.16'/>
 	<line y='2164.52' x='2356.31'/>
@@ -3947,7 +3947,7 @@
 <path type='fill' id='56'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='0.731812' lty=''/>
+		<style lwd='0.75749' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2173.34' x='2311.28'/>
@@ -3964,13 +3964,13 @@
 	<line y='2144.78' x='2285.07'/>
 	<line y='2150.97' x='2289.1'/>
 	<line y='2156.68' x='2294.08'/>
-	<line y='2161.82' x='2299.96'/>
+	<line y='2161.82' x='2299.97'/>
 	<line y='2166.27' x='2306.7'/>
 	<line y='2169.92' x='2314.22'/>
 	<line y='2173.45' x='2326.02'/>
 	<line y='2174.65' x='2337.86'/>
 	<line y='2173.64' x='2349.33'/>
-	<line y='2170.53' x='2360.08'/>
+	<line y='2170.54' x='2360.08'/>
 	<line y='2176.21' x='2349.39'/>
 	<line y='2178.43' x='2337.46'/>
 	<line y='2177.4' x='2324.64'/>
@@ -3981,7 +3981,7 @@
 <path type='fill' id='57'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='0.731812' lty=''/>
+		<style lwd='0.75749' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2086.11' x='2370.41'/>
@@ -4002,7 +4002,7 @@
 	<line y='2082.71' x='2327.7'/>
 	<line y='2083.58' x='2316.26'/>
 	<line y='2079.55' x='2329.09'/>
-	<line y='2078.27' x='2343.21'/>
+	<line y='2078.27' x='2343.22'/>
 	<line y='2080.27' x='2357.4'/>
 	<line y='2086.11' x='2370.41'/>
 	<line y='2086.11' x='2370.41'/>
@@ -4011,7 +4011,7 @@
 <path type='fill' id='58'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='0.731812' lty=''/>
+		<style lwd='0.75749' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2092.28' x='2354.33'/>
@@ -4041,7 +4041,7 @@
 <path type='fill' id='59'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='0.527344' lty=''/>
+		<style lwd='0.545835' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2278.7' x='2427.77'/>
@@ -4052,13 +4052,13 @@
 	<line y='2257.98' x='2407.03'/>
 	<line y='2252.62' x='2405.68'/>
 	<line y='2247.16' x='2405.4'/>
-	<line y='2241.72' x='2406.25'/>
+	<line y='2241.71' x='2406.25'/>
 	<line y='2251.41' x='2408.41'/>
 	<line y='2260.07' x='2413.73'/>
 	<line y='2267.36' x='2421.8'/>
 	<line y='2272.96' x='2432.18'/>
 	<line y='2275.74' x='2440.58'/>
-	<line y='2277.13' x='2448.87'/>
+	<line y='2277.12' x='2448.87'/>
 	<line y='2276.91' x='2456.9'/>
 	<line y='2274.91' x='2464.54'/>
 	<line y='2279.28' x='2456.58'/>
@@ -4071,7 +4071,7 @@
 <path type='fill' id='60'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='0.527344' lty=''/>
+		<style lwd='0.545835' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2283.27' x='2424.45'/>
@@ -4083,7 +4083,7 @@
 	<line y='2258.68' x='2401.01'/>
 	<line y='2253.41' x='2400.55'/>
 	<line y='2248.04' x='2401.34'/>
-	<line y='2257.97' x='2403.39'/>
+	<line y='2257.96' x='2403.39'/>
 	<line y='2267.15' x='2408.47'/>
 	<line y='2274.97' x='2416.3'/>
 	<line y='2280.8' x='2426.57'/>
@@ -4101,7 +4101,7 @@
 <path type='fill' id='61'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='0.527344' lty=''/>
+		<style lwd='0.545835' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2220.41' x='2467.06'/>
@@ -4127,7 +4127,7 @@
 <path type='fill' id='62'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='0.527344' lty=''/>
+		<style lwd='0.545835' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='2224.86' x='2455.47'/>
@@ -4136,14 +4136,14 @@
 	<line y='2252.51' x='2474.73'/>
 	<line y='2263.25' x='2472.95'/>
 	<line y='2253.52' x='2472.1'/>
-	<line y='2244.57' x='2468.25'/>
+	<line y='2244.57' x='2468.26'/>
 	<line y='2236.75' x='2461.51'/>
 	<line y='2230.36' x='2451.96'/>
 	<line y='2226.86' x='2443.61'/>
 	<line y='2224.71' x='2434.92'/>
 	<line y='2224.17' x='2426.31'/>
-	<line y='2225.47' x='2418.2'/>
-	<line y='2221.83' x='2426.65'/>
+	<line y='2225.46' x='2418.2'/>
+	<line y='2221.82' x='2426.65'/>
 	<line y='2220.43' x='2436.06'/>
 	<line y='2221.4' x='2445.86'/>
 	<line y='2224.86' x='2455.47'/>
@@ -4153,7 +4153,7 @@
 <path type='fill' id='63'>
 	<context>
 		<rgb r='0.784314' g='0.784314' b='0.784314'/>
-		<style lwd='0.638062' lty=''/>
+		<style lwd='0.638062' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1744.02' x='1418.97'/>
@@ -4227,7 +4227,7 @@
 <path type='fill' id='64'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1850.21' x='1274.92'/>
@@ -4269,7 +4269,7 @@
 <path type='fill' id='65'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1869.12' x='1268.13'/>
@@ -4311,7 +4311,7 @@
 <path type='fill' id='66'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1611.75' x='1351.46'/>
@@ -4353,7 +4353,7 @@
 <path type='fill' id='67'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1637.9' x='1317.89'/>
@@ -4395,7 +4395,7 @@
 <path type='fill' id='68'>
 	<context>
 		<rgb r='0.784314' g='0.784314' b='0.784314'/>
-		<style lwd='0.406738' lty=''/>
+		<style lwd='0.406738' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='536.43' x='1921.19'/>
@@ -4437,7 +4437,7 @@
 <path type='fill' id='69'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='3.10077' lty=''/>
+		<style lwd='3.10077' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='609.645' x='1829.36'/>
@@ -4475,7 +4475,7 @@
 <path type='fill' id='70'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='3.10077' lty=''/>
+		<style lwd='3.10077' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='622.68' x='1825.03'/>
@@ -4513,13 +4513,13 @@
 <path type='fill' id='71'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='3.10077' lty=''/>
+		<style lwd='3.10077' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
-	<move y='445.246' x='1878.14'/>
+	<move y='445.246' x='1878.15'/>
 	<line y='451.676' x='1890.54'/>
 	<line y='460.41' x='1901.11'/>
-	<line y='471.027' x='1909.79'/>
+	<line y='471.027' x='1909.8'/>
 	<line y='483.106' x='1916.51'/>
 	<line y='496.227' x='1921.19'/>
 	<line y='509.969' x='1923.74'/>
@@ -4539,19 +4539,19 @@
 	<line y='465.812' x='1796.87'/>
 	<line y='458.973' x='1805.11'/>
 	<line y='452.976' x='1814.3'/>
-	<line y='448.012' x='1824.23'/>
-	<line y='444.27' x='1834.72'/>
+	<line y='448.012' x='1824.24'/>
+	<line y='444.27' x='1834.73'/>
 	<line y='441.934' x='1845.56'/>
 	<line y='441.191' x='1856.54'/>
 	<line y='442.231' x='1867.47'/>
-	<line y='445.246' x='1878.14'/>
-	<line y='445.246' x='1878.14'/>
+	<line y='445.246' x='1878.15'/>
+	<line y='445.246' x='1878.15'/>
 </path>
 
 <path type='fill' id='72'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='3.10077' lty=''/>
+		<style lwd='3.10077' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='463.277' x='1856.75'/>
@@ -4589,13 +4589,13 @@
 <path type='fill' id='73'>
 	<context>
 		<rgb r='0.784314' g='0.784314' b='0.784314'/>
-		<style lwd='0.309814' lty=''/>
+		<style lwd='0.309814' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
-	<move y='448.672' x='1359.05'/>
-	<line y='436.188' x='1357.79'/>
+	<move y='448.672' x='1359.06'/>
+	<line y='436.188' x='1357.8'/>
 	<line y='424.559' x='1354.18'/>
-	<line y='414.035' x='1348.46'/>
+	<line y='414.035' x='1348.47'/>
 	<line y='404.863' x='1340.9'/>
 	<line y='397.297' x='1331.73'/>
 	<line y='391.582' x='1321.2'/>
@@ -4621,17 +4621,17 @@
 	<line y='505.762' x='1321.2'/>
 	<line y='500.047' x='1331.73'/>
 	<line y='492.48' x='1340.9'/>
-	<line y='483.309' x='1348.46'/>
+	<line y='483.309' x='1348.47'/>
 	<line y='472.781' x='1354.18'/>
-	<line y='461.152' x='1357.79'/>
-	<line y='448.672' x='1359.05'/>
-	<line y='448.672' x='1359.05'/>
+	<line y='461.152' x='1357.8'/>
+	<line y='448.672' x='1359.06'/>
+	<line y='448.672' x='1359.06'/>
 </path>
 
 <path type='fill' id='74'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='2.36157' lty=''/>
+		<style lwd='2.36157' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='504.434' x='1289.11'/>
@@ -4669,7 +4669,7 @@
 <path type='fill' id='75'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='2.36157' lty=''/>
+		<style lwd='2.36157' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='514.359' x='1285.82'/>
@@ -4703,7 +4703,7 @@
 <path type='fill' id='76'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='2.36157' lty=''/>
+		<style lwd='2.36157' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='379.227' x='1326.27'/>
@@ -4741,7 +4741,7 @@
 <path type='fill' id='77'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='2.36157' lty=''/>
+		<style lwd='2.36157' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='392.957' x='1309.98'/>
@@ -4779,7 +4779,7 @@
 <path type='fill' id='78'>
 	<context>
 		<rgb r='0.784314' g='0.784314' b='0.784314'/>
-		<style lwd='0.240601' lty=''/>
+		<style lwd='0.240601' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='559.734' x='1687.67'/>
@@ -4799,7 +4799,7 @@
 	<line y='541.012' x='1595.23'/>
 	<line y='550.039' x='1592.43'/>
 	<line y='559.734' x='1591.45'/>
-	<line y='569.422' x='1592.43'/>
+	<line y='569.426' x='1592.43'/>
 	<line y='578.453' x='1595.23'/>
 	<line y='586.625' x='1599.67'/>
 	<line y='593.746' x='1605.55'/>
@@ -4813,7 +4813,7 @@
 	<line y='593.746' x='1673.57'/>
 	<line y='586.625' x='1679.45'/>
 	<line y='578.453' x='1683.89'/>
-	<line y='569.422' x='1686.69'/>
+	<line y='569.426' x='1686.69'/>
 	<line y='559.734' x='1687.67'/>
 	<line y='559.734' x='1687.67'/>
 </path>
@@ -4821,7 +4821,7 @@
 <path type='fill' id='79'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='1.83362' lty=''/>
+		<style lwd='1.83362' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='603.027' x='1633.37'/>
@@ -4851,7 +4851,7 @@
 <path type='fill' id='80'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='1.83362' lty=''/>
+		<style lwd='1.83362' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='610.734' x='1630.81'/>
@@ -4885,7 +4885,7 @@
 <path type='fill' id='81'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='1.83362' lty=''/>
+		<style lwd='1.83362' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='505.812' x='1662.22'/>
@@ -4919,7 +4919,7 @@
 <path type='fill' id='82'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='1.83362' lty=''/>
+		<style lwd='1.83362' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='516.477' x='1649.56'/>
@@ -4949,12 +4949,12 @@
 <path type='fill' id='83'>
 	<context>
 		<rgb r='0.784314' g='0.784314' b='0.784314'/>
-		<style lwd='0.502686' lty=''/>
+		<style lwd='0.524613' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='457.969' x='2534.26'/>
 	<line y='441.242' x='2537.03'/>
-	<line y='424.48' x='2535.65'/>
+	<line y='424.481' x='2535.65'/>
 	<line y='408.121' x='2530.44'/>
 	<line y='392.617' x='2521.7'/>
 	<line y='378.402' x='2509.74'/>
@@ -4971,7 +4971,7 @@
 	<line y='397.926' x='2333.22'/>
 	<line y='414.648' x='2330.45'/>
 	<line y='431.41' x='2331.82'/>
-	<line y='447.769' x='2337.04'/>
+	<line y='447.77' x='2337.04'/>
 	<line y='463.273' x='2345.78'/>
 	<line y='477.488' x='2357.74'/>
 	<line y='489.965' x='2372.61'/>
@@ -4991,7 +4991,7 @@
 <path type='fill' id='84'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='3.83112' lty=''/>
+		<style lwd='3.99832' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='496.066' x='2399.3'/>
@@ -5012,12 +5012,12 @@
 	<line y='474.719' x='2396.63'/>
 	<line y='481.984' x='2411.46'/>
 	<line y='490.191' x='2434.32'/>
-	<line y='494.812' x='2456.91'/>
+	<line y='494.813' x='2456.91'/>
 	<line y='495.328' x='2478.84'/>
 	<line y='491.223' x='2499.73'/>
 	<line y='496.957' x='2489.32'/>
 	<line y='501.324' x='2477.92'/>
-	<line y='504.27' x='2465.73'/>
+	<line y='504.269' x='2465.73'/>
 	<line y='505.75' x='2452.92'/>
 	<line y='505.719' x='2439.68'/>
 	<line y='504.125' x='2426.21'/>
@@ -5029,14 +5029,14 @@
 <path type='fill' id='85'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='3.83112' lty=''/>
+		<style lwd='3.99832' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
-	<move y='507.285' x='2390.12'/>
+	<move y='507.285' x='2390.13'/>
 	<line y='499.246' x='2374.14'/>
 	<line y='489.726' x='2359.97'/>
 	<line y='478.961' x='2347.88'/>
-	<line y='467.168' x='2338.12'/>
+	<line y='467.168' x='2338.13'/>
 	<line y='454.578' x='2330.98'/>
 	<line y='441.422' x='2326.7'/>
 	<line y='427.922' x='2325.57'/>
@@ -5050,7 +5050,7 @@
 	<line y='493.844' x='2381.23'/>
 	<line y='501.273' x='2395.97'/>
 	<line y='508.894' x='2419.13'/>
-	<line y='512.219' x='2442.37'/>
+	<line y='512.219' x='2442.38'/>
 	<line y='511.441' x='2464.97'/>
 	<line y='506.75' x='2486.15'/>
 	<line y='512.297' x='2475.93'/>
@@ -5060,14 +5060,14 @@
 	<line y='518.301' x='2429.11'/>
 	<line y='516.016' x='2416.35'/>
 	<line y='512.328' x='2403.32'/>
-	<line y='507.285' x='2390.12'/>
-	<line y='507.285' x='2390.12'/>
+	<line y='507.285' x='2390.13'/>
+	<line y='507.285' x='2390.13'/>
 </path>
 
 <path type='fill' id='86'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='3.83112' lty=''/>
+		<style lwd='3.99832' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='352.43' x='2507.86'/>
@@ -5095,7 +5095,7 @@
 	<line y='336.469' x='2426.7'/>
 	<line y='335.258' x='2440.44'/>
 	<line y='335.449' x='2454.5'/>
-	<line y='337.149' x='2468.57'/>
+	<line y='337.148' x='2468.57'/>
 	<line y='340.473' x='2482.36'/>
 	<line y='345.527' x='2495.55'/>
 	<line y='352.43' x='2507.86'/>
@@ -5105,7 +5105,7 @@
 <path type='fill' id='87'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='3.83112' lty=''/>
+		<style lwd='3.99832' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='362.262' x='2476.12'/>
@@ -5122,10 +5122,10 @@
 	<line y='425.676' x='2516.73'/>
 	<line y='414.262' x='2510.57'/>
 	<line y='403.465' x='2502.42'/>
-	<line y='393.39' x='2492.33'/>
+	<line y='393.391' x='2492.33'/>
 	<line y='384.148' x='2480.31'/>
 	<line y='375.844' x='2466.42'/>
-	<line y='365.813' x='2443.7'/>
+	<line y='365.812' x='2443.7'/>
 	<line y='359.191' x='2420.03'/>
 	<line y='356.66' x='2396.54'/>
 	<line y='358.898' x='2374.36'/>
@@ -5143,7 +5143,7 @@
 <path type='fill' id='88'>
 	<context>
 		<rgb r='0.784314' g='0.784314' b='0.784314'/>
-		<style lwd='0.507812' lty=''/>
+		<style lwd='0.507812' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1718.21' x='3037.66'/>
@@ -5217,7 +5217,7 @@
 <path type='fill' id='89'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='3.87' lty=''/>
+		<style lwd='3.87' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1834.52' x='2923.05'/>
@@ -5259,7 +5259,7 @@
 <path type='fill' id='90'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='3.87' lty=''/>
+		<style lwd='3.87' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1855.22' x='2917.65'/>
@@ -5301,7 +5301,7 @@
 <path type='fill' id='91'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='3.87' lty=''/>
+		<style lwd='3.87' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1573.35' x='2983.95'/>
@@ -5343,7 +5343,7 @@
 <path type='fill' id='92'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='3.87' lty=''/>
+		<style lwd='3.87' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1602.0' x='2957.23'/>
@@ -5385,7 +5385,7 @@
 <path type='fill' id='93'>
 	<context>
 		<rgb r='0.658824' g='0.658824' b='0.658824'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1493.21' x='1633.39'/>
@@ -5427,7 +5427,7 @@
 <path type='fill' id='94'>
 	<context>
 		<rgb r='0.92549' g='0.92549' b='0.92549'/>
-		<style lwd='8.0' lty=''/>
+		<style lwd='8.0' lty='' lineend='0' linemitre='10.0' linejoin='0'/>
 	</context>
 
 	<move y='1522.54' x='1639.39'/>

@@ -1,6 +1,6 @@
-9f19b659515243b061cc56369f3a2603 *DESCRIPTION
+2bba000987613cc454a1d1b77f0686a2 *DESCRIPTION
 f7feb12ca96df28742134203a4708fe8 *NAMESPACE
-d2879e2166c8453b8b7b20a0b758445d *R/figures.R
+a6b71873187e948e65fd6ca95a2ba78a *R/figures.R
 17dce657ff4e01e92e54ca4298d40905 *R/globals.R
 c60858ec764d3861bfd22b2eaa4e4445 *data/ocean.rda
 fc9853be8c186de6dc6214701920ddd1 *data/ozTemp.rda
@@ -27,14 +27,15 @@ fa902d6e64b72858d7ef351a67558337 *inst/extra/Rlogo.png
 1de01e64b0bb0e38380f6de9f0c2fb6d *inst/extra/as.raster.R
 1307d29e645423b3a3335874bad3e0cf *inst/extra/astronaut.pgm
 ddf30b747be9d7f6ebe1da16ae1f4342 *inst/extra/brazilRelief.tif
+eee28509b494984f368ebf13305202e6 *inst/extra/capturecomic_moon.ps
 9388e6047b0c448b5ed1306f35614432 *inst/extra/comic_moon.ps
-4114c7559580efbc9271418a87d05263 *inst/extra/comic_moon.ps.xml
+40da8f686586b3e9433b072507791852 *inst/extra/comic_moon.ps.xml
 b580f9e4f3dc9148a20019327fe4adc9 *inst/extra/grayify.R
 18629493ad60a57d34e4d72022b2dd34 *inst/extra/grd.rda
 15b2d4d6f0bf42336ab713a871502ec7 *inst/extra/marajo.dbf
 ef86fc172711d94c0c6bf42629794450 *inst/extra/marajo.shp
 2d02af9e3de905825980fa9e68afacd9 *inst/extra/marajo.shx
-dc06c624d189e9e16acdd55769fab7c7 *inst/extra/tiger.ps.xml
+69c849f59dd6e1b00f0a36b318965b88 *inst/extra/tiger.ps.xml
 cff715f2b596b633d701c3dece3fb43c *man/faceA.Rd
 68303b88a895fe0b39d0351b5e1e6dd4 *man/figures.Rd
 4ae837a190be988fbcd34952c57aac3b *man/grid.imageFun.Rd

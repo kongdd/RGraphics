@@ -4,7 +4,7 @@ axis(2)
 axis(1, at=midpts, labels=FALSE)
 
 library(gridBase)
-vps <- baseViewports()
+vps <- gridBase::baseViewports()
 pushViewport(vps$inner, vps$figure, vps$plot)
 
 grid.text(c("one", "two", "three", "four", "five",
@@ -37,7 +37,7 @@ dendpanel <- function(x, y, subscripts, ...) {
                viewport(y=unit(0.95, "npc"), width=0.9,
                         height=unit(0.95, "npc") - space,
                         just="top"))
-  par(plt=gridPLT(), new=TRUE, ps=8)
+  par(plt=gridBase::gridPLT(), new=TRUE, ps=8)
   plot(dend2$lower[[subscripts]], axes=FALSE)
   popViewport(2)
 }
@@ -401,12 +401,13 @@ axisfun(xaxs="i", mgpcol="gray", tclcol="gray")
 figure3.11 <- function() {
 library(gridBase)
 par(oma=rep(3, 4))
-vps <- baseViewports()
+vps <- gridBase::baseViewports()
 # Annotation helper function
 annWidth <- function(x, y, lab, above=TRUE, horiz=TRUE) {
-  grid.arrows(x=x, y=y, 
-              ends="both", angle=10, type="closed",
-              length=unit(3, "mm"), gp=gpar(fill="black"))
+  grid.lines(x=x, y=y, 
+             arrow=arrow(ends="both", angle=10, type="closed",
+                         length=unit(3, "mm")), 
+             gp=gpar(fill="black"))
   nl <- length(lab)
   if (nl > 1) {
     y <- y + unit(c(-0.5, 0.5), "lines")
@@ -591,7 +592,7 @@ y <- sin(t/180*pi)*t/360
 
 library(pixmap)
 source(system.file("extra", "as.raster.R", package="RGraphics"))
-rlogo <- read.pnm(system.file("pictures/logo.pgm", 
+rlogo <- pixmap::read.pnm(system.file("pictures/logo.pgm", 
                               package="pixmap")[1])
 
 
@@ -1621,6 +1622,9 @@ mtcars2$vs <- NULL
 mtcars2$drat <- NULL
 mtcars2$carb <- NULL
 
+# To keep R CMD check happy
+mpg <- mtcars2$mpg
+
 
 
 print(
@@ -1648,6 +1652,9 @@ mtcars2$am <- NULL
 mtcars2$vs <- NULL
 mtcars2$drat <- NULL
 mtcars2$carb <- NULL
+
+# To keep R CMD check happy
+mpg <- mtcars2$mpg
 
 
 
@@ -1945,7 +1952,7 @@ minpop <- c(20, 50, 50, 115)
 maxpop <- c(50, 240, 240, 150)
 
 library(grImport)
-tiger <- readPicture(system.file("extra", "tiger.ps.xml", 
+tiger <- grImport::readPicture(system.file("extra", "tiger.ps.xml", 
                                  package="RGraphics"))[-1]
 
 require(colorspace)
@@ -1957,7 +1964,7 @@ pushViewport(plotViewport(c(3, 2, 2, 1)),
              viewport(xscale=c(1991, 2003), yscale=c(0, 250)))
 grid.rect()
 # tiger backdrop in gray
-grid.picture(tiger, x=0.45, FUN=grayify, min=.8)
+grImport::grid.picture(tiger, x=0.45, FUN=grayify, min=.8)
 grid.xaxis(at=year, gp=gpar(cex=0.7))
 grid.yaxis(gp=gpar(cex=0.7))
 # black bars
@@ -1965,8 +1972,8 @@ grid.rect(x=unit(year, "native"), y=0,
           width=unit(1, "native"), height=unit(maxpop, "native"),
           just="bottom", gp=gpar(fill="black"))
 # tiger in bars
-tigerGrob <- pictureGrob(tiger, x=0.45, 
- FUN=grobify)
+tigerGrob <- grImport::pictureGrob(tiger, x=0.45, 
+ FUN=grImport::grobify)
 # Start from 2 because bar 1 does not overlap with tiger
 for (i in 2:length(year)) {
     grid.clip(x=unit(year[i], "native"), y=0,
@@ -2002,10 +2009,10 @@ trellis.par.set(list(fontsize=list(text=6),
 	             par.xlab.text=list(cex=1.5),
                      add.text=list(cex=1.5),
                      superpose.symbol=list(cex=.5)))
-key <- simpleKey(levels(barley$year), space = "right")
+key <- simpleKey(levels(lattice::barley$year), space = "right")
 key$text$cex <- 1.5
 print(
-     dotplot(variety ~ yield | site, data = barley, groups = year,
+     dotplot(variety ~ yield | site, data = lattice::barley, groups = year,
              key = key,
              xlab = "Barley Yield (bushels/acre) ",
              aspect=0.5, layout = c(1,6), ylab=NULL)
@@ -2025,7 +2032,7 @@ figure1.6 <- function() {
 
 
 print(
-ggplot(data=mpg, aes(x=displ, y=hwy, shape=factor(cyl))) + 
+ggplot(data=ggplot2::mpg, aes(x=displ, y=hwy, shape=factor(cyl))) + 
     geom_point() +
     stat_smooth(method="lm", colour="black") +
     scale_shape_manual(values=c(1, 16, 3, 17)) + 
@@ -2052,14 +2059,14 @@ figure1.7 <- function() {
 library(maps)
 library(mapdata)
 par(mar=rep(1, 4))
-map("nzHires", fill=TRUE, col="gray80",
+maps::map("nzHires", fill=TRUE, col="gray80",
     regions=c("North Island", "South Island", "Stewart Island"))
 points(174.75, -36.87, pch=16, cex=2,
        col=rgb(0,0,0,.5))
 arrows(172, -36.87, 174, -36.87, lwd=3)
 text(172, -36.87, "Auckland  ", adj=1, cex=2)
 # mini world map as guide
-maplocs <- map(projection="sp_mercator", wrap=TRUE, lwd=0.1, 
+maplocs <- maps::map(projection="sp_mercator", wrap=TRUE, lwd=0.1, 
                col="gray", ylim=c(-60, 75),
                interior=FALSE, orientation=c(90, 180, 0), add=TRUE,
                plot=FALSE)
@@ -2072,7 +2079,7 @@ par(fig=c(0.99 - 0.5, 0.99, 0.01, 0.01 + 0.5*aspect*4.5/6.5),
 plot.new()
 plot.window(xlim=xrange,
             ylim=yrange)
-map(projection="sp_mercator", wrap=TRUE, lwd=0.5, ylim=c(-60, 75),
+maps::map(projection="sp_mercator", wrap=TRUE, lwd=0.5, ylim=c(-60, 75),
     interior=FALSE, orientation=c(90, 180, 0), add=TRUE)
 symbols(-.13, -0.8, circles=1, inches=0.1, add=TRUE)
 box()
@@ -2082,8 +2089,8 @@ box()
 }
 figure1.8 <- function() {
 library(quantmod)
-getSymbols("YHOO")
-chartSeries(YHOO, subset='last 4 months'
+quantmod::getSymbols("YHOO")
+quantmod::chartSeries(YHOO, subset='last 4 months'
  )
 
 
@@ -2099,7 +2106,7 @@ library(ipred)
 data("GlaucomaM", envir=environment())
 glau <- GlaucomaM
 levels(glau$Class) <- c("glau", "norm")
-fm.class <- ctree(Class ~ ., data = glau)
+fm.class <- party::ctree(Class ~ ., data = glau)
 
 # visualization
 pushViewport(viewport(gp=gpar(cex=0.6)))
@@ -2691,7 +2698,8 @@ text(x = seq(s1$x + 1, s1$x + 8.5, by = 0.5), y = rep(4, 16),
 figure1.13 <- function() {
 library(pixmap)
 
-pic <- read.pnm(system.file("extra", "AfterTheBombs.pnm", package="RGraphics"))
+pic <- pixmap::read.pnm(system.file("extra", "AfterTheBombs.pnm", 
+                                    package="RGraphics"))
 
 source(system.file("extra", "as.raster.R", package="RGraphics"))
 
@@ -2773,7 +2781,7 @@ library(gplots)
 par(mar=rep(1, 4))
 par(mfrow=c(1, 2))
 plot(faithful)
-textplot(capture.output(summary(faithful)))
+gplots::textplot(capture.output(summary(faithful)))
 
 
 
@@ -2787,7 +2795,7 @@ library(plotrix)
 
 par(mar=rep(1, 4))
 plot(pressure)
-addtable2plot(0, 300, pressure[13:19, ])
+plotrix::addtable2plot(0, 300, pressure[13:19, ])
 
 
 
@@ -2798,7 +2806,7 @@ library(gridExtra)
 
 
 
-grid.table(pressure[13:19, ], show.box=TRUE, 
+gridExtra::grid.table(pressure[13:19, ], show.box=TRUE, 
            separator="black")
 
 
@@ -2820,10 +2828,10 @@ x <- rnorm(20)
 y <- rnorm(20)
 plot(x, y, pch=16, col="gray")
 
-xy <- emptyspace(x, y)
+xy <- plotrix::emptyspace(x, y)
 text(xy, label="largest\nempty\nregion")
 
-xy2 <- largest.empty(x, y, 1, 1)
+xy2 <- Hmisc::largest.empty(x, y, 1, 1)
 rect(xy2$x - .5, xy2$y - .5, 
      xy2$x + .5, xy2$y + .5)
 
@@ -2856,7 +2864,7 @@ library(Hmisc)
 
 par(mar=c(1, 1, 2, 1))
 plot(x, y, pch=21, bg="gray", ylim=c(-3, 3), asp=1)
-spread.labels(x, y, labels=1:10)
+plotrix::spread.labels(x, y, labels=1:10)
 
 mtext("spread.labels", side=3, line=0)
 
@@ -2865,7 +2873,7 @@ mtext("spread.labels", side=3, line=0)
 par(mar=c(1, 1, 2, 1))
 plot(x, y, pch=21, bg="gray",  
      ylim=c(-2, 3), xlim=c(-.5, 1.5))
-thigmophobe.labels(x, y, labels=1:10)
+plotrix::thigmophobe.labels(x, y, labels=1:10)
 
 mtext("thigmophobe.labels", side=3, line=0)
 
@@ -2873,7 +2881,7 @@ mtext("thigmophobe.labels", side=3, line=0)
 
 par(mar=c(1, 1, 2, 1))
 plot(x, y, pch=21, bg="gray", ylim=c(-3, 3), asp=1)
-adjy <- spread.labs(y, strheight("10", cex=1.5))
+adjy <- TeachingDemos::spread.labs(y, strheight("10", cex=1.5))
 text(-0.5, adjy, labels=1:10, pos=2)
 segments(-0.5, adjy, x, y)
 
@@ -2883,7 +2891,7 @@ mtext("spread.labs", side=3, line=0)
 
 par(mar=c(1, 1, 2, 1))
 plot(x, y, pch=16, col="gray", ylim=c(-2, 3), xlim=c(-.5, 1.5))
-pointLabel(x, y, labels=as.character(1:10))
+maptools::pointLabel(x, y, labels=as.character(1:10))
 
 mtext("pointLabel", side=3, line=0)
 
@@ -2899,7 +2907,7 @@ lines <- list(A=list(x=sx, y=y, lty=1),
 
 plot(x, y, type="n", ylim=c(-3, 3))
 lapply(lines, function(l) do.call("lines", l))
-labcurve(lines)
+Hmisc::labcurve(lines)
 
 mtext("labcurve", side=3, line=0)
 
@@ -2918,36 +2926,36 @@ library(TeachingDemos)
 par(mar=rep(0, 4))
 plot.new()
 plot.window(0:1, c(.1, 1))
-draw.circle(.1, .9, radius=1:5/100)
-draw.arc(.3, .9, radius=1:5/100, 
+plotrix::draw.circle(.1, .9, radius=1:5/100)
+plotrix::draw.arc(.3, .9, radius=1:5/100, 
          deg1=45, deg2=seq(360, 160, -50))
-arctext("arctext", center=c(.5, .85), radius=.05,
+plotrix::arctext("arctext", center=c(.5, .85), radius=.05,
         stretch=1.2)
 
 text(.1, .8, "draw.circle")
 text(.3, .8, "draw.arc")
-boxed.labels(.7, .85, "boxed.labels", bg="gray90")
-textbox(c(.85, 1), .9, "this is a textbox .")
+plotrix::boxed.labels(.7, .85, "boxed.labels", bg="gray90")
+plotrix::textbox(c(.85, 1), .9, "this is a textbox .")
 
-gradient.rect(.05, .5, .15, .7, col=gray(0:20/21))
-cylindrect(.25, .5, .35, .7, "black")
-rectFill(.45, .5, .55, .7, pch=16)
+plotrix::gradient.rect(.05, .5, .15, .7, col=gray(0:20/21))
+plotrix::cylindrect(.25, .5, .35, .7, "black")
+plotrix::rectFill(.45, .5, .55, .7, pch=16)
 
 text(.1, .45, "gradient.rect")
 text(.3, .45, "cylindrect")
 text(.5, .45, "rectFill")
 x <- c(.65, .65, .75, .75)
 y <- c(.5, .7, .7, .5)
-polygon.shadow(x, y, offset=c(2/100, -2/100))
+plotrix::polygon.shadow(x, y, offset=c(2/100, -2/100))
 polygon(x, y, col="white")
 
 text(.7, .45, "polygon.shadow")
-shadowtext(.9, .6, "shadowtext")
+TeachingDemos::shadowtext(.9, .6, "shadowtext")
 
-my.symbols(seq(.3, .7, .2), .3,
-           ms.male, inches=.2)
-my.symbols(c(.4, .6), .3,
-           ms.female, inches=.2)
+TeachingDemos::my.symbols(seq(.3, .7, .2), .3,
+           TeachingDemos::ms.male, inches=.2)
+TeachingDemos::my.symbols(c(.4, .6), .3,
+           TeachingDemos::ms.female, inches=.2)
 
 text(.5, .2, "my.symbols")
 box(col="gray")
@@ -2960,16 +2968,16 @@ library(gridExtra)
 
 
 
-grid.ellipse(x=1:6/7, y=rep(.8, 6), size=.1, 
+gridExtra::grid.ellipse(x=1:6/7, y=rep(.8, 6), size=.1, 
              default.units="npc", size.unit="npc", 
              ar=1:6, angle=1:6*15/180*pi)
 grid.text("grid.ellipse", y=.7)
-grid.pattern(x=1:6/7, y=.5, width=unit(.1, "npc"),
+gridExtra::grid.pattern(x=1:6/7, y=.5, width=unit(.1, "npc"),
              height=unit(.1, "npc"), pattern=1:6,
              motif.cex=.7, gp=gpar(fill="gray80"))
 
 grid.text("grid.pattern", y=.4)
-grid.barbed(1:6/7, y=rep(c(.15, .25), 3), 
+gridExtra::grid.barbed(1:6/7, y=rep(c(.15, .25), 3), 
             size=unit(.05, "snpc"), 
             pch=21, gp=gpar(fill="gray"))
 
@@ -2984,7 +2992,7 @@ library(gplots)
 
 
 
-plotmeans(mpg ~ cyl, mtcars, 
+gplots::plotmeans(mpg ~ cyl, mtcars, 
           barcol="black", n.label=FALSE, connect=FALSE)
 
 
@@ -2997,11 +3005,11 @@ library(colorspace)
 
 grid.rect(1:10/11, .75, width=1/15, height=1/3,
           gp=gpar(col=NA,
-            fill=sequential_hcl(10, 0, 0, c(20, 90))))
+            fill=colorspace::sequential_hcl(10, 0, 0, c(20, 90))))
 
 grid.rect(1:10/11, .25, width=1/15, height=1/3,
           gp=gpar(col=NA,
-            fill=diverge_hcl(10, 0, 0, c(20, 90))))
+            fill=colorspace::diverge_hcl(10, 0, 0, c(20, 90))))
 
 grid.rect(gp=gpar(col="gray", fill=NA))
 
@@ -3023,9 +3031,9 @@ plot(rnorm(100), rnorm(100), pch=16, col="gray",
      ann=FALSE, axes=FALSE)
 box()
 
-corner.label("top-left", x=-1, y=1)
+plotrix::corner.label("top-left", x=-1, y=1)
 
-smartlegend(x="right", y="top", 
+gplots::smartlegend(x="right", y="top", 
             legend="top-right", pch=16, 
             col="gray", bg="white")
 
@@ -3042,7 +3050,7 @@ library(TeachingDemos)
 
 
 plot(window(Nile, 1920, 1940))
-subplot({ plot(Nile, axes=FALSE, ann=FALSE)
+TeachingDemos::subplot({ plot(Nile, axes=FALSE, ann=FALSE)
           rect(1920, 0, 1940, 2000, border=NA, col="gray")
           box()
           lines(Nile) }, 
@@ -3099,7 +3107,7 @@ with(pressure,
 
 
 plot(kelvin, pressure$pressure)
-updateusr(c(0, 1), 0:1, c(-273.15, -272.15), 0:1)
+TeachingDemos::updateusr(c(0, 1), 0:1, c(-273.15, -272.15), 0:1)
 abline(v=100)
 text(x=100, y=700, " water boils", adj=0)
 
@@ -3109,13 +3117,13 @@ pdf("Figures/extra-zoomplot-%d.pdf", onefile=FALSE,
     width=4, height=4)
 dev.control("enable")
 plot(pressure)
-zoomplot(c(0, 150), c(0, 3))
+TeachingDemos::zoomplot(c(0, 150), c(0, 3))
 
 dev.off()
 png("Web/extra-zoomplot%d.png", width=320, height=320)
 dev.control("enable")
 plot(pressure)
-zoomplot(c(0, 150), c(0, 3))
+TeachingDemos::zoomplot(c(0, 150), c(0, 3))
 
 dev.off()
 system("cp Web/extra-zoomplot2.png Web/extra-axisscale3.png")
@@ -3194,6 +3202,9 @@ mtcars2$wt <- NULL
 mtcars2$hp <- NULL
 mtcars2$qsec <- NULL
 
+# To keep R CMD check happy
+mpg <- mtcars2$mpg
+
 
 
 p <- ggplot(mtcars2)
@@ -3244,6 +3255,9 @@ mtcars2$carb <- NULL
 mtcars2$wt <- NULL
 mtcars2$hp <- NULL
 mtcars2$qsec <- NULL
+
+# To keep R CMD check happy
+mpg <- mtcars2$mpg
 
 
 
@@ -3390,6 +3404,9 @@ mtcars2$wt <- NULL
 mtcars2$hp <- NULL
 mtcars2$qsec <- NULL
 
+# To keep R CMD check happy
+mpg <- mtcars2$mpg
+
 
 
 p <- ggplot(mtcars2)
@@ -3423,6 +3440,9 @@ mtcars2$carb <- NULL
 mtcars2$wt <- NULL
 mtcars2$hp <- NULL
 mtcars2$qsec <- NULL
+
+# To keep R CMD check happy
+mpg <- mtcars2$mpg
 
 
 
@@ -3460,6 +3480,9 @@ mtcars2$carb <- NULL
 mtcars2$wt <- NULL
 mtcars2$hp <- NULL
 mtcars2$qsec <- NULL
+
+# To keep R CMD check happy
+mpg <- mtcars2$mpg
 
 
 
@@ -3507,6 +3530,9 @@ mtcars2$carb <- NULL
 mtcars2$wt <- NULL
 mtcars2$hp <- NULL
 mtcars2$qsec <- NULL
+
+# To keep R CMD check happy
+mpg <- mtcars2$mpg
 
 
 
@@ -3622,6 +3648,9 @@ mtcars2$wt <- NULL
 mtcars2$hp <- NULL
 mtcars2$qsec <- NULL
 
+# To keep R CMD check happy
+mpg <- mtcars2$mpg
+
 
 
 p <- ggplot(mtcars2)
@@ -3649,6 +3678,9 @@ mtcars2$carb <- NULL
 mtcars2$wt <- NULL
 mtcars2$hp <- NULL
 mtcars2$qsec <- NULL
+
+# To keep R CMD check happy
+mpg <- mtcars2$mpg
 
 
 
@@ -3698,6 +3730,9 @@ mtcars2$carb <- NULL
 mtcars2$wt <- NULL
 mtcars2$hp <- NULL
 mtcars2$qsec <- NULL
+
+# To keep R CMD check happy
+mpg <- mtcars2$mpg
 
 
 
@@ -3757,7 +3792,7 @@ simpleGNEL <- new("graphNEL",
 
 library(Rgraphviz)
 # Weird stuff happening if don't pre-layout graph
-temp <- agopen(simpleGNEL, "")
+temp <- Rgraphviz::agopen(simpleGNEL, "")
 Rgraphviz::plot(temp)
 
 
@@ -3788,7 +3823,7 @@ simpleGNEL <- new("graphNEL",
 
 
 # Weird stuff happening if don't pre-layout graph
-tempGraph <- agopen(simpleGNEL, "", layoutType="neato")
+tempGraph <- Rgraphviz::agopen(simpleGNEL, "", layoutType="neato")
 Rgraphviz::plot(tempGraph)
 
 
@@ -3833,8 +3868,8 @@ library(Rgraphviz)
 
 load(system.file("extra", "grd.rda", package="RGraphics"))
 grDraw <- function(layout) {
-    ragrd <- agopen(grd, "", layoutType=layout)
-    xy <- getNodeXY(ragrd)
+    ragrd <- Rgraphviz::agopen(grd, "", layoutType=layout)
+    xy <- Rgraphviz::getNodeXY(ragrd)
     grid.newpage()
     pushViewport(viewport(width=1.1, height=1.1),
                  plotViewport(xscale=range(xy$x), yscale=range(xy$y)))
@@ -3893,7 +3928,7 @@ simpleGNEL <- new("graphNEL",
 
 
 
-toFile(agopen(simpleGNEL, ""), 
+Rgraphviz::toFile(Rgraphviz::agopen(simpleGNEL, ""), 
        filename="Figures/graph-graphvizrender.ps", 
        fileType="ps")
 
@@ -3906,9 +3941,9 @@ library(hyperdraw)
 
 
 
-dh <- DirectedHyperedge(c("A", "B"), c("C", "D"))
-hg <- Hypergraph(LETTERS[1:4], list(dh))
-getMethod("plot", "graphBPH")(graphBPH(hg))
+dh <- hypergraph::DirectedHyperedge(c("A", "B"), c("C", "D"))
+hg <- hypergraph::Hypergraph(LETTERS[1:4], list(dh))
+getMethod("plot", "graphBPH")(hyperdraw::graphBPH(hg))
 
 
 
@@ -3918,22 +3953,22 @@ library(igraph)
 
 
 
-treeIgraph <- graph.tree(10)
-fullIgraph <- graph.full(10)
+treeIgraph <- igraph::graph.tree(10)
+fullIgraph <- igraph::graph.full(10)
 
 
 
 # See ?igraph.plotting for useful graph attributes
-treeIgraph <- set.vertex.attribute(treeIgraph, "color", value="black")
-treeIgraph <- set.edge.attribute(treeIgraph, "color", value="black")
+treeIgraph <- igraph::set.vertex.attribute(treeIgraph, "color", value="black")
+treeIgraph <- igraph::set.edge.attribute(treeIgraph, "color", value="black")
 plot(treeIgraph, 
-     layout=layout.reingold.tilford(treeIgraph, root=1, flip.y=FALSE))
+     layout=igraph::layout.reingold.tilford(treeIgraph, root=1, flip.y=FALSE))
 
 
 
-fullIgraph <- set.vertex.attribute(fullIgraph, "color", value="black")
-fullIgraph <- set.edge.attribute(fullIgraph, "color", value="black")
-plot(fullIgraph, layout=layout.circle)
+fullIgraph <- igraph::set.vertex.attribute(fullIgraph, "color", value="black")
+fullIgraph <- igraph::set.edge.attribute(fullIgraph, "color", value="black")
+plot(fullIgraph, layout=igraph::layout.circle)
 
 
 
@@ -3963,7 +3998,7 @@ simpleGNEL <- new("graphNEL",
 
 
 simpleNetwork <- 
-    network(rbind(c(1, 2),
+    network::network(rbind(c(1, 2),
                   c(1, 3),
                   c(3, 4),
                   c(3, 5)),
@@ -3989,44 +4024,44 @@ library(diagram)
 par(mar=rep(1, 4))
 plot.new()
 
-nodePos <- coordinates(c(2, 2, 2, 2))
+nodePos <- diagram::coordinates(c(2, 2, 2, 2))
 
-straightarrow(nodePos[1, ], nodePos[3,])
+diagram::straightarrow(nodePos[1, ], nodePos[3,])
 
-straightarrow(nodePos[3, ], nodePos[4,])
-straightarrow(nodePos[3, ], nodePos[5,])
-straightarrow(nodePos[5, ], nodePos[6,])
-straightarrow(nodePos[6, ], nodePos[4,])
-straightarrow(nodePos[5, ], nodePos[7,])
-straightarrow(nodePos[6, ], nodePos[8,])
-straightarrow(nodePos[7, ], nodePos[8,])
+diagram::straightarrow(nodePos[3, ], nodePos[4,])
+diagram::straightarrow(nodePos[3, ], nodePos[5,])
+diagram::straightarrow(nodePos[5, ], nodePos[6,])
+diagram::straightarrow(nodePos[6, ], nodePos[4,])
+diagram::straightarrow(nodePos[5, ], nodePos[7,])
+diagram::straightarrow(nodePos[6, ], nodePos[8,])
+diagram::straightarrow(nodePos[7, ], nodePos[8,])
 
-textplain(nodePos[3, ] + c(.2, .02), lab="yes")
-textplain(nodePos[5, ] + c(.2, .02), lab="yes")
-textplain(nodePos[6, ] + c(.03, .15), lab="yes")
-textplain(nodePos[3, ] + c(.2, .02), lab="yes")
-textplain(nodePos[5, ] + c(-.03, .125), lab="no")
-textplain(nodePos[7, ] + c(-.03, .125), lab="no")
-textplain(nodePos[7, ] + c(.2, -.02), lab="no")
-textplain(nodePos[8, ] + c(-.03, .125), lab="no")
+diagram::textplain(nodePos[3, ] + c(.2, .02), lab="yes")
+diagram::textplain(nodePos[5, ] + c(.2, .02), lab="yes")
+diagram::textplain(nodePos[6, ] + c(.03, .15), lab="yes")
+diagram::textplain(nodePos[3, ] + c(.2, .02), lab="yes")
+diagram::textplain(nodePos[5, ] + c(-.03, .125), lab="no")
+diagram::textplain(nodePos[7, ] + c(-.03, .125), lab="no")
+diagram::textplain(nodePos[7, ] + c(.2, -.02), lab="no")
+diagram::textplain(nodePos[8, ] + c(-.03, .125), lab="no")
 
-textrect(nodePos[1, ], .05, .025, lab="start")
+diagram::textrect(nodePos[1, ], .05, .025, lab="start")
 
-textdiamond(nodePos[3, ], .15, .1)
-textplain(nodePos[3, ], .08,
+diagram::textdiamond(nodePos[3, ], .15, .1)
+diagram::textplain(nodePos[3, ], .08,
           lab=c("do you", "understand flow", "charts?"))
-textellipse(nodePos[4, ], .08, .08,
+diagram::textellipse(nodePos[4, ], .08, .08,
             lab=c("let's go", "drink."))
-textdiamond(nodePos[5, ], .15, .1)
-textplain(nodePos[5, ], .08,
+diagram::textdiamond(nodePos[5, ], .15, .1)
+diagram::textplain(nodePos[5, ], .08,
           lab=c("you see", "the lines labeled", "'yes'?"))
-textdiamond(nodePos[6, ], .15, .1)
-textplain(nodePos[6, ], .08,
+diagram::textdiamond(nodePos[6, ], .15, .1)
+diagram::textplain(nodePos[6, ], .08,
           lab=c("you see", "the lines labeled", "'no'?"))
-textdiamond(nodePos[7, ], .15, .1)
-textplain(nodePos[7, ], .08,
+diagram::textdiamond(nodePos[7, ], .15, .1)
+diagram::textplain(nodePos[7, ], .08,
           lab=c("you see", "the lines labeled", "'no'?"))
-textellipse(nodePos[8, ], .07, .07,
+diagram::textellipse(nodePos[8, ], .07, .07,
             lab=c("I hate", "you."))
 
 
@@ -4071,7 +4106,7 @@ moonPhase <- function(x, y, phase, size=.05) {
 
 # Original image from NASA
 # http://grin.hq.nasa.gov/ABSTRACTS/GPN-2000-000473.html
-rasterMoon <- read.pnm(system.file("extra", "GPN-2000-000473.pgm",
+rasterMoon <- pixmap::read.pnm(system.file("extra", "GPN-2000-000473.pgm",
                                    package="RGraphics"))
 par(pin=c(3.5, 1.75), oma=c(0, 3, 0, 0), xaxs="i", yaxs="i", cex=.7)
 plot.new()
@@ -4135,9 +4170,9 @@ pushViewport(viewport(gp=gpar(cex=0.7)),
              dataViewport(as.numeric(lowTideDate), 
                           as.numeric(mainHours)))
 vectorMoon <- 
-    readPicture(system.file("extra", "comic_moon.ps.xml",
+    grImport::readPicture(system.file("extra", "comic_moon.ps.xml",
                             package="RGraphics"))
-grid.picture(vectorMoon)
+grImport::grid.picture(vectorMoon)
 grid.segments(unit(phases$date, "native"), 0,
               unit(phases$date, "native"), 1,
               gp=gpar(lty="dashed"))
@@ -4178,9 +4213,9 @@ source(system.file("extra", "as.raster.R", package="RGraphics"))
 
 
 
-moon <- read.pnm(system.file("extra", "GPN-2000-000473.pgm",
+moon <- pixmap::read.pnm(system.file("extra", "GPN-2000-000473.pgm",
                                    package="RGraphics"))
-helmet <- read.pnm(system.file("extra", "astronaut.pgm",
+helmet <- pixmap::read.pnm(system.file("extra", "astronaut.pgm",
                                package="RGraphics"))
 
 moonMatrix <- as.matrix(as.raster(moon))
@@ -4212,9 +4247,18 @@ popViewport(2)
 
 }
 figure18.4 <- function() {
-moon <- read.pnm(system.file("extra", "GPN-2000-000473.pgm",
+library(pixmap)
+
+
+
+source(system.file("extra", "as.raster.R", package="RGraphics"))
+
+
+
+
+moon <- pixmap::read.pnm(system.file("extra", "GPN-2000-000473.pgm",
                                    package="RGraphics"))
-helmet <- read.pnm(system.file("extra", "astronaut.pgm",
+helmet <- pixmap::read.pnm(system.file("extra", "astronaut.pgm",
                                package="RGraphics"))
 
 moonMatrix <- as.matrix(as.raster(moon))
@@ -4232,15 +4276,6 @@ helmetMask <- matrix(rgb(helmetRGB[1, ],
 
 
 
-library(pixmap)
-
-
-
-source(system.file("extra", "as.raster.R", package="RGraphics"))
-
-
-
-
 grid.rect(width=.99, height=.99)
 grid.raster(helmetMask)
 
@@ -4253,14 +4288,14 @@ library(grImport)
 
 
 library(grImport)
-PostScriptTrace(system.file("extra", "comic_moon.ps",
+grImport::PostScriptTrace(system.file("extra", "comic_moon.ps",
                             package="RGraphics"))
 
 
-vectorMoon <- readPicture("comic_moon.ps.xml")
+vectorMoon <- grImport::readPicture("comic_moon.ps.xml")
 
 
-picturePaths(vectorMoon[1:6], fill="white", 
+grImport::picturePaths(vectorMoon[1:6], fill="white", 
              freeScales=TRUE, nr=2, nc=3)
 
 
@@ -4272,18 +4307,18 @@ library(grImport)
 
 
 library(grImport)
-PostScriptTrace(system.file("extra", "comic_moon.ps",
+grImport::PostScriptTrace(system.file("extra", "comic_moon.ps",
                             package="RGraphics"))
 
 
-vectorMoon <- readPicture("comic_moon.ps.xml")
+vectorMoon <- grImport::readPicture("comic_moon.ps.xml")
 
 
-grid.picture(vectorMoon[1:4])
+grImport::grid.picture(vectorMoon[1:4])
 
 
 
-grid.picture(vectorMoon, use.gc=FALSE)
+grImport::grid.picture(vectorMoon, use.gc=FALSE)
 
 
 
@@ -4373,7 +4408,7 @@ ozImage <- function(mapLong, mapLat,
 }
 
 drawDetails.ozImage <- function(x, recording) { 
-  grid.draw(ozGrob(ozRegion(xlim=x$mapLong, 
+  grid.draw(ozGrob(oz::ozRegion(xlim=x$mapLong, 
                             ylim=x$mapLat))) 
   depth <- downViewport(vpPath("ozlay", "ozvp"))
   pushViewport(viewport(y=min(x$imageLat), 
@@ -4450,12 +4485,12 @@ widthDetails.ribbonLegend <- function(x) {
 
 mapLong <- c(132, 136)
 mapLat <- c(-35, -31.5)
-imageLong <- range(fluoro.predict$x)
-imageLat <- range(fluoro.predict$y)
-zbreaks <- seq(min(fluoro.predict$z, na.rm=TRUE), 
-               max(fluoro.predict$z, na.rm=TRUE), 
+imageLong <- range(RGraphics::fluoro.predict$x)
+imageLat <- range(RGraphics::fluoro.predict$y)
+zbreaks <- seq(min(RGraphics::fluoro.predict$z, na.rm=TRUE), 
+               max(RGraphics::fluoro.predict$z, na.rm=TRUE), 
                length=10)
-zcol <- cut(fluoro.predict$z, zbreaks,
+zcol <- cut(RGraphics::fluoro.predict$z, zbreaks,
             include.lowest=TRUE, labels=FALSE)
 ozgrays <- gray(0.5 + 1:9/20)
 imageCols <- ozgrays[zcol]
@@ -4467,7 +4502,7 @@ ozKey <- function(x, y, width, height, just,
   gTree(childrenvp=viewport(name="ozkeyframe",
                             x=x, y=y, just=just,
                             width=width, height=height),
-        children=gList(ozGrob(ozRegion(), vp="ozkeyframe",
+        children=gList(ozGrob(oz::ozRegion(), vp="ozkeyframe",
                               gp=gpar(lwd=0.1)),
                        rectGrob(x=mean(mapLong),
                                 y=mean(mapLat),
@@ -4631,7 +4666,7 @@ grid.ozFun <- function(ozRegion) {
 
 
 grid.rect(gp=gpar(col="gray"))
-grid.ozFun(ozRegion())
+grid.ozFun(oz::ozRegion())
 
 
 
@@ -4686,12 +4721,12 @@ grid.ozFun <- function(ozRegion) {
 
 mapLong <- c(132, 136)
 mapLat <- c(-35, -31.5)
-imageLong <- range(fluoro.predict$x)
-imageLat <- range(fluoro.predict$y)
-zbreaks <- seq(min(fluoro.predict$z, na.rm=TRUE), 
-               max(fluoro.predict$z, na.rm=TRUE), 
+imageLong <- range(RGraphics::fluoro.predict$x)
+imageLat <- range(RGraphics::fluoro.predict$y)
+zbreaks <- seq(min(RGraphics::fluoro.predict$z, na.rm=TRUE), 
+               max(RGraphics::fluoro.predict$z, na.rm=TRUE), 
                length=10)
-zcol <- cut(fluoro.predict$z, zbreaks,
+zcol <- cut(RGraphics::fluoro.predict$z, zbreaks,
             include.lowest=TRUE, labels=FALSE)
 ozgrays <- gray(0.5 + 1:9/20)
 imageCols <- ozgrays[zcol]
@@ -4700,18 +4735,18 @@ imageCols <- ozgrays[zcol]
 
 mapLong <- c(132, 136)
 mapLat <- c(-35, -31.5)
-imageLong <- range(fluoro.predict$x)
-imageLat <- range(fluoro.predict$y)
-zbreaks <- seq(min(fluoro.predict$z, na.rm=TRUE), 
-               max(fluoro.predict$z, na.rm=TRUE), 
+imageLong <- range(RGraphics::fluoro.predict$x)
+imageLat <- range(RGraphics::fluoro.predict$y)
+zbreaks <- seq(min(RGraphics::fluoro.predict$z, na.rm=TRUE), 
+               max(RGraphics::fluoro.predict$z, na.rm=TRUE), 
                length=10)
-zcol <- cut(fluoro.predict$z, zbreaks,
+zcol <- cut(RGraphics::fluoro.predict$z, zbreaks,
             include.lowest=TRUE, labels=FALSE)
 ozgrays <- gray(0.5 + 1:9/20)
 imageCols <- ozgrays[zcol]
 
 grid.rect(gp=gpar(col="gray"))
-grid.ozFun(ozRegion(xlim=mapLong, ylim=mapLat))
+grid.ozFun(oz::ozRegion(xlim=mapLong, ylim=mapLat))
 
 downViewport("ozvp")
 
@@ -4777,12 +4812,12 @@ grid.ozFun <- function(ozRegion) {
 
 mapLong <- c(132, 136)
 mapLat <- c(-35, -31.5)
-imageLong <- range(fluoro.predict$x)
-imageLat <- range(fluoro.predict$y)
-zbreaks <- seq(min(fluoro.predict$z, na.rm=TRUE), 
-               max(fluoro.predict$z, na.rm=TRUE), 
+imageLong <- range(RGraphics::fluoro.predict$x)
+imageLat <- range(RGraphics::fluoro.predict$y)
+zbreaks <- seq(min(RGraphics::fluoro.predict$z, na.rm=TRUE), 
+               max(RGraphics::fluoro.predict$z, na.rm=TRUE), 
                length=10)
-zcol <- cut(fluoro.predict$z, zbreaks,
+zcol <- cut(RGraphics::fluoro.predict$z, zbreaks,
             include.lowest=TRUE, labels=FALSE)
 ozgrays <- gray(0.5 + 1:9/20)
 imageCols <- ozgrays[zcol]
@@ -4790,7 +4825,7 @@ imageCols <- ozgrays[zcol]
 
 
 grid.rect(gp=gpar(col="gray"))
-grid.ozFun(ozRegion(xlim=mapLong, ylim=mapLat))
+grid.ozFun(oz::ozRegion(xlim=mapLong, ylim=mapLat))
 
 downViewport("ozvp")
 
@@ -4906,7 +4941,7 @@ ozImage <- function(mapLong, mapLat,
 }
 
 drawDetails.ozImage <- function(x, recording) { 
-  grid.draw(ozGrob(ozRegion(xlim=x$mapLong, 
+  grid.draw(ozGrob(oz::ozRegion(xlim=x$mapLong, 
                             ylim=x$mapLat))) 
   depth <- downViewport(vpPath("ozlay", "ozvp"))
   pushViewport(viewport(y=min(x$imageLat), 
@@ -5180,7 +5215,7 @@ ozKey <- function(x, y, width, height, just,
   gTree(childrenvp=viewport(name="ozkeyframe",
                             x=x, y=y, just=just,
                             width=width, height=height),
-        children=gList(ozGrob(ozRegion(), vp="ozkeyframe",
+        children=gList(ozGrob(oz::ozRegion(), vp="ozkeyframe",
                               gp=gpar(lwd=0.1)),
                        rectGrob(x=mean(mapLong),
                                 y=mean(mapLat),
@@ -5296,18 +5331,18 @@ widthDetails.ribbonLegend <- function(x) {
 } 
 
 
-grid.ozGrob(ozRegion())
+grid.ozGrob(oz::ozRegion())
 downViewport("ozvp")
-for (i in 1:(dim(ozTemp)[1])) {
-  grid.points(ozTemp$long[i], ozTemp$lat[i], pch=16)
-  rl <- ribbonLegend(breaks=c(min(ozTemp$min), 
-                              ozTemp$min[i], 
-                              ozTemp$max[i], 
-                              max(ozTemp$max)),
+for (i in 1:(dim(RGraphics::ozTemp)[1])) {
+  grid.points(RGraphics::ozTemp$long[i], RGraphics::ozTemp$lat[i], pch=16)
+  rl <- ribbonLegend(breaks=c(min(RGraphics::ozTemp$min), 
+                              RGraphics::ozTemp$min[i], 
+                              RGraphics::ozTemp$max[i], 
+                              max(RGraphics::ozTemp$max)),
                      cols=c("white", "gray", "white"),
                      gp=gpar(cex=.7))
-  pushViewport(viewport(x=unit(ozTemp$long[i], "native"),
-                        y=unit(ozTemp$lat[i], "native"),
+  pushViewport(viewport(x=unit(RGraphics::ozTemp$long[i], "native"),
+                        y=unit(RGraphics::ozTemp$lat[i], "native"),
                         height=unit(1, "in"),
                         width=grobWidth(rl),
                         clip="off"))
@@ -5489,8 +5524,8 @@ faceC <- function(x, y, width, height) {
 faceD <- function(x, y, width, height) {
   grid.grabExpr({
                   pushViewport(viewport(x=x, y=y,
-                                        width=size, 
-                                        height=size))
+                                        width=width, 
+                                        height=height))
                   grid.rect()
                   grid.circle(x=c(0.25, 0.75), 
                               y=0.75, r=0.1)
@@ -5635,11 +5670,11 @@ orbit <- function() {
 
 
 
-ani.options(interval=0.05, outdir="orbitImages",
+animation::ani.options(interval=0.05, outdir="orbitImages",
             filename="orbit.html")
-ani.start()
+animation::ani.start()
 orbit()
-ani.stop()
+animation::ani.stop()
 
 
 }
@@ -5669,7 +5704,7 @@ figure17.5 <- function() {
 library(rggobi)
 mtcars$gear <- factor(mtcars$gear)
 mtcars$cyl <- factor(mtcars$cyl)
-gg <- ggobi(mtcars)
+gg <- rggobi::ggobi(mtcars)
 
 
 }
@@ -5683,7 +5718,7 @@ library(rggobi)
 
 
 
-gg <- ggobi(mtcars)
+gg <- rggobi::ggobi(mtcars)
 
 
 }
@@ -5692,8 +5727,8 @@ library(iplots)
 
 
 
-iplot(mtcars$disp, mtcars$mpg)
-ibar(mtcars$gear)
+iplots::iplot(mtcars$disp, mtcars$mpg)
+iplots::ibar(mtcars$gear)
 
 
 }
@@ -5702,11 +5737,11 @@ library(iplots)
 
 
 
-iplot(mtcars$disp, mtcars$mpg)
-ibar(mtcars$gear)
+iplots::iplot(mtcars$disp, mtcars$mpg)
+iplots::ibar(mtcars$gear)
 
 
-iplot.set(1)
+iplots::iplot.set(1)
 
 
 
@@ -5714,14 +5749,14 @@ labels <- mapply("itext",
                  mtcars$disp, mtcars$mpg, rownames(mtcars), 
                  MoreArgs=list(visible=FALSE), SIMPLIFY=FALSE)
 olds <- NULL
-while (!is.null(ievent.wait())) {
-    if (iset.sel.changed()) {
-        s <- iset.selected()
+while (!is.null(iplots::ievent.wait())) {
+    if (iplots::iset.sel.changed()) {
+        s <- iplots::iset.selected()
         if (length(s) > 1) {
-            lapply(labels[s], iobj.opt, visible = TRUE)
+            lapply(labels[s], iplots::iobj.opt, visible = TRUE)
         }
         if (length(olds) > 1) {
-            lapply(labels[olds], iobj.opt, visible = FALSE)
+            lapply(labels[olds], iplots::iobj.opt, visible = FALSE)
         }
         olds <- s
     }
@@ -5740,17 +5775,17 @@ library(pmg)
 
 }
 figure17.12 <- function() {
-library(latticist)
-latticist(mtcars, list(xvar="disp", yvar="mpg"), 
-          use.playwith=FALSE)
-
-
+# library(latticist)
+# latticist(mtcars, list(xvar="disp", yvar="mpg"), 
+#           use.playwith=FALSE)
+# 
+# 
 }
 figure17.13 <- function() {
 library(playwith)
-playwith(xyplot(mpg ~ disp, mtcars))
-playwith(xyplot(qsec ~ wt, mtcars), 
-         new=TRUE, link.to=playDevCur())
+playwith::playwith(xyplot(mpg ~ disp, mtcars))
+playwith::playwith(xyplot(qsec ~ wt, mtcars), 
+         new=TRUE, link.to=playwith::playDevCur())
 
 
 }
@@ -5785,23 +5820,23 @@ library(gWidgetsRGtk2)
 
 
 
-window <- gwindow("Clock")
+window <- gWidgets::gwindow("Clock")
 
 
 
-allContent <- ggroup(container=window, horizontal=FALSE)
+allContent <- gWidgets::ggroup(container=window, horizontal=FALSE)
 
 
 
-graphicTime <- ggraphics(container=allContent)
+graphicTime <- gWidgets::ggraphics(container=allContent)
 
 
 
-timeContent <- ggroup(container=allContent)
+timeContent <- gWidgets::ggroup(container=allContent)
 
 
 
-textLabel <- glabel("")
+textLabel <- gWidgets::glabel("")
 
 
 
@@ -5809,28 +5844,28 @@ randomizeTime <- function(h, ...) {
     hour <- sample(1:12, 1)
     minute <- sample(seq(0, 55, 5), 1)
     drawClock(hour, minute)
-    visible(textLabel) <- FALSE
-    svalue(textLabel) <- paste(hour, 
+    gWidgetsRGtk2::visible(textLabel) <- FALSE
+    gWidgetsRGtk2::svalue(textLabel) <- paste(hour, 
                                sprintf("%02d", minute), 
                                sep=":")
 }
 
 
 
-reset <- gbutton("Randomize Time", 
+reset <- gWidgets::gbutton("Randomize Time", 
                  handler=randomizeTime)
 
 
 
-textButton <- gbutton("Show Time", 
+textButton <- gWidgets::gbutton("Show Time", 
                       handler=function(h, ...) {
-                          visible(textLabel) <- TRUE
+                          gWidgetsRGtk2::visible(textLabel) <- TRUE
                       })
 
 
-add(timeContent, reset)
-add(timeContent, textButton)
-add(timeContent, textLabel)
+gWidgetsRGtk2::add(timeContent, reset)
+gWidgetsRGtk2::add(timeContent, textButton)
+gWidgetsRGtk2::add(timeContent, textLabel)
 
 
 
@@ -5840,13 +5875,13 @@ library(SVGAnnotation)
 
 
 
-doc <- svgPlot({ par(mfrow=c(2, 1), cex=.7,     
+doc <- SVGAnnotation::svgPlot({ par(mfrow=c(2, 1), cex=.7,     
                      mar=c(5.1, 4.1, 1, 1))
                  plot(mpg ~ disp, mtcars, cex=2)
                  plot(qsec ~ wt, mtcars, cex=2) },
                width=4, height=8)
-linkPlots(doc)
-saveXML(doc, "linkedplots.svg")
+SVGAnnotation::linkPlots(doc)
+XML::saveXML(doc, "linkedplots.svg")
 
 
 }
@@ -5860,7 +5895,7 @@ text(150, 600,
 }
 figure14.1 <- function() {
 library(maptools)
-colorado <- readShapeSpatial(system.file("extra", "10m-colorado.shp",
+colorado <- maptools::readShapeSpatial(system.file("extra", "10m-colorado.shp",
                                          package="RGraphics"))
 par(mar=rep(0, 4))
 sp::plot(colorado, col="gray")
@@ -5875,7 +5910,7 @@ library(maps)
 
 
 par(mar=rep(0, 4))
-map(regions="Brazil", fill=TRUE, col="gray")
+maps::map(regions="Brazil", fill=TRUE, col="gray")
 
 box("figure", col="gray", lwd=2)
 
@@ -5888,7 +5923,7 @@ library(maptools)
 
 
 brazil <- 
-    readShapeSpatial(system.file("extra", "10m-brazil.shp",
+    maptools::readShapeSpatial(system.file("extra", "10m-brazil.shp",
                                  package="RGraphics"))
 
 
@@ -5907,13 +5942,13 @@ library(maptools)
 
 
 brazil <- 
-    readShapeSpatial(system.file("extra", "10m-brazil.shp",
+    maptools::readShapeSpatial(system.file("extra", "10m-brazil.shp",
                                  package="RGraphics"))
 
 
 
 print(
-spplot(brazil, "Regions", col.regions=gray(5:1/6))
+sp::spplot(brazil, "Regions", col.regions=gray(5:1/6))
 
 )
 
@@ -5926,19 +5961,19 @@ library(maptools)
 
 
 brazil <- 
-    readShapeSpatial(system.file("extra", "10m-brazil.shp",
+    maptools::readShapeSpatial(system.file("extra", "10m-brazil.shp",
                                  package="RGraphics"))
 
 
 
 brazilRegions <- 
-    readShapeSpatial(system.file("extra", 
+    maptools::readShapeSpatial(system.file("extra", 
                                  "10m_brazil_regions.shp",
                                  package="RGraphics"))
 
 
 brazilCapitals <- 
-    readShapeSpatial(system.file("extra",
+    maptools::readShapeSpatial(system.file("extra",
                                  "10m_brazil_capitals.shp",
                                  package="RGraphics"))
 
@@ -5946,22 +5981,22 @@ brazilCapitals <-
 
 
 print(
-spplot(brazil, "Regions", 
+sp::spplot(brazil, "Regions", 
        col.regions=gray.colors(5, 0.8, 0.3),
        col="white", 
        panel=function(...) {
-           panel.polygonsplot(...)
-           sp.lines(brazilRegions, col="gray40")
+           sp::panel.polygonsplot(...)
+           sp::sp.lines(brazilRegions, col="gray40")
            labels <- brazilCapitals$Name
            w <- stringWidth(labels)
            h <- stringHeight(labels)
-           locs <- coordinates(brazilCapitals)
+           locs <- sp::coordinates(brazilCapitals)
            grid.rect(unit(locs[, 1], "native"),
                      unit(locs[, 2], "native"),
                      w, h, just=c("right", "top"),
                      gp=gpar(col=NA, fill=rgb(1, 1, 1, .5)))
-           sp.text(locs, labels, adj=c(1, 1))
-           sp.points(brazilCapitals, pch=21,
+           sp::sp.text(locs, labels, adj=c(1, 1))
+           sp::sp.points(brazilCapitals, pch=21,
                      col="black", fill="white")
        })
 
@@ -5977,7 +6012,7 @@ library(maptools)
 
 
 marajo <- 
-    readShapeSpatial(system.file("extra", "marajo.shp",
+    maptools::readShapeSpatial(system.file("extra", "marajo.shp",
                                  package="RGraphics"))
 
 
@@ -5994,7 +6029,7 @@ library(maptools)
 
 
 iceland <- 
-    readShapeSpatial(system.file("extra", "10m-iceland.shp",
+    maptools::readShapeSpatial(system.file("extra", "10m-iceland.shp",
                                  package="RGraphics"))
 
 
@@ -6011,12 +6046,12 @@ library(maptools)
 
 
 iceland <- 
-    readShapeSpatial(system.file("extra", "10m-iceland.shp",
+    maptools::readShapeSpatial(system.file("extra", "10m-iceland.shp",
                                  package="RGraphics"))
 
 
 
-proj4string(iceland) <- CRS("+proj=longlat +ellps=WGS84")
+sp::proj4string(iceland) <- sp::CRS("+proj=longlat +ellps=WGS84")
 
 
 
@@ -6032,17 +6067,17 @@ library(rgdal)
 
 
 iceland <- 
-    readShapeSpatial(system.file("extra", "10m-iceland.shp",
+    maptools::readShapeSpatial(system.file("extra", "10m-iceland.shp",
                                  package="RGraphics"))
 
 
 
-proj4string(iceland) <- CRS("+proj=longlat +ellps=WGS84")
+sp::proj4string(iceland) <- sp::CRS("+proj=longlat +ellps=WGS84")
 
 
 
-icelandMercator <- spTransform(iceland, 
-                               CRS("+proj=merc +ellps=GRS80"))
+icelandMercator <- sp::spTransform(iceland, 
+                               sp::CRS("+proj=merc +ellps=GRS80"))
 
 
 
@@ -6064,19 +6099,19 @@ library(rgdal)
 
 
 brazil <- 
-    readShapeSpatial(system.file("extra", "10m-brazil.shp",
+    maptools::readShapeSpatial(system.file("extra", "10m-brazil.shp",
                                  package="RGraphics"))
 
 
 
-proj4string(brazil) <- CRS("+proj=longlat +ellps=WGS84")
+sp::proj4string(brazil) <- sp::CRS("+proj=longlat +ellps=WGS84")
 
 
 
-glines <- gridlines(brazil)
-glinesOrtho <- spTransform(glines, CRS("+proj=ortho"))
+glines <- sp::gridlines(brazil)
+glinesOrtho <- sp::spTransform(glines, sp::CRS("+proj=ortho"))
 par(mar=rep(0, 4))
-brazilOrtho <- spTransform(brazil, CRS("+proj=ortho"))
+brazilOrtho <- sp::spTransform(brazil, sp::CRS("+proj=ortho"))
 sp::plot(brazilOrtho, col="gray")
 sp::plot(glinesOrtho, lty="dashed", add=TRUE)
 
@@ -6093,13 +6128,13 @@ library(raster)
 
 
 brazil <- 
-    readShapeSpatial(system.file("extra", "10m-brazil.shp",
+    maptools::readShapeSpatial(system.file("extra", "10m-brazil.shp",
                                  package="RGraphics"))
 
 
 
 # Read in prepared raster
-brazilRelief <- raster(system.file("extra", "brazilRelief.tif",
+brazilRelief <- raster::raster(system.file("extra", "brazilRelief.tif",
                                    package="RGraphics"))
 
 
@@ -6473,6 +6508,9 @@ mtcars2$vs <- NULL
 mtcars2$drat <- NULL
 mtcars2$carb <- NULL
 
+# To keep R CMD check happy
+mpg <- mtcars2$mpg
+
 
 
 update_geom_defaults("smooth", aes(color="black"))
@@ -6561,9 +6599,9 @@ grpkgs <- new("graphNEL",
 # devicePkgs <- subGraph(c("GDD", "JavaGD", "Cairo", 
 #                          "cairoDevice", "tikzDevice"),
 #                        grpkgs)
-interfacePkgs <- subGraph(c("iplots", "rggobi", "rgl"), grpkgs)
+interfacePkgs <- graph::subGraph(c("iplots", "rggobi", "rgl"), grpkgs)
 
-ragraph <- agopen(grpkgs, name="whatever",
+ragraph <- Rgraphviz::agopen(grpkgs, name="whatever",
                   # layoutType="dot", 
                   layoutType="dot", 
                   # layoutType="twopi", 
@@ -6583,18 +6621,18 @@ ragraph <- agopen(grpkgs, name="whatever",
 #                    list(graph=gridPkgs),
                     list(graph=interfacePkgs)))
 
-nodeDataDefaults(ragraph, "style") <- "filled"
-nodeDataDefaults(ragraph, "fillcolor") <- "gray90"
-nodeData(ragraph, c("grDevices", "graphics", "grid", "lattice", "ggplot2"), 
+Rgraphviz::nodeDataDefaults(ragraph, "style") <- "filled"
+Rgraphviz::nodeDataDefaults(ragraph, "fillcolor") <- "gray90"
+Rgraphviz::nodeData(ragraph, c("grDevices", "graphics", "grid", "lattice", "ggplot2"), 
          "style") <- "filled"
-nodeData(ragraph, c("grDevices", "graphics", "grid", "lattice", "ggplot2"), 
+Rgraphviz::nodeData(ragraph, c("grDevices", "graphics", "grid", "lattice", "ggplot2"), 
          "fillcolor") <- "gray70"
 
 # clusterData(ragraph, 0, "label") <- "Devices"
 # clusterData(ragraph, 1, "label") <- "Systems"
 # clusterData(ragraph, 2, "label") <- "Graphics-based Packages"
 # clusterData(ragraph, 3, "label") <- "Grid-based Packages"
-clusterData(ragraph, 0, "style") <- "dashed"
+Rgraphviz::clusterData(ragraph, 0, "style") <- "dashed"
 
 # Edge from "grDevices" to "Interface Packages" cluster
 # (Needs existing link from grDevices to rgl)
@@ -6602,14 +6640,14 @@ clusterData(ragraph, 0, "style") <- "dashed"
 # edgeData(ragraph, "grDevices", "rgl", "lhead") <- "cluster_1" 
 
 # Edges within "Interface Packages" cluster
-edgeData(ragraph, "rgl", "rggobi", "style") <- "invis"
-edgeData(ragraph, "rggobi", "iplots", "style") <- "invis"
-edgeData(ragraph, "iplots", "rgl", "style") <- "invis"
+Rgraphviz::edgeData(ragraph, "rgl", "rggobi", "style") <- "invis"
+Rgraphviz::edgeData(ragraph, "rggobi", "iplots", "style") <- "invis"
+Rgraphviz::edgeData(ragraph, "iplots", "rgl", "style") <- "invis"
 # edgeData(ragraph, "pixmap", "rgl", "style") <- "invis"
 # edgeData(ragraph, "gridBase", "rggobi", "style") <- "invis"
 # edgeData(ragraph, "lattice", "iplots", "style") <- "invis"
 
-toFile(ragraph, filename="grpkgs.dot", fileType="dot")
+Rgraphviz::toFile(ragraph, filename="grpkgs.dot", fileType="dot")
 system("dot -Kneato grpkgs.dot -Tps -Gsize='8,8' -Gmargin=0 > organisation-graphicslevels.ps") 
 
 
@@ -6765,7 +6803,7 @@ cS <- as.character(Sp <- iris$Species[subset])
 cS[Sp == "setosa"] <- "S"
 cS[Sp == "versicolor"] <- "V"
 cS[Sp == "virginica"] <- "g"
-ai <- agnes(iris[subset, 1:4])
+ai <- cluster::agnes(iris[subset, 1:4])
 
 par(mfrow=c(2, 1), cex=0.5, pty="s")
 plot(ai, which=1, col=c("gray90", "gray"), labels = cS)
@@ -7438,24 +7476,24 @@ library(venneuler)
 
 
 
-venn(TitanicSets[1:2])
+gplots::venn(TitanicSets[1:2])
 
 
 
 par(mar=rep(2, 4))
-plot(venneuler(TitanicSets[1:2]), 
+plot(venneuler::venneuler(TitanicSets[1:2]), 
      col=hcl(0, 0, c(60, 80), .5),
      alpha=NA, border="black")
 
 
 
 
-venn(TitanicSets[1:3])
+gplots::venn(TitanicSets[1:3])
 
 
 
 par(mar=rep(2, 4))
-plot(venneuler(TitanicSets[1:3]), 
+plot(venneuler::venneuler(TitanicSets[1:3]), 
      col=hcl(0, 0, seq(40, 80, 20), .5),
      alpha=NA, border="black")
 
@@ -7464,17 +7502,17 @@ plot(venneuler(TitanicSets[1:3]),
 
 pdf("Figures/special-venn-3-%d.pdf", onefile=FALSE,
     width=6, height=6)
-venn(TitanicSets)
+gplots::venn(TitanicSets)
 
 dev.off()
 png("Figures/special-venn-3-%d.png", width=240, height=240, pointsize=8)
-venn(TitanicSets)
+gplots::venn(TitanicSets)
 
 dev.off()
 
 
 par(mar=rep(2, 4))
-plot(venneuler(TitanicSets[1:4]), 
+plot(venneuler::venneuler(TitanicSets[1:4]), 
      col=hcl(0, 0, seq(20, 80, 20), .5),
      alpha=NA, border="black")
 
@@ -7491,15 +7529,15 @@ library(symbols)
 
 
 
-faces(USJudgeRatings[1:5, ], nrow=1, ncol=5)
+TeachingDemos::faces(USJudgeRatings[1:5, ], nrow=1, ncol=5)
 
 
 
-faces2(USJudgeRatings[1:5, ], nrows=1, ncols=5, scale="all")
+TeachingDemos::faces2(USJudgeRatings[1:5, ], nrows=1, ncols=5, scale="all")
 
 
 
-symbol(USJudgeRatings[1:25, ], type="face")
+symbols::symbol(USJudgeRatings[1:25, ], type="face")
 
 
 
@@ -7538,26 +7576,26 @@ library(soiltexture)
 
 
 
-ternaryplot(soils, col="black", 
+vcd::ternaryplot(soils, col="black", 
             grid_color="black", labels_color="black")
  
 
 
 
-triax.plot(soils,  cex.ticks=.5)
+plotrix::triax.plot(soils,  cex.ticks=.5)
 
 
 
 TTsoils <- soils
 names(TTsoils) <- c("SAND", "SILT", "CLAY")
-TT.plot(tri.data=TTsoils)
+soiltexture::TT.plot(tri.data=TTsoils)
 
 
 
 }
 figure12.4 <- function() {
-hourSpeed <- aggregate(hourlySpeed["Speed"], 
-                       list(hour=hourlySpeed$hour),
+hourSpeed <- aggregate(RGraphics::hourlySpeed["Speed"], 
+                       list(hour=RGraphics::hourlySpeed$hour),
                        mean)
 head(hourSpeed)
 
@@ -7573,7 +7611,7 @@ library(openair)
 
 trellis.par.set(theme = canonical.theme("postscript", color=FALSE))
 print(
-with(wind9am,
+with(RGraphics::wind9am,
      polarFreq(data.frame(ws=Speed, wd=Dir, date=Date),
                cols=gray(10:1/11), border.col="black"))
 
@@ -7581,7 +7619,7 @@ with(wind9am,
 
 
 
-polar.plot(hourSpeed$Speed, hourSpeed$hour * 15,
+plotrix::polar.plot(hourSpeed$Speed, hourSpeed$hour * 15,
            start=90, clockwise=TRUE, lwd=5,
            label.pos=seq(15, 360, 15), labels=1:24,
            radial.lim=c(0, 4.5))
@@ -7593,17 +7631,17 @@ library(circular)
 
 
 
-station22254dir <- with(wind9am, Dir[Station == 22254])
+station22254dir <- with(RGraphics::wind9am, Dir[Station == 22254])
 
 
 
-station22254 <- circular(station22254dir, 
+station22254 <- circular::circular(station22254dir, 
                          units="degrees",
                          zero=pi/2, rotation="clock")
 
 
 
-windHours <- circular(hourlySpeed$hour,
+windHours <- circular::circular(RGraphics::hourlySpeed$hour,
                       units="hours", 
                       zero=pi/2, rotation="clock")
 
@@ -7623,7 +7661,7 @@ plot(density(station22254, bw=45),
 
 
 par(mar=rep(1, 4), xpd=NA)
-rose.diag(station22254, bins=36, prop=3)
+circular::rose.diag(station22254, bins=36, prop=3)
 
 
 
@@ -7631,9 +7669,9 @@ rose.diag(station22254, bins=36, prop=3)
 par(mar=rep(1, 4), xpd=NA)
 plot(windHours, col=NA, shrink=1.2, axes=FALSE)
 lines(windHours, 
-      0.5*hourlySpeed$Speed/max(hourlySpeed$Speed),
+      0.5*RGraphics::hourlySpeed$Speed/max(RGraphics::hourlySpeed$Speed),
       nosort=TRUE, lty="dotted", join=FALSE)
-axis.circular(template="clock24")
+circular::axis.circular(template="clock24")
 
 
 
@@ -7646,7 +7684,7 @@ library(openair)
 
 
 print(
-with(wind9am,
+with(RGraphics::wind9am,
      windRose(data.frame(ws=Speed, wd=Dir, 
                          date=Date, station=factor(Station)),
 
@@ -7667,7 +7705,7 @@ plot(Serum.Iron ~ Transferin, NHANES)
 
 trellis.par.set(theme = canonical.theme("postscript", color=FALSE))
 print(
-hexbinplot(Serum.Iron ~ Transferin, NHANES)
+hexbin::hexbinplot(Serum.Iron ~ Transferin, NHANES)
 
 )
 
@@ -7675,7 +7713,7 @@ hexbinplot(Serum.Iron ~ Transferin, NHANES)
 
 trellis.par.set(theme = canonical.theme("postscript", color=FALSE))
 print(
-hexbinplot(Serum.Iron ~ Transferin | Sex, NHANES)
+hexbin::hexbinplot(Serum.Iron ~ Transferin | Sex, NHANES)
 
 )
 
@@ -7685,60 +7723,60 @@ hexbinplot(Serum.Iron ~ Transferin | Sex, NHANES)
 figure16.1 <- function() {
 library(rgl)
 tetra <- function() {
-t1 <- tetrahedron3d()
+t1 <- rgl::tetrahedron3d()
 t2vb <- t1$vb
 t2vb[1, ] <- -3
-t2 <- tmesh3d(t2vb, t1$it)
-plane <- qmesh3d(rbind(rep(-3.01, 4),
+t2 <- rgl::tmesh3d(t2vb, t1$it)
+plane <- rgl::qmesh3d(rbind(rep(-3.01, 4),
                        c(-2, -2, 2, 2),
                        c(-3, 3, 3, -3),
                        rep(1, 4)),
                  matrix(1:4, ncol=1))
-open3d(windowRect=c(0, 0, 600, 600))
+rgl::open3d(windowRect=c(0, 0, 600, 600))
 # clear3d()
-shade3d(plane, color="white", specular="black")
-wire3d(plane)
-wire3d(t1, lwd=3)
-wire3d(t2, lwd=3)
-segments3d(rbind(t2$vb[1, t2$it], 
+rgl::shade3d(plane, color="white", specular="black")
+rgl::wire3d(plane)
+rgl::wire3d(t1, lwd=3)
+rgl::wire3d(t2, lwd=3)
+rgl::segments3d(rbind(t2$vb[1, t2$it], 
                  t1$vb[1, t1$it]),
            rbind(t2$vb[2, t2$it], 
                  t1$vb[2, t1$it]),
            rbind(t2$vb[3, t2$it], 
                  t1$vb[3, t1$it]),
            col="gray", lwd=3)
-view3d(40, -30)
+rgl::view3d(40, -30)
 }
 
 
-t1 <- cube3d()
+t1 <- rgl::cube3d()
 t1tube <- t1
 t1tube$ib <- t1tube$ib[, -(3:4)]
 t2vb <- t1$vb
 t2vb[1, ] <- -5
-t2 <- qmesh3d(t2vb, t1$ib)
-plane <- qmesh3d(rbind(rep(-5.01, 4),
+t2 <- rgl::qmesh3d(t2vb, t1$ib)
+plane <- rgl::qmesh3d(rbind(rep(-5.01, 4),
                        c(-2, -2, 2, 2),
                        c(-3, 3, 3, -3),
                        rep(1, 4)),
                  matrix(1:4, ncol=1))
-open3d(windowRect=c(0, 0, 600, 600))
+rgl::open3d(windowRect=c(0, 0, 600, 600))
 # clear3d()
-shade3d(plane, color="white", 
+rgl::shade3d(plane, color="white", 
         ambient="white", specular="white", emission="white")
-wire3d(plane)
-shade3d(t1tube, color="white", specular="black")
-wire3d(t1, lwd=3)
-wire3d(t2, lwd=3)
-segments3d(rbind(t2$vb[1, t2$ib[, 4]], 
+rgl::wire3d(plane)
+rgl::shade3d(t1tube, color="white", specular="black")
+rgl::wire3d(t1, lwd=3)
+rgl::wire3d(t2, lwd=3)
+rgl::segments3d(rbind(t2$vb[1, t2$ib[, 4]], 
                  t1$vb[1, t1$ib[, 4]]),
            rbind(t2$vb[2, t2$ib[, 4]], 
                  t1$vb[2, t1$ib[, 4]]),
            rbind(t2$vb[3, t2$ib[, 4]], 
                  t1$vb[3, t1$ib[, 4]]),
            col="gray", lwd=3)
-view3d(55, -20, fov=0)
-rgl.postscript("Figures/threed-3dproj.eps")
+rgl::view3d(55, -20, fov=0)
+rgl::rgl.postscript("Figures/threed-3dproj.eps")
 system("epstopdf Figures/threed-3dproj.eps")
 system("convert Figures/threed-3dproj.pdf Web/threed-3dproj.png")
 
@@ -7754,30 +7792,30 @@ t2vb[2, c(1, 4)] <- t2vb[2, c(1, 4)]*.8
 t2vb[3, c(1, 4)] <- t2vb[3, c(1, 4)]*.8
 t2vb[2, 2:3] <- t2vb[2, 2:3]*.6
 t2vb[3, 2:3] <- t2vb[3, 2:3]*.6
-t2 <- tmesh3d(t2vb, t1$it)
+t2 <- rgl::tmesh3d(t2vb, t1$it)
 t3vb <- t1$vb
 t3vb[1, ] <- -10
 t3vb[2, ] <- 0
 t3vb[3, ] <- 0
-t3 <- tmesh3d(t3vb, t1$it)
-open3d(windowRect=c(0, 0, 600, 600))
+t3 <- rgl::tmesh3d(t3vb, t1$it)
+rgl::open3d(windowRect=c(0, 0, 600, 600))
 # clear3d()
-shade3d(plane, color="white", specular="black")
-wire3d(plane)
-wire3d(t1, lwd=3)
-wire3d(t2, lwd=3)
-segments3d(rbind(t3$vb[1, t3$it], 
+rgl::shade3d(plane, color="white", specular="black")
+rgl::wire3d(plane)
+rgl::wire3d(t1, lwd=3)
+rgl::wire3d(t2, lwd=3)
+rgl::segments3d(rbind(t3$vb[1, t3$it], 
                  t1$vb[1, t1$it]),
            rbind(t3$vb[2, t3$it], 
                  t1$vb[2, t1$it]),
            rbind(t3$vb[3, t3$it], 
                  t1$vb[3, t1$it]),
            col="gray", lwd=3)
-shade3d(translate3d(scale3d(cube3d(), .1, .1, .1), -10, 0, 0))
-view3d(50, -20, zoom=.8)
+rgl::shade3d(rgl::translate3d(rgl::scale3d(rgl::cube3d(), .1, .1, .1), -10, 0, 0))
+rgl::view3d(50, -20, zoom=.8)
 }
 
-t1 <- cube3d()
+t1 <- rgl::cube3d()
 t1tube <- t1
 t1tube$ib <- t1tube$ib[, -(3:4)]
 t2vb <- t1$vb
@@ -7786,34 +7824,34 @@ t2vb[3, t1$ib[, 4]] <- t2vb[3, t1$ib[, 4]]*.4
 t2vb[2, t1$ib[, 3]] <- t2vb[2, t1$ib[, 3]]*.6
 t2vb[3, t1$ib[, 3]] <- t2vb[3, t1$ib[, 3]]*.6
 t2vb[1, ] <- -4.5
-t2 <- qmesh3d(t2vb, t1$ib)
+t2 <- rgl::qmesh3d(t2vb, t1$ib)
 t2tube <- t2
 t2tube$ib <- t2tube$ib[, -(3:4)]
-t3 <- translate3d(scale3d(cube3d(), .1, .1, .1), -10, 0, 0)
-plane <- qmesh3d(rbind(rep(-4.51, 4),
+t3 <- rgl::translate3d(rgl::scale3d(rgl::cube3d(), .1, .1, .1), -10, 0, 0)
+plane <- rgl::qmesh3d(rbind(rep(-4.51, 4),
                        c(-2, -2, 2, 2),
                        c(-3, 3, 3, -3),
                        rep(1, 4)),
                  matrix(1:4, ncol=1))
-open3d(windowRect=c(0, 0, 600, 300))
+rgl::open3d(windowRect=c(0, 0, 600, 300))
 # clear3d()
-shade3d(plane, color="white", 
+rgl::shade3d(plane, color="white", 
         ambient="white", specular="white", emission="white")
-wire3d(plane)
-shade3d(t1tube, color="white", specular="black")
-wire3d(t1, lwd=3)
-shade3d(t2tube, color="white", specular="black")
-wire3d(t2, lwd=3)
-segments3d(rbind(-10, 
+rgl::wire3d(plane)
+rgl::shade3d(t1tube, color="white", specular="black")
+rgl::wire3d(t1, lwd=3)
+rgl::shade3d(t2tube, color="white", specular="black")
+rgl::wire3d(t2, lwd=3)
+rgl::segments3d(rbind(-10, 
                  t1$vb[1, t1$ib[, 4]]),
            rbind(0, 
                  t1$vb[2, t1$ib[, 4]]),
            rbind(0,
                  t1$vb[3, t1$ib[, 4]]),
            col="gray", lwd=3)
-shade3d(t3)
-view3d(50, -15, fov=0, zoom=.7)
-rgl.postscript("Figures/threed-3dvp.eps")
+rgl::shade3d(t3)
+rgl::view3d(50, -15, fov=0, zoom=.7)
+rgl::rgl.postscript("Figures/threed-3dvp.eps")
 system("epstopdf Figures/threed-3dvp.eps")
 system("convert Figures/threed-3dvp.pdf Web/threed-3dvp.png")
 
@@ -7829,7 +7867,7 @@ NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
 cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
                quakes$LONG > 171 & quakes$LONG < 173.5, ]
 library(MASS)
-quakeDens <- kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
+quakeDens <- MASS::kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
 
 
 
@@ -7849,7 +7887,7 @@ NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
 cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
                quakes$LONG > 171 & quakes$LONG < 173.5, ]
 library(MASS)
-quakeDens <- kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
+quakeDens <- MASS::kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
 
 
 
@@ -7871,7 +7909,7 @@ NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
 cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
                quakes$LONG > 171 & quakes$LONG < 173.5, ]
 library(MASS)
-quakeDens <- kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
+quakeDens <- MASS::kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
 
 
 
@@ -7896,7 +7934,7 @@ NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
 cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
                quakes$LONG > 171 & quakes$LONG < 173.5, ]
 library(MASS)
-quakeDens <- kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
+quakeDens <- MASS::kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
 
 
 
@@ -7927,7 +7965,7 @@ NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
 cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
                quakes$LONG > 171 & quakes$LONG < 173.5, ]
 library(MASS)
-quakeDens <- kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
+quakeDens <- MASS::kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
 
 
 
@@ -7947,7 +7985,7 @@ s3d <- with(shallowCantyQuakes,
                           x.ticklabs=pretty(LONG, 3),
                           grid=FALSE, zlim=c(-20, 0)))
 
-quakeDensXY <- kde2d(shallowCantyQuakes$LONG, 
+quakeDensXY <- MASS::kde2d(shallowCantyQuakes$LONG, 
                      shallowCantyQuakes$LAT, n=30)
 lapply(contourLines(quakeDensXY, nlevels=8),
        function(cl) {
@@ -7957,7 +7995,7 @@ lapply(contourLines(quakeDensXY, nlevels=8),
                    border=NA)
        })
 
-quakeDensXZ <- kde2d(shallowCantyQuakes$LONG, 
+quakeDensXZ <- MASS::kde2d(shallowCantyQuakes$LONG, 
                      -shallowCantyQuakes$DEPTH, n=30)
 lapply(contourLines(quakeDensXZ, nlevels=8),
        function(cl) {
@@ -7967,7 +8005,7 @@ lapply(contourLines(quakeDensXZ, nlevels=8),
                    lwd=.5, col=gray(.8 - 2*cl$level),
                    border=NA)
        })
-quakeDensYZ <- kde2d(shallowCantyQuakes$LAT, 
+quakeDensYZ <- MASS::kde2d(shallowCantyQuakes$LAT, 
                      -shallowCantyQuakes$DEPTH, n=30)
 lapply(contourLines(quakeDensYZ, nlevels=8),
        function(cl) {
@@ -8006,20 +8044,20 @@ NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
 cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
                quakes$LONG > 171 & quakes$LONG < 173.5, ]
 library(MASS)
-quakeDens <- kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
+quakeDens <- MASS::kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
 
 
 
-open3d(windowRect=c(0, 0, 900, 450))
+rgl::open3d(windowRect=c(0, 0, 900, 450))
 # clear3d("all")
-persp3d(quakeDens$x, quakeDens$y, quakeDens$z, 
+rgl::persp3d(quakeDens$x, quakeDens$y, quakeDens$z, 
         aspect=c(1, 0.55, .2), col="white", box=FALSE,
         axes=FALSE, xlab="", ylab="", zlab="")
 
-par3d(userMatrix=rotationMatrix(-80/180*pi, 1, 0, 0)%*%
-                 rotationMatrix(-65/180*pi, 0, 0, 1),
+rgl::par3d(userMatrix=rgl::rotationMatrix(-80/180*pi, 1, 0, 0)%*%
+                 rgl::rotationMatrix(-65/180*pi, 0, 0, 1),
       zoom=.5)
-snapshot3d("Figures/threed-rglpersp.png")
+rgl::snapshot3d("Figures/threed-rglpersp.png")
 system("cp Figures/threed-rglpersp.png Web/")
 
 
@@ -8042,7 +8080,7 @@ NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
 cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
                quakes$LONG > 171 & quakes$LONG < 173.5, ]
 library(MASS)
-quakeDens <- kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
+quakeDens <- MASS::kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
 
 
 
@@ -8052,29 +8090,29 @@ shallowCantyQuakes <- subset(cantyQuakes, DEPTH < 20)
 
 d <- with(shallowCantyQuakes, 
           {
-              kde3d(LONG, LAT, -DEPTH, 
+              misc3d::kde3d(LONG, LAT, -DEPTH, 
                     h=c(.1, .1, 2), n = 30)
           })
 
 
 
-open3d(windowRect=c(0, 0, 900, 900))
+rgl::open3d(windowRect=c(0, 0, 900, 900))
 with(shallowCantyQuakes, 
      {
-         plot3d(LONG, LAT, -DEPTH, 
+         rgl::plot3d(LONG, LAT, -DEPTH, 
                 aspect=c(1, 0.55, 1), 
                 axes=TRUE, box=FALSE,
                 xlab="", ylab="", zlab="")
-         contour3d(d$d, c(.4, .1), d$x, d$y, d$z,
+         misc3d::contour3d(d$d, c(.4, .1), d$x, d$y, d$z,
                    color=rep("gray80", 2), 
                    color2="gray", specular="black",
                    engine="rgl", add=TRUE, alpha=.5)
      })
 
-par3d(userMatrix=rotationMatrix(-60/180*pi, 1, 0, 0)%*%
-                 rotationMatrix(-40/180*pi, 0, 0, 1),
+rgl::par3d(userMatrix=rgl::rotationMatrix(-60/180*pi, 1, 0, 0)%*%
+                 rgl::rotationMatrix(-40/180*pi, 0, 0, 1),
       zoom=.9)
-snapshot3d("Figures/contour3d.png")
+rgl::snapshot3d("Figures/contour3d.png")
 system("cp Figures/contour3d.png Web/threed-contour3d.png")
 
 
@@ -8084,15 +8122,15 @@ library(rgl)
 
 
 
-open3d(windowRect=c(0, 0, 600, 600))
-clear3d("all")
-light3d()
-material3d(shininess=100, specular="black")
+rgl::open3d(windowRect=c(0, 0, 600, 600))
+rgl::clear3d("all")
+rgl::light3d()
+rgl::material3d(shininess=100, specular="black")
 # Head
 radius <- function(d) {
    pchisq(d^2, 3)
 }
-shade3d(ellipse3d(diag(3), level=radius(1),
+rgl::shade3d(rgl::ellipse3d(diag(3), level=radius(1),
                    centre=c(0, 0, 1)),
          color="yellow")
 # Neck
@@ -8101,12 +8139,12 @@ png("rlogoExtended.png",
     width=500, height=250)
 grid.rect(gp=gpar(col=NA, fill="yellow"))
 library(png)
-rlogo <- as.raster(readPNG(system.file("extra", "Rlogo.png", 
+rlogo <- as.raster(png::readPNG(system.file("extra", "Rlogo.png", 
                                        package="RGraphics")))
 rlogo[rlogo == "#FFFFFF"] <- "yellow"
 grid.raster(rlogo, x=.6, y=.01, width=.08, just=c("bottom"))
 dev.off()
-shade3d(cylinder3d(cbind(0, 0, c(-1.4, 1)),
+rgl::shade3d(rgl::cylinder3d(cbind(0, 0, c(-1.4, 1)),
                    e1=cbind(0, 0, 1),
                    e2=cbind(1, 0, 0),
                    sides=100),
@@ -8115,57 +8153,57 @@ shade3d(cylinder3d(cbind(0, 0, c(-1.4, 1)),
         texcoords=list(x=rep(seq(1, 0, length.out=101), each=4)[-c(1:2, 403:404)],
                        y=rep(c(0, 1, 1, 0), 50)))
 old <- function() {
-shade3d(cylinder3d(cbind(0, 0, c(-1.3, 1)),
+rgl::shade3d(rgl::cylinder3d(cbind(0, 0, c(-1.3, 1)),
                    e1=cbind(0, 0, 1),
                    e2=cbind(1, 0, 0),
                    sides=100),
         color="yellow")
 }
 # Eyes
-eyeball <- ellipse3d(diag(3), level=radius(.4))
-shade3d(translate3d(eyeball, .8, .35, .7),
+eyeball <- rgl::ellipse3d(diag(3), level=radius(.4))
+rgl::shade3d(rgl::translate3d(eyeball, .8, .35, .7),
          color="white")
-shade3d(translate3d(eyeball, .8, -.35, .7),
+rgl::shade3d(rgl::translate3d(eyeball, .8, -.35, .7),
          color="white")
 # Translate radius of eye, rotate, translate position of eye
-pupil <- rotate3d(translate3d(ellipse3d(diag(3),
+pupil <- rgl::rotate3d(rgl::translate3d(rgl::ellipse3d(diag(3),
                                         level=radius(.05)),
                               .4, 0, 0),
                   30/180*pi, 0, 0, 1)
-shade3d(translate3d(pupil, .8, .35, .7),
+rgl::shade3d(rgl::translate3d(pupil, .8, .35, .7),
          color="black")
-shade3d(translate3d(pupil, .8, -.35, .7),
+rgl::shade3d(rgl::translate3d(pupil, .8, -.35, .7),
          color="black")
 # points3d(1.21, c(-.35, .35), .7, cex=3)
 # Nose
-shade3d(cylinder3d(cbind(c(1, 1.3), 0, .3),
+rgl::shade3d(rgl::cylinder3d(cbind(c(1, 1.3), 0, .3),
                     radius=.2,
                     e1=cbind(1, 0, 0),
                     e2=cbind(0, 1, 0),
                     sides=100),
          color="yellow")
-shade3d(ellipse3d(diag(3), level=radius(.2),
+rgl::shade3d(rgl::ellipse3d(diag(3), level=radius(.2),
                    centre=c(1.3, 0, .3)),
          color="yellow")
 # Mouth
-shade3d(ellipse3d(diag(3), level=radius(.8),
+rgl::shade3d(rgl::ellipse3d(diag(3), level=radius(.8),
                    centre=c(.6, 0, -.5)),
          color="tan")
 angle <- seq(-65, 65, length=30)/180*pi
-lines3d(.6 + .81*cos(angle), .81*sin(angle), -.5, lwd=3)
+rgl::lines3d(.6 + .81*cos(angle), .81*sin(angle), -.5, lwd=3)
 # Hair on top
 angle <- seq(15, 165, length=30)/180*pi
-lines3d(.2, .7*cos(angle), 1.5 + .7*sin(angle), lwd=3)
-lines3d(-.2, .7*cos(angle), 1.5 + .7*sin(angle), lwd=3)
+rgl::lines3d(.2, .7*cos(angle), 1.5 + .7*sin(angle), lwd=3)
+rgl::lines3d(-.2, .7*cos(angle), 1.5 + .7*sin(angle), lwd=3)
 # Hair on sides
-lines3d(seq(.5, -.5, length=5), -1, rep(c(.3, .8), length=5), lwd=3)
-lines3d(seq(.5, -.5, length=5), 1, rep(c(.3, .8), length=5), lwd=3)
+rgl::lines3d(seq(.5, -.5, length=5), -1, rep(c(.3, .8), length=5), lwd=3)
+rgl::lines3d(seq(.5, -.5, length=5), 1, rep(c(.3, .8), length=5), lwd=3)
 
-par3d(userMatrix=rotationMatrix(-pi/2, 1, 0, 0)%*%
-      rotationMatrix(-50/180*pi, 0, 0, 1)%*%
-      rotationMatrix(10/180*pi, 1, 0, 0))
+rgl::par3d(userMatrix=rgl::rotationMatrix(-pi/2, 1, 0, 0)%*%
+      rgl::rotationMatrix(-50/180*pi, 0, 0, 1)%*%
+      rgl::rotationMatrix(10/180*pi, 1, 0, 0))
 
-snapshot3d("homer.png")
+rgl::snapshot3d("homer.png")
 
 
 
@@ -8183,7 +8221,7 @@ NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
 cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
                quakes$LONG > 171 & quakes$LONG < 173.5, ]
 library(MASS)
-quakeDens <- kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
+quakeDens <- MASS::kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
 
 
 
@@ -8192,7 +8230,7 @@ shallowCantyQuakes <- subset(cantyQuakes, DEPTH < 20)
 
 
 with(shallowCantyQuakes,
-     cloud3d(LONG, LAT, -DEPTH,
+     vrmlgen::cloud3d(LONG, LAT, -DEPTH,
              filename="vrmlgen.wrl",
              cols="white"))
 
@@ -8206,7 +8244,7 @@ xmm <- read.table(file.path("XMM-Newton", "XMM-Newton.txt"),
 
 
 
-counts <- sort(table(xmm$Category))
+counts <- sort(table(RGraphics::xmm$Category))
 
 par(mfrow=c(1, 2), mar=c(3, 3, 2, 2))
 
@@ -8223,7 +8261,7 @@ print(dotplot(counts), pos=c(.5, 0, 1, 1))
 
 
 grid.newpage()
-catSort <- data.frame(Category=factor(xmm$Category, levels=names(counts)))
+catSort <- data.frame(Category=factor(RGraphics::xmm$Category, levels=names(counts)))
 pushViewport(viewport(x=0, width=.5, just="left"))
 print(ggplot(catSort) +
       geom_bar(aes(x=Category)), newpage=FALSE)
@@ -8245,19 +8283,19 @@ library(vcd)
 
 
 
-spine(Priority ~ Duration, xmm)
+vcd::spine(Priority ~ Duration, RGraphics::xmm)
 
 
 
-durn <- xmm$Duration/1000
-cd_plot(Priority ~ durn, xmm, xlab="Duration (1000s)")
+durn <- RGraphics::xmm$Duration/1000
+vcd::cd_plot(Priority ~ durn, RGraphics::xmm, xlab="Duration (1000s)")
 
 
 
 }
 figure13.3 <- function() {
 trellis.par.set(theme = canonical.theme("postscript", color=FALSE))
-catTab <- table(xmm$Schedule, xmm$Priority)
+catTab <- table(RGraphics::xmm$Schedule, RGraphics::xmm$Priority)
 print(barchart(prop.table(catTab, margin=1), col=gray(1:3/4)),
       pos=c(0, 0, .5, 1), more=TRUE)
 print(barchart(prop.table(catTab, margin=1), col=gray(1:3/4), stack=FALSE),
@@ -8292,11 +8330,11 @@ library(vcd)
 
 
 
-mosaic(Priority ~ Schedule, xmm)
+vcd::mosaic(Priority ~ Schedule, RGraphics::xmm)
 
 
 
-mosaic(nObs ~ Schedule + Priority, xmm,
+vcd::mosaic(nObs ~ Schedule + Priority, RGraphics::xmm,
        labeling_args=list(rot_labels=c(right=0), 
          offset_labels=c(right=-.5),
          just_labels=c(right="left")),
@@ -8312,7 +8350,7 @@ library(vcd)
 
 
 grid.rect(gp=gpar(col=NA, fill="gray"))
-tile(nObs ~ Schedule + Priority, xmm,
+vcd::tile(nObs ~ Schedule + Priority, RGraphics::xmm,
      tile_type="area",
      shade=TRUE, 
      gp=gpar(lwd=2, fill="white"), 
@@ -8337,7 +8375,7 @@ upViewport(0)
 
 
 
-doubledecker(nObs ~ Schedule + Priority, xmm,
+vcd::doubledecker(nObs ~ Schedule + Priority, RGraphics::xmm,
              dep_varname=FALSE,
              gp=gpar(fill=c("gray90", "gray")),
              offset_labels=c(right=-.5),
@@ -8357,14 +8395,14 @@ library(vcd)
 
 
 
-pairs(structable(nObs ~ Priority + Schedule, xmm),
+pairs(vcd::structable(nObs ~ Priority + Schedule, RGraphics::xmm),
       space=.15)
 
 
 
 }
 figure13.7 <- function() {
-cotabplot(~ Schedule + Priority | nObs, xmm)
+vcd::cotabplot(~ Schedule + Priority | nObs, RGraphics::xmm)
 
 
 
@@ -8376,7 +8414,7 @@ library(vcdExtra)
 
 # Need the .1 cos the handling of zero cells seems off
 # Also need the custom shading to produce gray-scale
-mosaic3d(structable(~ Priority + Schedule + nObs, xmm) + .1, 
+vcdExtra::mosaic3d(vcd::structable(~ Priority + Schedule + nObs, RGraphics::xmm) + .1, 
          shading=function(x) { "gray" })
 
 
