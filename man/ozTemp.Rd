@@ -15,6 +15,7 @@ data(ozTemp)
   \code{min} and \code{max} average minimum and maximum monthly temperatures;
   \code{long} and \code{lat} longitudes and latitudes of cities.}
 \source{
-  \url{http://www.auinfo.com/sydney-climate.html}
+  Was originally \code{http://www.auinfo.com/sydney-climate.html}
+  but that URL is no longer alive.
 }
 \keyword{datasets}

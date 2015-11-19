@@ -3,7 +3,7 @@ midpts <- barplot(1:10, col="gray90", axes=FALSE)
 axis(2)
 axis(1, at=midpts, labels=FALSE)
 
-library(gridBase)
+
 vps <- gridBase::baseViewports()
 pushViewport(vps$inner, vps$figure, vps$plot)
 
@@ -399,7 +399,7 @@ axisfun(xaxs="i", mgpcol="gray", tclcol="gray")
 
 }
 figure3.11 <- function() {
-library(gridBase)
+
 par(oma=rep(3, 4))
 vps <- gridBase::baseViewports()
 # Annotation helper function
@@ -590,7 +590,7 @@ y <- sin(t/180*pi)*t/360
 
 
 
-library(pixmap)
+
 source(system.file("extra", "as.raster.R", package="RGraphics"))
 rlogo <- pixmap::read.pnm(system.file("pictures/logo.pgm", 
                               package="pixmap")[1])
@@ -1951,11 +1951,11 @@ year <- c(1993, 1996, 1998, 2001)
 minpop <- c(20, 50, 50, 115)
 maxpop <- c(50, 240, 240, 150)
 
-library(grImport)
+
 tiger <- grImport::readPicture(system.file("extra", "tiger.ps.xml", 
                                  package="RGraphics"))[-1]
 
-require(colorspace)
+
 
 source(system.file("extra", "grayify.R", package="RGraphics"))
 
@@ -2056,8 +2056,8 @@ figure1.7 <- function() {
 #
 
 
-library(maps)
-library(mapdata)
+
+
 par(mar=rep(1, 4))
 maps::map("nzHires", fill=TRUE, col="gray80",
     regions=c("North Island", "South Island", "Stewart Island"))
@@ -2088,7 +2088,7 @@ box()
 
 }
 figure1.8 <- function() {
-library(quantmod)
+
 quantmod::getSymbols("YHOO")
 quantmod::chartSeries(YHOO, subset='last 4 months'
  )
@@ -2098,11 +2098,11 @@ quantmod::chartSeries(YHOO, subset='last 4 months'
 
 }
 figure1.9 <- function() {
-library(party)
+
 
 # CLASSIFICATION
 # fitting
-library(ipred)
+
 data("GlaucomaM", envir=environment())
 glau <- GlaucomaM
 levels(glau$Class) <- c("glau", "norm")
@@ -2696,7 +2696,7 @@ text(x = seq(s1$x + 1, s1$x + 8.5, by = 0.5), y = rep(4, 16),
 
 }
 figure1.13 <- function() {
-library(pixmap)
+
 
 pic <- pixmap::read.pnm(system.file("extra", "AfterTheBombs.pnm", 
                                     package="RGraphics"))
@@ -2774,7 +2774,7 @@ popViewport(2)
 
 }
 figure11.1 <- function() {
-library(gplots)
+
 
 
 
@@ -2788,7 +2788,7 @@ gplots::textplot(capture.output(summary(faithful)))
 
 }
 figure11.2 <- function() {
-library(plotrix)
+
 
 
 
@@ -2802,7 +2802,7 @@ plotrix::addtable2plot(0, 300, pressure[13:19, ])
 
 }
 figure11.3 <- function() {
-library(gridExtra)
+
 
 
 
@@ -2814,12 +2814,12 @@ gridExtra::grid.table(pressure[13:19, ], show.box=TRUE,
 
 }
 figure11.4 <- function() {
-library(plotrix)
 
 
 
 
-library(Hmisc)
+
+
 
 
 
@@ -2845,20 +2845,20 @@ y <- rnorm(10)
 
 
 
-library(plotrix)
 
 
 
 
-library(TeachingDemos)
 
 
 
-library(maptools)
 
 
 
-library(Hmisc)
+
+
+
+
 
 
 
@@ -2914,12 +2914,12 @@ mtext("labcurve", side=3, line=0)
 
 }
 figure11.6 <- function() {
-library(plotrix)
 
 
 
 
-library(TeachingDemos)
+
+
 
 
 
@@ -2964,31 +2964,31 @@ box(col="gray")
 
 }
 figure11.7 <- function() {
-library(gridExtra)
-
-
-
-gridExtra::grid.ellipse(x=1:6/7, y=rep(.8, 6), size=.1, 
-             default.units="npc", size.unit="npc", 
-             ar=1:6, angle=1:6*15/180*pi)
-grid.text("grid.ellipse", y=.7)
-gridExtra::grid.pattern(x=1:6/7, y=.5, width=unit(.1, "npc"),
-             height=unit(.1, "npc"), pattern=1:6,
-             motif.cex=.7, gp=gpar(fill="gray80"))
-
-grid.text("grid.pattern", y=.4)
-gridExtra::grid.barbed(1:6/7, y=rep(c(.15, .25), 3), 
-            size=unit(.05, "snpc"), 
-            pch=21, gp=gpar(fill="gray"))
-
-grid.text("grid.barbed", y=.1)
-grid.rect(gp=gpar(col="gray", fill=NA))
-
-
-
+# library(gridExtra)
+# 
+# 
+# 
+# gridExtra::grid.ellipse(x=1:6/7, y=rep(.8, 6), size=.1, 
+#              default.units="npc", size.unit="npc", 
+#              ar=1:6, angle=1:6*15/180*pi)
+# grid.text("grid.ellipse", y=.7)
+# gridExtra::grid.pattern(x=1:6/7, y=.5, width=unit(.1, "npc"),
+#              height=unit(.1, "npc"), pattern=1:6,
+#              motif.cex=.7, gp=gpar(fill="gray80"))
+# 
+# grid.text("grid.pattern", y=.4)
+# gridExtra::grid.barbed(1:6/7, y=rep(c(.15, .25), 3), 
+#             size=unit(.05, "snpc"), 
+#             pch=21, gp=gpar(fill="gray"))
+# 
+# grid.text("grid.barbed", y=.1)
+# grid.rect(gp=gpar(col="gray", fill=NA))
+# 
+# 
+# 
 }
 figure11.8 <- function() {
-library(gplots)
+
 
 
 
@@ -2999,7 +2999,7 @@ gplots::plotmeans(mpg ~ cyl, mtcars,
 
 }
 figure11.9 <- function() {
-library(colorspace)
+
 
 
 
@@ -3017,11 +3017,11 @@ grid.rect(gp=gpar(col="gray", fill=NA))
 
 }
 figure11.10 <- function() {
-library(gplots)
 
 
 
-library(plotrix)
+
+
 
 
 
@@ -3045,7 +3045,7 @@ text(grconvertX(1, "npc"), grconvertY(0, "npc"),
 
 }
 figure11.11 <- function() {
-library(TeachingDemos)
+
 
 
 
@@ -3064,7 +3064,7 @@ kelvin <- pressure$temperature + 273.15
 
 
 
-library(plotrix)
+
 
 
 
@@ -3092,12 +3092,12 @@ kelvin <- pressure$temperature + 273.15
 
 
 
-library(plotrix)
 
 
 
 
-library(TeachingDemos)
+
+
 
 
 
@@ -3143,7 +3143,7 @@ figure5.2 <- function() {
 print(
 qplot(temperature, pressure, data=pressure,
       main="Vapor Pressure of Mercury",
-      geom=c("point", "line"), lty=I("dashed"))
+      geom=c("point", "line"))
 
 )
 
@@ -3220,7 +3220,7 @@ p + geom_point(aes(x=disp, y=mpg))
 print(
 p + geom_point(aes(x=disp, y=mpg, shape=gear),
                size=4) +
-  opts(legend.position="none")
+    theme(legend.position="none")
 )
 
 
@@ -3666,56 +3666,56 @@ p + geom_point(aes(x=disp, y=mpg)) +
 
 }
 figure5.14 <- function() {
-mtcars2 <- mtcars
-mtcars2$trans <- factor(mtcars$am, 
-                        levels=0:1, 
-                        labels=c("automatic", "manual"))
-mtcars2$gear <- as.factor(mtcars$gear)
-mtcars2$am <- NULL
-mtcars2$vs <- NULL
-mtcars2$drat <- NULL
-mtcars2$carb <- NULL
-mtcars2$wt <- NULL
-mtcars2$hp <- NULL
-mtcars2$qsec <- NULL
-
-# To keep R CMD check happy
-mpg <- mtcars2$mpg
-
-
-
-p <- ggplot(mtcars2)
-
-
-
-print(
-p + geom_point(aes(x=disp, y=mpg)) +
-    theme_bw()
-
-)
-
-
-print(
-p + geom_point(aes(x=disp, y=mpg)) +
-    opts(axis.title.y=theme_text(angle=0))
-
-)
-
-
-print(
-p + geom_point(aes(x=disp, y=mpg)) +
-    opts(axis.title.y=theme_blank())
-
-)
-
-
-print(
-p + geom_point(aes(x=disp, y=mpg)) +
-    opts(title="Vehicle Fuel Efficiency")
-
-)
-
-
+# mtcars2 <- mtcars
+# mtcars2$trans <- factor(mtcars$am, 
+#                         levels=0:1, 
+#                         labels=c("automatic", "manual"))
+# mtcars2$gear <- as.factor(mtcars$gear)
+# mtcars2$am <- NULL
+# mtcars2$vs <- NULL
+# mtcars2$drat <- NULL
+# mtcars2$carb <- NULL
+# mtcars2$wt <- NULL
+# mtcars2$hp <- NULL
+# mtcars2$qsec <- NULL
+# 
+# # To keep R CMD check happy
+# mpg <- mtcars2$mpg
+# 
+# 
+# 
+# p <- ggplot(mtcars2)
+# 
+# 
+# 
+# print(
+# p + geom_point(aes(x=disp, y=mpg)) +
+#     theme_bw()
+# 
+# )
+# 
+# 
+# print(
+# p + geom_point(aes(x=disp, y=mpg)) +
+#     opts(axis.title.y=theme_text(angle=0))
+# 
+# )
+# 
+# 
+# print(
+# p + geom_point(aes(x=disp, y=mpg)) +
+#     opts(axis.title.y=theme_blank())
+# 
+# )
+# 
+# 
+# print(
+# p + geom_point(aes(x=disp, y=mpg)) +
+#     opts(title="Vehicle Fuel Efficiency")
+# 
+# )
+# 
+# 
 }
 figure5.15 <- function() {
 mtcars2 <- mtcars
@@ -3771,7 +3771,7 @@ p + geom_point(aes(x=disp, y=mpg)) +
 
 }
 figure15.1 <- function() {
-library(graph)
+
 
 
 
@@ -3790,7 +3790,7 @@ simpleGNEL <- new("graphNEL",
 
 
 
-library(Rgraphviz)
+
 # Weird stuff happening if don't pre-layout graph
 temp <- Rgraphviz::agopen(simpleGNEL, "")
 Rgraphviz::plot(temp)
@@ -3803,7 +3803,7 @@ Rgraphviz::plot(temp)
 
 
 figure15.3 <- function() {
-library(Rgraphviz)
+
 
 
 
@@ -3830,7 +3830,7 @@ Rgraphviz::plot(tempGraph)
 
 }
 figure15.4 <- function() {
-library(Rgraphviz)
+
 
 
 
@@ -3862,7 +3862,7 @@ Rgraphviz::plot(simpleGNEL,
 
 }
 figure15.5 <- function() {
-library(Rgraphviz)
+
 
 
 
@@ -3909,7 +3909,7 @@ system("cp Figures/graph-pkgdep.png Web/")
 
 }
 figure15.6 <- function() {
-library(Rgraphviz)
+
 
 
 
@@ -3936,8 +3936,8 @@ Rgraphviz::toFile(Rgraphviz::agopen(simpleGNEL, ""),
 
 }
 figure15.7 <- function() {
-library(hypergraph)
-library(hyperdraw)
+
+
 
 
 
@@ -3949,7 +3949,7 @@ getMethod("plot", "graphBPH")(hyperdraw::graphBPH(hg))
 
 }
 figure15.8 <- function() {
-library(igraph)
+
 
 
 
@@ -3974,11 +3974,11 @@ plot(fullIgraph, layout=igraph::layout.circle)
 
 }
 figure15.9 <- function() {
-library(graph)
 
 
 
-library(network)
+
+
 
 
 
@@ -4017,7 +4017,7 @@ plot(simpleNetwork, mode="fruchtermanreingold",
 
 }
 figure15.10 <- function() {
-library(diagram)
+
 
 
 
@@ -4073,7 +4073,7 @@ figure18.1 <- function() {
 
 }
 figure18.2 <- function() {
-library(pixmap)
+
 
 
 
@@ -4140,7 +4140,7 @@ mtext("Phases of the Moon", side=3, line=3, cex=.7)
 
 
 
-library(grImport)
+
 
 
 
@@ -4204,7 +4204,7 @@ popViewport(2)
 
 }
 figure18.3 <- function() {
-library(pixmap)
+
 
 
 
@@ -4247,7 +4247,7 @@ popViewport(2)
 
 }
 figure18.4 <- function() {
-library(pixmap)
+
 
 
 
@@ -4283,11 +4283,11 @@ grid.raster(helmetMask)
 
 }
 figure18.5 <- function() {
-library(grImport)
 
 
 
-library(grImport)
+
+
 grImport::PostScriptTrace(system.file("extra", "comic_moon.ps",
                             package="RGraphics"))
 
@@ -4302,11 +4302,11 @@ grImport::picturePaths(vectorMoon[1:6], fill="white",
 
 }
 figure18.6 <- function() {
-library(grImport)
 
 
 
-library(grImport)
+
+
 grImport::PostScriptTrace(system.file("extra", "comic_moon.ps",
                             package="RGraphics"))
 
@@ -4324,7 +4324,7 @@ grImport::grid.picture(vectorMoon, use.gc=FALSE)
 
 }
 figure8.1 <- function() {
-library(oz)
+
 
 
 
@@ -4638,7 +4638,7 @@ grid.ozFun <- function(ozRegion) {
 
 
 figure8.5 <- function() {
-library(oz)
+
 
 
 
@@ -4673,7 +4673,7 @@ grid.ozFun(oz::ozRegion())
 
 }
 figure8.6 <- function() {
-library(oz)
+
 
 
 
@@ -4764,7 +4764,7 @@ upViewport(0)
 
 }
 figure8.7 <- function() {
-library(oz)
+
 
 
 
@@ -5229,7 +5229,7 @@ ozKey <- function(x, y, width, height, just,
 
 
 figure8.18 <- function() {
-library(oz)
+
 
 
 
@@ -5646,7 +5646,7 @@ for (i in 1:n) {
 
 }
 figure17.2 <- function() {
-library(animation)
+
 
 
 
@@ -5701,7 +5701,7 @@ xyplot(mpg ~ disp | factor(gear), mtcars, subset=gear != 5, pch=16)
 
 }
 figure17.5 <- function() {
-library(rggobi)
+
 mtcars$gear <- factor(mtcars$gear)
 mtcars$cyl <- factor(mtcars$cyl)
 gg <- rggobi::ggobi(mtcars)
@@ -5714,7 +5714,7 @@ figure17.6 <- function() {
 
 }
 figure17.7 <- function() {
-library(rggobi)
+
 
 
 
@@ -5723,7 +5723,7 @@ gg <- rggobi::ggobi(mtcars)
 
 }
 figure17.8 <- function() {
-library(iplots)
+
 
 
 
@@ -5733,7 +5733,7 @@ iplots::ibar(mtcars$gear)
 
 }
 figure17.9 <- function() {
-library(iplots)
+
 
 
 
@@ -5765,12 +5765,12 @@ while (!is.null(iplots::ievent.wait())) {
 
 }
 figure17.10 <- function() {
-library(Rcmdr)
+
 
 
 }
 figure17.11 <- function() {
-library(pmg)
+
 
 
 }
@@ -5782,7 +5782,7 @@ figure17.12 <- function() {
 # 
 }
 figure17.13 <- function() {
-library(playwith)
+
 playwith::playwith(xyplot(mpg ~ disp, mtcars))
 playwith::playwith(xyplot(qsec ~ wt, mtcars), 
          new=TRUE, link.to=playwith::playDevCur())
@@ -5816,7 +5816,7 @@ drawClock <- function(hour, minute) {
 }
 
 
-library(gWidgetsRGtk2)
+
 
 
 
@@ -5871,7 +5871,7 @@ gWidgetsRGtk2::add(timeContent, textLabel)
 
 }
 figure17.16 <- function() {
-library(SVGAnnotation)
+
 
 
 
@@ -5894,7 +5894,7 @@ text(150, 600,
 
 }
 figure14.1 <- function() {
-library(maptools)
+
 colorado <- maptools::readShapeSpatial(system.file("extra", "10m-colorado.shp",
                                          package="RGraphics"))
 par(mar=rep(0, 4))
@@ -5904,7 +5904,7 @@ sp::plot(colorado, col="gray")
 
 }
 figure14.2 <- function() {
-library(maps)
+
 
 
 
@@ -5918,7 +5918,7 @@ box("figure", col="gray", lwd=2)
 
 }
 figure14.3 <- function() {
-library(maptools)
+
 
 
 
@@ -5937,7 +5937,7 @@ box("figure", col="gray", lwd=2)
 
 }
 figure14.4 <- function() {
-library(maptools)
+
 
 
 
@@ -5956,7 +5956,7 @@ sp::spplot(brazil, "Regions", col.regions=gray(5:1/6))
 
 }
 figure14.5 <- function() {
-library(maptools)
+
 
 
 
@@ -6007,7 +6007,7 @@ sp::spplot(brazil, "Regions",
 
 }
 figure14.6 <- function() {
-library(maptools)
+
 
 
 
@@ -6024,7 +6024,7 @@ sp::plot(marajo, col="gray", pbg="white")
 
 }
 figure14.7 <- function() {
-library(maptools)
+
 
 
 
@@ -6041,7 +6041,7 @@ sp::plot(iceland, col="gray")
 
 }
 figure14.8 <- function() {
-library(maptools)
+
 
 
 
@@ -6062,7 +6062,7 @@ sp::plot(iceland, col="gray")
 
 }
 figure14.9 <- function() {
-library(rgdal)
+
 
 
 
@@ -6090,11 +6090,11 @@ sp::plot(icelandMercator)
 
 }
 figure14.10 <- function() {
-library(maptools)
 
 
 
-library(rgdal)
+
+
 
 
 
@@ -6119,11 +6119,11 @@ sp::plot(glinesOrtho, lty="dashed", add=TRUE)
 
 }
 figure14.11 <- function() {
-library(maptools)
 
 
 
-library(raster)
+
+
 
 
 
@@ -6535,8 +6535,8 @@ grid.text("line of best fit", .71, .81,
 
 }
 figure1.14 <- function() {
-library(graph)
-library(Rgraphviz)
+
+
 
 grpkgs <- new("graphNEL", 
               nodes=c(
@@ -6794,7 +6794,7 @@ figure2.2 <- function() {
 
 }
 figure2.3 <- function() {
-library(cluster)
+
 
 
 
@@ -7430,7 +7430,7 @@ doplot <- function(name, ...) {
                        grid.rect(gp=gpar(fill="gray90")); grid.text(name) 
                      }))
 }
-library(latticeExtra)
+
 plot <- vector("list", 4)
 plot[[1]] <- doplot("ecdfplot", ~ rnorm(10) | 1)
 plot[[2]] <- doplot("rootogram", ~ rpois(50, 10) | 1, 
@@ -7468,11 +7468,11 @@ head(TitanicSets)
 
 
 
-library(gplots)
 
 
 
-library(venneuler)
+
+
 
 
 
@@ -7521,11 +7521,11 @@ plot(venneuler::venneuler(TitanicSets[1:4]),
 
 }
 figure12.2 <- function() {
-library(TeachingDemos)
 
 
 
-library(symbols)
+
+
 
 
 
@@ -7543,7 +7543,7 @@ symbols::symbol(USJudgeRatings[1:25, ], type="face")
 
 }
 figure12.3 <- function() {
-library(agricolae)
+
 data("soil", envir=environment())
 place2region <- as.data.frame(rbind(c("Cnt1", "Lima"),
                                     c("Cnt2", "Lima"),
@@ -7564,15 +7564,15 @@ names(soils) <- c("sand", "silt", "clay")
 
 
 
-library(vcd)
 
 
 
-library(plotrix)
 
 
 
-library(soiltexture)
+
+
+
 
 
 
@@ -7601,11 +7601,11 @@ head(hourSpeed)
 
 
 
-library(plotrix)
 
 
 
-library(openair)
+
+
 
 
 
@@ -7627,7 +7627,7 @@ plotrix::polar.plot(hourSpeed$Speed, hourSpeed$hour * 15,
 
 }
 figure12.5 <- function() {
-library(circular) 
+ 
 
 
 
@@ -7678,7 +7678,7 @@ circular::axis.circular(template="clock24")
 
 }
 figure12.6 <- function() {
-library(openair)
+
 
 
 
@@ -7694,7 +7694,7 @@ with(RGraphics::wind9am,
 
 }
 figure12.7 <- function() {
-library(hexbin)
+
 
 
 
@@ -7721,7 +7721,7 @@ hexbin::hexbinplot(Serum.Iron ~ Transferin | Sex, NHANES)
 
 }
 figure16.1 <- function() {
-library(rgl)
+
 tetra <- function() {
 t1 <- rgl::tetrahedron3d()
 t2vb <- t1$vb
@@ -7784,7 +7784,7 @@ system("convert Figures/threed-3dproj.pdf Web/threed-3dproj.png")
 
 }
 figure16.2 <- function() {
-library(rgl)
+
 tetra <- function() {
 t2vb <- t1$vb
 t2vb[1, ] <- -3
@@ -7866,7 +7866,7 @@ NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
 
 cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
                quakes$LONG > 171 & quakes$LONG < 173.5, ]
-library(MASS)
+
 quakeDens <- MASS::kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
 
 
@@ -7886,7 +7886,7 @@ NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
 
 cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
                quakes$LONG > 171 & quakes$LONG < 173.5, ]
-library(MASS)
+
 quakeDens <- MASS::kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
 
 
@@ -7908,7 +7908,7 @@ NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
 
 cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
                quakes$LONG > 171 & quakes$LONG < 173.5, ]
-library(MASS)
+
 quakeDens <- MASS::kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
 
 
@@ -7933,7 +7933,7 @@ NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
 
 cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
                quakes$LONG > 171 & quakes$LONG < 173.5, ]
-library(MASS)
+
 quakeDens <- MASS::kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
 
 
@@ -7964,7 +7964,7 @@ NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
 
 cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
                quakes$LONG > 171 & quakes$LONG < 173.5, ]
-library(MASS)
+
 quakeDens <- MASS::kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
 
 
@@ -7973,7 +7973,7 @@ shallowCantyQuakes <- subset(cantyQuakes, DEPTH < 20)
 
 
 
-library(scatterplot3d)
+
 
 
 
@@ -8032,7 +8032,7 @@ s3d$box()
 
 }
 figure16.8 <- function() {
-library(rgl)
+
 
 
 
@@ -8043,7 +8043,7 @@ NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
 
 cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
                quakes$LONG > 171 & quakes$LONG < 173.5, ]
-library(MASS)
+
 quakeDens <- MASS::kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
 
 
@@ -8064,11 +8064,11 @@ system("cp Figures/threed-rglpersp.png Web/")
 
 }
 figure16.9 <- function() {
-library(rgl)
 
 
 
-library(misc3d)
+
+
 
 
 
@@ -8079,7 +8079,7 @@ NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
 
 cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
                quakes$LONG > 171 & quakes$LONG < 173.5, ]
-library(MASS)
+
 quakeDens <- MASS::kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
 
 
@@ -8118,7 +8118,7 @@ system("cp Figures/contour3d.png Web/threed-contour3d.png")
 
 }
 figure16.10 <- function() {
-library(rgl)
+
 
 
 
@@ -8138,7 +8138,7 @@ rgl::shade3d(rgl::ellipse3d(diag(3), level=radius(1),
 png("rlogoExtended.png",
     width=500, height=250)
 grid.rect(gp=gpar(col=NA, fill="yellow"))
-library(png)
+
 rlogo <- as.raster(png::readPNG(system.file("extra", "Rlogo.png", 
                                        package="RGraphics")))
 rlogo[rlogo == "#FFFFFF"] <- "yellow"
@@ -8209,7 +8209,7 @@ rgl::snapshot3d("homer.png")
 
 }
 figure16.11 <- function() {
-library(vrmlgen)
+
 
 
 
@@ -8220,7 +8220,7 @@ NZquakes <- quakes[c("LAT", "LONG", "MAG", "DEPTH")]
 
 cantyQuakes <- quakes[quakes$LAT < -42.4 & quakes$LAT > -44 & 
                quakes$LONG > 171 & quakes$LONG < 173.5, ]
-library(MASS)
+
 quakeDens <- MASS::kde2d(cantyQuakes$LONG, cantyQuakes$LAT, n=30)
 
 
@@ -8279,7 +8279,7 @@ popViewport()
 
 }
 figure13.2 <- function() {
-library(vcd)
+
 
 
 
@@ -8326,7 +8326,7 @@ popViewport()
 
 }
 figure13.4 <- function() {
-library(vcd)
+
 
 
 
@@ -8345,7 +8345,7 @@ vcd::mosaic(nObs ~ Schedule + Priority, RGraphics::xmm,
 
 }
 figure13.5 <- function() {
-library(vcd)
+
 
 
 
@@ -8391,7 +8391,7 @@ xmm <- read.table(file.path("XMM-Newton", "XMM-Newton.txt"),
 
 
 
-library(vcd)
+
 
 
 
@@ -8408,7 +8408,7 @@ vcd::cotabplot(~ Schedule + Priority | nObs, RGraphics::xmm)
 
 }
 figure13.8 <- function() {
-library(vcdExtra)
+
 
 
 
