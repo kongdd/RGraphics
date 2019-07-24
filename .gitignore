@@ -2,4 +2,9 @@
 .Rhistory
 .RData
 .Ruserdata
+
+# Directory
+Figures/
+
+# Files
 *.pdf

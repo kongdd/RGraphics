@@ -1,3 +1,21 @@
+#' figure14
+#' 
+#' @keywords internal
+#' @export
+figure14 <- function(){
+    figure14.1()
+    figure14.2()
+    figure14.3()
+    figure14.4()
+    figure14.5()
+    figure14.6()
+    figure14.7()
+    figure14.8()
+    figure14.9()
+    figure14.10()
+    figure14.11()
+}
+
 
 figure14.1 <- function() {
     colorado <- maptools::readShapeSpatial(system.file("extra", "10m-colorado.shp",
@@ -132,14 +150,14 @@ figure14.10 <- function() {
 }
 
 figure14.11 <- function() {
-    brazil <- 
-        maptools::readShapeSpatial(system.file("extra", "10m-brazil.shp",
-                                               package="RGraphics"))
+    brazil <- maptools::readShapeSpatial(system.file("extra", "10m-brazil.shp",
+                                         package="RGraphics"))
 
     # Read in prepared raster
     brazilRelief <- raster::raster(system.file("extra", "brazilRelief.tif",
                                                package="RGraphics"))
 
+    check_dir("Figures")
     # Make PNG version for this one because otherwise it's TOO big
     png("Figures/maps-brazilraster.png",
         width=900, height=900)

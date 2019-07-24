@@ -50,3 +50,13 @@ makeImageRect <- function(nrow, ncol, cols, byrow) {
              gp=gpar(col=NA, fill=cols),
              name="image")
 }
+
+#' @import foreach
+check_dir <- function(path){
+    foreach(path_i = unique(path)) %do% {
+        if (!dir.exists(path_i)){
+            dir.create(path_i, recursive = TRUE)
+        }    
+    }
+    path
+}

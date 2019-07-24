@@ -1,9 +1,21 @@
-#' @name figure04
-#' @title figure04
+#' figure04
+#' 
+#' @export
 figure04 <- function(){
-    
+    figure4.1()
+    figure4.2()
+    figure4.3()
+    figure4.4()
+    figure4.5()
+    figure4.6()
+    figure4.7()
+    figure4.8()
+    figure4.9()
+    figure4.10()
+    figure4.11()
+    figure4.12()
+    figure4.13()
 }
-NULL
 
 
 figure4.1 <- function() {
@@ -177,6 +189,7 @@ figure4.12 <- function() {
     show.settings()
 }
 
+#' @importFrom latticeExtra ecdfplot rootogram segplot tileplot
 figure4.13 <- function() {
     doplot <- function(name, ...) {
         do.call(name, 
